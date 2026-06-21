@@ -1,0 +1,216 @@
+{
+  "nav": {
+    "inventory": "Fahrzeuge",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "finance": "Finanzierung",
+    "tradein": "Inzahlungnahme",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "eyebrow": "2024 · Geprüfte Gebrauchtwagen",
+    "title": "Jeder Kilometer, geprüft.",
+    "subtitle": "Sorgfältig ausgewählte Premium-Fahrzeuge — transparent dokumentiert, fahrbereit übergeben.",
+    "browse": "Fahrzeuge ansehen",
+    "book": "Beratung buchen",
+    "scroll": "Scrollen"
+  },
+  "cred": {
+    "vehicles": "Fahrzeuge",
+    "brands": "Marken",
+    "from": "ab"
+  },
+  "theme": {
+    "toLight": "Tagmodus",
+    "toDark": "Nachtmodus"
+  },
+  "inventory": {
+    "eyebrow": "Aktueller Bestand",
+    "title": "Die Sammlung",
+    "filters": "Filter",
+    "reset": "Filter zurücksetzen",
+    "empty": "Keine Fahrzeuge entsprechen den Filtern.",
+    "count_one": "{{count}} Fahrzeug",
+    "count_other": "{{count}} Fahrzeuge"
+  },
+  "filter": {
+    "marke": "Marke",
+    "preis": "Preis",
+    "jahr": "Jahr",
+    "km": "Kilometerstand",
+    "kraftstoff": "Kraftstoff",
+    "karosserie": "Karosserie"
+  },
+  "card": {
+    "km": "km",
+    "soon": "Detailseite folgt"
+  },
+  "footer": {
+    "about": "MEGACARS — sorgfältig ausgewählte Premium-Gebrauchtwagen. Persönliche Beratung und transparente Fahrzeughistorie.",
+    "contact": "Kontakt",
+    "explore": "Entdecken",
+    "service": "Service",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "agb": "AGB",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "detail": {
+    "back": "Zurück zur Sammlung",
+    "zoom": "Bild vergrößern",
+    "photo": "Foto",
+    "year": "Jahr",
+    "km": "km",
+    "ps": "PS",
+    "reserve": "Reservieren",
+    "testdrive": "Probefahrt vereinbaren",
+    "trust": "120-Punkte-Check · Garantie",
+    "finance": "Finanzierung möglich",
+    "specsTitle": "Fahrzeugdetails",
+    "equipTitle": "Ausstattung",
+    "spec": {
+      "marke": "Marke",
+      "modell": "Modell",
+      "erstzulassung": "Erstzulassung",
+      "km": "Kilometerstand",
+      "leistung": "Leistung",
+      "kraftstoff": "Kraftstoff",
+      "getriebe": "Getriebe"
+    }
+  },
+  "featured": {
+    "eyebrow": "Im Fokus",
+    "cta": "Details ansehen"
+  },
+  "process": {
+    "eyebrow": "So einfach geht's",
+    "title": "Ablauf & Garantie",
+    "s1": { "t": "120-Punkte-Check", "d": "Jedes Fahrzeug durchläuft vor dem Verkauf eine technische Prüfung." },
+    "s2": { "t": "Transparente Historie", "d": "Fahrzeughistorie und Zustand werden offen dokumentiert." },
+    "s3": { "t": "Garantie & Gewährleistung", "d": "Sie kaufen mit gesetzlicher Gewährleistung und klaren Konditionen." },
+    "s4": { "t": "Lieferung & Übergabe", "d": "Übergabe fahrbereit — auf Wunsch mit Lieferung." }
+  },
+  "reviews": {
+    "eyebrow": "Kundenstimmen",
+    "title": "Geprüfter Händler auf AutoScout24",
+    "sub": "Alle {{count}} Fahrzeuge sind öffentlich auf AutoScout24 gelistet und einsehbar.",
+    "cta": "Profil auf AutoScout24 ansehen"
+  },
+  "about": {
+    "eyebrow": "Über uns",
+    "title": "Premium-Gebrauchtwagen aus Vorarlberg.",
+    "intro": "MEGACARS ist Ihr Ansprechpartner für sorgfältig ausgewählte Premium-Gebrauchtwagen in Hohenems, Vorarlberg. Jedes Fahrzeug wird technisch geprüft und seine Historie transparent dokumentiert — damit Sie mit Vertrauen kaufen.",
+    "factsVehicles": "Fahrzeuge im Bestand",
+    "factsBrands": "Marken",
+    "factsLocation": "Standort",
+    "factsListed": "Gelistet auf",
+    "valuesEyebrow": "Unsere Werte",
+    "v1t": "Qualität",
+    "v1d": "Sorgfältig ausgewählte Fahrzeuge, technisch geprüft vor dem Verkauf.",
+    "v2t": "Transparenz",
+    "v2d": "Historie und Zustand jedes Fahrzeugs werden offen dokumentiert.",
+    "v3t": "Vertrauen",
+    "v3d": "Persönliche Beratung — vom ersten Kontakt bis zur Übergabe.",
+    "locationEyebrow": "Standort",
+    "cta": "Kontakt aufnehmen"
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": "Sprechen wir über Ihr nächstes Fahrzeug.",
+    "addressLabel": "Adresse",
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-Mail",
+    "whatsappLabel": "WhatsApp",
+    "hoursLabel": "Öffnungszeiten",
+    "hoursValue": "Termin nach Vereinbarung",
+    "formName": "Name",
+    "formEmail": "E-Mail",
+    "formMessage": "Nachricht",
+    "formSubmit": "Nachricht senden",
+    "formHint": "Ihre Nachricht öffnet Ihr E-Mail-Programm (office@meral.at).",
+    "mapTitle": "Standort auf der Karte"
+  },
+  "finance": {
+    "eyebrow": "Finanzierung",
+    "title": "Finanzierung & Leasing.",
+    "intro": "Sie möchten Ihr Wunschfahrzeug finanzieren oder leasen? Über unsere Partner ermöglichen wir individuelle Lösungen mit monatlichen Raten — abgestimmt auf Ihre Situation.",
+    "howEyebrow": "So funktioniert's",
+    "s1t": "Fahrzeug wählen",
+    "s1d": "Sie finden Ihr Wunschfahrzeug in unserem Bestand.",
+    "s2t": "Anfrage stellen",
+    "s2d": "Wir klären die Finanzierung über unsere Partner — Bank oder Leasing.",
+    "s3t": "Entscheiden & fahren",
+    "s3d": "Nach Zusage übernehmen Sie Ihr Fahrzeug fahrbereit.",
+    "note": "Individuelle Finanzierungslösungen — Konditionen auf Anfrage.",
+    "cta": "Finanzierung anfragen"
+  },
+  "tradein": {
+    "eyebrow": "Inzahlungnahme",
+    "title": "Ihr Fahrzeug in Zahlung geben.",
+    "intro": "Bringen Sie Ihr aktuelles Fahrzeug — wir bewerten es und rechnen den Wert auf Ihren neuen Wagen an.",
+    "howEyebrow": "Ablauf",
+    "s1t": "Fahrzeugdaten",
+    "s1d": "Sie nennen uns Marke, Modell, Jahr und Kilometerstand.",
+    "s2t": "Bewertung",
+    "s2d": "Wir bewerten Ihr Fahrzeug fair und unverbindlich.",
+    "s3t": "Anrechnung",
+    "s3d": "Der Wert wird auf Ihr neues Fahrzeug angerechnet.",
+    "fMarke": "Marke",
+    "fModell": "Modell",
+    "fJahr": "Jahr",
+    "fKm": "Kilometerstand",
+    "cta": "Fahrzeug bewerten lassen",
+    "note": "Bewertung unverbindlich — ein verbindliches Angebot erfolgt erst nach Besichtigung."
+  },
+  "faq": {
+    "eyebrow": "Häufige Fragen",
+    "title": "FAQ",
+    "q1": { "q": "Gibt es eine Gewährleistung?", "a": "Beim Kauf bei einem Händler gilt die gesetzliche Gewährleistung. Die Details besprechen wir gerne persönlich." },
+    "q2": { "q": "Ist eine Finanzierung möglich?", "a": "Ja. Über unsere Partner ermöglichen wir individuelle Finanzierungs- und Leasinglösungen — Konditionen auf Anfrage." },
+    "q3": { "q": "Wie werden die Fahrzeuge geprüft?", "a": "Jedes Fahrzeug durchläuft vor dem Verkauf einen 120-Punkte-Check und eine technische Prüfung." },
+    "q4": { "q": "Nehmen Sie Fahrzeuge in Zahlung?", "a": "Ja. Wir bewerten Ihr aktuelles Fahrzeug und rechnen den Wert auf Ihren neuen Wagen an." },
+    "q5": { "q": "Gibt es Lieferung oder Transport?", "a": "Die Übergabe erfolgt fahrbereit. Eine Lieferung ist auf Anfrage möglich." },
+    "q6": { "q": "Ist eine Probefahrt möglich?", "a": "Ja, nach Terminvereinbarung. Kontaktieren Sie uns für einen Termin." },
+    "q7": { "q": "Wird die Fahrzeughistorie dokumentiert?", "a": "Ja. Historie und Zustand jedes Fahrzeugs werden transparent dokumentiert." }
+  },
+  "legal": {
+    "eyebrow": "Rechtliches",
+    "placeholder": "[wird ergänzt]",
+    "demoNote": "Vorläufige Demo-Fassung — wird vor dem Verkaufsstart finalisiert.",
+    "impressum": {
+      "title": "Impressum",
+      "intro": "Angaben gemäß § 5 ECG und Offenlegung gemäß § 25 MedienG.",
+      "company": "Unternehmen",
+      "address": "Anschrift",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "owner": "Inhaber",
+      "firmenbuch": "Firmenbuchnummer",
+      "uid": "UID-Nummer (ATU)",
+      "gewerbe": "Gewerbeberechtigung"
+    },
+    "datenschutz": {
+      "title": "Datenschutzerklärung",
+      "sections": [
+        { "h": "Verantwortlicher", "b": "Mega Cars, Radetzkystraße 80, 6845 Hohenems, Österreich. E-Mail: office@meral.at." },
+        { "h": "Welche Daten wir verarbeiten", "b": "Wenn Sie das Kontaktformular nutzen, verarbeiten wir die von Ihnen angegebenen Daten (Name, E-Mail-Adresse, Nachricht), um Ihre Anfrage zu bearbeiten." },
+        { "h": "Zweck und Rechtsgrundlage", "b": "Die Verarbeitung erfolgt zur Bearbeitung Ihrer Anfrage auf Grundlage von Art. 6 Abs. 1 lit. b und lit. f DSGVO." },
+        { "h": "Speicherdauer", "b": "Wir speichern Ihre Daten nur so lange, wie es für die Bearbeitung Ihrer Anfrage erforderlich ist oder gesetzliche Aufbewahrungsfristen dies vorsehen." },
+        { "h": "Eingebettete Karte", "b": "Auf der Kontaktseite wird eine Karte von Google Maps eingebettet. Dabei können Daten (z. B. Ihre IP-Adresse) an Google übertragen werden. Es gilt die Datenschutzerklärung von Google." },
+        { "h": "Keine Analyse- oder Tracking-Tools", "b": "Diese Website verwendet derzeit keine Analyse-, Tracking- oder Werbe-Tools." },
+        { "h": "Ihre Rechte", "b": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Widerspruch. Wenden Sie sich dazu an office@meral.at." }
+      ]
+    },
+    "agb": {
+      "title": "Allgemeine Geschäftsbedingungen",
+      "sections": [
+        { "h": "1. Geltungsbereich", "b": "Diese Bedingungen gelten für die Geschäftsbeziehung zwischen Mega Cars und seinen Kundinnen und Kunden." },
+        { "h": "2. Angebot und Vertragsabschluss", "b": "Fahrzeugangebote sind freibleibend und unverbindlich. Ein Kaufvertrag kommt erst mit beiderseitiger Unterzeichnung beziehungsweise ausdrücklicher Bestätigung zustande." },
+        { "h": "3. Preise", "b": "Alle Preise verstehen sich in Euro inklusive der gesetzlichen Umsatzsteuer, sofern nicht anders angegeben." },
+        { "h": "4. Gewährleistung", "b": "Es gilt die gesetzliche Gewährleistung. Individuelle Vereinbarungen werden im jeweiligen Kaufvertrag festgehalten." },
+        { "h": "5. Haftung", "b": "Wir haften nach den gesetzlichen Bestimmungen. Für die Inhalte verlinkter externer Seiten wird keine Haftung übernommen." },
+        { "h": "6. Schlussbestimmungen", "b": "Es gilt österreichisches Recht. Gerichtsstand ist, soweit gesetzlich zulässig, der Sitz des Unternehmens." }
+      ]
+    }
+  }
+}

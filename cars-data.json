@@ -1,0 +1,380 @@
+[
+  {
+    "id": "mercedes-s-560-4matic",
+    "marka": "Mercedes-Benz",
+    "model": "S 560 4Matic L AMG-Line",
+    "aciklama": "S 560 4Matic L AMG-Line / PANO / TV / Head -UP",
+    "fiyat": 64900,
+    "yil": "02/2019",
+    "km": 148000,
+    "guc_ps": 469,
+    "guc_kw": 345,
+    "yakit": "Benzin",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/mercedes-benz-s-560-4matic-l-amg-line-pano-tv-head-up-benzin-schwarz-4fac424f-8f71-45cc-ba1a-8eb505584961",
+    "fotograflar": [
+      "cars/mercedes-s-560-4matic/1.webp",
+      "cars/mercedes-s-560-4matic/2.webp",
+      "cars/mercedes-s-560-4matic/3.webp",
+      "cars/mercedes-s-560-4matic/4.webp",
+      "cars/mercedes-s-560-4matic/5.webp"
+    ]
+  },
+  {
+    "id": "mercedes-c-220-d",
+    "marka": "Mercedes-Benz",
+    "model": "C 220 d Cabrio Aut. AMG-Line",
+    "aciklama": "C 220 d Cabrio Aut. AMG-Line / 52.000KM / NAVI",
+    "fiyat": 45900,
+    "yil": "08/2019",
+    "km": 52000,
+    "guc_ps": 194,
+    "guc_kw": 143,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/mercedes-benz-c-220-d-cabrio-aut-amg-line-52-000km-navi-diesel-weiss-e1c819fc-346d-424d-a651-cad3414241c0",
+    "fotograflar": [
+      "cars/mercedes-c-220-d/1.webp",
+      "cars/mercedes-c-220-d/2.webp",
+      "cars/mercedes-c-220-d/3.webp",
+      "cars/mercedes-c-220-d/4.webp",
+      "cars/mercedes-c-220-d/5.webp"
+    ]
+  },
+  {
+    "id": "bmw-340-i-m-paket",
+    "marka": "BMW",
+    "model": "340 i M-Paket xDrive",
+    "aciklama": "340 i M-Paket xDrive",
+    "fiyat": 43900,
+    "yil": "03/2020",
+    "km": 149000,
+    "guc_ps": 374,
+    "guc_kw": 275,
+    "yakit": "Benzin",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/bmw-340-i-m-paket-xdrive-benzin-schwarz-65307718-b86a-471e-8ca2-03e6a095f0c6",
+    "fotograflar": [
+      "cars/bmw-340-i-m-paket/1.webp",
+      "cars/bmw-340-i-m-paket/2.webp",
+      "cars/bmw-340-i-m-paket/3.webp",
+      "cars/bmw-340-i-m-paket/4.webp",
+      "cars/bmw-340-i-m-paket/5.webp"
+    ]
+  },
+  {
+    "id": "vw-touran-highline",
+    "marka": "Volkswagen",
+    "model": "Touran Highline (7 Sitze)",
+    "aciklama": "Touran Highline ( 7 Sitze )",
+    "fiyat": 42900,
+    "yil": "03/2024",
+    "km": 14000,
+    "guc_ps": 150,
+    "guc_kw": 110,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/volkswagen-touran-highline-7-sitze-diesel-schwarz-f88ba4d6-d0dc-4228-899f-cee8f8d09c32",
+    "fotograflar": [
+      "cars/vw-touran-highline/1.webp",
+      "cars/vw-touran-highline/2.webp",
+      "cars/vw-touran-highline/3.webp",
+      "cars/vw-touran-highline/4.webp",
+      "cars/vw-touran-highline/5.webp"
+    ]
+  },
+  {
+    "id": "mercedes-glc-300-glc",
+    "marka": "Mercedes-Benz",
+    "model": "GLC 300 d 4Matic",
+    "aciklama": "GLC 300 GLC 300 d 4Matic (253.919)",
+    "fiyat": 38900,
+    "yil": "04/2021",
+    "km": 130000,
+    "guc_ps": 245,
+    "guc_kw": 180,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/mercedes-benz-glc-300-glc-300-d-4matic-253-919-diesel-grau-9e0085fb-6874-4638-b4ba-9a0a7a7b1ae7",
+    "fotograflar": [
+      "cars/mercedes-glc-300-glc/1.webp",
+      "cars/mercedes-glc-300-glc/2.webp",
+      "cars/mercedes-glc-300-glc/3.webp",
+      "cars/mercedes-glc-300-glc/4.webp",
+      "cars/mercedes-glc-300-glc/5.webp"
+    ]
+  },
+  {
+    "id": "porsche-panamera-e-hybrid-s",
+    "marka": "Porsche",
+    "model": "Panamera E-Hybrid S Facelift",
+    "aciklama": "Panamera E-Hybrid S Facelift / Schiebedach / Memory Sitze",
+    "fiyat": 38900,
+    "yil": "11/2013",
+    "km": 147000,
+    "guc_ps": 333,
+    "guc_kw": 245,
+    "yakit": "Elektro/Benzin",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/porsche-panamera-e-hybrid-s-facelift-schiebedach-memory-sitze-elektro-benzin-weiss-a966d01a-5319-48f0-8e92-de342058b673",
+    "fotograflar": [
+      "cars/porsche-panamera-e-hybrid-s/1.webp",
+      "cars/porsche-panamera-e-hybrid-s/2.webp",
+      "cars/porsche-panamera-e-hybrid-s/3.webp",
+      "cars/porsche-panamera-e-hybrid-s/4.webp",
+      "cars/porsche-panamera-e-hybrid-s/5.webp"
+    ]
+  },
+  {
+    "id": "mercedes-c-300-c",
+    "marka": "Mercedes-Benz",
+    "model": "C 300 T d",
+    "aciklama": "C 300 C 300 T d (206.206)",
+    "fiyat": 36900,
+    "yil": "02/2022",
+    "km": 110000,
+    "guc_ps": 265,
+    "guc_kw": 195,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/mercedes-benz-c-300-c-300-t-d-206-206-diesel-schwarz-78ba9cd8-1bd9-4262-91ff-0009ff4f7703",
+    "fotograflar": [
+      "cars/mercedes-c-300-c/1.webp",
+      "cars/mercedes-c-300-c/2.webp",
+      "cars/mercedes-c-300-c/3.webp",
+      "cars/mercedes-c-300-c/4.webp",
+      "cars/mercedes-c-300-c/5.webp"
+    ]
+  },
+  {
+    "id": "mercedes-a-35-amg",
+    "marka": "Mercedes-Benz",
+    "model": "A 35 AMG 4Matic",
+    "aciklama": "A 35 AMG 4Matic",
+    "fiyat": 35490,
+    "yil": "08/2019",
+    "km": 43000,
+    "guc_ps": 306,
+    "guc_kw": 225,
+    "yakit": "Benzin",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/mercedes-benz-a-35-amg-4matic-benzin-schwarz-747293ff-6312-42e9-b2ed-0d5094915047",
+    "fotograflar": [
+      "cars/mercedes-a-35-amg/1.webp",
+      "cars/mercedes-a-35-amg/2.webp",
+      "cars/mercedes-a-35-amg/3.webp",
+      "cars/mercedes-a-35-amg/4.webp",
+      "cars/mercedes-a-35-amg/5.webp"
+    ]
+  },
+  {
+    "id": "mercedes-glc-220-d",
+    "marka": "Mercedes-Benz",
+    "model": "GLC 220 d 4Matic",
+    "aciklama": "GLC 220 d 4MATIC",
+    "fiyat": 33500,
+    "yil": "10/2018",
+    "km": 96883,
+    "guc_ps": 170,
+    "guc_kw": 125,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/mercedes-benz-glc-220-d-4matic-diesel-schwarz-203ddef9-b060-4b1d-b77b-809842f7f612",
+    "fotograflar": [
+      "cars/mercedes-glc-220-d/1.webp",
+      "cars/mercedes-glc-220-d/2.webp",
+      "cars/mercedes-glc-220-d/3.webp",
+      "cars/mercedes-glc-220-d/4.webp",
+      "cars/mercedes-glc-220-d/5.webp"
+    ]
+  },
+  {
+    "id": "bmw-320-320-d",
+    "marka": "BMW",
+    "model": "320 d Advantage",
+    "aciklama": "320 320 d Advantage",
+    "fiyat": 32900,
+    "yil": "06/2022",
+    "km": 78700,
+    "guc_ps": 190,
+    "guc_kw": 140,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/bmw-320-320-d-advantage-diesel-schwarz-4de54f31-53eb-4dba-ad3a-497ea54489eb",
+    "fotograflar": [
+      "cars/bmw-320-320-d/1.webp",
+      "cars/bmw-320-320-d/2.webp",
+      "cars/bmw-320-320-d/3.webp",
+      "cars/bmw-320-320-d/4.webp",
+      "cars/bmw-320-320-d/5.webp"
+    ]
+  },
+  {
+    "id": "bmw-320-d-advantage",
+    "marka": "BMW",
+    "model": "320 d Advantage Aut.",
+    "aciklama": "320 d Advantage Aut. | WENIG KM | NAVI | SITZH. | AHK",
+    "fiyat": 30900,
+    "yil": "05/2021",
+    "km": 45000,
+    "guc_ps": 190,
+    "guc_kw": 140,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/bmw-320-d-advantage-aut-wenig-km-navi-sitzh-ahk-diesel-grau-7138e3fa-2e01-496e-8853-7ba7e2b37cd2",
+    "fotograflar": [
+      "cars/bmw-320-d-advantage/1.webp",
+      "cars/bmw-320-d-advantage/2.webp",
+      "cars/bmw-320-d-advantage/3.webp",
+      "cars/bmw-320-d-advantage/4.webp",
+      "cars/bmw-320-d-advantage/5.webp"
+    ]
+  },
+  {
+    "id": "audi-q3-35-tdi",
+    "marka": "Audi",
+    "model": "Q3 35 TDI S line",
+    "aciklama": "Q3 35 TDI S line",
+    "fiyat": 29800,
+    "yil": "10/2020",
+    "km": 102000,
+    "guc_ps": 150,
+    "guc_kw": 110,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/audi-q3-35-tdi-s-line-diesel-weiss-76db4410-ea8a-4b56-bdd8-7858ffe63f16",
+    "fotograflar": [
+      "cars/audi-q3-35-tdi/1.webp",
+      "cars/audi-q3-35-tdi/2.webp",
+      "cars/audi-q3-35-tdi/3.webp",
+      "cars/audi-q3-35-tdi/4.webp",
+      "cars/audi-q3-35-tdi/5.webp"
+    ]
+  },
+  {
+    "id": "mercedes-c-180-c",
+    "marka": "Mercedes-Benz",
+    "model": "C 180 BlueTec",
+    "aciklama": "C 180 C 180 BlueTec / d (205.036)",
+    "fiyat": 26900,
+    "yil": "02/2017",
+    "km": 114000,
+    "guc_ps": 116,
+    "guc_kw": 85,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/mercedes-benz-c-180-c-180-bluetec-d-205-036-diesel-schwarz-abc4d3f7-ebd1-45da-a403-8f42db4e0b37",
+    "fotograflar": [
+      "cars/mercedes-c-180-c/1.webp",
+      "cars/mercedes-c-180-c/2.webp",
+      "cars/mercedes-c-180-c/3.webp",
+      "cars/mercedes-c-180-c/4.webp",
+      "cars/mercedes-c-180-c/5.webp"
+    ]
+  },
+  {
+    "id": "volvo-xc60-allrad-4x4",
+    "marka": "Volvo",
+    "model": "XC60 AWD",
+    "aciklama": "XC60 ALLRAD 4X4",
+    "fiyat": 26400,
+    "yil": "11/2017",
+    "km": 163000,
+    "guc_ps": 235,
+    "guc_kw": 173,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/volvo-xc60-allrad-4x4-diesel-schwarz-ea8d2439-3fa1-44b7-b4fc-cc97be9e0464",
+    "fotograflar": [
+      "cars/volvo-xc60-allrad-4x4/1.webp",
+      "cars/volvo-xc60-allrad-4x4/2.webp",
+      "cars/volvo-xc60-allrad-4x4/3.webp",
+      "cars/volvo-xc60-allrad-4x4/4.webp",
+      "cars/volvo-xc60-allrad-4x4/5.webp"
+    ]
+  },
+  {
+    "id": "chrysler-sonstige-jeep-commander",
+    "marka": "Chrysler",
+    "model": "Jeep Commander 4,7 V8",
+    "aciklama": "Sonstige Jeep Commander 4,7 V8 Stretchlimousine",
+    "fiyat": 25900,
+    "yil": "04/2006",
+    "km": 64000,
+    "guc_ps": 231,
+    "guc_kw": 170,
+    "yakit": "Benzin",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/chrysler-others-jeep-commander-4-7-v8-stretchlimousine-benzin-schwarz-2e73b555-3337-4d18-a208-39d7ff0bf147",
+    "fotograflar": [
+      "cars/chrysler-sonstige-jeep-commander/1.webp",
+      "cars/chrysler-sonstige-jeep-commander/2.webp",
+      "cars/chrysler-sonstige-jeep-commander/3.webp",
+      "cars/chrysler-sonstige-jeep-commander/4.webp",
+      "cars/chrysler-sonstige-jeep-commander/5.webp"
+    ]
+  },
+  {
+    "id": "landrover-range-rover-sport",
+    "marka": "Land Rover",
+    "model": "Range Rover Sport S 3,0 Aut.",
+    "aciklama": "Range Rover Sport S 3,0 Aut. / PANO / RFK / LEDER / NAVI",
+    "fiyat": 25900,
+    "yil": "10/2013",
+    "km": 235000,
+    "guc_ps": 258,
+    "guc_kw": 190,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/land-rover-range-rover-sport-s-3-0-aut-pano-rfk-leder-navi-diesel-weiss-f711de1a-76b9-4d06-814e-4bbe8ccd6b52",
+    "fotograflar": [
+      "cars/landrover-range-rover-sport/1.webp",
+      "cars/landrover-range-rover-sport/2.webp",
+      "cars/landrover-range-rover-sport/3.webp",
+      "cars/landrover-range-rover-sport/4.webp",
+      "cars/landrover-range-rover-sport/5.webp"
+    ]
+  },
+  {
+    "id": "bmw-x6-xdrive30d",
+    "marka": "BMW",
+    "model": "X6 xDrive30d",
+    "aciklama": "X6 xDrive30d",
+    "fiyat": 25900,
+    "yil": "04/2013",
+    "km": 119000,
+    "guc_ps": 245,
+    "guc_kw": 180,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/bmw-x6-xdrive30d-diesel-schwarz-d154b3f1-2e4f-4b92-b420-6d45b65c495d",
+    "fotograflar": [
+      "cars/bmw-x6-xdrive30d/1.webp",
+      "cars/bmw-x6-xdrive30d/2.webp",
+      "cars/bmw-x6-xdrive30d/3.webp",
+      "cars/bmw-x6-xdrive30d/4.webp",
+      "cars/bmw-x6-xdrive30d/5.webp"
+    ]
+  },
+  {
+    "id": "skoda-octavia-ambition-aut",
+    "marka": "Skoda",
+    "model": "Octavia Ambition Aut.",
+    "aciklama": "Octavia Ambition Aut. / 20% MWST / 1-BESITZ / ACC",
+    "fiyat": 23900,
+    "yil": "08/2020",
+    "km": 109000,
+    "guc_ps": 150,
+    "guc_kw": 110,
+    "yakit": "Diesel",
+    "vites": "Automatik",
+    "url": "https://www.autoscout24.de/angebote/skoda-octavia-ambition-aut-20-mwst-1-besitz-acc-diesel-grau-954bc22a-dc1b-43cf-a51a-3da43023bd20",
+    "fotograflar": [
+      "cars/skoda-octavia-ambition-aut/1.webp",
+      "cars/skoda-octavia-ambition-aut/2.webp",
+      "cars/skoda-octavia-ambition-aut/3.webp",
+      "cars/skoda-octavia-ambition-aut/4.webp",
+      "cars/skoda-octavia-ambition-aut/5.webp"
+    ]
+  }
+]

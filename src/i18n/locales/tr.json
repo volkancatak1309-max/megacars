@@ -1,0 +1,173 @@
+{
+  "nav": {
+    "inventory": "Araçlar",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "finance": "Finansman",
+    "tradein": "Takas",
+    "faq": "SSS"
+  },
+  "hero": {
+    "eyebrow": "2024 · Sertifikalı İkinci El",
+    "title": "Her kilometre, kontrol edildi.",
+    "subtitle": "Özenle seçilmiş premium araçlar — şeffaf biçimde belgelenir, yola hazır teslim edilir.",
+    "browse": "Araçları gör",
+    "book": "Randevu al",
+    "scroll": "Kaydır"
+  },
+  "cred": {
+    "vehicles": "Araç",
+    "brands": "Marka",
+    "from": "başlangıç"
+  },
+  "theme": {
+    "toLight": "Gündüz modu",
+    "toDark": "Gece modu"
+  },
+  "inventory": {
+    "eyebrow": "Güncel Stok",
+    "title": "Koleksiyon",
+    "filters": "Filtreler",
+    "reset": "Filtreleri sıfırla",
+    "empty": "Filtrelere uyan araç yok.",
+    "count_one": "{{count}} araç",
+    "count_other": "{{count}} araç"
+  },
+  "filter": {
+    "marke": "Marka",
+    "preis": "Fiyat",
+    "jahr": "Yıl",
+    "km": "Kilometre",
+    "kraftstoff": "Yakıt",
+    "karosserie": "Kasa"
+  },
+  "card": {
+    "km": "km",
+    "soon": "Detay sayfası yakında"
+  },
+  "footer": {
+    "about": "MEGACARS — özenle seçilmiş premium ikinci el araçlar. Kişisel danışmanlık ve şeffaf araç geçmişi.",
+    "contact": "İletişim",
+    "explore": "Keşfet",
+    "service": "Hizmetler",
+    "rights": "Tüm hakları saklıdır."
+  },
+  "detail": {
+    "back": "Koleksiyona dön",
+    "zoom": "Resmi büyüt",
+    "photo": "Foto",
+    "year": "Yıl",
+    "km": "km",
+    "ps": "PS",
+    "reserve": "Rezerve Et",
+    "testdrive": "Test sürüşü ayarla",
+    "trust": "120 Nokta Kontrol · Garanti",
+    "finance": "Finansman mümkün",
+    "specsTitle": "Araç Detayları",
+    "equipTitle": "Donanım",
+    "spec": {
+      "marke": "Marka",
+      "modell": "Model",
+      "erstzulassung": "İlk Tescil",
+      "km": "Kilometre",
+      "leistung": "Güç",
+      "kraftstoff": "Yakıt",
+      "getriebe": "Vites"
+    }
+  },
+  "featured": {
+    "eyebrow": "Öne Çıkan",
+    "cta": "Detayları gör"
+  },
+  "process": {
+    "eyebrow": "Adım adım",
+    "title": "Süreç & Garanti",
+    "s1": { "t": "120 Nokta Kontrol", "d": "Her araç satıştan önce teknik kontrolden geçer." },
+    "s2": { "t": "Şeffaf Geçmiş", "d": "Araç geçmişi ve durumu açıkça belgelenir." },
+    "s3": { "t": "Garanti & Güvence", "d": "Yasal güvence ve net koşullarla satın alırsınız." },
+    "s4": { "t": "Teslimat & Devir", "d": "Yola hazır teslim — istenirse adrese teslimat." }
+  },
+  "reviews": {
+    "eyebrow": "Müşteri Yorumları",
+    "title": "AutoScout24'te kayıtlı satıcı",
+    "sub": "{{count}} aracın tamamı AutoScout24'te herkese açık listelenmiştir.",
+    "cta": "AutoScout24 profilini gör"
+  },
+  "about": {
+    "eyebrow": "Hakkımızda",
+    "title": "Vorarlberg'den premium ikinci el.",
+    "intro": "MEGACARS, Hohenems, Vorarlberg'de özenle seçilmiş premium ikinci el araçlar için doğru adrestir. Her araç teknik kontrolden geçer ve geçmişi şeffaf biçimde belgelenir — güvenle satın alın.",
+    "factsVehicles": "Stoktaki araç",
+    "factsBrands": "Marka",
+    "factsLocation": "Konum",
+    "factsListed": "Listelendiği yer",
+    "valuesEyebrow": "Değerlerimiz",
+    "v1t": "Kalite",
+    "v1d": "Özenle seçilmiş, satıştan önce teknik kontrolden geçen araçlar.",
+    "v2t": "Şeffaflık",
+    "v2d": "Her aracın geçmişi ve durumu açıkça belgelenir.",
+    "v3t": "Güven",
+    "v3d": "İlk temastan teslimata kişisel danışmanlık.",
+    "locationEyebrow": "Konum",
+    "cta": "İletişime geç"
+  },
+  "contact": {
+    "eyebrow": "İletişim",
+    "title": "Bir sonraki aracınızı konuşalım.",
+    "addressLabel": "Adres",
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-posta",
+    "whatsappLabel": "WhatsApp",
+    "hoursLabel": "Çalışma saatleri",
+    "hoursValue": "Randevu ile",
+    "formName": "Ad",
+    "formEmail": "E-posta",
+    "formMessage": "Mesaj",
+    "formSubmit": "Mesaj gönder",
+    "formHint": "Mesajınız e-posta uygulamanızı açar (office@meral.at).",
+    "mapTitle": "Haritada konum"
+  },
+  "finance": {
+    "eyebrow": "Finansman",
+    "title": "Finansman & Leasing.",
+    "intro": "Hayalinizdeki aracı finanse etmek veya kiralamak mı istiyorsunuz? Partnerlerimiz aracılığıyla, durumunuza göre aylık taksitli bireysel çözümler sunuyoruz.",
+    "howEyebrow": "Nasıl işliyor",
+    "s1t": "Aracı seçin",
+    "s1d": "Stoğumuzdan hayalinizdeki aracı bulun.",
+    "s2t": "Talep oluşturun",
+    "s2d": "Finansmanı partnerlerimiz üzerinden — banka veya leasing — netleştiririz.",
+    "s3t": "Karar verin & sürün",
+    "s3d": "Onay sonrası aracınızı yola hazır teslim alırsınız.",
+    "note": "Bireysel finansman çözümleri — koşullar talep üzerine.",
+    "cta": "Finansman talep et"
+  },
+  "tradein": {
+    "eyebrow": "Takas",
+    "title": "Aracınızı takasa verin.",
+    "intro": "Mevcut aracınızı getirin — değerlendirip yeni aracınıza mahsup edelim.",
+    "howEyebrow": "Süreç",
+    "s1t": "Araç bilgileri",
+    "s1d": "Marka, model, yıl ve kilometreyi bize iletin.",
+    "s2t": "Değerlendirme",
+    "s2d": "Aracınızı adil ve bağlayıcı olmadan değerlendiririz.",
+    "s3t": "Mahsup",
+    "s3d": "Değer, yeni aracınıza mahsup edilir.",
+    "fMarke": "Marka",
+    "fModell": "Model",
+    "fJahr": "Yıl",
+    "fKm": "Kilometre",
+    "cta": "Aracımı değerlendirin",
+    "note": "Değerlendirme bağlayıcı değildir — kesin teklif ancak araç görüldükten sonra verilir."
+  },
+  "faq": {
+    "eyebrow": "Sıkça Sorulanlar",
+    "title": "SSS",
+    "q1": { "q": "Garanti var mı?", "a": "Bir satıcıdan alımda yasal güvence (Gewährleistung) geçerlidir. Ayrıntıları memnuniyetle birebir görüşürüz." },
+    "q2": { "q": "Finansman mümkün mü?", "a": "Evet. Partnerlerimiz aracılığıyla bireysel finansman ve leasing çözümleri sunuyoruz — koşullar talep üzerine." },
+    "q3": { "q": "Araçlar nasıl kontrol ediliyor?", "a": "Her araç satıştan önce 120 nokta kontrolden ve teknik muayeneden geçer." },
+    "q4": { "q": "Takas yapıyor musunuz?", "a": "Evet. Mevcut aracınızı değerlendirip değerini yeni aracınıza mahsup ederiz." },
+    "q5": { "q": "Teslimat veya nakliye var mı?", "a": "Teslim yola hazır yapılır. Talep üzerine nakliye mümkündür." },
+    "q6": { "q": "Test sürüşü mümkün mü?", "a": "Evet, randevu ile. Bir randevu için bizimle iletişime geçin." },
+    "q7": { "q": "Araç geçmişi belgeleniyor mu?", "a": "Evet. Her aracın geçmişi ve durumu şeffaf biçimde belgelenir." }
+  }
+}

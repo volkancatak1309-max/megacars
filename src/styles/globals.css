@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   MEGACARS design tokens — DESIGN.md §2 (real Refero-grounded hex)
+   Runtime light/dark switch via [data-theme] on <html>. Dark is default.
+   ========================================================================= */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #000000;          /* Ferrari Obsidian / Tesla /choose */
+  --surface: #141414;     /* Tesla /choose (0x141414) */
+  --surface-2: #1f1f20;   /* Tesla inventory (0x1f1f20) */
+  --border: #303030;      /* Ferrari Steel Gray */
+  --border-soft: #181818; /* Ferrari Shadow Graphite */
+  --text: #fbfbfb;        /* Tesla used-detay (0xfbfbfb) */
+  --text-muted: #a4a6a6;  /* Tesla (0xa4a6a6) */
+  --text-faint: #68686a;  /* Tesla (0x68686a) */
+  --accent: #3c6be2;      /* Tesla used-detay (0x3c6be2) */
+  --accent-press: #2962c9;/* Tesla /choose (0x2962c9) */
+  --accent-fg: #ffffff;
+  --hot: #ff0000;         /* Ferrari Rosso Corsa — reserved */
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;          /* AATHER Paper White / BMW Canvas White */
+  --surface: #f5f5f7;     /* Apple Canvas White */
+  --surface-2: #ffffff;
+  --border: #e8e8e8;      /* AATHER Ghost Gray */
+  --border-soft: #d6d6d6; /* Apple Border Silver */
+  --text: #030303;        /* Abel Charcoal Noir */
+  --text-muted: #565658;  /* darkened from Apple Medium Gray for hero legibility */
+  --text-faint: #8e8e90;  /* darkened from Farfetch (0xa4a4a4) to match */
+  --accent: #2962c9;      /* Tesla light-page blue */
+  --accent-press: #0066cc;/* Apple Action Blue */
+  --accent-fg: #ffffff;
+  --hot: #ff0000;
+}
+
+/* Map tokens to Tailwind utilities; `inline` keeps var() refs so utilities
+   follow the runtime theme. (DESIGN.md typography fonts mapped too.) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-press: var(--accent-press);
+  --color-accent-fg: var(--accent-fg);
+  --color-hot: var(--hot);
+
+  --font-display: "Archivo Variable", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SFMono-Regular", monospace;
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+  }
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* DESIGN.md §7 — theme cross-fade, not a flash */
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+  /* ARSENAL BÖLÜM 13 — honor reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Display = Archivo "Expanded" via wdth axis (DESIGN.md tipografi) */
+  .display {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-variation-settings: "wght" 800, "wdth" 125;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.96;
+  }
+  /* Small technical labels — Geist Mono, wide tracking (Ferrari/Abel role) */
+  .eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+  .spec {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+}

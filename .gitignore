@@ -17,3 +17,5 @@ Thumbs.db
 
 # NOTE: public/cars, public/hero and cars-data.json are intentionally tracked
 # (the site needs the real photos, hero video and inventory data at runtime).
+
+.vercel

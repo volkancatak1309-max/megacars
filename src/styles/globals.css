@@ -90,6 +90,14 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /* FAZ C item 12 — hide the native cursor while the custom cursor is active
+     (added by CustomCursor on hover-capable, motion-on desktops only). Text
+     fields keep their caret so typing stays usable. */
+  html.has-cursor,
+  html.has-cursor *:not(input):not(textarea):not(select):not([contenteditable='true']) {
+    cursor: none !important;
+  }
 }
 
 @layer components {

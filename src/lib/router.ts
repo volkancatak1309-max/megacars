@@ -67,14 +67,21 @@ export function go(hash: string) {
 
 // Scroll to an on-home section. If currently on ANY sub-page (detail, about,
 // contact, faq, etc.), go home first, then scroll. Explicit section nav must
-// NOT trigger a remembered-scroll restore.
+// NOT trigger a remembered-scroll restore. We poll for the target element (not a
+// single fixed timeout) so this still lands correctly even when the page-wipe
+// transition (FAZ C, item 11) delays the home content swap behind the cover.
 export function goSection(id: string) {
   scrollMemory.forget()
   const onHome = window.location.hash === '' || window.location.hash === '#/'
-  if (!onHome) {
-    window.location.hash = ''
-    setTimeout(() => scrollToId(id), 200)
-  } else {
+  if (onHome) {
     scrollToId(id)
+    return
   }
+  window.location.hash = ''
+  let tries = 0
+  const tryScroll = () => {
+    if (document.getElementById(id)) scrollToId(id)
+    else if (tries++ < 40) setTimeout(tryScroll, 60)
+  }
+  setTimeout(tryScroll, 80)
 }

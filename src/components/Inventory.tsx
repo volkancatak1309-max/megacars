@@ -1,15 +1,16 @@
-import { useMemo, useRef, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Flip } from 'gsap/Flip'
 import { cars, FACETS, matchesSelection, emptySelection } from '../lib/cars'
 import type { FacetKey, Lang, Selection } from '../lib/cars'
 import { prefersReducedMotion } from '../lib/motion'
 import { useReveal } from '../hooks/useReveal'
 import CarCard from './CarCard'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, Flip)
 
 function Chevron({ open }: { open: boolean }) {
   return (
@@ -32,6 +33,7 @@ export default function Inventory() {
   const { t, i18n } = useTranslation()
   const lang = ((i18n.resolvedLanguage ?? 'de').slice(0, 2) === 'tr' ? 'tr' : 'de') as Lang
   const root = useRef<HTMLElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   const [sel, setSel] = useState<Selection>(emptySelection)
   const [open, setOpen] = useState<Record<FacetKey, boolean>>({
@@ -46,12 +48,57 @@ export default function Inventory() {
   const filtered = useMemo(() => cars.filter((c) => matchesSelection(c, sel)), [sel])
   const activeCount = Object.values(sel).reduce((n, a) => n + a.length, 0)
 
-  const toggle = (key: FacetKey, value: string) =>
+  // item 10 — GSAP Flip relayout. Capture the grid's current card positions right
+  // BEFORE the filter changes, then morph from that state after React re-renders
+  // (the "showroom reorganises itself" feel). reduced-motion: skip, swap instantly.
+  const flipState = useRef<ReturnType<typeof Flip.getState> | null>(null)
+  const captureFlip = () => {
+    if (prefersReducedMotion()) return
+    const grid = gridRef.current
+    if (grid) flipState.current = Flip.getState(grid.querySelectorAll('.car-card'))
+  }
+
+  const toggle = (key: FacetKey, value: string) => {
+    captureFlip()
     setSel((s) => ({
       ...s,
       [key]: s[key].includes(value) ? s[key].filter((v) => v !== value) : [...s[key], value],
     }))
-  const clear = () => setSel(emptySelection())
+  }
+  const clear = () => {
+    captureFlip()
+    setSel(emptySelection())
+  }
+
+  useLayoutEffect(() => {
+    const state = flipState.current
+    flipState.current = null
+    const grid = gridRef.current
+    if (!grid) return
+    const cards = grid.querySelectorAll<HTMLElement>('.car-card')
+    if (prefersReducedMotion() || !state) {
+      gsap.set(cards, { autoAlpha: 1, clipPath: 'none' })
+      return
+    }
+    // CRITICAL: make every result card's TARGET state visible before Flip captures
+    // it. useReveal leaves below-fold cards at autoAlpha:0; a filter can promote
+    // one into view, and Flip would otherwise lock it at its captured 0. Setting
+    // first means survivors end visible; entering cards still fade via onEnter.
+    gsap.set(cards, { autoAlpha: 1, clipPath: 'none' })
+    Flip.from(state, {
+      duration: 0.6,
+      ease: 'power3.out',
+      stagger: 0.03,
+      absolute: true,
+      onEnter: (els) =>
+        gsap.fromTo(
+          els,
+          { autoAlpha: 0, scale: 0.92 },
+          { autoAlpha: 1, scale: 1, duration: 0.45, ease: 'power3.out' },
+        ),
+      onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.92, duration: 0.3, ease: 'power3.out' }),
+    })
+  }, [filtered])
 
   // Header bits + car cards reveal via the shared staggered clip-path system.
   useReveal(root)
@@ -164,7 +211,10 @@ export default function Inventory() {
             {filtered.length === 0 ? (
               <p className="py-24 text-center text-muted">{t('inventory.empty')}</p>
             ) : (
-              <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div
+                ref={gridRef}
+                className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              >
                 {filtered.map((c) => (
                   <CarCard key={c.id} car={c} />
                 ))}

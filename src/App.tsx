@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { gsap } from 'gsap'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import FeaturedCar from './components/FeaturedCar'
@@ -16,16 +17,57 @@ import Faq from './components/Faq'
 import Legal from './components/Legal'
 import Footer from './components/Footer'
 import Loader from './components/Loader'
+import CustomCursor from './components/CustomCursor'
 import { useLenis } from './hooks/useLenis'
 import { useHeadingReveal } from './hooks/useHeadingReveal'
-import { useHash, parseRoute, scrollMemory } from './lib/router'
+import { useHash, parseRoute, scrollMemory, type Route } from './lib/router'
 import { scrollTop, scrollToY } from './lib/lenis'
+import { prefersReducedMotion } from './lib/motion'
 import { cars } from './lib/cars'
+
+// A route's identity (page), ignoring on-home section anchors — the wipe only
+// fires when this changes, never for in-page section scrolls.
+const routeKey = (r: Route) => (r.name === 'detail' ? `detail:${r.slug}` : r.name)
 
 export default function App() {
   const { i18n } = useTranslation()
   useLenis()
-  const route = parseRoute(useHash())
+
+  // Overlay-wipe page transition (item 11). The shown route lags the target hash
+  // during the wipe: the screen is covered, content swaps behind it, then it
+  // reveals — so pages never jump. In-page anchors (same routeKey) sync without a
+  // wipe; reduced-motion swaps instantly. The existing hash router is untouched.
+  const targetHash = useHash()
+  const [shownHash, setShownHash] = useState(targetHash)
+  const shownHashRef = useRef(shownHash)
+  const wipeRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    shownHashRef.current = shownHash
+  }, [shownHash])
+
+  useEffect(() => {
+    const cur = shownHashRef.current
+    if (routeKey(parseRoute(targetHash)) === routeKey(parseRoute(cur))) {
+      if (targetHash !== cur) setShownHash(targetHash) // anchor change only, no wipe
+      return
+    }
+    if (prefersReducedMotion() || !wipeRef.current) {
+      setShownHash(targetHash)
+      return
+    }
+    const ov = wipeRef.current
+    const tl = gsap.timeline()
+    tl.set(ov, { autoAlpha: 1, scaleY: 0, transformOrigin: 'center bottom', pointerEvents: 'auto' })
+      .to(ov, { scaleY: 1, duration: 0.42, ease: 'power3.inOut' })
+      .add(() => setShownHash(targetHash)) // swap behind the cover
+      .to(ov, { scaleY: 0, transformOrigin: 'center top', duration: 0.5, ease: 'power3.inOut' }, '+=0.04')
+      .set(ov, { autoAlpha: 0, pointerEvents: 'none' })
+    return () => {
+      tl.kill()
+    }
+  }, [targetHash])
+
+  const route = parseRoute(shownHash)
   const car = route.name === 'detail' ? cars.find((c) => c.id === route.slug) : undefined
   const slug = route.name === 'detail' ? route.slug : ''
 
@@ -76,6 +118,14 @@ export default function App() {
       <Nav />
       <main>{page}</main>
       <Footer />
+      {/* page-wipe cover (item 11) — driven imperatively by the transition above */}
+      <div
+        ref={wipeRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-[70] bg-bg"
+        style={{ visibility: 'hidden', transform: 'scaleY(0)' }}
+      />
+      <CustomCursor />
     </>
   )
 }

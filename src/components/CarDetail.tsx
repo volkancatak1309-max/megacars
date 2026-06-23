@@ -4,6 +4,8 @@ import type { Car } from '../lib/cars'
 import { carYear } from '../lib/cars'
 import { CONTACT } from '../lib/contact'
 import { go } from '../lib/router'
+import { useMagnetic } from '../hooks/useMagnetic'
+import Counter from './Counter'
 
 // Equipment chips parsed from the dealer's own `aciklama` (real data, not invented).
 // First "/"|"|" segment is the model repeat → dropped; the rest are feature tokens.
@@ -29,6 +31,8 @@ export default function CarDetail({ car }: { car: Car }) {
   const [idx, setIdx] = useState(0)
   const [lightbox, setLightbox] = useState(false)
   const equip = parseEquipment(car.aciklama)
+  const reserveRef = useMagnetic<HTMLAnchorElement>(0.4)
+  const testRef = useMagnetic<HTMLAnchorElement>(0.4)
 
   // Go back to the collection at the exact scroll position the user left from.
   // history.back() replays the same path as the browser back button.
@@ -69,10 +73,12 @@ export default function CarDetail({ car }: { car: Car }) {
     `Hallo MEGACARS, ich möchte eine Probefahrt für den ${car.marka} ${car.model} vereinbaren.`,
   )}`
 
-  const stats: [string, string | number][] = [
-    [t('detail.year'), carYear(car)],
-    [t('detail.km'), `${car.km.toLocaleString('de-DE')}`],
-    [t('detail.ps'), car.guc_ps],
+  const plainNum = (n: number) => String(Math.round(n))
+  const deNum = (n: number) => Math.round(n).toLocaleString('de-DE')
+  const stats: { label: string; value: number; format: (n: number) => string }[] = [
+    { label: t('detail.year'), value: carYear(car), format: plainNum },
+    { label: t('detail.km'), value: car.km, format: deNum },
+    { label: t('detail.ps'), value: car.guc_ps, format: plainNum },
   ]
   const specs: [string, string][] = [
     [t('detail.spec.marke'), car.marka],
@@ -135,34 +141,42 @@ export default function CarDetail({ car }: { car: Car }) {
 
           {/* sticky buy rail */}
           <aside className="lg:sticky lg:top-28 lg:self-start">
-            <h1 className="display text-text" style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)' }}>
+            <h1
+              data-split
+              className="display text-text"
+              style={{ fontSize: 'clamp(1.8rem, 3vw, 3rem)' }}
+            >
               {car.marka} {car.model}
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-muted">{car.aciklama}</p>
 
             <div className="mt-6 grid grid-cols-3 gap-3 border-y border-border py-5">
-              {stats.map(([label, value]) => (
-                <div key={label}>
-                  <div className="spec text-[0.6rem] text-faint">{label}</div>
-                  <div className="spec mt-1 text-base text-text">{value}</div>
+              {stats.map((s) => (
+                <div key={s.label}>
+                  <div className="spec text-[0.6rem] text-faint">{s.label}</div>
+                  <div className="spec mt-1 text-base text-text">
+                    <Counter value={s.value} format={s.format} trigger="view" />
+                  </div>
                 </div>
               ))}
             </div>
 
             <p className="display mt-6 text-accent" style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.4rem)' }}>
-              {priceFmt}
+              €<Counter value={car.fiyat} format={deNum} trigger="view" />
             </p>
 
             <div className="mt-5 flex flex-col gap-3">
               <a
+                ref={reserveRef}
                 href={waReserve}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-[2px] bg-accent px-7 py-3.5 text-center text-sm font-medium text-accent-fg transition-colors hover:bg-accent-press"
+                className="btn-fill rounded-[2px] bg-accent px-7 py-3.5 text-center text-sm font-medium text-accent-fg"
               >
                 {t('detail.reserve')}
               </a>
               <a
+                ref={testRef}
                 href={waTest}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -179,7 +193,7 @@ export default function CarDetail({ car }: { car: Car }) {
                 e.preventDefault()
                 go('#/finanzierung')
               }}
-              className="spec mt-2 inline-block text-[0.62rem] text-accent transition-colors hover:text-accent-press"
+              className="link-underline spec mt-2 inline-block text-[0.62rem] text-accent transition-colors hover:text-accent-press"
             >
               {t('detail.finance')} →
             </a>

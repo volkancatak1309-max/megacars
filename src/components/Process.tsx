@@ -1,11 +1,7 @@
 import { useRef } from 'react'
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { useReveal } from '../hooks/useReveal'
 
 // Custom minimal line icons (ARSENAL: no cartoon).
 const STEPS: { k: string; icon: ReactNode }[] = [
@@ -53,26 +49,13 @@ export default function Process() {
   const { t } = useTranslation()
   const root = useRef<HTMLElement>(null)
 
-  useGSAP(
-    () => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-      gsap.from('.proc-step', {
-        autoAlpha: 0,
-        y: 22,
-        duration: 0.7,
-        ease: 'power2.out',
-        stagger: 0.12,
-        scrollTrigger: { trigger: root.current, start: 'top 78%', once: true },
-      })
-    },
-    { scope: root },
-  )
+  useReveal(root)
 
   return (
     <section id="ablauf" ref={root} className="bg-bg px-6 py-24 md:px-10 md:py-32">
       <div className="mx-auto max-w-[1400px]">
         <header className="mb-14 max-w-[640px]">
-          <p className="eyebrow text-muted">{t('process.eyebrow')}</p>
+          <p className="reveal eyebrow text-muted">{t('process.eyebrow')}</p>
           <h2 className="display mt-4 text-text" style={{ fontSize: 'clamp(2rem, 4vw, 3.6rem)' }}>
             {t('process.title')}
           </h2>
@@ -82,7 +65,7 @@ export default function Process() {
           {STEPS.map((s, i) => (
             <div
               key={s.k}
-              className="proc-step pt-8 lg:border-l lg:border-border lg:pl-8 lg:[&:first-child]:border-l-0 lg:[&:first-child]:pl-0"
+              className="reveal pt-8 lg:border-l lg:border-border lg:pl-8 lg:[&:first-child]:border-l-0 lg:[&:first-child]:pl-0"
             >
               <div className="flex items-center justify-between">
                 <span className="spec text-[0.7rem] text-faint">

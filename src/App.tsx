@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import FeaturedCar from './components/FeaturedCar'
@@ -15,15 +16,21 @@ import Legal from './components/Legal'
 import Footer from './components/Footer'
 import Loader from './components/Loader'
 import { useLenis } from './hooks/useLenis'
+import { useHeadingReveal } from './hooks/useHeadingReveal'
 import { useHash, parseRoute, scrollMemory } from './lib/router'
 import { scrollTop, scrollToY } from './lib/lenis'
 import { cars } from './lib/cars'
 
 export default function App() {
+  const { i18n } = useTranslation()
   useLenis()
   const route = parseRoute(useHash())
   const car = route.name === 'detail' ? cars.find((c) => c.id === route.slug) : undefined
   const slug = route.name === 'detail' ? route.slug : ''
+
+  // Cinematic SplitText reveal on display headings — re-run per route + language
+  // (so re-splitting picks up the freshly rendered, correctly-measured text).
+  useHeadingReveal(`${route.name}:${slug}:${i18n.resolvedLanguage ?? 'de'}`)
 
   // Take over scroll restoration from the browser (it fights our manual restore).
   useEffect(() => {

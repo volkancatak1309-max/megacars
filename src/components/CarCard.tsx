@@ -16,9 +16,9 @@ export default function CarCard({ car }: { car: Car }) {
       href={`#/fahrzeug/${car.id}`}
       onClick={() => scrollMemory.remember()}
       aria-label={`${car.marka} ${car.model}`}
-      className="car-card group block w-full cursor-pointer text-left focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+      className="car-card reveal group block w-full cursor-pointer text-left focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-surface">
+      <div className="skewable relative aspect-[4/3] overflow-hidden bg-surface">
         <img
           src={img1}
           alt={`${car.marka} ${car.model}`}

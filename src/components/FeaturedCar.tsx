@@ -56,7 +56,7 @@ export default function FeaturedCar() {
         <div className="lg:col-span-5">
           <p className="featured-reveal eyebrow text-muted">{t('featured.eyebrow')}</p>
           <h2
-            className="featured-reveal display mt-4 text-text"
+            className="display mt-4 text-text"
             style={{ fontSize: 'clamp(2rem, 3.5vw, 3.6rem)' }}
           >
             {car.marka} {car.model}
@@ -83,7 +83,7 @@ export default function FeaturedCar() {
 
           <a
             href={`#/fahrzeug/${car.id}`}
-            className="featured-reveal mt-6 inline-block rounded-[2px] bg-accent px-7 py-3.5 text-sm font-medium text-accent-fg transition-colors hover:bg-accent-press"
+            className="featured-reveal btn-fill mt-6 inline-block rounded-[2px] bg-accent px-7 py-3.5 text-sm font-medium text-accent-fg"
           >
             {t('featured.cta')}
           </a>

@@ -30,12 +30,12 @@ export default function Footer() {
           <p className="eyebrow mb-4 text-faint">{t('footer.contact')}</p>
           <ul className="space-y-2.5 text-sm">
             <li>
-              <a href={CONTACT.tel} className="text-text transition-colors hover:text-accent">
+              <a href={CONTACT.tel} className="link-underline text-text transition-colors hover:text-accent">
                 {CONTACT.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={CONTACT.mailto} className="text-text transition-colors hover:text-accent">
+              <a href={CONTACT.mailto} className="link-underline text-text transition-colors hover:text-accent">
                 {CONTACT.email}
               </a>
             </li>
@@ -44,7 +44,7 @@ export default function Footer() {
                 href={CONTACT.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text transition-colors hover:text-accent"
+                className="link-underline text-text transition-colors hover:text-accent"
               >
                 WhatsApp
               </a>
@@ -62,7 +62,7 @@ export default function Footer() {
                   e.preventDefault()
                   goSection('inventory')
                 }}
-                className="text-text transition-colors hover:text-accent"
+                className="link-underline text-text transition-colors hover:text-accent"
               >
                 {t('nav.inventory')}
               </a>
@@ -74,7 +74,7 @@ export default function Footer() {
                   e.preventDefault()
                   go('#/ueber-uns')
                 }}
-                className="text-text transition-colors hover:text-accent"
+                className="link-underline text-text transition-colors hover:text-accent"
               >
                 {t('nav.about')}
               </a>
@@ -86,7 +86,7 @@ export default function Footer() {
                   e.preventDefault()
                   go('#/kontakt')
                 }}
-                className="text-text transition-colors hover:text-accent"
+                className="link-underline text-text transition-colors hover:text-accent"
               >
                 {t('nav.contact')}
               </a>
@@ -96,7 +96,7 @@ export default function Footer() {
                 href={CONTACT.whatsappBeratung}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text transition-colors hover:text-accent"
+                className="link-underline text-text transition-colors hover:text-accent"
               >
                 {t('hero.book')}
               </a>
@@ -114,7 +114,7 @@ export default function Footer() {
                   e.preventDefault()
                   go('#/finanzierung')
                 }}
-                className="text-text transition-colors hover:text-accent"
+                className="link-underline text-text transition-colors hover:text-accent"
               >
                 {t('nav.finance')}
               </a>
@@ -126,7 +126,7 @@ export default function Footer() {
                   e.preventDefault()
                   go('#/inzahlungnahme')
                 }}
-                className="text-text transition-colors hover:text-accent"
+                className="link-underline text-text transition-colors hover:text-accent"
               >
                 {t('nav.tradein')}
               </a>
@@ -138,7 +138,7 @@ export default function Footer() {
                   e.preventDefault()
                   go('#/faq')
                 }}
-                className="text-text transition-colors hover:text-accent"
+                className="link-underline text-text transition-colors hover:text-accent"
               >
                 {t('nav.faq')}
               </a>
@@ -156,7 +156,7 @@ export default function Footer() {
               e.preventDefault()
               go('#/impressum')
             }}
-            className="text-faint transition-colors hover:text-text"
+            className="link-underline text-faint transition-colors hover:text-text"
           >
             {t('footer.impressum')}
           </a>
@@ -166,7 +166,7 @@ export default function Footer() {
               e.preventDefault()
               go('#/datenschutz')
             }}
-            className="text-faint transition-colors hover:text-text"
+            className="link-underline text-faint transition-colors hover:text-text"
           >
             {t('footer.datenschutz')}
           </a>
@@ -176,7 +176,7 @@ export default function Footer() {
               e.preventDefault()
               go('#/agb')
             }}
-            className="text-faint transition-colors hover:text-text"
+            className="link-underline text-faint transition-colors hover:text-text"
           >
             {t('footer.agb')}
           </a>

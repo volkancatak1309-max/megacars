@@ -115,4 +115,88 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
+
+  /* =========================================================================
+     PHASE A — cinematic motion utilities. All motion is power-curve only
+     (ARSENAL: no bounce/spring/elastic) and disabled under reduced-motion via
+     the @layer base media query above (it zeroes transition/animation duration).
+     ========================================================================= */
+
+  /* SplitText line wrappers (item 1) */
+  .split-line {
+    will-change: transform;
+  }
+
+  /* item 5 — scroll-velocity skew on car imagery (tactile "weight").
+     The JS driver writes --cc-skew off Lenis-smoothed scroll velocity; the CSS
+     transition smooths the value and eases it back to 0 when scrolling stops. */
+  .skewable {
+    transform: skewY(calc(var(--cc-skew, 0) * 1deg));
+    transform-origin: center;
+    will-change: transform;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* item 6 — premium link underline (transform-only, no layout shift) */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.4s cubic-bezier(0.6, 0, 0.2, 1);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* item 6 — primary button fill + press. Uses a background-size sweep (NOT a
+     transform) so it never fights the magnetic x/y transform on the same button.
+     The label stays foreground (background paints behind content). */
+  .btn-fill {
+    background-image: linear-gradient(var(--accent-press), var(--accent-press));
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 0% 100%;
+    transition:
+      background-size 0.45s cubic-bezier(0.6, 0, 0.2, 1),
+      filter 0.2s ease,
+      border-color 0.3s ease;
+  }
+  .btn-fill:hover {
+    background-size: 100% 100%;
+  }
+  .btn-fill:active {
+    filter: brightness(0.92);
+  }
+
+  /* item 8 — transparent nav while over the dark hero video. Forces WHITE in both
+     themes, matching DESIGN.md's hero rule (footage is dark → hero text is white).
+     No scrim/overlay is added to the video itself. */
+  .nav-over-hero {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  .nav-over-hero a,
+  .nav-over-hero button,
+  .nav-over-hero span {
+    color: #fff;
+  }
+  .nav-over-hero button {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  .nav-over-hero .nav-divider {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 }

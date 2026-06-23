@@ -5,6 +5,8 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cars, FACETS, matchesSelection, emptySelection } from '../lib/cars'
 import type { FacetKey, Lang, Selection } from '../lib/cars'
+import { prefersReducedMotion } from '../lib/motion'
+import { useReveal } from '../hooks/useReveal'
 import CarCard from './CarCard'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -51,16 +53,27 @@ export default function Inventory() {
     }))
   const clear = () => setSel(emptySelection())
 
+  // Header bits + car cards reveal via the shared staggered clip-path system.
+  useReveal(root)
+
+  // item 5 — scroll-velocity skew on car imagery (tactile "weight"). One global
+  // trigger writes --cc-skew off Lenis-smoothed velocity; .skewable smooths it and
+  // eases back to 0 via CSS transition. New cards inherit the var automatically.
   useGSAP(
     () => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-      gsap.from('.inv-head', {
-        autoAlpha: 0,
-        y: 20,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: '.inv-head', start: 'top 88%', once: true },
+      if (prefersReducedMotion()) return
+      const docEl = document.documentElement
+      const clamp = gsap.utils.clamp(-6, 6)
+      const st = ScrollTrigger.create({
+        start: 0,
+        end: 'max',
+        onUpdate: (self) =>
+          docEl.style.setProperty('--cc-skew', clamp(self.getVelocity() / -300).toFixed(2)),
       })
+      return () => {
+        st.kill()
+        docEl.style.setProperty('--cc-skew', '0')
+      }
     },
     { scope: root },
   )
@@ -72,13 +85,13 @@ export default function Inventory() {
       className="scroll-mt-24 bg-bg px-6 py-20 md:px-10 md:py-28"
     >
       <div className="mx-auto max-w-[1400px]">
-        <header className="inv-head mb-12 border-b border-border pb-8">
-          <p className="eyebrow text-muted">{t('inventory.eyebrow')}</p>
+        <header className="mb-12 border-b border-border pb-8">
+          <p className="reveal eyebrow text-muted">{t('inventory.eyebrow')}</p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
             <h2 className="display text-text" style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)' }}>
               {t('inventory.title')}
             </h2>
-            <span className="spec text-sm text-muted">
+            <span className="reveal spec text-sm text-muted">
               {t('inventory.count', { count: filtered.length })}
             </span>
           </div>

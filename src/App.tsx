@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import FeaturedCar from './components/FeaturedCar'
+import HeroSequence from './components/HeroSequence'
 import Inventory from './components/Inventory'
 import Process from './components/Process'
 import Reviews from './components/Reviews'
@@ -62,6 +63,7 @@ export default function App() {
       <>
         <Hero />
         <FeaturedCar />
+        <HeroSequence />
         <Inventory />
         <Process />
         <Reviews />

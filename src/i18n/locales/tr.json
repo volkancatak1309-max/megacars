@@ -15,6 +15,14 @@
     "book": "Randevu al",
     "scroll": "Kaydır"
   },
+  "heroSeq": {
+    "k1": "Her açıdan",
+    "l1": "Detayda kontrol.",
+    "k2": "120 Nokta Kontrol",
+    "l2": "Her detay önemli.",
+    "k3": "Hazır",
+    "l3": "Yola hazır teslim."
+  },
   "cred": {
     "vehicles": "Araç",
     "brands": "Marka",

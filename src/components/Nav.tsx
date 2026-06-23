@@ -3,14 +3,13 @@ import ThemeToggle from './ThemeToggle'
 import LangToggle from './LangToggle'
 import { goSection, go } from '../lib/router'
 
-// Thin, transparent top nav over the hero (DESIGN.md §4).
+// Fixed top nav with solid background so scrolling content never bleeds through.
 export default function Nav() {
   const { t } = useTranslation()
-
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-bg/85 backdrop-blur-md">
       <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-10">
-        <a
+        
           href="#/"
           onClick={(e) => {
             e.preventDefault()
@@ -20,9 +19,8 @@ export default function Nav() {
         >
           MEGACARS
         </a>
-
         <div className="hidden items-center gap-8 md:flex">
-          <a
+          
             href="#inventory"
             onClick={(e) => {
               e.preventDefault()
@@ -32,7 +30,7 @@ export default function Nav() {
           >
             {t('nav.inventory')}
           </a>
-          <a
+          
             href="#/ueber-uns"
             onClick={(e) => {
               e.preventDefault()
@@ -42,7 +40,7 @@ export default function Nav() {
           >
             {t('nav.about')}
           </a>
-          <a
+          
             href="#/kontakt"
             onClick={(e) => {
               e.preventDefault()
@@ -53,7 +51,6 @@ export default function Nav() {
             {t('nav.contact')}
           </a>
         </div>
-
         <div className="flex items-center gap-3">
           <LangToggle />
           <span className="h-4 w-px bg-border" />

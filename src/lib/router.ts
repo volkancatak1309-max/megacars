@@ -65,14 +65,15 @@ export function go(hash: string) {
   window.location.hash = hash
 }
 
-// Scroll to an on-home section; if currently on a detail page, go home first.
-// Explicit section nav must NOT trigger a remembered-scroll restore.
+// Scroll to an on-home section. If currently on ANY sub-page (detail, about,
+// contact, faq, etc.), go home first, then scroll. Explicit section nav must
+// NOT trigger a remembered-scroll restore.
 export function goSection(id: string) {
   scrollMemory.forget()
-  const onDetail = window.location.hash.startsWith('#/fahrzeug/')
-  if (onDetail) {
+  const onHome = window.location.hash === '' || window.location.hash === '#/'
+  if (!onHome) {
     window.location.hash = ''
-    setTimeout(() => scrollToId(id), 160)
+    setTimeout(() => scrollToId(id), 200)
   } else {
     scrollToId(id)
   }

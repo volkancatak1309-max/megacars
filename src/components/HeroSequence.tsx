@@ -12,14 +12,14 @@ gsap.registerPlugin(ScrollTrigger, SplitText)
 // Apple AirPods-style frame-scrub: a pinned <canvas> plays a pre-rendered WebP
 // frame sequence keyed to scroll position. We draw bitmaps to a canvas (NOT
 // <video currentTime>) so scrubbing is jank-free in every browser.
-//   • Assets: public/hero/seq/seq_###.webp (1024×576, q48, ~3.8 MB total).
+//   • Assets: public/hero/seq/seq_###.webp (1280×720, q60, ~5.5 MB total).
 //   • Mobile: load every 2nd frame → ~half the bytes + half the decode memory.
 //   • Motion is power-curve only (ARSENAL: no bounce/spring); the frame tween is
 //     linear ('none') so frames track scroll 1:1.
 //   • reduced-motion: no pin/scrub — render the static LAST frame, captions shown.
 const FRAME_COUNT = 120
-const FRAME_W = 1024
-const FRAME_H = 576
+const FRAME_W = 1280
+const FRAME_H = 720
 const SCROLL_VH = 3.2 // viewport-heights of scroll the section is pinned for
 const framePath = (i: number) => `/hero/seq/seq_${String(i).padStart(3, '0')}.webp`
 

@@ -1,7 +1,7 @@
 {
   "count": 120,
-  "width": 1024,
-  "height": 576,
+  "width": 1280,
+  "height": 720,
   "pattern": "seq_%03d.webp",
-  "quality": 48
+  "quality": 60
 }

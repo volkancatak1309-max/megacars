@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { osmEmbedHref } from '@/lib/site'
 import { useMotion, MOTION_OK } from '@/lib/gsap'
 import { Icon } from '@/components/ui/Icon'
+import { ShutterButton } from '@/components/site/Shutter'
 
 export interface MapData {
   viewBox: string
@@ -52,7 +53,7 @@ export function MapPreview({ map }: { map: MapData }) {
           { strokeDashoffset: 1 },
           { strokeDashoffset: 0, duration: 1.4, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 80%', once: true } },
         )
-        gsap.from('[data-pin]', { scale: 0.6, autoAlpha: 0, duration: 0.7, delay: 0.6, scrollTrigger: { trigger: ref.current, start: 'top 80%', once: true } })
+        gsap.from('.map-pin', { scale: 0.6, autoAlpha: 0, duration: 0.7, delay: 0.6, scrollTrigger: { trigger: ref.current, start: 'top 80%', once: true } })
       })
     },
     ref,
@@ -60,7 +61,7 @@ export function MapPreview({ map }: { map: MapData }) {
   )
 
   return (
-    <div ref={ref} className="relative aspect-[16/10] overflow-clip rounded-[4px] border border-line bg-hall">
+    <div ref={ref} className="map">
       {loaded ? (
         <iframe src={osmEmbedHref} title={t('mapTitle')} className="absolute inset-0 h-full w-full border-0" loading="lazy" />
       ) : (
@@ -72,31 +73,20 @@ export function MapPreview({ map }: { map: MapData }) {
               <img src={map.src} alt="" width={vw} height={vh} loading="lazy" className="h-full w-full" />
             )}
           </div>
-          <span
-            data-pin
-            aria-hidden="true"
-            className="absolute grid -translate-x-1/2 -translate-y-1/2 place-items-center"
-            style={{ left: `${(map.pin.x / vw) * 100}%`, top: `${(map.pin.y / vh) * 100}%` }}
-          >
-            <span className="absolute size-10 rounded-full bg-signal-12" />
-            <span className="size-3.5 rounded-full border-2 border-night bg-signal" />
-            <span className="absolute top-6 whitespace-nowrap rounded-full bg-night px-3 py-1 text-[0.8125rem] font-medium text-ink">Mega Cars</span>
+          <span className="map-pin" aria-hidden="true" style={{ left: `${(map.pin.x / vw) * 100}%`, top: `${(map.pin.y / vh) * 100}%` }}>
+            <i />
+            <b>Mega Cars</b>
           </span>
-          <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-3 bg-gradient-to-t from-night/90 to-transparent p-4 sm:p-5">
-            <button type="button" onClick={() => setLoaded(true)} className="btn btn-secondary btn-sm bg-night">
+          <div className="map-bar">
+            <ShutterButton kind="solid" className="sh--sm" onClick={() => setLoaded(true)}>
               <Icon name="mapPin" size={16} />
               {t('loadMap')}
-            </button>
-            <p className="max-w-[36ch] text-[0.8125rem] text-ink-2">{t('mapNote')}</p>
+            </ShutterButton>
+            <p>{t('mapNote')}</p>
           </div>
         </>
       )}
-      <a
-        href="https://www.openstreetmap.org/copyright"
-        target="_blank"
-        rel="noopener"
-        className="absolute top-2 right-2 rounded-full bg-night/80 px-2.5 py-1 text-[0.75rem] text-ink-2"
-      >
+      <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener" className="map-osm">
         © OpenStreetMap
       </a>
     </div>

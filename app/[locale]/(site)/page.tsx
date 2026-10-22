@@ -4,16 +4,14 @@ import map from '@/data/map.json'
 import type { Locale } from '@/i18n/routing'
 import { featuredVehicles, stockStats, toCard, vehicles } from '@/lib/inventory'
 import { buildOptions } from '@/lib/filter'
+import { HERO } from '@/lib/hero'
 import { alternates, autoDealerLd } from '@/lib/seo'
 import { JsonLd } from '@/components/ui/JsonLd'
-import { Hero } from '@/components/home/Hero'
+import { HeroLetters } from '@/components/home/HeroLetters'
 import { QuickSearch } from '@/components/home/QuickSearch'
-import { FeaturedGrid } from '@/components/home/FeaturedGrid'
-import { Trust } from '@/components/home/Trust'
-import { Services } from '@/components/home/Services'
-import { Location } from '@/components/home/Location'
+import { BrandBand, FeaturedCars, LocationSection, ServicesSection, TrustSection } from '@/components/home/Sections'
 import type { MapData } from '@/components/home/MapPreview'
-import { MobileActionBar } from '@/components/layout/MobileActionBar'
+import { ActionBar } from '@/components/site/ActionBar'
 
 export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
   const { locale } = await params
@@ -33,9 +31,9 @@ const photoOf = (ref: { id: string; photo: number }) => vehicles.find((v) => v.i
 export default async function HomePage({ params }: PageProps<'/[locale]'>) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+  const t = await getTranslations('hero')
 
-  const cards = vehicles.map(toCard)
-  const quick = cards.map(({ makeSlug, make, price, mileage, firstRegistrationKey, fuel, transmission, body }) => ({
+  const quick = vehicles.map(toCard).map(({ makeSlug, make, price, mileage, firstRegistrationKey, fuel, transmission, body }) => ({
     makeSlug,
     make,
     price,
@@ -45,18 +43,22 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
     transmission,
     body,
   }))
-  const options = buildOptions(quick)
+  const { makes, priceTo, bodies } = buildOptions(quick)
+  const brandCounts = makes
+    .map((m) => ({ slug: m.value, label: m.label, count: quick.filter((v) => v.makeSlug === m.value).length }))
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'de'))
 
   return (
     <>
       <JsonLd data={autoDealerLd(locale as Locale)} />
-      <Hero />
-      <QuickSearch vehicles={quick} options={{ ...options, priceFrom: [], kmTo: [], yearFrom: [] }} />
-      <FeaturedGrid cards={featuredVehicles().map(toCard).slice(0, 6)} />
-      <Trust photo={photoOf(SHOWROOM)} stock={stockStats} />
-      <Services />
-      <Location map={map as MapData} building={photoOf(BUILDING)} />
-      <MobileActionBar />
+      <HeroLetters film={HERO} title={t('title')} cta={t('cta')} count={stockStats.count} />
+      <QuickSearch vehicles={quick} options={{ makes, priceTo, bodies }} />
+      <FeaturedCars cars={featuredVehicles().slice(0, 6)} />
+      <BrandBand makes={brandCounts} />
+      <TrustSection photo={photoOf(SHOWROOM)} stock={stockStats} />
+      <ServicesSection />
+      <LocationSection map={map as MapData} building={photoOf(BUILDING)} />
+      <ActionBar />
     </>
   )
 }

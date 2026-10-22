@@ -1,18 +1,22 @@
 'use client'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { Link } from '@/i18n/navigation'
 import { EMPTY_FILTERS, matches, toSearchParams, type CardVehicle, type FilterOptions, type Filters } from '@/lib/filter'
 import { formatPrice } from '@/lib/format'
-import { loadMotion } from '@/lib/gsap'
+import { loadMotion, REDUCED } from '@/lib/gsap'
 import { Icon } from '@/components/ui/Icon'
-import { Magnetic } from '@/components/ui/Magnetic'
+import { LinesUp } from '@/components/site/Reveals'
+import { ShutterLink } from '@/components/site/Shutter'
 import { Stagger } from '@/components/motion/Reveal'
 
 type QuickVehicle = Pick<CardVehicle, 'makeSlug' | 'price' | 'mileage' | 'firstRegistrationKey' | 'fuel' | 'transmission' | 'body'>
 
-/** Marke · Preis bis · Karosserie with a live, real result count (DESIGN.md §8.1 #2). */
-export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; options: FilterOptions }) {
+/**
+ * Marke · Preis bis · Karosserie as three large fields and a live, real result count.
+ * Each field is a native select laid over its large value, so keyboards, screen readers
+ * and phones get the system picker; the count in the button rolls to its new value.
+ */
+export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; options: Pick<FilterOptions, 'makes' | 'priceTo' | 'bodies'> }) {
   const t = useTranslations('quickSearch')
   const tv = useTranslations('vehicle')
   const tl = useTranslations('list')
@@ -22,9 +26,8 @@ export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; o
   const [shown, setShown] = useState(count)
   const tween = useRef<{ kill: () => void } | null>(null)
 
-  // the number in the button rolls to its new value (t-2)
   useEffect(() => {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (matchMedia(REDUCED).matches) {
       setShown(count)
       return
     }
@@ -32,39 +35,47 @@ export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; o
     const state = { n: shown }
     tween.current?.kill()
     loadMotion().then(({ gsap }) => {
-      if (!cancelled) tween.current = gsap.to(state, { n: count, duration: 0.45, snap: { n: 1 }, onUpdate: () => setShown(state.n) })
+      if (!cancelled) tween.current = gsap.to(state, { n: count, duration: 0.6, snap: { n: 1 }, ease: 'power3.out', onUpdate: () => setShown(state.n) })
     })
     return () => {
       cancelled = true
       tween.current?.kill()
     }
+    // `shown` is the tween's start value only
   }, [count])
 
-  const countWith = (patch: Partial<Filters>, ignore: keyof Filters) =>
-    vehicles.filter((v) => matches(v, { ...f, ...patch }, ignore as never)).length
-
+  const countWith = (patch: Partial<Filters>, ignore: keyof Filters) => vehicles.filter((v) => matches(v, { ...f, ...patch }, ignore as never)).length
   const query = Object.fromEntries(toSearchParams(f))
 
+  const makeLabel = f.make ? (options.makes.find((m) => m.value === f.make)?.label ?? t('all')) : t('all')
+  const priceLabel = f.priceMax ? tl('upToPrice', { value: formatPrice(f.priceMax, locale) }) : t('anyPrice')
+  const bodyLabel = f.body ? tv(`bodyValues.${f.body}`) : t('all')
+
+  const field = (id: string, label: string, value: string, control: React.ReactNode) => (
+    <div className="qs-field" data-stagger>
+      <label htmlFor={id} className="field-label">
+        {label}
+      </label>
+      <span className="qs-value" aria-hidden="true">
+        <span>{value}</span>
+        <Icon name="chevronDown" size={22} />
+      </span>
+      {control}
+    </div>
+  )
+
   return (
-    <section aria-labelledby="quick-search-title" className="relative border-b border-line bg-hall">
-      <Stagger className="container-max page-x py-10 lg:py-14">
-        <h2 id="quick-search-title" data-stagger className="t-h3 font-normal">
+    <section className="qs s-night" aria-labelledby="qs-title">
+      <div className="pg wide">
+        <LinesUp id="qs-title" className="qs-title d-m">
           {t('title')}
-        </h2>
-        <form
-          className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <div className="field" data-stagger>
-            <label htmlFor="qs-make" className="field-label">
-              {t('make')}
-            </label>
-            <select
-              id="qs-make"
-              className="field-control"
-              value={f.make ?? ''}
-              onChange={(e) => setF({ ...f, make: e.target.value || null })}
-            >
+        </LinesUp>
+        <Stagger as="form" className="qs-form" start="top 92%">
+          {field(
+            'qs-make',
+            t('make'),
+            makeLabel,
+            <select id="qs-make" value={f.make ?? ''} onChange={(e) => setF({ ...f, make: e.target.value || null })}>
               <option value="">{t('allMakes')}</option>
               {options.makes.map((m) => {
                 const n = countWith({ make: m.value }, 'make')
@@ -74,18 +85,13 @@ export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; o
                   </option>
                 )
               })}
-            </select>
-          </div>
-          <div className="field" data-stagger>
-            <label htmlFor="qs-price" className="field-label">
-              {t('priceMax')}
-            </label>
-            <select
-              id="qs-price"
-              className="field-control tabular"
-              value={f.priceMax ?? ''}
-              onChange={(e) => setF({ ...f, priceMax: e.target.value ? Number(e.target.value) : null })}
-            >
+            </select>,
+          )}
+          {field(
+            'qs-price',
+            t('priceMax'),
+            priceLabel,
+            <select id="qs-price" value={f.priceMax ?? ''} onChange={(e) => setF({ ...f, priceMax: e.target.value ? Number(e.target.value) : null })}>
               <option value="">{t('anyPrice')}</option>
               {options.priceTo.map((p) => {
                 const n = countWith({ priceMax: p }, 'priceMax')
@@ -95,18 +101,13 @@ export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; o
                   </option>
                 )
               })}
-            </select>
-          </div>
-          <div className="field" data-stagger>
-            <label htmlFor="qs-body" className="field-label">
-              {t('body')}
-            </label>
-            <select
-              id="qs-body"
-              className="field-control"
-              value={f.body ?? ''}
-              onChange={(e) => setF({ ...f, body: (e.target.value || null) as Filters['body'] })}
-            >
+            </select>,
+          )}
+          {field(
+            'qs-body',
+            t('body'),
+            bodyLabel,
+            <select id="qs-body" value={f.body ?? ''} onChange={(e) => setF({ ...f, body: (e.target.value || null) as Filters['body'] })}>
               <option value="">{t('allBodies')}</option>
               {options.bodies.map((b) => {
                 const n = countWith({ body: b }, 'body')
@@ -116,25 +117,19 @@ export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; o
                   </option>
                 )
               })}
-            </select>
+            </select>,
+          )}
+          <div className="qs-submit" data-stagger>
+            <ShutterLink href={{ pathname: '/fahrzeuge', query }} kind="solid" aria-disabled={count === 0 ? 'true' : undefined}>
+              <span className="tabular">{t('submit', { count: shown })}</span>
+              <Icon name="arrowRight" size={18} />
+            </ShutterLink>
           </div>
-          <div data-stagger className="md:col-span-2 lg:col-span-1">
-            <Magnetic>
-              <Link
-                href={{ pathname: '/fahrzeuge', query }}
-                className="btn btn-primary tabular w-full lg:w-auto"
-                aria-disabled={count === 0 || undefined}
-              >
-                {t('submit', { count: shown })}
-                <Icon name="arrowRight" size={18} />
-              </Link>
-            </Magnetic>
-          </div>
-        </form>
+        </Stagger>
         <p className="sr-only" aria-live="polite">
           {tl('found', { count })}
         </p>
-      </Stagger>
+      </div>
     </section>
   )
 }

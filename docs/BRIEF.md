@@ -25,10 +25,10 @@ HEDEF
 
 SHOWROOM (360°) — SİTENİN İMZA ÖZELLİĞİ (Volkan'ın isteği, 22.10.2026)
 - Ziyaretçi bir araç sayfasına girdiğinde araç, kendi gerçek zemininin oluşturduğu sahnede durur ve yavaşça döner. Ziyaretçi fareyle ya da parmağıyla sürükleyerek aracı çepeçevre, istediği açıdan inceler.
-- Dönme kuralı: Detay sayfası açılınca araç, üstten bakıldığında saat yönünde ve yavaş döner (1 tam tur ≈ 40 sn; hız ve yön tek ayardan değişir). Ziyaretçi sürükleyince araç fareyi ya da parmağı takip eder; bırakınca ataletle yumuşakça durur; 3 sn dokunulmazsa yine yavaşça dönmeye başlar. prefers-reduced-motion açıkken kendiliğinden dönme kapalıdır. Tek açılı ilan fotoğrafları döndürülmez. Yakınlaştırma (fare tekerleği ve iki parmak) ve tam ekran vardır.
+- Dönme kuralı: Detay sayfası açılınca araç, üstten bakıldığında saat yönünde ve yavaş döner (1 tam tur ≈ 40 sn; hız ve yön tek ayardan değişir). Ziyaretçi sürükleyince araç fareyi ya da parmağı takip eder; bırakınca ataletle yumuşakça durur; 3 sn dokunulmazsa yine yavaşça dönmeye başlar. prefers-reduced-motion açıkken kendiliğinden dönme kapalıdır. Tek açılı ilan fotoğrafları döndürülmez. Yakınlaştırma Ctrl/⌘ + fare tekerleğiyle ya da iki parmakla yapılır. Düz fare tekerleği yalnız tam ekranda yakınlaştırır; normal sayfada sayfayı kaydırır. Tam ekran vardır.
 - Yöntem: 3D model DEĞİL. Her aracın etrafında dönülerek çekilmiş gerçek video karelerinden 360° döndürme (spin) yapılır:
-  · Kareler eşit açı adımlarıyla seçilir (hedef 72 kare = 5°, en az 36 kare).
-  · Araç her karede aynı boyut ve konumda ortalanır; zıplama ve kayma olmaz.
+  · 72 kare, araç merkezi etrafında eşit açı adımlarıyla seçilir (hedef 72 kare = 5°, en az 36 kare).
+  · Ölçek kuralı: Döner platform taklidinde araç kendi merkezi etrafında döner, kamera sabittir; aracın yandan geniş, önden dar görünmesi doğaldır. Kareler, COLMAP'ten gelen "kamera – araç merkezi" uzaklığına göre ölçeklenir; kamera yüksekliği ve ufuk çizgisi sabitlenir. Aracın kutu boyutunu (bounding box) her karede eşitleyen ölçekleme YASAK: bu, aracın dönerken büyüyüp küçülüyormuş gibi görünmesine yol açar.
   · Araç, altındaki gerçek zemin ve gerçek gölgesi korunur; yalnız arka plandaki duvarlar ve uzak çevre dikişsiz bir fonla değiştirilir. Camdan görünen arka plan da yeni fona uyarlanır; aracın gövdesine, rengine ve çiziğine dokunulmaz.
   · Fon görünümü (açık stüdyo, karanlık salon ya da ince platform kenarlı karanlık salon) 360° denemesinin sonucuna göre Volkan tarafından seçilir; platform kenarı yalnız gerçekçi duruyorsa kullanılır.
 - Showroom havası: NFS tarzı neon garaj DEĞİL. Fotoğraf gibi gerçekçi; oyun ya da CGI hissi yok.

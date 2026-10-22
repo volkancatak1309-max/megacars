@@ -1,3 +1,5 @@
+> **22.10.2026: Bu rehberin yerini `docs/showroom-v2/CEKIM-TALEBI.md` / `.pdf` aldı** (aracın ortası etrafında 6,0 m yarıçaplı çember, 1× lens, ≈ 70 sn tur). Aşağıdaki eski değerler (3–4 m, 40 sn) artık geçerli değildir; dosya yalnız geçmiş kaydı olarak duruyor.
+
 # 360°-Video: Drehanleitung · 360° Video: Çekim Rehberi
 
 **Mega Cars · Radetzkystraße 80, Hohenems**

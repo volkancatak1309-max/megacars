@@ -159,3 +159,37 @@
 - **22.10.2026** — "Çekim gelene kadar Pexels 854754 ile YALNIZ boru hattını kur: kare çıkarma, 72 kare, görüntüleyici, ölçümler (kare boyutu, ilk kare süresi, JS boyutu, işlem süresi). Raporda bunun yöntemi kanıtlamadığını açıkça yaz." — İlgili: docs/showroom-v2/
 - **22.10.2026** — "fal.ai anahtarını Volkan onay vermeden hiçbir ücretli işte kullanma." — İlgili: .env.local, fal.ai
 - **22.10.2026** — "Rapordan sonra dur." — İlgili: faz sırası
+
+## 22.10.2026 — 360° kararları, çekim talimatı düzeltmesi ve commit (dördüncü talimat)
+
+### Sınır
+- **22.10.2026** — "Site koduna dokunma. Deploy etme. fal.ai anahtarını Volkan onay vermeden hiçbir ücretli işte kullanma. Yeni görsel ya da video üretme." — İlgili: bu oturum
+
+### 1) Yakınlaştırma
+- **22.10.2026** — "Onaylandı: Yakınlaştırma Ctrl/⌘ + fare tekerleğiyle ya da iki parmakla yapılır. Düz fare tekerleği yalnız tam ekranda yakınlaştırır; normal sayfada sayfayı kaydırır." — İlgili: 360 görüntüleyici, BRIEF.md, DESIGN.md
+
+### 2) Boru hattı ölçek kuralı
+- **22.10.2026** — "Döner platform taklidinde araç kendi merkezi etrafında döner, kamera sabittir; aracın yandan geniş, önden dar görünmesi doğaldır." — İlgili: showroom boru hattı
+- **22.10.2026** — "Kareler, COLMAP'ten gelen "kamera – araç merkezi" uzaklığına göre ölçeklenir; kamera yüksekliği ve ufuk çizgisi sabitlenir." — İlgili: showroom boru hattı
+- **22.10.2026** — "Aracın kutu boyutunu (bounding box) her karede eşitleyen ölçekleme YASAK: bu, aracın dönerken büyüyüp küçülüyormuş gibi görünmesine yol açar." — İlgili: showroom boru hattı
+- **22.10.2026** — "72 kare, araç merkezi etrafında eşit açı adımlarıyla seçilir." — İlgili: showroom boru hattı
+- **22.10.2026** — "BRIEF.md'deki "araç her karede aynı boyut ve konumda ortalanır" ifadesini bu kuralla değiştir. README'ye bu kuralın gerçek çekimde doğrulanacağını yaz." — İlgili: BRIEF.md, docs/showroom-v2/README.md
+
+### 3) Çekim talimatı
+- **22.10.2026** — "docs/showroom-v2/CEKIM-TALEBI-DE.md dosyasını aşağıdaki kurallarla yeniden yaz ve adını CEKIM-TALEBI.md yap. İçerik Almanca + Türkçe olsun (çekimi galeride kim yaparsa anlasın); tek sayfa, kısa, maddeli ve yazılımcı olmayan birinin anlayacağı dilde yaz." — İlgili: docs/showroom-v2/CEKIM-TALEBI.md
+- **22.10.2026** — "Yürüme yolu: Çeken kişi aracın gövdesine göre değil, aracın ORTASINA hep aynı uzaklıkta kalarak bir çember üzerinde yürür. Çember yere 8 koni ya da işaretle önceden işaretlenir." — İlgili: çekim talimatı
+- **22.10.2026** — "Uzaklık ve lens: Aracın doğal (çarpık olmayan) görünmesi lense değil uzaklığa bağlıdır; kamera yaklaştıkça burun ve arka olduğundan büyük görünür, 0,5× lens bunu düzeltmez." — İlgili: çekim talimatı
+- **22.10.2026** — "Çember yarıçapını kendin hesapla: telefonun ana kamerası (1×), 4K yatay video; aracın yan görünümü kenarlarda yaklaşık %10 boşlukla kadraja sığacak; araç uzunluğunu 5,2 m kabul et. Hesabı ve kullandığın görüş açısı değerini kaynağıyla yaz. Talimata çemberin yarıçapını ve çapını metre olarak yaz." — İlgili: çekim talimatı
+- **22.10.2026** — "1. tercih: Bu çember showroom'un içinde açılabiliyorsa 1× lensle çekilir." — İlgili: çekim talimatı
+- **22.10.2026** — "2. tercih: Açılamıyorsa video çekilmeden önce, açılabilen en büyük çemberin üstünden 0,5× lensle 3 deneme fotoğrafı istenir: ön, ön çapraz, yan. Galzura bu fotoğraflara bakıp çekimin yapılıp yapılmayacağına karar verir." — İlgili: çekim talimatı
+- **22.10.2026** — "Kamera: Yükseklik yaklaşık 1,0–1,2 m ve tur boyunca sabit (monopod ya da gimbal varsa kullanılsın). 4K yatay, 30 fps. Odak ve pozlama kilitli. Kayıt sırasında yakınlaştırma yapılmaz. iPhone'da "Kamerayı Kilitle" ayarı açık olsun ki kayıt sırasında lens değişmesin; HDR video, sinematik mod ve aksiyon modu kapalı olsun. Bu ayarların iPhone menüsündeki adlarını güncel Apple kaynağından doğrula; Android için genel karşılıklarını kısaca yaz." — İlgili: çekim talimatı
+- **22.10.2026** — "Tur: Eşit ve yavaş hızla tam tur ve yaklaşık %10 fazlası. Tur süresini boru hattının ihtiyacına göre sen belirle." — İlgili: çekim talimatı
+- **22.10.2026** — "Ortam: Kapalı showroom ve sabit ışık; kadrajda insan yok; kapılar kapalı; ön tekerlekler düz; aracın çevresindeki eşyalar çekimden önce kaldırılır." — İlgili: çekim talimatı
+- **22.10.2026** — "Gönderim: Video WhatsApp'tan normal video olarak gönderilmez, çünkü kalitesi düşer; WhatsApp'ta "Dokument" olarak ya da Google Drive / WeTransfer linkiyle gönderilir. Dosya adı kuralı: marka-model-tarih." — İlgili: çekim talimatı
+- **22.10.2026** — "İlk çekim tek araçla yapılan bir denemedir." — İlgili: çekim talimatı
+- **22.10.2026** — "[VARSAYIM] etiketlerini yalnız md dosyasında tut. Gönderilecek temiz sürümü docs/showroom-v2/CEKIM-TALEBI.pdf olarak üret; PDF'te etiket, iç not ya da Galzura'ya özel açıklama olmasın. PDF'i açıp bir kez kontrol et." — İlgili: docs/showroom-v2/CEKIM-TALEBI.pdf
+
+### 4) Commit
+- **22.10.2026** — "docs/showroom-v2/ içindeki kare klasörlerini ve stok klibi .gitignore'a ekle; bunların hiçbiri commit'lenmez." — İlgili: .gitignore
+- **22.10.2026** — "Test sayfasını, görüntüleyici kodunu, boru hattı kodunu, README'yi ve çekim talimatını (md + pdf) commit'le; BRIEF.md, DESIGN.md ve KARAR-DEFTERI.md değişikliklerini de ekle." — İlgili: git
+- **22.10.2026** — "Commit mesajı: "docs: 360 olcek kurali, cekim talimati (DE+TR), yakinlastirma karari; showroom-v2 test kodu". v2'ye push et. main'e dokunma." — İlgili: git, v2 dalı

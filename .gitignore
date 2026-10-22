@@ -26,3 +26,8 @@ Thumbs.db
 
 # browser automation scratch
 .playwright-mcp/
+
+# 360 pipeline test: generated frames and the stock test clip never go into the repo
+docs/showroom-v2/kareler/
+docs/showroom-v2/src/
+docs/showroom-v2/**/*.mp4

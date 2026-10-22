@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>360° Boru Hattı Testi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: oklch(0.165 0.006 272); --hall: oklch(0.205 0.007 272); --panel: oklch(0.245 0.008 272);
+    --line: oklch(0.33 0.008 272); --line-strong: oklch(0.56 0.010 272);
+    --ink: oklch(0.955 0.004 272); --ink-2: oklch(0.80 0.008 272); --ink-3: oklch(0.68 0.010 272);
+    --signal: oklch(0.78 0.085 272); --signal-12: oklch(0.78 0.085 272 / 0.12); --danger: oklch(0.72 0.13 25);
+    --ease: cubic-bezier(0.25, 0.1, 0.25, 1); --margin: clamp(20px, 4.5vw, 72px);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--night); color-scheme: dark; }
+  body { margin: 0; background: var(--night); color: var(--ink); font: 400 1rem/1.65 "Hanken Grotesk", system-ui, sans-serif; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding-inline: var(--margin); }
+  header { padding-block: clamp(36px, 6vw, 72px) 24px; }
+  h1 { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.25rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.06; margin: 0; text-wrap: balance; }
+  h2 { font-size: clamp(1.25rem, 1.15rem + .45vw, 1.5rem); font-weight: 500; margin: 0 0 12px; }
+  p { color: var(--ink-2); max-width: 70ch; text-wrap: pretty; }
+  .warn { border: 1px solid oklch(0.72 0.13 25 / 0.5); background: oklch(0.72 0.13 25 / 0.08); border-radius: 12px; padding: 16px 20px; margin: 24px 0 0; color: var(--ink); max-width: 80ch; }
+  .warn b { color: var(--danger); font-weight: 600; }
+  .tabs { display: flex; gap: 8px; margin: 32px 0 16px; flex-wrap: wrap; }
+  .tab { font: 500 .9375rem/1 "Hanken Grotesk", sans-serif; height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink-2); cursor: pointer; transition: border-color 300ms var(--ease), color 300ms var(--ease), background-color 300ms var(--ease); }
+  .tab[aria-selected="true"] { background: var(--ink); color: var(--night); border-color: var(--ink); }
+  .tab:focus-visible, .mcs:focus-visible, .mcs-btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+  /* viewer */
+  .mcs { position: relative; width: 100%; aspect-ratio: 4 / 3; max-height: 78vh; background: var(--hall); border-radius: 4px; overflow: hidden; cursor: grab; user-select: none; -webkit-user-select: none; }
+  .mcs.is-dragging { cursor: grabbing; }
+  .mcs canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; }
+  .mcs.is-full { position: fixed; inset: 0; z-index: 500; max-height: none; aspect-ratio: auto; border-radius: 0; }
+  .mcs:fullscreen { max-height: none; aspect-ratio: auto; border-radius: 0; }
+  .mcs-ui { position: absolute; right: 12px; bottom: 12px; display: flex; gap: 8px; }
+  .mcs-btn { width: 44px; height: 44px; border-radius: 999px; border: 0; display: grid; place-items: center; background: oklch(0.245 0.008 272 / 0.82); color: var(--ink); cursor: pointer; transition: background-color 300ms var(--ease), transform 300ms var(--ease); }
+  .mcs-btn:hover { background: oklch(0.29 0.008 272 / 0.95); }
+  .mcs-btn:active { transform: scale(.98); }
+  .mcs-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .mcs-hint { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); background: oklch(0.165 0.006 272 / 0.72); color: var(--ink); font-size: .8125rem; font-weight: 500; padding: 8px 14px; border-radius: 999px; pointer-events: none; transition: opacity 450ms var(--ease); }
+  .mcs-hint.is-gone { opacity: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: .9375rem; margin: 8px 0 0; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink-3); font-weight: 500; font-size: .8125rem; }
+  td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .scroll { overflow-x: auto; }
+  section { padding-block: 40px; border-top: 1px solid var(--line); margin-top: 40px; }
+  ul { color: var(--ink-2); max-width: 80ch; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  footer { color: var(--ink-3); font-size: .875rem; padding-block: 32px 56px; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0ms !important; } }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>360° boru hattı testi</h1>
+  <p>Kaynak: Pexels 854754 "Vintage Mercedes Benz" (1920×1080, 60 sn, Pexels License). Yalnız iç test içindir; sitede asla yayınlanmaz.</p>
+  <div class="warn"><b>Bu sayfa yöntemi kanıtlamaz.</b> Klipte kamera aracın etrafında dönmüyor; araç sabit kamera önünde dönen bir sahnede duruyor ve yalnız ≈ 250° dönüyor. Zemin olarak müzenin siyah parlak döner sahnesi, LED duvar yansımaları, direkler ve sahnedeki kask-gözlük aksesuarı kalıyor. Bu sayfa yalnız boru hattının çalıştığını (kare çıkarma, COLMAP açıları, 72 kare seçimi, maske, fon, dışa aktarma, görüntüleyici) ve ölçüleri gösterir. Yöntemin fotoğraf gibi durup durmadığı ancak Mega Cars'ın kendi deneme çekimiyle görülür.</div>
+</header>
+
+<main class="wrap">
+  <div class="tabs" role="tablist" aria-label="Fon görünümü">
+    <button class="tab" role="tab" id="tab-B" aria-selected="true" aria-controls="panel">B: karanlık salon</button>
+    <button class="tab" role="tab" id="tab-A" aria-selected="false" aria-controls="panel">A: açık stüdyo</button>
+  </div>
+  <div id="panel" role="tabpanel" aria-labelledby="tab-B">
+    <div id="viewer"></div>
+  </div>
+  <p style="font-size:.875rem;color:var(--ink-3)">Sürükleyin (fare ya da parmak); bırakınca araç ataletle durur, 3 sn sonra yeniden saat yönünde döner. Ctrl/⌘ + fare tekerleği ya da iki parmakla yakınlaştırma; düz tekerlek yalnız tam ekranda yakınlaştırır, normal sayfada sayfayı kaydırır. Klavye: ← → (Shift ile 45°), + / −, F. Bu klip tam tur olmadığı için yalnız bu sayfada araç yayın sonunda geri döner; gerçek 360°'de sürekli döner.</p>
+
+  <section aria-labelledby="m-title">
+    <h2 id="m-title">Ölçümler</h2>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Ölçü</th><th>Değer</th><th>Not</th></tr></thead>
+      <tbody id="measures">
+        <tr><td>Ölçek kuralı</td><td class="n">ölçek 0,964–1,045 · eğim ≤ 4,43°</td><td>Kamera–araç merkezi uzaklığına göre (COLMAP); kutu eşitleme yok. Aracın genişliği dönerken 935–1490 px arasında doğal olarak değişiyor. Gerçek çekimde doğrulanacak.</td></tr>
+        <tr><td>72 kare, masaüstü (1440×1080 WebP q80)</td><td class="n">A 4,22 MB · B 4,09 MB</td><td>Bu klipte 72 karenin ortak dolu alanı 1149×862 px; 1440'a büyütüldü. 4K kaynakla hedef 1600×1200.</td></tr>
+        <tr><td>72 kare, mobil (960×720 WebP q80)</td><td class="n">A 2,74 MB · B 2,66 MB</td><td>Kademeli yüklenir: 1 → 12 → 36 → 72</td></tr>
+        <tr><td>İlk kare</td><td class="n">masaüstü 66–67 KB · mobil 43–44 KB</td><td>Detay sayfasının LCP öğesi</td></tr>
+        <tr><td>İlk kare süresi (ölçüldü, önbellek boş)</td><td class="n">Yavaş 4G mobil 2,33 sn · Hızlı 4G mobil 0,81 sn · Hızlı 4G masaüstü 0,79 sn</td><td>Sayfa açılışından ilk çizime (Chrome ağ kısıtlaması). Tüm 72 kare: 19,3 / 5,0 / 5,9 sn. Sitede ilk kare HTML'de hazır `&lt;img&gt;` olacağı için daha erken başlar.</td></tr>
+        <tr><td>İlk kare süresi (bu açılış)</td><td class="n" id="ttf">—</td><td>Bu tarayıcıda, bu açılışta</td></tr>
+        <tr><td>Görüntüleyici JS</td><td class="n">2,7 KB gzip</td><td>6,1 KB küçültülmüş, 11,6 KB ham; bağımlılık yok</td></tr>
+        <tr><td>İşlem süresi (bu klip)</td><td class="n">≈ 7,4 dk</td><td>Kare çıkarma 2 sn · SAM 2.1 28 sn · COLMAP 103 sn · BiRefNet 222 sn · ölçek kuralı 11 sn · fon + dışa aktarma 76 sn (RTX 4050, i5-13500H)</td></tr>
+        <tr><td>COLMAP</td><td class="n">150/150 kare · 0,59 px · 250,3°</td><td>Kayıtlı kare · ortalama yeniden izdüşüm hatası · kapsanan yay; kamera yüksekliği sapması %0,52</td></tr>
+        <tr><td>72 kare seçimi</td><td class="n">3,52° adım · en çok 0,87° sapma</td><td>Araç merkezi etrafında eşit açı; tam turda adım 5° olur</td></tr>
+        <tr><td>Aracın pikselleri</td><td class="n">fark 0</td><td>Tam opak piksellerde çıktı = yerleştirilmiş kaynak kare (yalnız geometrik örnekleme)</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="q-title">
+    <h2 id="q-title">Dürüst gözlemler</h2>
+    <ul>
+      <li>Maske (SAM 2.1): araç 150 karenin hepsinde tutarlı izlendi; kask-gözlük aksesuarı dışarıda kaldı. Bir karede aracın altındaki beyaz zemin üçgeni maskeye karıştı.</li>
+      <li>Zemin: bu testte zemin dairesi sabit bir elips olarak alındı (kamera sabit). İçinde müzenin döner sahnesi, LED yansımaları, direkler ve aksesuar kalıyor. Gerçek çekimde zemin dairesi COLMAP'in zemin düzleminden hesaplanacak ve galerinin kendi zemini olacak.</li>
+      <li>A (açık stüdyo): koyu ve parlak sahne zemini açık fonla çatışıyor, sahte duruyor. Açık stüdyo görünümü ancak zemin de açık renkliyse işe yarar.</li>
+      <li>B (karanlık salon): koyu zemin fona daha doğal geçiyor; ama zemindeki renkli LED yansımaları duruyor.</li>
+      <li>C (platform kenarı): bu adımda kurulmadı (talimat yalnız boru hattı).</li>
+      <li>Cam: bu araçta cam yok; tel jantların arasından görünen arka plan BiRefNet maskesine bırakıldı.</li>
+    </ul>
+  </section>
+</main>
+<footer class="wrap">Mega Cars v2 · 360° boru hattı testi · 22.10.2026 · kod: <code>kod/</code></footer>
+
+<script src="spin-viewer.js"></script>
+<script>
+(function () {
+  var t0 = performance.now();
+  // COLMAP: the camera moved clockwise around the car in this clip. The frame list is reversed here so that
+  // the demo starts at the end of its 250° arc where a clockwise turn of the car can begin (a full 360° spin needs no reversal).
+  var meta = { frames: 72, degPerFrame: 3.52, cameraDirection: 'ccw', loop: false };
+  var list = function (k, s) { var a = []; for (var i = meta.frames - 1; i >= 0; i--) a.push('kareler/' + k + '/' + s + '/' + String(i).padStart(3, '0') + '.webp'); return a; };
+  var host = document.getElementById('viewer'), current = null;
+  function show(k) {
+    host.innerHTML = '';
+    var el = document.createElement('div'); host.appendChild(el);
+    el.addEventListener('spin:first', function () {
+      var ms = Math.round(performance.now() - t0);
+      document.getElementById('ttf').textContent = ms + ' ms (bu cihaz)';
+    }, { once: true });
+    current = MCSpin.mount(el, {
+      frames: list(k, 1440), framesSmall: list(k, 960), loop: meta.loop, cameraDirection: meta.cameraDirection,
+      degPerFrame: meta.degPerFrame, autoRotate: { degPerSec: 9, direction: 'cw', resumeAfterMs: 3000, rampMs: 1200 },
+      label: 'Mercedes Simplex, Testansicht ' + (k === 'A' ? 'heller Hintergrund' : 'dunkler Hintergrund')
+    });
+  }
+  var tabs = [].slice.call(document.querySelectorAll('.tab'));
+  tabs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+      document.getElementById('panel').setAttribute('aria-labelledby', b.id);
+      t0 = performance.now(); show(b.id.slice(-1));
+    });
+    b.addEventListener('keydown', function (e) {
+      var i = tabs.indexOf(b);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); n.click(); }
+    });
+  });
+  show('B');
+})();
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useRef, useState, ViewTransition, type KeyboardEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, ViewTransition, type KeyboardEvent, type RefObject } from 'react'
 import { useTranslations } from 'next-intl'
 import type { Photo } from '@/lib/types'
 import { SITE } from '@/lib/site'
@@ -11,7 +11,8 @@ export const GALLERY_OPEN_EVENT = 'gallery:open'
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches
 
-function scrollToIndex(track: HTMLElement | null, i: number, instant = false) {
+function scrollToIndex(ref: RefObject<HTMLElement | null>, i: number, instant = false) {
+  const track = ref.current
   if (!track) return
   track.scrollTo({ left: i * track.clientWidth, behavior: instant || reduced() ? 'auto' : 'smooth' })
 }
@@ -54,7 +55,7 @@ export function Gallery({
 
   const openAt = useCallback((i: number) => {
     setOpen(true)
-    requestAnimationFrame(() => scrollToIndex(full.ref.current, i, true))
+    requestAnimationFrame(() => scrollToIndex(full.ref, i, true))
   }, [full.ref])
 
   useEffect(() => {
@@ -72,7 +73,7 @@ export function Gallery({
     return () => window.removeEventListener(GALLERY_OPEN_EVENT, onOpen)
   }, [openAt])
 
-  const keys = (track: HTMLElement | null, index: number) => (e: KeyboardEvent) => {
+  const keys = (track: RefObject<HTMLElement | null>, index: number) => (e: KeyboardEvent) => {
     if (e.key === 'ArrowRight') {
       e.preventDefault()
       scrollToIndex(track, Math.min(total - 1, index + 1))
@@ -82,7 +83,7 @@ export function Gallery({
     }
   }
 
-  const arrows = (track: HTMLElement | null, index: number, dark = false) => (
+  const arrows = (track: RefObject<HTMLElement | null>, index: number, dark = false) => (
     <>
       <button
         type="button"
@@ -105,7 +106,7 @@ export function Gallery({
     </>
   )
 
-  const thumbs = (track: HTMLElement | null, index: number, instant = false) => (
+  const thumbs = (track: RefObject<HTMLElement | null>, index: number, instant = false) => (
     <ul aria-label={t('thumbs')} className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
       {photos.map((p, i) => (
         <li key={p.src} className="shrink-0">
@@ -131,7 +132,7 @@ export function Gallery({
         <div
           ref={stage.ref}
           onScroll={stage.onScroll}
-          onKeyDown={keys(stage.ref.current, stage.index)}
+          onKeyDown={keys(stage.ref, stage.index)}
           tabIndex={0}
           className="flex aspect-[4/3] snap-x snap-mandatory overflow-x-auto overflow-y-hidden rounded-[4px] bg-panel [scrollbar-width:none]"
         >
@@ -148,7 +149,7 @@ export function Gallery({
             </div>
           ))}
         </div>
-        {arrows(stage.ref.current, stage.index)}
+        {arrows(stage.ref, stage.index)}
         <p className="tabular pointer-events-none absolute bottom-3 left-3 rounded-full bg-night/75 px-3 py-1.5 text-[0.8125rem] text-ink" aria-live="polite">
           {t('counter', { index: stage.index + 1, total })}
         </p>
@@ -156,12 +157,12 @@ export function Gallery({
           <Icon name="maximize" size={18} />
         </button>
       </div>
-      <div className="mt-3">{thumbs(stage.ref.current, stage.index)}</div>
+      <div className="mt-3">{thumbs(stage.ref, stage.index)}</div>
 
       <dialog
         ref={dialog}
         onClose={() => setOpen(false)}
-        onKeyDown={keys(full.ref.current, full.index)}
+        onKeyDown={keys(full.ref, full.index)}
         aria-label={t('label', { name })}
         className="lightbox fixed inset-0 m-0 h-[100svh] max-h-none w-full max-w-none bg-black p-0 text-ink"
         data-lenis-prevent
@@ -181,7 +182,7 @@ export function Gallery({
                   {open && (
                     <img
                       src={p.src}
-                      srcSet={p.src800 ? `${p.src800} 800w, ${p.src} ${p.width}w` : undefined}
+                      srcSet={[p.src800 && `${p.src800} 800w`, `${p.src} ${p.width}w`].filter(Boolean).join(', ')}
                       sizes="100vw"
                       width={p.width}
                       height={p.height}
@@ -193,10 +194,10 @@ export function Gallery({
                 </div>
               ))}
             </div>
-            {arrows(full.ref.current, full.index, true)}
+            {arrows(full.ref, full.index, true)}
           </div>
           <div className="grid gap-3 px-4 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))] sm:px-6">
-            <div className="flex justify-center">{thumbs(full.ref.current, full.index, true)}</div>
+            <div className="flex justify-center">{thumbs(full.ref, full.index, true)}</div>
             <div className="flex justify-center gap-3">
               <a href={whatsapp} target="_blank" rel="noopener" className="btn btn-secondary btn-sm gap-2">
                 <Icon name="whatsapp" size={16} />

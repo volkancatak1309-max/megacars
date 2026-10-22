@@ -1,5 +1,5 @@
 'use client'
-import { useId, useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { useTranslations } from 'next-intl'
 import { SITE, whatsappHref } from '@/lib/site'
 import { Icon } from '@/components/ui/Icon'
@@ -27,14 +27,28 @@ export function RequestForm({
   fields,
   headingLevel = 'h2',
   initial = {},
+  queryPresets = {},
 }: {
   kind: FormKind
   fields: FormField[]
   headingLevel?: 'h2' | 'h3'
   initial?: Record<string, string>
+  /** field name → URL parameter whose value preselects that field (if it is a valid option) */
+  queryPresets?: Record<string, string>
 }) {
   const t = useTranslations('form')
   const id = useId()
+  const formRef = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search)
+    for (const [field, param] of Object.entries(queryPresets)) {
+      const value = query.get(param)
+      const el = formRef.current?.elements.namedItem(field)
+      if (value && el instanceof HTMLSelectElement && [...el.options].some((o) => o.value === value)) el.value = value
+    }
+    // presets are read once, on arrival
+  }, [])
   const [errors, setErrors] = useState<Record<string, boolean>>({})
   const Heading = headingLevel
   const label = (name: string) => t(`${kind}.${name}`)
@@ -139,7 +153,7 @@ export function RequestForm({
   }
 
   return (
-    <form onSubmit={submit} noValidate className="rf" aria-labelledby={`${id}-title`}>
+    <form ref={formRef} onSubmit={submit} noValidate className="rf" aria-labelledby={`${id}-title`}>
       <Heading id={`${id}-title`} className="rf-title d-m">
         {t(`${kind}.title`)}
       </Heading>

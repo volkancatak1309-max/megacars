@@ -1,4 +1,5 @@
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+import type { Locale } from '@/i18n/routing'
 import { stockStats } from '@/lib/inventory'
 import { SITE } from '@/lib/site'
 import { Loader } from '@/components/site/Loader'
@@ -8,8 +9,14 @@ import { Footer } from '@/components/site/Footer'
 import { Floating } from '@/components/site/Floating'
 import { ViewCursor, Grain } from '@/components/site/Cursor'
 
-/** Site chrome: first-visit loader, red curtain, top bar, footer, cursor and grain. */
-export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+/**
+ * Site chrome: first-visit loader, red curtain, top bar, footer, cursor and grain.
+ * setRequestLocale here too: layouts render on their own, and without it next-intl
+ * reads the request headers, which turns every page into a dynamic render.
+ */
+export default async function SiteLayout({ children, params }: LayoutProps<'/[locale]'>) {
+  const { locale } = await params
+  setRequestLocale(locale as Locale)
   const t = await getTranslations('common')
   return (
     <>

@@ -23,15 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
  * a plain explanation and a form that goes to the dealer by WhatsApp or e-mail.
  * Visibility in menu and sitemap: lib/launch.ts PAGES.financing.
  */
-export default async function FinancingPage({ params, searchParams }: Props) {
+export default async function FinancingPage({ params }: Props) {
   const { locale: raw } = await params
   const locale = raw as Locale
   setRequestLocale(locale)
   const t = await getTranslations('financingPage')
   const tn = await getTranslations('nav')
   const tf = await getTranslations('form')
-  const wanted = (await searchParams).fahrzeug
-  const preset = typeof wanted === 'string' && vehicles.some((v) => v.slug === wanted) ? wanted : undefined
 
   const fields: FormField[] = [
     {
@@ -68,7 +66,8 @@ export default async function FinancingPage({ params, searchParams }: Props) {
             </p>
             <p className="lead">{t('formLead')}</p>
           </div>
-          <RequestForm kind="financing" fields={fields} initial={preset ? { vehicle: preset } : {}} />
+          {/* ?fahrzeug=<slug> (from a vehicle page) preselects the car on the client, so the page stays static */}
+          <RequestForm kind="financing" fields={fields} queryPresets={{ vehicle: 'fahrzeug' }} />
         </div>
       </section>
       <ActionBar />

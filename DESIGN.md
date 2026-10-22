@@ -138,10 +138,13 @@ Logo (Unbounded 800), gezinme (Fahrzeuge · Finanzierung · Ankauf · Kontakt; g
 Tam ekran `dialog`; clip-path ile yukarıdan iner, linkler satır satır yükselir (Animmaster Navigation Menus 19; Mobbin: Open). Büyük harfli Unbounded linkler, "Fahrzeuge" yanında stok adedi, altta telefon · WhatsApp · e-posta · adres · saatler ve dil seçimi.
 
 ### 7.4 Araç kartı (`components/vehicle/VehicleCard.tsx`)
-4:3 çerçeve (foto sayısı rozeti), marka (etiket), model (Unbounded 800 büyük harf), sürüm, kırmızı çizgi (hover'da %12 → %100), özellik zinciri, fiyat. Kartın tamamı tek bağlantı; "Ansehen" imleci; clip-path ile gelir.
+4:3 çerçeve (foto sayısı rozeti), film klaketi gibi sıra numarası (01, 02 … görünür sıraya göre), marka (etiket) ve ilk tescil yılı, model (Unbounded 800 büyük harf), sürüm, kırmızı çizgi (hover'da %12 → %100), özellik zinciri, fiyat ve "Ansehen →". Hover: çerçeve geniş ekran kesimine daralır (`clip-path: inset(7% 0)`), fotoğraf kendi çerçevesinde 1.04 büyür — fotoğrafın üstüne katman yok. Kartın tamamı tek bağlantı; "Ansehen" imleci; clip-path ile gelir.
 
-### 7.5 Filtre (`components/vehicles/VehicleList.tsx`)
-Masaüstü: her filtre bir çip (`.chip.sh--line`), üstünde görünmez yerel `select` (klavye, ekran okuyucu ve sistem seçicisi çalışır); seçili çip kemik zemin. Sonuç sayısı büyük Unbounded rakam ve sayaçla değişir. Aktif filtreler kırmızı çerçeveli kaldırılabilir çipler. Mobil: "Filter (n)" → alttan açılan sheet, altta "n Fahrzeuge anzeigen". Sıralama: **Empfohlen** (varsayılan: öne çıkanlar, sonra `inventory.json` sırası), Preis aufsteigend, Preis absteigend, Kilometerstand aufsteigend, Erstzulassung neueste zuerst, Erstzulassung älteste zuerst. "Neueste" etiketi yok (ilan tarihi verisi yok). Durum adres çubuğunda.
+### 7.5 Fahrzeuge (`components/vehicles/VehicleList.tsx`)
+- **Başlık:** stok adedi dev Unbounded 900 kırmızı rakam (maskeden yükselir) + tam cümle başlık + gerçek veriden üç değer (fiyat aralığı, marka sayısı, ilk tescil yılı aralığı).
+- **Filtre paneli (masaüstü):** sekiz hücreli gösterge paneli (1800 px altında 4 × 2, üstünde 8 × 1); her hücrede küçük etiket + büyük değer + ok; üstünde görünmez yerel `select` (klavye, ekran okuyucu, sistem seçicisi); kepenk hover; seçili hücre kemik zemin + üstte 3 px kırmızı çizgi.
+- **Sonuç satırı:** sonuç sayısı sayaçla değişir; sıralama çipi; **Raster / Liste** görünüm düğmeleri (Liste: katalog satırı — küçük fotoğraf, dev model adı, sağda fiyat; geçiş GSAP Flip ile).
+- Mobil: "Filter (n)" → alttan açılan sheet, altta "n Fahrzeuge anzeigen". Aktif filtreler kırmızı çerçeveli kaldırılabilir çipler. Sıralama: **Empfohlen** (varsayılan), Preis auf-/absteigend, Kilometerstand aufsteigend, Erstzulassung neueste/älteste zuerst. Durum adres çubuğunda.
 
 ### 7.6 Galeri sahnesi (`components/vehicle/Stage.tsx`)
 4:3 sahne; ilk fotoğraf pencereden büyüyerek yerleşir (CSS, LCP öğesi). Değişimde kırmızı silme geçer, yeni fotoğraf arkasından açılır. Oklar, ← →, yatay kaydırma (swipe), sayaç, 5'li küçük resim satırı (kaydırmasız). Tam ekran: aynı geçiş, ← →, swipe, fare tekerleği, Esc, küçük resimler, WhatsApp ve Anrufen.
@@ -153,7 +156,9 @@ Erstzulassung, Kilometerstand, Leistung, Kraftstoff, Getriebe, Karosserie: büy�
 Masaüstünde sağda yapışkan: fiyat (odometre), özellik zinciri, **Probefahrt anfragen** (form penceresi), WhatsApp (araç adı + fiyat + link hazır dolu), Anrufen, showroom notu. Mobilde aynı içerik sahnenin hemen altında, ayrıca altta sabit eylem çubuğu.
 
 ### 7.9 Formlar
-Probefahrt: ad (zorunlu), tarih, saat aralığı, telefon, mesaj → WhatsApp'ta hazır mesaj açılır; metin bunu açıkça söyler. Sahte "gönderildi" ekranı yok. Alanlar köşesiz, 1 px çerçeve; hata 2 px çerçeve + metin.
+- Probefahrt (`TestDriveForm`): ad (zorunlu), tarih, saat aralığı, telefon, mesaj → WhatsApp'ta hazır mesaj.
+- Kontakt, Finanzierung, Ankauf (`components/site/RequestForm.tsx`): iki gerçek gönderim düğmesi — **In WhatsApp öffnen** (+43 660 6877002) ve **Als E-Mail öffnen** (megacars@live.at, konu + gövde hazır). Form hiçbir şey saklamaz; metin, mesajın ancak WhatsApp'ta ya da e-posta programında "Gönder"e basılınca gideceğini açıkça söyler. Sahte "gönderildi" ekranı yok. Zorunlu alan hatası alanın altında, ilk hatalı alana odak.
+- Alanlar köşesiz, 1 px çerçeve; hata 2 px çerçeve + metin; seçim çipleri (`.rf-pill`) seçilince dolu.
 
 ### 7.10 Mobil eylem çubuğu ve yüzen düğmeler
 Çubuk: Anrufen · WhatsApp (çizgili) · Probefahrt (kırmızı); klavye açıkken iner (Mobbin: Realtor.com, Agoda). Yüzen: yuvarlak "yukarı" düğmesi (kırmızı ilerleme halkası; Mobbin: Goodreads) ve masaüstünde WhatsApp; ilk 1,5 ekranda ve footer'da gizli.
@@ -175,10 +180,15 @@ Tek cümle başlık, adres/route · saatler · iletişim, hover'da kırmızıya 
 7. **Konum** (night): DSGVO'ya uygun harita (statik çizim, tıklayınca OpenStreetMap), saatler, telefon, bina fotoğrafı.
 
 ### 8.2 Fahrzeuge — §7.5. ### 8.3 Fahrzeug-Detail
-Başlık (marka etiketi, dev model adı, sürüm) → sahne + yapışkan eylem alanı → teknik kart → donanım (bone, dergi düzeni: grup başlığı + kırmızı adet + sütunlar) → bütün veriler (night) → Probefahrt formu (red) → benzer araçlar (night, clip-path). 360 verisi gelince sahnenin üstünde `SpinViewer` kendiliğinden açılır (§10).
+Başlık (marka etiketi, dev model adı, sürüm) → sahne + yapışkan eylem alanı (Probefahrt, WhatsApp, Anrufen; Finanzierung açıksa "Finanzierung für dieses Fahrzeug anfragen" → `/finanzierung?fahrzeug=<slug>`) → teknik kart → donanım (bone) → bütün veriler (night) → Probefahrt formu (red) → benzer araçlar (night, clip-path). 360 verisi gelince sahnenin üstünde `SpinViewer` kendiliğinden açılır (§10).
 
-### 8.4 Geçici sayfalar (2. aşamaya kadar)
-Finanzierung, Ankauf, Kontakt, Impressum, Datenschutz: dev başlık (dağınık harf yükselişi), tek cümle giriş, gerçek iletişim satırları (Impressum'da şirket, sahip, Firmenbuch), üç düğme. İçerik, formlar ve EN 2. aşamada.
+### 8.4 İç sayfalar (`components/site/PageHero.tsx`)
+Her iç sayfa aynı açılışla başlar: sayfanın adı dev, dağınık harf yükselişiyle (dekoratif, ekran okuyucudan gizli) + tam cümle `h1` (maskeden yükselir) + tek cümle giriş. Ritim: night → bone → red.
+- **Kontakt & Über uns:** dev telefon numarası (hover'da kırmızı alt çizgi), WhatsApp, e-posta, adres, saatler (Pazar kapalı; öğle arası yazılmaz) → kırmızı form bölümü (yapışkan dev "Schreiben") → bone "Über uns" (galerinin showroom fotoğrafı, Firmenbuch, Facebook tanıtım cümlesinden alıntı, stok sayacı) → konum (tıklanınca yüklenen harita).
+- **Finanzierung:** sade açıklama (faiz, banka, koşul yok) → bone adımlar (01 02 03) → kırmızı talep formu (araç seçimi stoktan).
+- **Ankauf / Inzahlungnahme:** aynı düzen; form: amaç, marka, model, ilk tescil, km, yakıt, şanzıman, durum, iletişim. Menüde ve sitemap'te gizli (`lib/launch.ts` → `PAGES.tradeIn`).
+- **Impressum:** bone üzerinde etiket/değer satırları (§ 5 ECG, § 14 UGB, § 25 MedienG). UID satırı yok (bilinmiyor).
+- **Datenschutz:** solda yapışkan içindekiler (masaüstü), sağda numaralı bölümler. EN/TR'de "bağlayıcı olan Almanca metindir" notu.
 
 ### 8.5 404
 Kırmızı dev "404", tam cümle başlık, "Zum Bestand".
@@ -231,11 +241,17 @@ Pexels 33374869, kırmızı Chevrolet Corvette C8 (Volkan'ın seçimi, 23.10.202
 Hareket kitaplıkları ilk boyamadan sonra; video `load`'dan sonra; harita tıklanınca; yazı tipleri `swap` + fallback ölçüsü; `/cars`, `/hero`, `/spin` için 1 yıl immutable önbellek.
 
 ## 12. SEO
-Diller önekli (`/de`, `/tr`; EN 2. aşamada), çevrilmiş yol adları; her sayfada `generateMetadata`, canonical, hreflang; JSON-LD `AutoDealer`, araçta `Car` + `Offer`, `BreadcrumbList`. Demo canlıya çıkana kadar **noindex** (meta + `X-Robots-Tag` + `robots.txt`).
+- Diller önekli ve çevrilmiş yol adları: `/de/fahrzeuge`, `/en/vehicles`, `/tr/araclar` …
+- Her sayfada `generateMetadata` → `pageMeta()` (`lib/seo.ts`): title, description, canonical, hreflang (de-AT, en, tr, x-default), Open Graph (mutlak adres, yerel dil + alternatif diller) ve Twitter. Paylaşım görseli: araçta kendi kapak fotoğrafından 1200×630 (`public/cars/<id>/og.jpg`), diğer sayfalarda yedek `public/og/default.jpg`.
+- JSON-LD: `AutoDealer` (ana sayfa, Kontakt; yalnız doğrulanmış bilgiler), araçta `Car` + `Offer`, bütün iç sayfalarda `BreadcrumbList`.
+- `sitemap.xml`: her sayfa × 3 dil, hreflang alternatifleriyle; gizli sayfalar (`PAGES`) dışarıda.
+- **Canlıya geçiş tek satır:** `lib/launch.ts` → `INDEXABLE = true` (robots.txt açılır ve sitemap'i duyurur, meta robots index/follow olur, `X-Robots-Tag` kalkar). Demo canlıya çıkana kadar **noindex**.
+- `siteOrigin()`: üretimde `VERCEL_PROJECT_PRODUCTION_URL`, önizlemede sabit dal adresi.
+- Favicon: kırmızı kare + beyaz geometrik "M" (`app/icon.svg`, `app/apple-icon.png`).
 
 ## 13. i18n
-`next-intl`, mesajlar derleme anında derlenir; Almanca önce yazılır, Türkçe uzman tercüman düzeyinde ve yüklemli tam cümlelerle. Biçimler: "64.900 €", "148.000 km", "345 kW (469 PS)", "02/2019". İlan donanımı Almanca gelir; Türkçe kontrollü sözlükten, sözlükte olmayan terim `lang="de"` ile Almanca kalır.
+`next-intl`, mesajlar derleme anında derlenir; DE · EN · TR (dil seçicide bu sırayla). Almanca önce yazılır; İngilizce ve Türkçe uzman tercüman düzeyinde ve yüklemli tam cümlelerle. Biçimler: DE/TR "64.900 €", EN "€64,900"; "148.000 km" / "148,000 km"; "345 kW (469 PS)"; "02/2019". İlan donanımı Almanca gelir; İngilizce (`data/equipment-en.json`) ve Türkçe (`data/equipment-tr.json`) kontrollü sözlükten, sözlükte olmayan terim `lang="de"` ile Almanca kalır. Dil çerezi yok (`localeCookie: false`): ilk girişte tarayıcı dili, sonra adres dili belirler.
 
 ## 14. Yapılacaklar / yapılmayacaklar
 - Yap: her bölümde bir anlamlı hareket; kırmızıyı eylem için sakla; fotoğrafı çerçevede tut; her sayıyı gerçek veriden al; reduced motion'da her şeyi okunur bırak.
-- Yapma: neon, parıltı, bounce; yatay kaydırma; bir ekrandan uzun pin; koyu zeminde küçük kırmızı yazı; kart içinde kart; sahte yorum, sahte garanti, sahte sayı; uydurma hizmet (Finanzierung, Inzahlungnahme teyit bekliyor).
+- Yapma: neon, parıltı, bounce; yatay kaydırma; bir ekrandan uzun pin; koyu zeminde küçük kırmızı yazı; kart içinde kart; sahte yorum, sahte garanti, sahte sayı; faiz oranı, banka ortağı ya da koşul; uydurma hizmet (Inzahlungnahme, Leasing, Tausch teyit bekliyor); cihazda çerez ya da depolama.

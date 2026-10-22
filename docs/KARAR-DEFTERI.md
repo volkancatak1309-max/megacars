@@ -440,3 +440,50 @@
 - **Kontrol (23.10.2026):** 8 tam çözünürlük kaynak karesi (0,1 / 1,5 / 3,2 / 4,3 / 5,4 / 6,6 / 7,6 / 8,4 sn) + her iki çıktıdan 10'ar kare. Arka plan sığ alan derinliğiyle bulanık: arkadaki beyaz SUV'un ve motosikletin plakası okunmuyor; motosikletlinin kaskı var, yüz görünmüyor; sırt çantasındaki beyaz şekil okunmuyor; aracın amblemi ve jant göbekleri kadraj dışında. Yapay zekâ/3D izi yok.
 - **Kodlama:** 1 sn çapraz geçişli döngü 7,58 sn (dikiş PSNR 38,15 dB; normal kare adımı 38,10 dB). Masaüstü 1920×1080 H.264 5,20 MB (sınır 6); mobil 540×960 dikey kırpım (kaynakta x 1000–2215) 2,17 MB (sınır 2,5); WebP poster 58 KB / 18 KB (LCP öğesi). Dosyalar yeni klasörde: `public/hero/c8/` (/hero/* bir yıl immutable önbellekte; aynı adın üzerine yazılmaz).
 - **Kaldırılanlar:** `/de/prototyp/hero-adaylari` sayfası, `heroCandidates` metinleri, `public/hero/a|b|c` (git geçmişinde kalır).
+
+### Kayıtlar (CC, kaynaklı) — 2. aşama uygulaması
+> Bu alt bölüm Volkan'ın cümlesi değildir; talimatın istediği kaynak ve teyit kayıtlarıdır. Erişim tarihi: 23.10.2026.
+
+**Impressum — kullanılan bilgiler ve kaynakları**
+- Firma "Mega Cars Murat Demir e.U.", FN 447871 i, Landesgericht Feldkirch: BRIEF.md (creditreform). EVI (https://www.evi.gv.at/f/447871i): "Rechtsform Einzelunternehmer", "Eintragungsdatum 02.03.2016", "Geschäftszweig Handel sowie Wartung und Pflege von Kraftfahrzeugen" → sitede Unternehmensgegenstand olarak yazıldı. Not: BRIEF'te e.U. kaydı 02.02.2016 yazıyor, EVI 02.03.2016 diyor (sitede tarih kullanılmadı).
+- WKO Firmen A-Z (https://firmen.wko.at/murat-demir/vorarlberg/?firmaid=f0566b38-748b-4a4f-a50f-c55be0944a1e): "Handelsgewerbe mit Ausnahme der reglementierten Handelsgewerbe", "Berufszweig Einzelhandel mit Automobilen", "LG Fahrzeughandel", "Behörde gem. ECG (E-Commerce Gesetz) Bezirkshauptmannschaft Dornbirn", "GISA-Zahl 38931796", "Seit 20.10.2025".
+- GISA resmî çıktısı (https://www.gisa.gv.at/abfrage): "Behörde: Bezirkshauptmannschaft Dornbirn", "Gewerbeart: freies Gewerbe", "Anschrift: 6845 Hohenems, Radetzkystraße 80".
+- "Wirtschaftskammer Vorarlberg, Landesgremium Fahrzeughandel": WKO kaydı /vorarlberg/ altında ve "LG Fahrzeughandel" yazıyor; "LG = Landesgremium" WKO'nun standart kısaltması olarak açıldı [VARSAYIM: kısaltmanın açılımı sayfada yazmıyor].
+- Yasal metinler (RIS açık veri kopyası): § 5 Abs. 1 ECG (Z 1–7), § 14 Abs. 1 UGB, § 25 Abs. 5 MedienG (küçük web sitesi: ad/firma, gerekirse faaliyet konusu, merkez).
+- Bildnachweis: araç ve showroom fotoğrafları galerinin ilanlarından; açılış filmi Pexels 33374869 (Igor Vieira, Pexels License); harita © OpenStreetMap.
+
+**Finanzierung — menüde gösterildi (`lib/launch.ts` `PAGES.financing = true`)**
+- Galerinin Facebook tanıtım metni (https://www.facebook.com/Autohaus.MegaCars/, oturumsuz görünüm ve meta etiketi): "Bei Mega Car's erwarten euch Autos zu Top Preisen. Auch für die kleine Geldtasche. Finanzierunge…" (metin bu noktada kesiliyor; cümlenin devamı okunamadı).
+- Galerinin kendi AutoScout24 ilan metni (Haziran 2026): "Wir erstellen Ihre Finanzierung individuell auch OHNE Anzahlung".
+- Sitede faiz oranı, banka ortağı, "ohne Anzahlung" ya da başka koşul yazılmadı; sayfa yalnız sade açıklama + talep formundan oluşur.
+
+**Ankauf / Inzahlungnahme — hazır, menüde ve sitemap'te gizli (`PAGES.tradeIn = false`)**
+- Facebook'ta geçmiyor; yalnız Haziran 2026 ilan metninde "Inzahlungnahme, Finanzierung, Leasing oder Tausch möglich". Teyit gelince `lib/launch.ts` içinde tek satır: `tradeIn: true`.
+
+**Datenschutz — sitenin gerçekten kullandığı teknolojiler ve kaynaklar**
+- Barındırma: Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, USA; "Vercel complies with the EU-U.S. Data Privacy Framework"; DPA'da 2021/914 standart sözleşme maddeleri; ziyaretçi verisi "End User IP address, location information derived from IP address, and system configuration information" (vercel.com/legal/privacy-policy, vercel.com/legal/dpa). Log saklama: Hobby 1 saat, Pro 1 gün, Observability Plus 30 gün (vercel.com/docs/logs/runtime) → sitede "bir saat ile 30 gün arası".
+- Yazı tipleri: next/font — "No requests are sent to Google by the browser" (nextjs.org/docs/app/api-reference/components/font).
+- Harita: önce kendi sunucudan statik çizim; "Karte laden" tıklanınca OpenStreetMap Foundation, St John's Innovation Centre, Cowley Road, Cambridge, CB4 0WS, UK (osmfoundation.org/wiki/Contact; Privacy_Policy: IP, tarayıcı, cihaz, sayfa). AB'nin Birleşik Krallık yeterlilik kararı 19.12.2025'te yenilendi, 27.12.2031'e kadar geçerli (ec.europa.eu ip_25_3059).
+- WhatsApp: WhatsApp Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Ireland (whatsapp.com/legal/privacy-policy-eea).
+- Şikâyet makamı: Österreichische Datenschutzbehörde, Barichgasse 40-42, 1030 Wien, dsb@dsb.gv.at (dsb.gv.at).
+- Saklama: § 132 Abs. 1 BAO yedi yıl.
+- Çerez ve depolama: kod incelendi. next-intl dil çerezi (NEXT_LOCALE) kapatıldı (`localeCookie: false`); yükleyicinin "ilk ziyaret" işareti için kullanılan sessionStorage kaldırıldı (artık yönlendiren adres ve gezinme türüne bakılıyor). Analiz, takip ve reklam aracı yok → Datenschutz'ta "çerez yok, cihazda depolama yok" yazıldı, çerez bandı konmadı.
+
+**İngilizce**
+- Bütün sayfalar /en altında (yollar: /en/vehicles, /financing, /trade-in, /contact, /imprint, /privacy). Donanım sözlüğü data/equipment-en.json (108 terim). Fiyat biçimi "€64,900".
+- Impressum ve Datenschutz'un EN/TR sürümlerinde "bağlayıcı olan Almanca metindir" notu [VARSAYIM: yaygın uygulama; Volkan'ın ayrıca bir kararı yok].
+
+**Teyit bekliyor (Gökhan'dan cevap gelince açılacak)**
+1. Inzahlungnahme / Ankauf hizmeti → sayfa hazır, `PAGES.tradeIn`.
+2. Leasing ve Tausch (yalnız Haziran 2026 ilan metninde geçiyor).
+3. Öğle arası (kaynaklar farklı; sitede yazılmadı).
+4. +43 660 6877002 numarasının WhatsApp'ta açık olduğu.
+5. UID numarası: firmenabc'de görünen ATU70884019 AB VIES'te geçersiz ("isValid": false, 22.10.2026 23:16Z) → yayınlanmadı; Impressum'da UID satırı yok (eksik).
+6. **Fiyatların KDV durumu:** § 5 Abs. 2 ECG fiyatın vergi dahil olup olmadığının belirtilmesini istiyor; galeri ilanlarında bu bilgi yok. Sitede şimdilik yalnız "Der Preis stammt aus dem Inserat." yazıyor — canlıya çıkmadan önce galeriden öğrenilmeli (ör. "Endpreise inkl. USt." ya da "differenzbesteuert").
+7. "Seit 2002": hiçbir resmî kaynakta yok; en eski kayıt 02.03.2016 (Demir OG). Kullanılmadı.
+8. Firma adının güncel yazımı: EVI'de Mart 2026 tarihli "Namensänderung … Rechtsformänderung … Auflösung" kaydı var (OG'den e.U.'ya geçiş olduğu düşünülüyor), WKO "Firmenname: Murat Demir" gösteriyor. Impressum'daki "Mega Cars Murat Demir e.U." yazımı güncel Firmenbuchauszug ile doğrulanmalı.
+9. İkinci telefon +43 660 6969496 (firmenabc'de "T:0660/6969496") — sitede kullanılmıyor.
+10. "Wartung und Pflege" müşteriye hizmet olarak sunuluyor mu (yalnız Firmenbuch iş kolunda geçiyor; sitede hizmet olarak yazılmadı).
+11. Pazar ve resmî tatil günlerinde randevuyla inceleme / test sürüşü.
+12. Porsche Panamera'nın kasa tipi (ilan hatası, gizli).
+13. Güncel stok kaynağı ve 360° deneme çekimi.

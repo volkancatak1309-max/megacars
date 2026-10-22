@@ -1,5 +1,7 @@
 # Prototip A / B / C — kaynaklar ve kalite kapısı (22.10.2026)
 
+> 23.10.2026: Volkan C "Nachtfahrt" yönünü seçti. A ve B ile karşılaştırma sayfası kaldırıldı (git geçmişinde: 9f3bbbf). C'nin kodu ürüne taşındı: `components/proto/*` → `components/site/*` (Shutter, Curtain, Loader, Cursor, Reveals), `NachtHero` → `components/home/HeroLetters.tsx`, stiller `styles/*.css`. Aşağıdaki kaynak listesi geçerliliğini korur; güncel sistem: `DESIGN.md`.
+
 Adresler: `/de/prototyp` (karşılaştırma), `/de/prototyp/a`, `/b`, `/c`; Türkçe: `/tr/prototip/...`.
 Üçü de aynı 18 aracın verisini kullanır (`components/proto/data.ts`), noindex.
 

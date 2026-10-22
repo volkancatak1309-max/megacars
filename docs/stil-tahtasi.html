@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mega Cars v2 Stil Tahtası</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: oklch(0.165 0.006 272);
+    --hall: oklch(0.205 0.007 272);
+    --panel: oklch(0.245 0.008 272);
+    --panel-hover: oklch(0.29 0.008 272);
+    --line: oklch(0.33 0.008 272);
+    --line-strong: oklch(0.56 0.010 272);
+    --ink: oklch(0.955 0.004 272);
+    --ink-2: oklch(0.80 0.008 272);
+    --ink-3: oklch(0.68 0.010 272);
+    --signal: oklch(0.78 0.085 272);
+    --signal-12: oklch(0.78 0.085 272 / 0.12);
+    --danger: oklch(0.72 0.13 25);
+    --ok: oklch(0.78 0.10 160);
+    --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --t-1: 300ms; --t-2: 450ms; --t-3: 700ms; --t-4: 1000ms;
+    --shadow-lift: 0 8px 24px oklch(0 0 0 / 0.45);
+    --margin: clamp(20px, 4.5vw, 72px);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--night); color-scheme: dark; }
+  body { margin: 0; background: var(--night); color: var(--ink); font: 400 1rem/1.65 "Hanken Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1440px; margin: 0 auto; padding-inline: var(--margin); }
+  section { padding-block: clamp(56px, 8vw, 120px); border-top: 1px solid var(--line); }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  p { text-wrap: pretty; }
+  .note { color: var(--ink-3); font-size: .875rem; line-height: 1.55; max-width: 68ch; }
+  .sec-title { font-size: clamp(1.625rem, 1.3rem + 1.4vw, 2.5rem); font-weight: 400; letter-spacing: -0.015em; line-height: 1.12; margin-bottom: 8px; }
+  .sec-lead { color: var(--ink-2); max-width: 64ch; margin: 0 0 40px; }
+  .tabular { font-variant-numeric: tabular-nums; }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+  /* Header */
+  .top { padding-block: clamp(48px, 7vw, 104px) clamp(40px, 6vw, 80px); }
+  .wordmark { font-weight: 700; letter-spacing: 0.06em; font-size: .9375rem; color: var(--ink-2); }
+  .top h1 { margin-top: 28px; font-size: clamp(2.5rem, 1.55rem + 4.1vw, 5.25rem); font-weight: 300; letter-spacing: -0.025em; line-height: 1.02; max-width: 16ch; }
+  .top .concept { margin-top: 28px; display: grid; gap: 12px; max-width: 70ch; color: var(--ink-2); font-size: clamp(1.125rem, 1.08rem + .2vw, 1.25rem); line-height: 1.6; }
+  .meta-row { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px 24px; color: var(--ink-3); font-size: .875rem; }
+
+  /* Palette */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+  .sw { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--hall); }
+  .sw .chip { height: 96px; display: flex; align-items: flex-end; padding: 12px; font-size: .8125rem; font-weight: 500; }
+  .sw .info { padding: 12px 14px 14px; font-size: .8125rem; line-height: 1.5; color: var(--ink-2); }
+  .sw .info b { color: var(--ink); font-weight: 600; font-size: .875rem; display: block; }
+  .sw .info code { font: 500 .78rem/1.4 "Hanken Grotesk", sans-serif; color: var(--ink-3); }
+  .ratio-table { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: .9375rem; }
+  .ratio-table th, .ratio-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .ratio-table th { color: var(--ink-3); font-weight: 500; font-size: .8125rem; }
+  .pair { display: inline-flex; align-items: center; justify-content: center; min-width: 120px; height: 36px; border-radius: 6px; padding: 0 12px; font-weight: 500; font-size: .875rem; }
+  .table-scroll { overflow-x: auto; }
+
+  /* Type */
+  .type-row { display: grid; grid-template-columns: minmax(130px, 200px) 1fr; gap: 12px 32px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .type-row .lbl { color: var(--ink-3); font-size: .8125rem; line-height: 1.5; }
+  .type-row .lbl b { display: block; color: var(--ink-2); font-weight: 500; }
+  .t-display { font-size: clamp(2.5rem, 1.55rem + 4.1vw, 5.25rem); font-weight: 300; letter-spacing: -0.025em; line-height: 1.02; }
+  .t-h1 { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.06; }
+  .t-h2 { font-size: clamp(1.625rem, 1.3rem + 1.4vw, 2.5rem); font-weight: 400; letter-spacing: -0.015em; line-height: 1.12; }
+  .t-h3 { font-size: clamp(1.25rem, 1.15rem + .45vw, 1.5rem); font-weight: 500; letter-spacing: -0.01em; line-height: 1.25; }
+  .t-price { font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem); font-weight: 500; letter-spacing: -0.01em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .t-lead { font-size: clamp(1.125rem, 1.08rem + .2vw, 1.25rem); line-height: 1.6; color: var(--ink-2); max-width: 60ch; }
+  .t-body { font-size: 1rem; line-height: 1.65; color: var(--ink-2); max-width: 64ch; }
+  .t-spec { font-size: clamp(1.125rem, 1.08rem + .2vw, 1.25rem); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .t-small { font-size: .875rem; color: var(--ink-3); }
+  .t-label { font-size: .8125rem; font-weight: 500; letter-spacing: .01em; color: var(--ink-2); }
+  .font-card { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-end; margin-bottom: 32px; }
+  .font-card .aa { font-size: clamp(5rem, 3rem + 8vw, 9rem); font-weight: 300; line-height: .9; letter-spacing: -0.03em; }
+  .weights { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 1.25rem; color: var(--ink-2); }
+
+  /* Buttons */
+  .btn { --s: 1; font: 500 1rem/1 "Hanken Grotesk", sans-serif; height: 52px; padding: 0 26px; border-radius: 999px; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; border: 1px solid transparent; transform: scale(var(--s)); transition: transform var(--t-1) var(--ease), box-shadow var(--t-1) var(--ease), background-color var(--t-1) var(--ease), border-color var(--t-1) var(--ease), color var(--t-1) var(--ease); text-decoration: none; }
+  .btn-primary { background: var(--ink); color: var(--night); }
+  .btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  @media (hover: hover) {
+    .btn-primary.live:hover { --s: 1.02; box-shadow: var(--shadow-lift); }
+    .btn-secondary.live:hover { --s: 1.02; border-color: var(--ink); background: oklch(0.955 0.004 272 / 0.04); }
+  }
+  .btn.live:active { --s: .98; box-shadow: none; }
+  .btn:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+  .btn-primary.is-hover { --s: 1.02; box-shadow: var(--shadow-lift); }
+  .btn-secondary.is-hover { --s: 1.02; border-color: var(--ink); background: oklch(0.955 0.004 272 / 0.04); }
+  .btn.is-focus { outline: 2px solid var(--signal); outline-offset: 2px; }
+  .btn.is-pressed { --s: .98; }
+  .btn-primary[aria-disabled="true"] { background: var(--panel); color: var(--ink-3); cursor: not-allowed; }
+  .btn-secondary[aria-disabled="true"] { border-color: var(--line); color: var(--ink-3); cursor: not-allowed; }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .states { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 28px 20px; }
+  .state { display: grid; gap: 14px; justify-items: start; }
+  .state .t-label { color: var(--ink-3); }
+  .live-row { margin-top: 44px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .ico-btn { width: 52px; height: 52px; border-radius: 999px; display: inline-grid; place-items: center; background: var(--panel); color: var(--ink); border: 0; cursor: pointer; transition: background-color var(--t-1) var(--ease), transform var(--t-1) var(--ease); }
+  .ico-btn:hover { background: var(--panel-hover); }
+  .ico-btn:active { transform: scale(.98); }
+  .ico-btn svg { width: 22px; height: 22px; }
+
+  /* Card */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px 24px; max-width: 980px; }
+  .card { display: grid; gap: 14px; text-decoration: none; color: inherit; border-radius: 6px; }
+  .card .ph { aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: var(--panel); position: relative; }
+  .card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-3) var(--ease); }
+  .card .ph.orig img { object-position: 50% 50%; }
+  .card h3 { font-size: clamp(1.25rem, 1.15rem + .45vw, 1.5rem); font-weight: 500; letter-spacing: -0.01em; line-height: 1.25; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 5px; text-decoration-thickness: 1px; transition: text-decoration-color var(--t-1) var(--ease); }
+  .card .specs { color: var(--ink-2); font-size: .9375rem; font-variant-numeric: tabular-nums; }
+  .card .bottom { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .card .price { font-size: 1.375rem; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .card .count { color: var(--ink-3); font-size: .875rem; }
+  .badge { position: absolute; left: 12px; top: 12px; background: var(--signal-12); color: var(--ink); border: 1px solid oklch(0.78 0.085 272 / 0.4); border-radius: 999px; padding: 4px 10px; font-size: .8125rem; font-weight: 500; backdrop-filter: none; }
+  @media (hover: hover) {
+    .card:hover .ph img, .card.is-hover .ph img { transform: scale(1.02); }
+    .card:hover h3 { text-decoration-color: currentColor; }
+  }
+  .card.is-hover h3 { text-decoration-color: currentColor; }
+  .card:focus-visible { outline: 2px solid var(--signal); outline-offset: 6px; }
+  .card:active .ph img { transform: scale(.99); }
+  .tag { color: var(--ink-3); font-size: .8125rem; font-weight: 500; margin-bottom: 10px; }
+
+  /* Motion demos */
+  .demos { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .demo { background: var(--hall); border: 1px solid var(--line); border-radius: 12px; padding: clamp(20px, 3vw, 36px); display: grid; gap: 20px; align-content: start; }
+  .demo-stage { min-height: 220px; display: grid; align-content: center; }
+  .mask-title { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem); font-weight: 300; letter-spacing: -0.025em; line-height: 1.05; }
+  .mask-title .ln { display: block; overflow: hidden; padding-bottom: .06em; }
+  .mask-title .ln > span { display: block; transform: translateY(0); }
+  .demo .ctrl { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .demo .spec-list { color: var(--ink-3); font-size: .8125rem; line-height: 1.6; }
+
+  /* Showroom trial */
+  .trial { display: grid; gap: 40px; }
+  .trial figure { margin: 0; display: grid; gap: 12px; }
+  .trial .duo { display: grid; grid-template-columns: 4fr 5fr; gap: 12px; }
+  .trial .duo img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; background: var(--panel); }
+  .trial .duo .o { aspect-ratio: 4 / 3; }
+  .trial .duo .s { aspect-ratio: 16 / 10; }
+  .trial figcaption { color: var(--ink-2); font-size: .9375rem; max-width: 80ch; }
+  .trial figcaption b { color: var(--ink); font-weight: 500; }
+  .cap-row { display: grid; grid-template-columns: 4fr 5fr; gap: 12px; color: var(--ink-3); font-size: .8125rem; }
+  @media (max-width: 700px) {
+    .trial .duo, .cap-row { grid-template-columns: 1fr; }
+    .cap-row span:last-child { display: none; }
+  }
+  .verdict { margin-top: 8px; display: grid; gap: 10px; max-width: 80ch; color: var(--ink-2); }
+  .verdict li { margin-bottom: 6px; }
+  footer { padding-block: 48px 64px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: .875rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <div class="wordmark">MEGA CARS · V2 · STİL TAHTASI</div>
+  <h1>Die Übergabe: teslim anının sessiz güveni</h1>
+  <div class="concept">
+    <p>Her araç, teslim alınacağı an gibi sunulur: sakin, karanlık bir teslim salonu, mat zemin, yukarıdan tek bir yumuşak ışık ve platformun üstünde yalnız o araç.</p>
+    <p>Arayüz bu salondaki iyi bir satış danışmanı gibi davranır: sessiz, kesin ve dürüsttür; her rakam gerçektir, her fotoğraf aracın kendisidir.</p>
+    <p>Hareketler bir kameranın hareketleridir: yavaş dolly, geri çekilme ve bir insanın aracın etrafında yürüme hızında dönen platform.</p>
+  </div>
+  <div class="meta-row"><span>22.10.2026</span><span>Dal: v2</span><span>Kaynak: DESIGN.md</span><span>Bu sayfa yalnız iç inceleme içindir.</span></div>
+</header>
+
+<main>
+<!-- PALETTE -->
+<section class="wrap" aria-labelledby="p-title">
+  <h2 class="sec-title" id="p-title">Renk paleti</h2>
+  <p class="sec-lead">Zemin koyu ve sakin. Tek vurgu rengi, galerinin showroom'undaki ışıklı "MEGA CARS" tabelasından ölçüldü (≈ #9AAAE9) ve yüzeyin %5'inden azında kullanılır. Fiyatlar vurgu renginde değil, ana metin renginde yazılır.</p>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:var(--night);color:var(--ink-3)">night</div><div class="info"><b>#0d0e11</b><code>oklch(0.165 0.006 272)</code><br>Sayfa zemini</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hall);color:var(--ink-3)">hall</div><div class="info"><b>#16171a</b><code>oklch(0.205 0.007 272)</code><br>Bölüm zemini</div></div>
+    <div class="sw"><div class="chip" style="background:var(--panel);color:var(--ink-3)">panel</div><div class="info"><b>#1f2024</b><code>oklch(0.245 0.008 272)</code><br>Kart, form, sheet</div></div>
+    <div class="sw"><div class="chip" style="background:var(--line);color:var(--ink-2)">line</div><div class="info"><b>#34353a</b><code>oklch(0.33 0.008 272)</code><br>Yalnız dekoratif ayraç</div></div>
+    <div class="sw"><div class="chip" style="background:var(--line-strong);color:var(--night)">line-strong</div><div class="info"><b>#72747b</b><code>oklch(0.56 0.010 272)</code><br>Form ve kontrol sınırı</div></div>
+    <div class="sw"><div class="chip" style="background:var(--ink);color:var(--night)">ink</div><div class="info"><b>#eff0f3</b><code>oklch(0.955 0.004 272)</code><br>Ana metin, birincil düğme</div></div>
+    <div class="sw"><div class="chip" style="background:var(--ink-2);color:var(--night)">ink-2</div><div class="info"><b>#bcbdc3</b><code>oklch(0.80 0.008 272)</code><br>İkincil metin</div></div>
+    <div class="sw"><div class="chip" style="background:var(--ink-3);color:var(--night)">ink-3</div><div class="info"><b>#96989f</b><code>oklch(0.68 0.010 272)</code><br>Meta bilgi, yer tutucu</div></div>
+    <div class="sw"><div class="chip" style="background:var(--signal);color:var(--night)">signal</div><div class="info"><b>#a4b5ef</b><code>oklch(0.78 0.085 272)</code><br>Odak, etkin filtre, yükleme çizgisi</div></div>
+    <div class="sw"><div class="chip" style="background:var(--danger);color:var(--night)">danger</div><div class="info"><b>#eb827b</b><code>oklch(0.72 0.13 25)</code><br>Form hatası</div></div>
+    <div class="sw"><div class="chip" style="background:var(--ok);color:var(--night)">ok</div><div class="info"><b>#7bcba1</b><code>oklch(0.78 0.10 160)</code><br>Gerçekleşmiş gönderim</div></div>
+  </div>
+  <div class="table-scroll">
+  <table class="ratio-table">
+    <thead><tr><th>Örnek</th><th>Ön plan / zemin</th><th>Kontrast</th><th>WCAG</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pair" style="background:var(--night);color:var(--ink)">Fahrzeuge</span></td><td>ink / night</td><td class="tabular">16,94 : 1</td><td>AAA</td></tr>
+      <tr><td><span class="pair" style="background:var(--panel);color:var(--ink-2)">148.000 km</span></td><td>ink-2 / panel</td><td class="tabular">8,68 : 1</td><td>AAA</td></tr>
+      <tr><td><span class="pair" style="background:var(--panel);color:var(--ink-3)">5 Fotos</span></td><td>ink-3 / panel (en soluk metin)</td><td class="tabular">5,65 : 1</td><td>AA</td></tr>
+      <tr><td><span class="pair" style="background:var(--night);color:var(--signal)">Filter aktiv</span></td><td>signal / night</td><td class="tabular">9,59 : 1</td><td>AAA</td></tr>
+      <tr><td><span class="pair" style="background:var(--ink);color:var(--night)">Probefahrt</span></td><td>night / ink (birincil düğme)</td><td class="tabular">16,94 : 1</td><td>AAA</td></tr>
+      <tr><td><span class="pair" style="background:var(--panel);color:var(--danger)">Pflichtfeld</span></td><td>danger / panel</td><td class="tabular">6,21 : 1</td><td>AA</td></tr>
+      <tr><td><span class="pair" style="background:var(--night);border:1px solid var(--line-strong);color:var(--ink-2)">Eingabe</span></td><td>line-strong / night (kontrol sınırı)</td><td class="tabular">4,14 : 1</td><td>≥ 3:1</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section class="wrap" aria-labelledby="t-title">
+  <h2 class="sec-title" id="t-title">Yazı tipi ve başlık ölçeği</h2>
+  <p class="sec-lead">Tek aile: <b>Hanken Grotesk</b> (SIL Open Font License 1.1, ticari kullanım serbest). Sakin özgüven ağırlık ve boyut zıtlığından gelir; rakamlar her yerde tablo hizalı. Ölçek mobilde 360 px'ten masaüstünde 1440 px'e akışkan büyür.</p>
+  <div class="font-card">
+    <div class="aa" aria-hidden="true">Aa</div>
+    <div class="weights"><span style="font-weight:300">Light 300</span><span style="font-weight:400">Regular 400</span><span style="font-weight:500">Medium 500</span><span style="font-weight:600">Semibold 600</span><span class="tabular">0123456789 €</span><span>ß ä ö ü · ğ ş ı İ ç</span></div>
+  </div>
+  <div class="type-row"><div class="lbl"><b>display</b>40 → 84 px · 300</div><div class="t-display">Jeder Wagen, so wie er ist.</div></div>
+  <div class="type-row"><div class="lbl"><b>h1</b>32 → 56 px · 400</div><div class="t-h1">Mercedes-Benz S 560 4Matic L</div></div>
+  <div class="type-row"><div class="lbl"><b>h2</b>26 → 40 px · 400</div><div class="t-h2">Wir zeigen jedes Fahrzeug von allen Seiten.</div></div>
+  <div class="type-row"><div class="lbl"><b>h3</b>20 → 24 px · 500</div><div class="t-h3">Probefahrt vereinbaren</div></div>
+  <div class="type-row"><div class="lbl"><b>price</b>28 → 40 px · 500 · tabular</div><div class="t-price">64.900 €</div></div>
+  <div class="type-row"><div class="lbl"><b>spec + label</b>20 / 13 px</div><div style="display:flex;flex-wrap:wrap;gap:20px 40px"><div><div class="t-label">Erstzulassung</div><div class="t-spec">02/2019</div></div><div><div class="t-label">Kilometerstand</div><div class="t-spec">148.000 km</div></div><div><div class="t-label">Leistung</div><div class="t-spec">345 kW (469 PS)</div></div><div><div class="t-label">Getriebe</div><div class="t-spec">Automatik</div></div></div></div>
+  <div class="type-row"><div class="lbl"><b>lead</b>18 → 20 px · 400</div><div class="t-lead">Jedes Fahrzeug steht bei uns in Hohenems. Sie sehen es hier so, wie Sie es vor Ort sehen würden.</div></div>
+  <div class="type-row"><div class="lbl"><b>body</b>16 px · 1.65</div><div class="t-body">Her aracı gerçekte olduğu gibi gösteriyoruz. Fotoğraflar aracın kendisine aittir; rengine, parlaklığına ve kusurlarına dokunulmaz. (Örnek metin; son metinler FAZ 3'te üç dilde yazılır.)</div></div>
+  <div class="type-row"><div class="lbl"><b>small</b>14 px</div><div class="t-small">Fahrzeug unverändert, nur der Hintergrund ist digital ersetzt.</div></div>
+</section>
+
+<!-- CTA -->
+<section class="wrap" aria-labelledby="c-title">
+  <h2 class="sec-title" id="c-title">CTA düğmesi: bütün durumlar</h2>
+  <p class="sec-lead">Hap biçimli, 52 px yükseklik. Hover'da ölçek 1.02 ve hafif gölge, basınca 0.98, odakta 2 px tabela-mavisi halka. Animasyon 300 ms, cubic-bezier(0.25, 0.1, 0.25, 1). Aşağıdaki ilk iki satır durumları sabit gösterir; en alttaki düğmeler canlıdır.</p>
+  <div class="states">
+    <div class="state"><span class="t-label">Normal</span><span class="btn btn-primary">Probefahrt vereinbaren</span><span class="btn btn-secondary">WhatsApp schreiben</span></div>
+    <div class="state"><span class="t-label">Hover</span><span class="btn btn-primary is-hover">Probefahrt vereinbaren</span><span class="btn btn-secondary is-hover">WhatsApp schreiben</span></div>
+    <div class="state"><span class="t-label">Odak (klavye)</span><span class="btn btn-primary is-focus">Probefahrt vereinbaren</span><span class="btn btn-secondary is-focus">WhatsApp schreiben</span></div>
+    <div class="state"><span class="t-label">Basılı</span><span class="btn btn-primary is-pressed">Probefahrt vereinbaren</span><span class="btn btn-secondary is-pressed">WhatsApp schreiben</span></div>
+    <div class="state"><span class="t-label">Devre dışı</span><span class="btn btn-primary" aria-disabled="true">Probefahrt vereinbaren</span><span class="btn btn-secondary" aria-disabled="true">WhatsApp schreiben</span></div>
+  </div>
+  <div class="live-row" aria-label="Canlı düğmeler">
+    <a class="btn btn-primary live" href="#c-title">Probefahrt vereinbaren</a>
+    <a class="btn btn-secondary live" href="#c-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+      WhatsApp schreiben</a>
+    <button class="ico-btn" type="button" aria-label="Anrufen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></button>
+    <button class="ico-btn" type="button" aria-label="Nach oben"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
+  </div>
+</section>
+
+<!-- CARD -->
+<section class="wrap" aria-labelledby="k-title">
+  <h2 class="sec-title" id="k-title">Araç kartı</h2>
+  <p class="sec-lead">Repodaki gerçek bir aracın gerçek fotoğrafı (Haziran 2026 verisi; bu ilan bugün yayında değil, yalnız örnektir). Solda kapak showroom zeminine yerleştirilmiş, sağda orijinal fotoğraf. Fare ile üzerine gelin ya da Tab ile odaklayın.</p>
+  <div class="cards">
+    <div>
+      <div class="tag">Showroom kapağı (yerleştirme kalitesi yeterliyse)</div>
+      <a class="card" href="#k-title">
+        <div class="ph"><img src="showroom-deneme/1-mercedes-s-560-4matic-showroom.jpg" alt="Mercedes-Benz S 560 4Matic L in Schwarz, Frontansicht von links, auf der Showroom-Plattform" width="1600" height="1000" loading="lazy"><span class="badge">Showroom 360°</span></div>
+        <h3>Mercedes-Benz S 560 4Matic L AMG-Line</h3>
+        <div class="specs">02/2019 · 148.000 km · 469 PS · Benzin · Automatik</div>
+        <div class="bottom"><span class="price">64.900 €</span><span class="count">5 Fotos</span></div>
+      </a>
+    </div>
+    <div>
+      <div class="tag">Orijinal fotoğraf (yedek durum)</div>
+      <a class="card" href="#k-title">
+        <div class="ph orig"><img src="../public/cars/mercedes-s-560-4matic/1.webp" alt="Mercedes-Benz S 560 4Matic L in Schwarz, Frontansicht von links, im Showroom von Mega Cars" width="1440" height="1080" loading="lazy"></div>
+        <h3>Mercedes-Benz S 560 4Matic L AMG-Line</h3>
+        <div class="specs">02/2019 · 148.000 km · 469 PS · Benzin · Automatik</div>
+        <div class="bottom"><span class="price">64.900 €</span><span class="count">5 Fotos</span></div>
+      </a>
+    </div>
+  </div>
+  <p class="note" style="margin-top:28px">"Showroom 360°" rozeti yalnız aracın spin verisi varsa görünür; burada durum göstermek için konmuştur.</p>
+</section>
+
+<!-- MOTION -->
+<section class="wrap" aria-labelledby="m-title">
+  <h2 class="sec-title" id="m-title">İki hareket örneği</h2>
+  <p class="sec-lead">Gerçek sitede GSAP ile yapılır; burada aynı süre ve easing ile tarayıcının kendi animasyonuyla gösteriliyor. Hareketi azaltma ayarı açıksa ikisi de anında biter.</p>
+  <div class="demos">
+    <div class="demo">
+      <div class="t-h3">1 · Maskeli başlık açılışı</div>
+      <div class="demo-stage">
+        <h3 class="mask-title" id="maskTitle"><span class="ln"><span>Jeder Wagen,</span></span><span class="ln"><span>so wie er ist.</span></span></h3>
+      </div>
+      <div class="ctrl"><button class="btn btn-secondary live" type="button" id="replay">Tekrar oynat</button></div>
+      <div class="spec-list">Her satır kendi maskesinin altından yukarı kayar · satır başına 1000 ms · satırlar arası 120 ms · power3.out karşılığı. Başlık ekranda kalır; kendiliğinden değişmez.</div>
+    </div>
+    <div class="demo">
+      <div class="t-h3">2 · Kart hover</div>
+      <div class="demo-stage">
+        <a class="card" href="#m-title" style="max-width:360px">
+          <div class="ph"><img src="showroom-deneme/2-porsche-panamera-e-hybrid-s-showroom.jpg" alt="Porsche Panamera E-Hybrid S in Weiß auf der Showroom-Plattform" width="1600" height="1000" loading="lazy"></div>
+          <h3>Porsche Panamera E-Hybrid S</h3>
+          <div class="specs">Örnek kart · fotoğraf kendi çerçevesinde 1.02</div>
+        </a>
+      </div>
+      <div class="ctrl"><button class="btn btn-secondary live" type="button" id="hoverDemo" aria-pressed="false">Hover'ı göster</button></div>
+      <div class="spec-list">Fotoğraf çerçevesinin içinde 1.02 büyür (700 ms), başlığın altı çizilir (300 ms). Parıltı, kart çevirme ve gölge patlaması yok.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWROOM TRIAL -->
+<section class="wrap" aria-labelledby="s-title">
+  <h2 class="sec-title" id="s-title">Showroom denemesi: 3 sonuç</h2>
+  <p class="sec-lead">Arka plan yerel BiRefNet modeliyle (MIT lisansı, ücretsiz) ayrıldı. Aracın tam opak piksellerinde orijinalle renk farkı 0 (ölçüldü). Zemin bu oturumda fal.ai ile üretilemedi (anahtar yoktu); kodla çizilmiş geçici bir oda kullanıldı, bu yüzden odanın kendisi fotogerçekçi değil. Harcanan tutar: 0 USD.</p>
+  <div class="trial">
+    <figure>
+      <div class="cap-row"><span>Orijinal ilan fotoğrafı</span><span>Showroom</span></div>
+      <div class="duo"><img class="o" src="../public/cars/mercedes-s-560-4matic/1.webp" alt="Orijinal: Mercedes S 560, Mega Cars iç showroom" loading="lazy"><img class="s" src="showroom-deneme/1-mercedes-s-560-4matic-showroom.jpg" alt="Showroom: Mercedes S 560 platformda" loading="lazy"></div>
+      <figcaption><b>Mercedes S 560, siyah, iç mekân.</b> Kenarlar %200'de temiz. Tavan camında eski showroom'un mavi "MEGA CARS" tabela yansıması kalıyor (aracın pikseli, kural gereği dokunulmadı).</figcaption>
+    </figure>
+    <figure>
+      <div class="cap-row"><span>Orijinal ilan fotoğrafı</span><span>Showroom</span></div>
+      <div class="duo"><img class="o" src="../public/cars/porsche-panamera-e-hybrid-s/1.webp" alt="Orijinal: Porsche Panamera, Mega Cars iç showroom" loading="lazy"><img class="s" src="showroom-deneme/2-porsche-panamera-e-hybrid-s-showroom.jpg" alt="Showroom: Porsche Panamera platformda" loading="lazy"></div>
+      <figcaption><b>Porsche Panamera, beyaz, iç mekân.</b> Ayna ve tavan kenarı temiz; beyaz kenarda hale yok. Jantın bir boşluğunda eski zeminin gri parçası ve ön camdan eski tabela görünüyor.</figcaption>
+    </figure>
+    <figure>
+      <div class="cap-row"><span>Orijinal ilan fotoğrafı</span><span>Showroom</span></div>
+      <div class="duo"><img class="o" src="../public/cars/audi-q3-35-tdi/1.webp" alt="Orijinal: Audi Q3, Mega Cars önünde dış mekân" loading="lazy"><img class="s" src="showroom-deneme/3-audi-q3-35-tdi-showroom.jpg" alt="Showroom: Audi Q3 platformda" loading="lazy"></div>
+      <figcaption><b>Audi Q3, beyaz, dış mekân, yağmurlu.</b> Tavan rayı ve cam kenarı çok temiz; yağmur damlaları korunmuş. Fotoğraf yakın ve geniş açıyla çekildiği için araç platforma göre büyük ve "yapıştırılmış" duruyor; bulutlu dış ışık karanlık odayla çelişiyor.</figcaption>
+    </figure>
+    <ul class="verdict">
+      <li><b style="color:var(--ink);font-weight:500">Ayırma kalitesi çok iyi;</b> sınır ayırma değil, ışık ve perspektif uyuşmazlığı.</li>
+      <li>Liste kartı boyutunda kabul edilebilir; büyük 360 sahnesi için kontrollü yeni çekim (sabit 1,2 m yükseklik, kapalı hava) ve fotogerçekçi oda zemini gerekir.</li>
+      <li>%200 kenar kırpımları: <a href="showroom-deneme/kenar-200/mercedes-s-560-4matic-kenar.jpg">S 560</a> · <a href="showroom-deneme/kenar-200/porsche-panamera-e-hybrid-s-kenar.jpg">Panamera</a> · <a href="showroom-deneme/kenar-200/audi-q3-35-tdi-kenar.jpg">Q3</a> · Ayrıntı: <a href="showroom-deneme/README.md">README</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">Mega Cars v2 · Stil tahtası · 22.10.2026 · Belgeler: DESIGN.md, docs/ARASTIRMA.md, docs/GORSEL-PLANI.md</footer>
+
+<script>
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lines = [...document.querySelectorAll('#maskTitle .ln > span')];
+  const ease = 'cubic-bezier(0.165, 0.84, 0.44, 1)'; // power3.out (easeOutQuart)
+  function play() {
+    lines.forEach((el, i) => {
+      el.getAnimations().forEach(a => a.cancel());
+      if (reduce) return;
+      el.animate([{ transform: 'translateY(105%)' }, { transform: 'translateY(0)' }],
+        { duration: 1000, delay: 200 + i * 120, easing: ease, fill: 'backwards' });
+    });
+  }
+  const stage = document.getElementById('maskTitle');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) { play(); io.disconnect(); }
+    }, { threshold: 0.6 });
+    io.observe(stage);
+  }
+  document.getElementById('replay').addEventListener('click', play);
+
+  const hoverBtn = document.getElementById('hoverDemo');
+  const demoCard = hoverBtn.closest('.demo').querySelector('.card');
+  hoverBtn.addEventListener('click', () => {
+    const on = demoCard.classList.toggle('is-hover');
+    hoverBtn.setAttribute('aria-pressed', String(on));
+    hoverBtn.textContent = on ? "Hover'ı kapat" : "Hover'ı göster";
+  });
+})();
+</script>
+</body>
+</html>

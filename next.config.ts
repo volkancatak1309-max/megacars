@@ -1,7 +1,11 @@
 import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
+const withNextIntl = createNextIntlPlugin({
+  requestConfig: './i18n/request.ts',
+  // ICU messages are compiled at build time, so the client ships no message parser
+  experimental: { messages: { path: './messages', format: 'json', locales: ['de', 'tr'], precompile: true } },
+})
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,

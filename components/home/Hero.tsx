@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { whatsappHref } from '@/lib/site'
-import { gsap, SplitText, useGSAP, MOTION_OK, REDUCED, fontsReady } from '@/lib/gsap'
+import { useMotion, MOTION_OK, REDUCED } from '@/lib/gsap'
 import { Icon } from '@/components/ui/Icon'
 import { Magnetic } from '@/components/ui/Magnetic'
 
@@ -71,46 +71,19 @@ export function Hero() {
     }
   }
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      const title = root.current!.querySelector<HTMLElement>('[data-hero-title]')!
-      const fades = root.current!.querySelectorAll<HTMLElement>('[data-hero-fade]')
-      mm.add(MOTION_OK, () => {
-        let split: SplitText | null = null
-        let cancelled = false
-        fontsReady().then(() => {
-          if (cancelled) return
-          split = SplitText.create(title, {
-            type: 'lines',
-            mask: 'lines',
-            autoSplit: true,
-            onSplit: (self) => {
-              gsap.set(title, { visibility: 'visible' })
-              return gsap.from(self.lines, { yPercent: 105, duration: 1, stagger: 0.12, delay: 0.2 })
-            },
-          })
-          gsap.fromTo(fades, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.1, delay: 0.75 })
-        })
-        // the camera pulls back while the page scrolls on
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: 0.8 },
-          defaults: { ease: 'none' },
-        })
-        tl.to(media.current, { scale: 0.92 }, 0)
-          .to('[data-hero-darken]', { opacity: 0.55 }, 0)
-          .to('[data-hero-content]', { yPercent: -8 }, 0)
-        return () => {
-          cancelled = true
-          split?.revert()
-        }
+  // The title reveal is pure CSS (.hero-line), so it starts with the first paint and
+  // never waits for JavaScript (keeps LCP early). GSAP only drives the scroll pull-back.
+  useMotion(({ gsap }) => {
+    gsap.matchMedia().add(MOTION_OK, () => {
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: 0.8 },
+        defaults: { ease: 'none' },
       })
-      mm.add(REDUCED, () => {
-        gsap.set([title, ...fades], { visibility: 'visible', opacity: 1 })
-      })
-    },
-    { scope: root },
-  )
+      tl.to(media.current, { scale: 0.92 }, 0)
+        .to('[data-hero-darken]', { opacity: 0.55 }, 0)
+        .to('[data-hero-content]', { yPercent: -8 }, 0)
+    })
+  }, root)
 
   return (
     <section ref={root} className="hero" aria-labelledby="hero-title">
@@ -138,14 +111,16 @@ export function Hero() {
       </div>
 
       <div data-hero-content className="container-max page-x relative flex h-full flex-col justify-end pb-[calc(var(--bar-h)+40px)] lg:pb-24">
-        <h1 id="hero-title" data-hero-title data-hero-reveal className="t-display">
-          <span className="block">{t('line1')}</span>
-          <span className="block">{t('line2')}</span>
+        <h1 id="hero-title" className="t-display">
+          <span className="hero-line">
+            <span style={{ ['--i' as string]: 0 }}>{t('line1')}</span>
+          </span>
+          <span className="hero-line">
+            <span style={{ ['--i' as string]: 1 }}>{t('line2')}</span>
+          </span>
         </h1>
-        <p data-hero-fade data-hero-reveal className="t-lead mt-6 max-w-[44ch] text-ink-2">
-          {t('lead')}
-        </p>
-        <div data-hero-fade data-hero-reveal className="mt-8 flex flex-wrap gap-3">
+        <p className="hero-lead t-lead mt-6 max-w-[44ch] text-ink-2">{t('lead')}</p>
+        <div className="hero-ctas mt-8 flex flex-wrap gap-3">
           <Magnetic>
             <Link href="/fahrzeuge" className="btn btn-primary">
               {t('ctaPrimary')}

@@ -1,8 +1,8 @@
 'use client'
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import Lenis from 'lenis'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import type Lenis from 'lenis'
+import { loadMotion } from '@/lib/gsap'
 
 let lenis: Lenis | null = null
 export const getLenis = () => lenis
@@ -30,16 +30,22 @@ export function SmoothScroll() {
   useEffect(() => {
     const mq = matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)')
     let tick: ((time: number) => void) | null = null
-    const start = () => {
+    let disposed = false
+    // loaded after the first paint together with GSAP (lib/gsap.ts)
+    const start = async () => {
       if (lenis || !mq.matches) return
-      lenis = new Lenis({ lerp: 0.1, smoothWheel: true, syncTouch: false, anchors: true })
+      const [{ gsap, ScrollTrigger }, { default: LenisClass }] = await Promise.all([loadMotion(), import('lenis')])
+      if (disposed || lenis || !mq.matches) return
+      lenis = new LenisClass({ lerp: 0.1, smoothWheel: true, syncTouch: false, anchors: true })
       lenis.on('scroll', ScrollTrigger.update)
       tick = (time) => lenis?.raf(time * 1000)
       gsap.ticker.add(tick)
       gsap.ticker.lagSmoothing(0)
     }
     const stop = () => {
-      if (tick) gsap.ticker.remove(tick)
+      const t = tick
+      if (t) loadMotion().then(({ gsap }) => gsap.ticker.remove(t))
+      tick = null
       lenis?.destroy()
       lenis = null
     }
@@ -47,6 +53,7 @@ export function SmoothScroll() {
     start()
     mq.addEventListener('change', onChange)
     return () => {
+      disposed = true
       mq.removeEventListener('change', onChange)
       stop()
     }
@@ -54,7 +61,10 @@ export function SmoothScroll() {
 
   useEffect(() => {
     lenis?.resize()
-    const id = requestAnimationFrame(() => ScrollTrigger.refresh())
+    let id = 0
+    loadMotion().then(({ ScrollTrigger }) => {
+      id = requestAnimationFrame(() => ScrollTrigger.refresh())
+    })
     return () => cancelAnimationFrame(id)
   }, [pathname])
 

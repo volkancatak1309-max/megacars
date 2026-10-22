@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { EMPTY_FILTERS, matches, toSearchParams, type CardVehicle, type FilterOptions, type Filters } from '@/lib/filter'
 import { formatPrice } from '@/lib/format'
-import { gsap } from '@/lib/gsap'
+import { loadMotion } from '@/lib/gsap'
 import { Icon } from '@/components/ui/Icon'
 import { Magnetic } from '@/components/ui/Magnetic'
 import { Stagger } from '@/components/motion/Reveal'
@@ -20,7 +20,7 @@ export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; o
   const [f, setF] = useState<Filters>(EMPTY_FILTERS)
   const count = useMemo(() => vehicles.filter((v) => matches(v, f)).length, [vehicles, f])
   const [shown, setShown] = useState(count)
-  const tween = useRef<gsap.core.Tween | null>(null)
+  const tween = useRef<{ kill: () => void } | null>(null)
 
   // the number in the button rolls to its new value (t-2)
   useEffect(() => {
@@ -28,10 +28,14 @@ export function QuickSearch({ vehicles, options }: { vehicles: QuickVehicle[]; o
       setShown(count)
       return
     }
+    let cancelled = false
     const state = { n: shown }
     tween.current?.kill()
-    tween.current = gsap.to(state, { n: count, duration: 0.45, snap: { n: 1 }, onUpdate: () => setShown(state.n) })
+    loadMotion().then(({ gsap }) => {
+      if (!cancelled) tween.current = gsap.to(state, { n: count, duration: 0.45, snap: { n: 1 }, onUpdate: () => setShown(state.n) })
+    })
     return () => {
+      cancelled = true
       tween.current?.kill()
     }
   }, [count])

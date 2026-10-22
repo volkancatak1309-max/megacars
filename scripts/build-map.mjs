@@ -60,12 +60,31 @@ for (const el of data.elements) {
   layers[kindOf(el.tags)].push(d)
 }
 const [px, py] = project(CENTER)
+// small metadata for the page; the drawing itself is a separate file loaded on approach,
+// so the street geometry never weighs down the HTML
 const out = {
   viewBox: `0 0 ${VIEW_W} ${VIEW_H}`,
   pin: { x: +px.toFixed(1), y: +py.toFixed(1) },
-  layers: Object.fromEntries(Object.entries(layers).map(([k, v]) => [k, v.join('')])),
+  src: '/map/hohenems.svg',
   attribution: '© OpenStreetMap-Mitwirkende (ODbL)',
 }
 const target = path.join(process.cwd(), 'data', 'map.json')
-fs.writeFileSync(target, JSON.stringify(out) + '\n')
-console.log(`map.json: ${Object.entries(layers).map(([k, v]) => `${k} ${v.length}`).join(', ')}, ${fs.statSync(target).size} bytes`)
+fs.writeFileSync(target, JSON.stringify(out, null, 2) + '\n')
+
+// colours are the DESIGN.md tokens as hex, so the file also renders as a plain <img>
+const STYLE = {
+  water: 'stroke="#3d4a57" stroke-width="3"',
+  minor: 'stroke="#34353a" stroke-width="1.6"',
+  street: 'stroke="#72747b" stroke-width="2.6"',
+  major: 'stroke="#96989f" stroke-width="5"',
+}
+const svg = [
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VIEW_W} ${VIEW_H}" fill="none" stroke-linecap="round" stroke-linejoin="round">`,
+  ...Object.entries(STYLE).map(([k, s]) => `<path data-draw="" pathLength="1" stroke-dasharray="1 1" ${s} d="${layers[k].join('')}"/>`),
+  `<path stroke="#96989f" stroke-width="2" stroke-dasharray="6 10" d="${layers.rail.join('')}"/>`,
+  '</svg>',
+].join('\n')
+const svgTarget = path.join(process.cwd(), 'public', 'map', 'hohenems.svg')
+fs.mkdirSync(path.dirname(svgTarget), { recursive: true })
+fs.writeFileSync(svgTarget, svg + '\n')
+console.log(`map: ${Object.entries(layers).map(([k, v]) => `${k} ${v.length}`).join(', ')}; hohenems.svg ${fs.statSync(svgTarget).size} bytes`)

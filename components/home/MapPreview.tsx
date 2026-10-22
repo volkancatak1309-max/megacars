@@ -1,44 +1,63 @@
 'use client'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { osmEmbedHref } from '@/lib/site'
-import { gsap, useGSAP, MOTION_OK } from '@/lib/gsap'
+import { useMotion, MOTION_OK } from '@/lib/gsap'
 import { Icon } from '@/components/ui/Icon'
 
 export interface MapData {
   viewBox: string
   pin: { x: number; y: number }
-  layers: Record<'water' | 'minor' | 'street' | 'major' | 'rail', string>
+  src: string
 }
 
 /**
  * DSGVO-friendly map: a static drawing of the surrounding streets (built once from
- * OpenStreetMap data) — nothing is requested from a third party until the visitor
- * clicks "Karte laden".
+ * OpenStreetMap data, served from this site) — nothing is requested from a third party
+ * until the visitor clicks "Karte laden". The drawing is inlined when it comes near the
+ * viewport so its streets can draw themselves in.
  */
 export function MapPreview({ map }: { map: MapData }) {
   const t = useTranslations('location')
   const [loaded, setLoaded] = useState(false)
+  const [inline, setInline] = useState<string | null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const [vw, vh] = map.viewBox.split(' ').slice(2).map(Number)
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add(MOTION_OK, () => {
-        const paths = ref.current!.querySelectorAll('[data-draw]')
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        io.disconnect()
+        fetch(map.src)
+          .then((r) => (r.ok ? r.text() : Promise.reject()))
+          .then(setInline)
+          .catch(() => {})
+      },
+      { rootMargin: '600px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [map.src])
+
+  useMotion(
+    ({ gsap }) => {
+      if (loaded || !inline) return
+      gsap.matchMedia().add(MOTION_OK, () => {
+        if (ref.current!.getBoundingClientRect().top < window.innerHeight * 0.8) return
         gsap.fromTo(
-          paths,
+          ref.current!.querySelectorAll('[data-draw]'),
           { strokeDashoffset: 1 },
           { strokeDashoffset: 0, duration: 1.4, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: ref.current, start: 'top 80%', once: true } },
         )
         gsap.from('[data-pin]', { scale: 0.6, autoAlpha: 0, duration: 0.7, delay: 0.6, scrollTrigger: { trigger: ref.current, start: 'top 80%', once: true } })
       })
     },
-    { scope: ref, dependencies: [loaded] },
+    ref,
+    [loaded, inline],
   )
-
-  const line = { pathLength: 1, strokeDasharray: '1 1', 'data-draw': true } as const
 
   return (
     <div ref={ref} className="relative aspect-[16/10] overflow-clip rounded-[4px] border border-line bg-hall">
@@ -46,13 +65,13 @@ export function MapPreview({ map }: { map: MapData }) {
         <iframe src={osmEmbedHref} title={t('mapTitle')} className="absolute inset-0 h-full w-full border-0" loading="lazy" />
       ) : (
         <>
-          <svg viewBox={map.viewBox} role="img" aria-label={t('mapPreviewLabel')} className="map-lines absolute inset-0 h-full w-full">
-            <path d={map.layers.water} stroke="oklch(0.42 0.03 240)" strokeWidth={3} {...line} />
-            <path d={map.layers.minor} stroke="var(--color-line)" strokeWidth={1.6} {...line} />
-            <path d={map.layers.street} stroke="var(--color-line-strong)" strokeWidth={2.6} {...line} />
-            <path d={map.layers.major} stroke="var(--color-ink-3)" strokeWidth={5} {...line} />
-            <path d={map.layers.rail} stroke="var(--color-ink-3)" strokeWidth={2} strokeDasharray="6 10" />
-          </svg>
+          <div role="img" aria-label={t('mapPreviewLabel')} className="absolute inset-0">
+            {inline ? (
+              <div className="h-full w-full [&>svg]:h-full [&>svg]:w-full" dangerouslySetInnerHTML={{ __html: inline }} />
+            ) : (
+              <img src={map.src} alt="" width={vw} height={vh} loading="lazy" className="h-full w-full" />
+            )}
+          </div>
           <span
             data-pin
             aria-hidden="true"

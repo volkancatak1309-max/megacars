@@ -12,6 +12,8 @@ export interface Photo {
   src: string
   /** 800 px wide derivative, or null when the original is not wider than 800 px */
   src800: string | null
+  /** 240 px wide derivative for thumbnails */
+  src240: string
   width: number
   height: number
   /** 16 px WebP as data URL for the blur-up placeholder */

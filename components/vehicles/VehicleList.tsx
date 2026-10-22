@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { Flip } from 'gsap/Flip'
 import {
   EMPTY_FILTERS,
   activeCount,
@@ -16,13 +15,11 @@ import {
   type SortKey,
 } from '@/lib/filter'
 import { formatKm, formatPrice } from '@/lib/format'
-import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from '@/lib/gsap'
+import { loadMotion, useMotion, MOTION_OK, type Motion } from '@/lib/gsap'
 import { Icon } from '@/components/ui/Icon'
-import { RevealText } from '@/components/motion/Reveal'
+import { RevealText, RiseHeading } from '@/components/motion/Reveal'
 import { lockScroll } from '@/components/motion/SmoothScroll'
 import { VehicleCard } from '@/components/vehicle/VehicleCard'
-
-gsap.registerPlugin(Flip)
 
 const SORT_LABEL: Record<SortKey, string> = {
   year: 'sortYear',
@@ -44,8 +41,10 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   const [sheet, setSheet] = useState(false)
   const grid = useRef<HTMLUListElement>(null)
   const dialog = useRef<HTMLDialogElement>(null)
-  const flipState = useRef<Flip.FlipState | null>(null)
-  const entrance = useRef<ScrollTrigger[]>([])
+  // GSAP arrives after the first paint; until then filtering simply re-renders
+  const motion = useRef<Motion | null>(null)
+  const flipState = useRef<ReturnType<Motion['Flip']['getState']> | null>(null)
+  const entrance = useRef<{ kill: () => void }[]>([])
 
   const sorted = useMemo(() => sortVehicles(cards, f.sort), [cards, f.sort])
   const visible = useMemo(() => new Set(sorted.filter((v) => matches(v, f)).map((v) => v.id)), [sorted, f])
@@ -54,12 +53,13 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
 
   const update = (next: Filters) => {
     const el = grid.current
-    if (el && matchMedia(MOTION_OK).matches) {
+    const m = motion.current
+    if (el && m && matchMedia(MOTION_OK).matches) {
       // finish any first-view entrance before measuring
       entrance.current.forEach((st) => st.kill())
       entrance.current = []
-      gsap.set(el.querySelectorAll('[data-card]'), { clearProps: 'opacity,visibility,transform' })
-      flipState.current = Flip.getState(el.querySelectorAll('[data-card]'))
+      m.gsap.set(el.querySelectorAll('[data-card]'), { clearProps: 'opacity,visibility,transform' })
+      flipState.current = m.Flip.getState(el.querySelectorAll('[data-card]'))
     }
     setF(next)
   }
@@ -80,9 +80,11 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
 
   useLayoutEffect(() => {
     const state = flipState.current
-    if (!state) return
+    const m = motion.current
+    if (!state || !m) return
     flipState.current = null
-    Flip.from(state, {
+    const { gsap } = m
+    m.Flip.from(state, {
       duration: 0.45,
       ease: 'power3.out',
       absolute: true,
@@ -94,21 +96,26 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   }, [f])
 
   // first view: cards settle 24 px upward in batches (t-3, 90 ms)
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add(MOTION_OK, () => {
-        const items = grid.current!.querySelectorAll('[data-card]:not([hidden])')
-        gsap.set(items, { autoAlpha: 0, y: 24 })
-        entrance.current = ScrollTrigger.batch(items, {
-          start: 'top 92%',
-          once: true,
-          onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.09, overwrite: true }),
-        })
+  useEffect(() => {
+    loadMotion().then((m) => {
+      motion.current = m
+    })
+  }, [])
+  useMotion(({ gsap, ScrollTrigger }) => {
+    gsap.matchMedia().add(MOTION_OK, () => {
+      // cards already on screen when motion arrives stay as they are
+      const items = [...grid.current!.querySelectorAll<HTMLElement>('[data-card]:not([hidden])')].filter(
+        (el) => el.getBoundingClientRect().top > window.innerHeight,
+      )
+      if (!items.length) return
+      gsap.set(items, { autoAlpha: 0, y: 24 })
+      entrance.current = ScrollTrigger.batch(items, {
+        start: 'top 92%',
+        once: true,
+        onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.09, overwrite: true }),
       })
-    },
-    { scope: grid },
-  )
+    })
+  }, grid)
 
   useEffect(() => {
     const d = dialog.current
@@ -182,9 +189,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   return (
     <div className="container-max page-x pb-[var(--section-y)]">
       <header className="pt-10 pb-8 lg:pt-16 lg:pb-10">
-        <RevealText as="h1" className="t-h1 max-w-[22ch]" start="top 100%">
-          {t('title', { count: cards.length })}
-        </RevealText>
+        <RiseHeading className="t-h1 max-w-[22ch]">{t('title', { count: cards.length })}</RiseHeading>
         <p className="t-lead mt-4 measure">{t('lead')}</p>
       </header>
 
@@ -243,7 +248,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
       <ul ref={grid} className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 2xl:grid-cols-4">
         {sorted.map((v, i) => (
           <li key={v.id} data-card data-flip-id={v.id} hidden={!visible.has(v.id)}>
-            <VehicleCard v={v} priority={i < 3 && visible.has(v.id)} headingLevel="h2" />
+            <VehicleCard v={v} priority={i === 0 && visible.has(v.id)} headingLevel="h2" />
           </li>
         ))}
       </ul>

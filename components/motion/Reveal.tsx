@@ -1,8 +1,8 @@
 'use client'
 // Scroll-linked motion primitives. Every element is fully visible in the server HTML;
-// motion is added only when JS runs and the visitor allows motion (DESIGN.md §6).
+// motion is added only when GSAP has loaded and the visitor allows motion (DESIGN.md §6).
 import { useRef, type ElementType, type ReactNode } from 'react'
-import { gsap, ScrollTrigger, SplitText, useGSAP, MOTION_OK, fontsReady } from '@/lib/gsap'
+import { useMotion, MOTION_OK, fontsReady } from '@/lib/gsap'
 
 type Tag = 'h1' | 'h2' | 'h3' | 'p' | 'div'
 
@@ -21,38 +21,30 @@ export function RevealText({
   start?: string
 }) {
   const ref = useRef<HTMLElement>(null)
-  useGSAP(
-    () => {
-      const el = ref.current
-      if (!el) return
-      const mm = gsap.matchMedia()
-      mm.add(MOTION_OK, () => {
-        let split: SplitText | null = null
-        let cancelled = false
-        fontsReady().then(() => {
-          if (cancelled) return
+  useMotion(({ gsap, SplitText }, ctx) => {
+    const el = ref.current!
+    gsap.matchMedia().add(MOTION_OK, () => {
+      // a heading already on screen when motion arrives stays as it is
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.85) return
+      let split: InstanceType<typeof SplitText> | null = null
+      fontsReady().then(() =>
+        // runs inside the gsap.context so the split and its tween are reverted with it
+        ctx.add(() => {
           split = SplitText.create(el, {
             type: 'lines',
             mask: 'lines',
-            linesClass: 'mask-line-inner',
+            tag: 'span',
+            // lines stay real text for screen readers; no aria-label on <p>/<h*>
+            aria: 'none',
             autoSplit: true,
             onSplit: (self) =>
-              gsap.from(self.lines, {
-                yPercent: 105,
-                duration: 1,
-                stagger: 0.12,
-                scrollTrigger: { trigger: el, start, once: true },
-              }),
+              gsap.from(self.lines, { yPercent: 105, duration: 1, stagger: 0.12, scrollTrigger: { trigger: el, start, once: true } }),
           })
-        })
-        return () => {
-          cancelled = true
-          split?.revert()
-        }
-      })
-    },
-    { scope: ref },
-  )
+        }),
+      )
+      return () => split?.revert()
+    })
+  }, ref)
   const Comp = as as ElementType
   return (
     <Comp ref={ref} className={className} id={id}>
@@ -61,37 +53,55 @@ export function RevealText({
   )
 }
 
+/** Heading above the fold: rises out of a mask in CSS from the first paint (no JS). */
+export function RiseHeading({ as = 'h1', className, children }: { as?: Tag; className?: string; children: ReactNode }) {
+  const Comp = as as ElementType
+  return (
+    <Comp className={className}>
+      <span className="rise-mask">
+        <span>{children}</span>
+      </span>
+    </Comp>
+  )
+}
+
 /** A photo opens from a narrow window to its full frame while scrolling (catalog #4). */
 export function WindowReveal({ className, children }: { className?: string; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null)
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add(MOTION_OK, () => {
-        const el = ref.current!
-        gsap.fromTo(
-          el,
-          { clipPath: 'inset(18% 26% 18% 26%)' },
-          {
-            clipPath: 'inset(0% 0% 0% 0%)',
-            ease: 'none',
-            scrollTrigger: { trigger: el, start: 'top 90%', end: 'center 55%', scrub: 0.8 },
-          },
-        )
-        const img = el.querySelector('img')
-        if (img) {
-          gsap.fromTo(
-            img,
-            { scale: 1.12 },
-            { scale: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 90%', end: 'bottom 30%', scrub: 0.8 } },
-          )
-        }
-      })
-    },
-    { scope: ref },
-  )
+  useMotion(({ gsap }) => {
+    gsap.matchMedia().add(MOTION_OK, () => {
+      const el = ref.current!
+      gsap.fromTo(
+        el,
+        { clipPath: 'inset(18% 26% 18% 26%)' },
+        { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: el, start: 'top 90%', end: 'center 55%', scrub: 0.8 } },
+      )
+      const img = el.querySelector('img')
+      if (img) {
+        gsap.fromTo(img, { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 90%', end: 'bottom 30%', scrub: 0.8 } })
+      }
+    })
+  }, ref)
   return (
     <div ref={ref} className={className}>
+      {children}
+    </div>
+  )
+}
+
+/**
+ * A <dl> row (or any block) whose top rule is drawn left to right when it enters.
+ * The rule is a ::before line, so dt/dd stay direct children (valid list markup).
+ */
+export function DrawGroup({ className = '', children }: { className?: string; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useMotion(({ gsap }) => {
+    gsap.matchMedia().add(MOTION_OK, () => {
+      gsap.fromTo(ref.current, { '--draw': 0 }, { '--draw': 1, duration: 0.7, scrollTrigger: { trigger: ref.current, start: 'top 92%', once: true } })
+    })
+  }, ref)
+  return (
+    <div ref={ref} className={`draw-group ${className}`}>
       {children}
     </div>
   )
@@ -100,20 +110,16 @@ export function WindowReveal({ className, children }: { className?: string; chil
 /** Divider drawn from left to right when it enters (t-3). */
 export function DrawLine({ className = '' }: { className?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add(MOTION_OK, () => {
-        gsap.from(ref.current, {
-          scaleX: 0,
-          transformOrigin: 'left center',
-          duration: 0.7,
-          scrollTrigger: { trigger: ref.current, start: 'top 92%', once: true },
-        })
+  useMotion(({ gsap }) => {
+    gsap.matchMedia().add(MOTION_OK, () => {
+      gsap.from(ref.current, {
+        scaleX: 0,
+        transformOrigin: 'left center',
+        duration: 0.7,
+        scrollTrigger: { trigger: ref.current, start: 'top 92%', once: true },
       })
-    },
-    { scope: ref },
-  )
+    })
+  }, ref)
   return <span ref={ref} aria-hidden="true" className={`block h-px w-full bg-line ${className}`} />
 }
 
@@ -130,22 +136,21 @@ export function Stagger({
   start?: string
 }) {
   const ref = useRef<HTMLElement>(null)
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add(MOTION_OK, () => {
-        const items = ref.current!.querySelectorAll('[data-stagger]')
-        if (!items.length) return
-        gsap.set(items, { autoAlpha: 0, y: 24 })
-        ScrollTrigger.batch(items, {
-          start,
-          once: true,
-          onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.09, overwrite: true }),
-        })
+  useMotion(({ gsap, ScrollTrigger }) => {
+    gsap.matchMedia().add(MOTION_OK, () => {
+      // items already on screen when motion arrives stay as they are
+      const items = [...ref.current!.querySelectorAll<HTMLElement>('[data-stagger]')].filter(
+        (el) => el.getBoundingClientRect().top > window.innerHeight,
+      )
+      if (!items.length) return
+      gsap.set(items, { autoAlpha: 0, y: 24 })
+      ScrollTrigger.batch(items, {
+        start,
+        once: true,
+        onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.09, overwrite: true }),
       })
-    },
-    { scope: ref },
-  )
+    })
+  }, ref)
   const Comp = as
   return (
     <Comp ref={ref} className={className}>
@@ -158,11 +163,11 @@ export function Stagger({
 export function Ticker({ value, locale, className }: { value: number; locale: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const fmt = new Intl.NumberFormat(locale === 'tr' ? 'tr-TR' : 'de-DE')
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add(MOTION_OK, () => {
+  useMotion(
+    ({ gsap }) => {
+      gsap.matchMedia().add(MOTION_OK, () => {
         const el = ref.current!
+        if (el.getBoundingClientRect().top < window.innerHeight) return
         const state = { n: 0 }
         el.textContent = fmt.format(0)
         gsap.to(state, {
@@ -179,7 +184,8 @@ export function Ticker({ value, locale, className }: { value: number; locale: st
         }
       })
     },
-    { scope: ref, dependencies: [value] },
+    ref,
+    [value],
   )
   return (
     <span ref={ref} className={`tabular ${className ?? ''}`}>

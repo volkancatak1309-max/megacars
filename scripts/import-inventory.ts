@@ -172,19 +172,22 @@ async function photo(rel: string): Promise<Photo> {
   const meta = await sharp(file).metadata()
   const width = meta.width!
   const height = meta.height!
-  let src800: string | null = null
-  if (width > 800) {
-    const derivedRel = rel.replace(/\.webp$/, '-800.webp')
+  // scaled copies only: same pixels, smaller size (no crop, no filter)
+  const derive = async (w: number, quality: number) => {
+    const derivedRel = rel.replace(/\.webp$/, `-${w}.webp`)
     const derived = path.join(PUBLIC, derivedRel)
     if (!fs.existsSync(derived) || fs.statSync(derived).mtimeMs < fs.statSync(file).mtimeMs) {
-      await sharp(file).resize({ width: 800 }).webp({ quality: 78, effort: 6 }).toFile(derived)
+      await sharp(file).resize({ width: w }).webp({ quality, effort: 6 }).toFile(derived)
     }
-    src800 = '/' + derivedRel.replace(/\\/g, '/')
+    return '/' + derivedRel.replace(/\\/g, '/')
   }
+  const src800 = width > 800 ? await derive(800, 78) : null
+  const src240 = await derive(240, 72)
   const tiny = await sharp(file).resize({ width: 16 }).webp({ quality: 40 }).toBuffer()
   return {
     src: '/' + rel.replace(/\\/g, '/'),
     src800,
+    src240,
     width,
     height,
     blur: `data:image/webp;base64,${tiny.toString('base64')}`,

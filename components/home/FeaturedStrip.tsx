@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import type { CardVehicle } from '@/lib/filter'
 import { vehicleName } from '@/lib/format'
-import { gsap, useGSAP, DESKTOP_FINE, MOTION_OK } from '@/lib/gsap'
+import { useMotion, DESKTOP_FINE, MOTION_OK } from '@/lib/gsap'
 import { CarImage } from '@/components/ui/CarImage'
 import { Icon } from '@/components/ui/Icon'
 import { RevealText } from '@/components/motion/Reveal'
@@ -22,10 +22,9 @@ export function FeaturedStrip({ cards }: { cards: CardVehicle[] }) {
   const root = useRef<HTMLElement>(null)
   const track = useRef<HTMLUListElement>(null)
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add(`${DESKTOP_FINE} and ${MOTION_OK}`, () => {
+  useMotion(
+    ({ gsap }) => {
+      gsap.matchMedia().add(`${DESKTOP_FINE} and ${MOTION_OK}`, () => {
         const list = track.current!
         list.classList.add('is-pinned')
         const distance = () => Math.max(0, list.scrollWidth - document.documentElement.clientWidth)
@@ -60,7 +59,7 @@ export function FeaturedStrip({ cards }: { cards: CardVehicle[] }) {
         return () => list.classList.remove('is-pinned')
       })
     },
-    { scope: root },
+    root,
   )
 
   return (

@@ -121,6 +121,7 @@
       {
         "src": "/cars/mercedes-s-560-4matic/1.webp",
         "src800": "/cars/mercedes-s-560-4matic/1-800.webp",
+        "src240": "/cars/mercedes-s-560-4matic/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoQAAwAA4BaJZQAD5DuL+6W89MigAD+6txXPlIqP1sUHpxNnYXrAiW9f080JxRLUwCYZatjsrwRIqERQ+bAExDocwOVn2u+g773HjlSUd6xeQmuAAA="
@@ -128,6 +129,7 @@
       {
         "src": "/cars/mercedes-s-560-4matic/2.webp",
         "src800": "/cars/mercedes-s-560-4matic/2-800.webp",
+        "src240": "/cars/mercedes-s-560-4matic/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoQAAwAA4BaJZQCw7YvXNIDe6jtAAD+vn8J2aS8y885ge/IraOU2W2Xc+IvIWCkCq8bqCYFILeM1Th2kaON6L3PbgvM0XR0K54Z123hZjZH3eix5n2r2ZPITb4AAA=="
@@ -135,6 +137,7 @@
       {
         "src": "/cars/mercedes-s-560-4matic/3.webp",
         "src800": "/cars/mercedes-s-560-4matic/3-800.webp",
+        "src240": "/cars/mercedes-s-560-4matic/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABQAgCdASoQAAwAA4BaJZQCw7YuHOJz83MzMEAA/teaZK+ynP/Yt2XO/RVZVjp25xRUAdV9lVPfeGSPQwQG3hv46ucZlPpF17erhLw4/+WGQzVPBw4FnMTjwkAAAA=="
@@ -142,6 +145,7 @@
       {
         "src": "/cars/mercedes-s-560-4matic/4.webp",
         "src800": "/cars/mercedes-s-560-4matic/4-800.webp",
+        "src240": "/cars/mercedes-s-560-4matic/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoQAAwAA4BaJZQAD45On3WUTTcxuAD+6RzyciKUBD3ndIC1goaAlEBxyXEafrB/4cWmpAPmUivEXoEOxXEYx9Rw7Mmiz6pVsNLKg899rRgAAA=="
@@ -149,6 +153,7 @@
       {
         "src": "/cars/mercedes-s-560-4matic/5.webp",
         "src800": "/cars/mercedes-s-560-4matic/5-800.webp",
+        "src240": "/cars/mercedes-s-560-4matic/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAwAA4BaJZQAAt4/VNAYx8cwAAD+8XtNDPxw2ZnQCHx9y1qwsYxRCW53dIFQmGNEqOYvoaOFPN3+SajovZSOUyia8xXkpkNnIXMUD6Q9LvUpbfH0AAAA"
@@ -245,6 +250,7 @@
       {
         "src": "/cars/mercedes-c-220-d/1.webp",
         "src800": "/cars/mercedes-c-220-d/1-800.webp",
+        "src240": "/cars/mercedes-c-220-d/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoQAAwAA4BaJYgCdAYuvlFRPgMAAP5enx+Godwf54POmqHELS5AMF+hXDbPWYLbrW0rpsBMw2rtIbn1DBJtpDSoOe6gPRg5X1PLGDy2h+DQstj8QAA="
@@ -252,6 +258,7 @@
       {
         "src": "/cars/mercedes-c-220-d/2.webp",
         "src800": "/cars/mercedes-c-220-d/2-800.webp",
+        "src240": "/cars/mercedes-c-220-d/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAABwAgCdASoQAAwAA4BaJYwCdAYqNvvWypt9wngAAPfDwyJDohy0gaSxspPyDuN/P8S/nicIpwEmKxkh/KP44zRaQtn8wctix8KvIw/RfuznEqUzi0fCQwJ3Eei0LO8TuAA="
@@ -259,6 +266,7 @@
       {
         "src": "/cars/mercedes-c-220-d/3.webp",
         "src800": "/cars/mercedes-c-220-d/3-800.webp",
+        "src240": "/cars/mercedes-c-220-d/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAwAA4BaJZQC7AEN9hlRwdAA/vS0iniqP4ktHFEp3eEkb0U/u6Z3Bh5wXrl4xnqxcljIAwAImOwu0sBsx/0vUx0CBtU6J8zwXYOP4jkAYAAA"
@@ -266,6 +274,7 @@
       {
         "src": "/cars/mercedes-c-220-d/4.webp",
         "src800": "/cars/mercedes-c-220-d/4-800.webp",
+        "src240": "/cars/mercedes-c-220-d/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoQAAwAA4BaJZQCdAYstu3EbEfQAP7xuf2Ri0WNG+Fuu7oXnWPHbGGU+rPZRu2HTIe548CjrDx8ENk64Zafjn5CBZ8NrDngr4/wWLmxAmCOLXrNkAA="
@@ -273,6 +282,7 @@
       {
         "src": "/cars/mercedes-c-220-d/5.webp",
         "src800": "/cars/mercedes-c-220-d/5-800.webp",
+        "src240": "/cars/mercedes-c-220-d/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoQAAwAA4BaJYwC7AYrTi1pgYgAAP6PlcB8jxW8YMy0QPUsyHsnTrvH/yt3K9Syx3DoEEVuYGtNq8QzJHOUp8iU1DvbOW1x+R3CB6yxGqyyPidwKEsAAA=="
@@ -400,6 +410,7 @@
       {
         "src": "/cars/bmw-340-i-m-paket/1.webp",
         "src800": "/cars/bmw-340-i-m-paket/1-800.webp",
+        "src240": "/cars/bmw-340-i-m-paket/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAwAA4BaJYwAAsWPmZcSHc7oAP7iUBLL8bY0abDb7y0NHtKhV96kRk+uKRjRzj2dhxFLNOw9pN/ZIio6FZAHSO9fHiBjD4umRO0/hgAAAA=="
@@ -407,6 +418,7 @@
       {
         "src": "/cars/bmw-340-i-m-paket/2.webp",
         "src800": "/cars/bmw-340-i-m-paket/2-800.webp",
+        "src240": "/cars/bmw-340-i-m-paket/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAwAgCdASoQAAwAA4BaJQBdgMXc7M4eFfr6gAD+g+e2wq1zbgFSwxMobFWLxERBuyW9o9F/cqDzo0s/Pgy5Ion03BES3I7WgG6vJLF1dz/DEJqONGUHi3fuoK42t2VAAAA="
@@ -414,6 +426,7 @@
       {
         "src": "/cars/bmw-340-i-m-paket/3.webp",
         "src800": "/cars/bmw-340-i-m-paket/3-800.webp",
+        "src240": "/cars/bmw-340-i-m-paket/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAwAA4BaJZwAAsY+u/V8d4wAAP69afox+KF/CZzyj9Ii804DgKOriwxNPWgc+GR3EHsvsmTKunMt6dtEP39eWHVEpa6XbgCkgeAA"
@@ -421,6 +434,7 @@
       {
         "src": "/cars/bmw-340-i-m-paket/4.webp",
         "src800": "/cars/bmw-340-i-m-paket/4-800.webp",
+        "src240": "/cars/bmw-340-i-m-paket/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoQAAwAA4BaJZwAD5LKVEkEmvQAAP7s0lf83J62TGt/pt4lof8zxZyidn3bh89P3eCqCX0RDlsJI2a9KUm+Zt1hKfMTJeGxyjfuU+qhRMN7NyKZZOJP+06AAAA="
@@ -428,6 +442,7 @@
       {
         "src": "/cars/bmw-340-i-m-paket/5.webp",
         "src800": "/cars/bmw-340-i-m-paket/5-800.webp",
+        "src240": "/cars/bmw-340-i-m-paket/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADQAQCdASoQAAwAA4BaJZwAAkpU9FH0AAD+79fmemG/8QKn5yx5P5LuavI/OWx7G8Deb3taUOY4mEwRARGtoWDxexWELTNx63K+fDknFCuJ//R6t6MCDLpfz68aDmJwIAA="
@@ -541,6 +556,7 @@
       {
         "src": "/cars/vw-touran-highline/1.webp",
         "src800": "/cars/vw-touran-highline/1-800.webp",
+        "src240": "/cars/vw-touran-highline/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAwAA4BaJZwAD5AttTa1bzAAAP21jL6z+z/71gXUkKrzpnyku0qyhf7yIPN5VxiiEWKFGGCWFkeKqGV0d8L7yZevpWxc5NGeOEAA"
@@ -548,6 +564,7 @@
       {
         "src": "/cars/vw-touran-highline/2.webp",
         "src800": "/cars/vw-touran-highline/2-800.webp",
+        "src240": "/cars/vw-touran-highline/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoQAAwAA4BaJaQAD4onKNUUAAD2vsFGCiSlzHkKRsckvrQiMjFwnITvEVEzATaHgpw7o5yzKKqXdc+X4AIh/rPFvl7vGLx/Giv3i5kBoAA="
@@ -555,6 +572,7 @@
       {
         "src": "/cars/vw-touran-highline/3.webp",
         "src800": "/cars/vw-touran-highline/3-800.webp",
+        "src240": "/cars/vw-touran-highline/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoQAAwAA4BaJZwAAusfP+/Ao7AAzjeXl3WaxOW3I538MNlTorC3DAPG8eAf/D7PgLVK+whZPO3ct1CZ2elaLC4/S4BQAA=="
@@ -562,6 +580,7 @@
       {
         "src": "/cars/vw-touran-highline/4.webp",
         "src800": "/cars/vw-touran-highline/4-800.webp",
+        "src240": "/cars/vw-touran-highline/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoQAAwAA4BaJZwAAq8KSlW/AAD98HKqKTr+OI0MepdRMktdbiljnx2YIOj814SsR9LNxZyHtXdRBly/gb9TtpaNKuVqYfBNLgAAAA=="
@@ -569,6 +588,7 @@
       {
         "src": "/cars/vw-touran-highline/5.webp",
         "src800": "/cars/vw-touran-highline/5-800.webp",
+        "src240": "/cars/vw-touran-highline/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAwAA4BaJZwAAu0HWYFHIAAA/rI9GBLcwe1CAI3zgBeONQVerQox1ns5gN3BVgOj+UK0QwLg1eaWZE09I3ysvtmG3AfAAAA="
@@ -670,6 +690,7 @@
       {
         "src": "/cars/mercedes-glc-300-glc/1.webp",
         "src800": "/cars/mercedes-glc-300-glc/1-800.webp",
+        "src240": "/cars/mercedes-glc-300-glc/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoQAAwAA4BaJZwC/OChxBrIAADN8ndbhOSYi+94NniDKqbk0vS+S7Lzj10GnuUTxQFOazVBMVMGajBbxaupZy5DjUSv1cjRi5whoDXAAAA="
@@ -677,6 +698,7 @@
       {
         "src": "/cars/mercedes-glc-300-glc/2.webp",
         "src800": "/cars/mercedes-glc-300-glc/2-800.webp",
+        "src240": "/cars/mercedes-glc-300-glc/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwAA4BaJZwAD5DsoJRYHIAA/nkOlXuhWib7d1e4dhvjajkcL2RBLxzrulFJ13M9WS8qVqPcbOH6Zb+zalez2v0Frka88Pwi6cRgIgQAAA=="
@@ -684,6 +706,7 @@
       {
         "src": "/cars/mercedes-glc-300-glc/3.webp",
         "src800": "/cars/mercedes-glc-300-glc/3-800.webp",
+        "src240": "/cars/mercedes-glc-300-glc/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAwAgCdASoQAAwAA4BaJZwAD5CPF6IpNv70AAD7INrTBK2Tr+steC14kJ+be0sdvz7m3iK2A5H8LxHz8dX08PCn98fAhydu4mL6muvZXgxk+MgA"
@@ -691,6 +714,7 @@
       {
         "src": "/cars/mercedes-glc-300-glc/4.webp",
         "src800": "/cars/mercedes-glc-300-glc/4-800.webp",
+        "src240": "/cars/mercedes-glc-300-glc/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAACwAQCdASoQAAwAA4BaJZwAAuLwIVx4AP5snNLwJ5c5Hh3TunvPUCUu2gJXwO+kEt6ptlQvwnXR8E71L18hvAgqoAWY65vg2VuiK+j/TyTAEqEHYKAAAA=="
@@ -698,6 +722,7 @@
       {
         "src": "/cars/mercedes-glc-300-glc/5.webp",
         "src800": "/cars/mercedes-glc-300-glc/5-800.webp",
+        "src240": "/cars/mercedes-glc-300-glc/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwAgCdASoQAAwAA4BaJYwCdAYrdqhUnx8aAAD9mda5EqtEuITDcCDjXq4L7x5EWDBXRlhSvTi5lSD7dGVpvbPaEM9TG01hcSh9WhKETNAj2r0hfSoqBwAA"
@@ -807,6 +832,7 @@
       {
         "src": "/cars/porsche-panamera-e-hybrid-s/1.webp",
         "src800": "/cars/porsche-panamera-e-hybrid-s/1-800.webp",
+        "src240": "/cars/porsche-panamera-e-hybrid-s/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoQAAwAA4BaJYwAAg5hW/d+gAD+sZNbyxet0AE3VDeYEdYJECHnJ4t5kfNf+K4xn7+OiFM9gz81oZwzQ/RMHIY+nGHxO/nLBmcRiNiZELPAAA=="
@@ -814,6 +840,7 @@
       {
         "src": "/cars/porsche-panamera-e-hybrid-s/2.webp",
         "src800": "/cars/porsche-panamera-e-hybrid-s/2-800.webp",
+        "src240": "/cars/porsche-panamera-e-hybrid-s/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoQAAwAA4BaJZQC7ADOeR7wkvQAAP5hRyJR6/WbrQnLRkyiE+euJ9NADjlcogYu/5l0hN7fgjVH6hZxjqYIBtWkH7/EUaSUIpKduUeoGDuR4VuuvE7ZgAAA"
@@ -821,6 +848,7 @@
       {
         "src": "/cars/porsche-panamera-e-hybrid-s/3.webp",
         "src800": "/cars/porsche-panamera-e-hybrid-s/3-800.webp",
+        "src240": "/cars/porsche-panamera-e-hybrid-s/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAwAA4BaJZQCdAELM1T6U8ckAP6Nmm1oSWyow9pLwv7OxshpxAzEOQYIAbYiNSd/AjCZ5u/Ap0tXngoIf5JKbd3lqAzkueDJriPoHAAAAA=="
@@ -828,6 +856,7 @@
       {
         "src": "/cars/porsche-panamera-e-hybrid-s/4.webp",
         "src800": "/cars/porsche-panamera-e-hybrid-s/4-800.webp",
+        "src240": "/cars/porsche-panamera-e-hybrid-s/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoQAAwAA4BaJZQC7AYuRUGalIOMCAD+8zWhCsPIOrpM037oWWu85AQDsokaWSZb967WMZIqpSFt4ZMylGAEM5tDHkV+Osz81PyPQzCjU4r26s2QAAA="
@@ -835,6 +864,7 @@
       {
         "src": "/cars/porsche-panamera-e-hybrid-s/5.webp",
         "src800": "/cars/porsche-panamera-e-hybrid-s/5-800.webp",
+        "src240": "/cars/porsche-panamera-e-hybrid-s/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwAA4BaJZQAAuPmCkjO4QAA/u+pLvYSLljZ7XUhHmVwRwNftm0Nn+5zrL9UMrEj6+t0oNzzwwD+fHNSD9/SV9LW0DXQERlIoi3ug8AAAA=="
@@ -928,6 +958,7 @@
       {
         "src": "/cars/mercedes-c-300-c/1.webp",
         "src800": "/cars/mercedes-c-300-c/1-800.webp",
+        "src240": "/cars/mercedes-c-300-c/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAwAA4BaJYwAAmhe7hfc2AAA/urcT4yy3PymgJPQD2mcLXHNxV8LNFZ46h2YfdaJzytJSVfnywy8o/rJy+dZuCErkrz6yYgGhRLRsTIhZ4AA"
@@ -935,6 +966,7 @@
       {
         "src": "/cars/mercedes-c-300-c/2.webp",
         "src800": "/cars/mercedes-c-300-c/2-800.webp",
+        "src240": "/cars/mercedes-c-300-c/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABQAgCdASoQAAwAA4BaJQBOgMXI7cjuR8a2cbwA/szXVvYErEWITq4EChEJ8DosE66zt7uRkNqPL+WcFN8Lx98umJkKuBsAsglre/XDNtTvNr/jUlY/HCfBWxVgp8AA"
@@ -942,6 +974,7 @@
       {
         "src": "/cars/mercedes-c-300-c/3.webp",
         "src800": "/cars/mercedes-c-300-c/3-800.webp",
+        "src240": "/cars/mercedes-c-300-c/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABwAgCdASoQAAwAA4BaJYwCdH8AgrCxbkcv22AAAP7t4XWUfaqyEPvCN73j8awdhuO8Z4Ir/OXh9XjXZn4A585U4H3sozYZ8rXbtlpgTnyiuasn/qsfi2SPPtcrO+f9ba9kAA=="
@@ -949,6 +982,7 @@
       {
         "src": "/cars/mercedes-c-300-c/4.webp",
         "src800": "/cars/mercedes-c-300-c/4-800.webp",
+        "src240": "/cars/mercedes-c-300-c/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwAA4BaJYwC7ADvzpEof8AA/tn17w0JOEA7+C0ltNjxlK2pFgAMcEujCWbldP3NqL+HqaoiT7xdP3IzLp/3wwrpfH2FcbkBRjl7f8AAAA=="
@@ -956,6 +990,7 @@
       {
         "src": "/cars/mercedes-c-300-c/5.webp",
         "src800": "/cars/mercedes-c-300-c/5-800.webp",
+        "src240": "/cars/mercedes-c-300-c/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwAA4BaJZQAApQqsyziHAAA/uzPYtJJAsBUQn5X9WJ9NrDxiJnLmVpB4KMWHyWNbv8FQL0ezjA5IUoSoBwNsnj3XzlzbmJevjC3mH8QAA=="
@@ -1070,6 +1105,7 @@
       {
         "src": "/cars/mercedes-a-35-amg/1.webp",
         "src800": "/cars/mercedes-a-35-amg/1-800.webp",
+        "src240": "/cars/mercedes-a-35-amg/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoQAAwAA4BaJZQAAwBe/+UtegKkAAD+7eZ7mE63tIiCq0bK3S+skh98BAg1U4ivNA+eUL963nFdP03Ad1nWxShJVtnZnO1usQiHYT1wb2QAAA=="
@@ -1077,6 +1113,7 @@
       {
         "src": "/cars/mercedes-a-35-amg/2.webp",
         "src800": "/cars/mercedes-a-35-amg/2-800.webp",
+        "src240": "/cars/mercedes-a-35-amg/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAQAgCdASoQAAwAA4BaJZQCdAYtLU0qtZwAAP7iUwWdWb2xf6gG1jnrf/5BGoqgUnnPCudES+FgRsXzQwex35mRBeJty5PgqsgerbouSmHS/cBRHPdvsuCnkW2BEq89gW+5dkAA"
@@ -1084,6 +1121,7 @@
       {
         "src": "/cars/mercedes-a-35-amg/3.webp",
         "src800": "/cars/mercedes-a-35-amg/3-800.webp",
+        "src240": "/cars/mercedes-a-35-amg/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwAA4BaJYwC7ADLtLPDFsAA/jDJFfDik9cJpqwYBrmfmpBZ60qBPSPWytkJ/XFyZqTD4+7LeNlDAYgnQd034TM6JPW6FL4sJcS32FaQAA=="
@@ -1091,6 +1129,7 @@
       {
         "src": "/cars/mercedes-a-35-amg/4.webp",
         "src800": "/cars/mercedes-a-35-amg/4-800.webp",
+        "src240": "/cars/mercedes-a-35-amg/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAwAA4BaJZACdADxIEgoH54AAP1PnudJIj3ZJY55RCgGNbHOOOeWsju9j3TXzf9PMijuDLUu1Iopmnz27aRXayT5qKRDLHVN8W2AAAA="
@@ -1098,6 +1137,7 @@
       {
         "src": "/cars/mercedes-a-35-amg/5.webp",
         "src800": "/cars/mercedes-a-35-amg/5-800.webp",
+        "src240": "/cars/mercedes-a-35-amg/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAwAA4BaJYwCdAYu5V4mgtAA/tByxzFTP7m7Sb6M7SuZVmuAYHU0EIwRplvY3NpR5kXd4D5+fq3ofJwFK9AVOaaxYQ/PHhOPOAQPBbeSu4AA"
@@ -1197,6 +1237,7 @@
       {
         "src": "/cars/mercedes-glc-220-d/1.webp",
         "src800": "/cars/mercedes-glc-220-d/1-800.webp",
+        "src240": "/cars/mercedes-glc-220-d/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoQAAwAA4BaJZQAAqson2r6CyAA/loAgJ0wSATjIsMlfBgWQKpni7ZqzRl6qbh308tD5qhLf6K7etIMLVeeyKBapWm0AA=="
@@ -1204,6 +1245,7 @@
       {
         "src": "/cars/mercedes-glc-220-d/2.webp",
         "src800": "/cars/mercedes-glc-220-d/2-800.webp",
+        "src240": "/cars/mercedes-glc-220-d/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAABQAgCdASoQAAwAA4BaJZwAD37TG7oBBr9FwAAA/ln+onmJafVExBCu3NjMfZFUI6LUj3KWs6vey5a7bGWjXrQ8rz1FgjHgAAA="
@@ -1211,6 +1253,7 @@
       {
         "src": "/cars/mercedes-glc-220-d/3.webp",
         "src800": "/cars/mercedes-glc-220-d/3-800.webp",
+        "src240": "/cars/mercedes-glc-220-d/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAwAA4BaJYwC7ADpuIXHleAA/l6oeTyW6OoRkWRCgT2ssqoXYORxAxSCWljVC4+tX4Od7zIq6C29i+rsRww+zMRhZG3FS8AAAA=="
@@ -1218,6 +1261,7 @@
       {
         "src": "/cars/mercedes-glc-220-d/4.webp",
         "src800": "/cars/mercedes-glc-220-d/4-800.webp",
+        "src240": "/cars/mercedes-glc-220-d/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAwAA4BaJYwC7ADwgCBeNIAAAP6scOoNasZgQgxzSC6k4hQq6pstsXHP4+55JON6mWTOoQCAdgZa/fiPW9cvgpHWwrs19AA="
@@ -1225,6 +1269,7 @@
       {
         "src": "/cars/mercedes-glc-220-d/5.webp",
         "src800": "/cars/mercedes-glc-220-d/5-800.webp",
+        "src240": "/cars/mercedes-glc-220-d/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAwAgCdASoQAAwAA4BaJYgC7AEeje9C+LRTAADd2g5P7A0vcRGLJyugvkMAWc4bJoIo8y0u0qhjLNG75DAYqc3v0rk2h26rPb6d+JfVhAA="
@@ -1323,6 +1368,7 @@
       {
         "src": "/cars/bmw-320-320-d/1.webp",
         "src800": "/cars/bmw-320-320-d/1-800.webp",
+        "src240": "/cars/bmw-320-320-d/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoQAAwAA4BaJQBOgMWlsyMCZgD+o2P8giOulxVuixbpqGANhe8HwzKGmn6xpToA5WSeNOIOanXPirwjS+NrxrD/LbMJYjWTfblwXkCutpWIAA=="
@@ -1330,6 +1376,7 @@
       {
         "src": "/cars/bmw-320-320-d/2.webp",
         "src800": "/cars/bmw-320-320-d/2-800.webp",
+        "src240": "/cars/bmw-320-320-d/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoQAAwAA4BaJYwCdAD1kTms8EAAAOH+N8cUsritA1xijugwbEAD0rn4vi6ScfRE3uzD1vhKnzJ6PzbFH9NWEQUs4xrD1w1GrSanRfZLIAnOlDYAAAA="
@@ -1337,6 +1384,7 @@
       {
         "src": "/cars/bmw-320-320-d/3.webp",
         "src800": "/cars/bmw-320-320-d/3-800.webp",
+        "src240": "/cars/bmw-320-320-d/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoQAAwAA4BaJQBOgMXXeX6Q7p5AAP6cEGL+P7nlEyydVHhfFOu3zJzbUjH0PqeaCtGVhMeJ6/6CgoivTV/de7bnZZsxJPtpMpptJVpaK1KPoVNhwQAAAA=="
@@ -1344,6 +1392,7 @@
       {
         "src": "/cars/bmw-320-320-d/4.webp",
         "src800": "/cars/bmw-320-320-d/4-800.webp",
+        "src240": "/cars/bmw-320-320-d/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwAgCdASoQAAwAA4BaJYwCdAEDffn9JobngAD+fVWrpVh6O9hhFv+0u7iB4xJ4VLefit2XgiKJpD1Y6ikTRi498rD9lcdO1ot/WySAUbAcVMRFMQSwQAAA"
@@ -1351,6 +1400,7 @@
       {
         "src": "/cars/bmw-320-320-d/5.webp",
         "src800": "/cars/bmw-320-320-d/5-800.webp",
+        "src240": "/cars/bmw-320-320-d/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoQAAwAA4BaJQBOgCPuP5H9PpJcQAD8tKGogSSDpxFiM8GPulsy5g6iOL8SzjVsKNQ345Tp1ogCVaucc8qxM6zRBbEpJoLtwfyfCrLyan5AAA=="
@@ -1460,6 +1510,7 @@
       {
         "src": "/cars/bmw-320-d-advantage/1.webp",
         "src800": "/cars/bmw-320-d-advantage/1-800.webp",
+        "src240": "/cars/bmw-320-d-advantage/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoQAAwAA4BaJQBdgB0/eugRTm7AAP7wRg81TY49bNgVNXtfkQW4MKFz07AHe+RfL4lF7d77ApfX0uc9ZnV0tW8l77oUJwDlxS/5OvPx2tCxEmAA"
@@ -1467,6 +1518,7 @@
       {
         "src": "/cars/bmw-320-d-advantage/2.webp",
         "src800": "/cars/bmw-320-d-advantage/2-800.webp",
+        "src240": "/cars/bmw-320-d-advantage/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADwAQCdASoQAAwAA4BaJQBOgBoStIz6QAAA/u3hhMARoAp1yGp+vCzElbMY8zDjA1nm9cEYP5yAwFqdB1s5VKz0iD+ErPApJFL0qyGRW/6HD/6RLn0qSdF9W+O8lpAwAAA="
@@ -1474,6 +1526,7 @@
       {
         "src": "/cars/bmw-320-d-advantage/3.webp",
         "src800": "/cars/bmw-320-d-advantage/3-800.webp",
+        "src240": "/cars/bmw-320-d-advantage/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwAgCdASoQAAwAA4BaJQBdgMWqz1vCKJmaAAD+46eMa1EiGdV9yGQ48/5cv1MqTiXf8KiUCqASvQTYn7/AP30I5eOP06Pa175iPFRtHVKO+eP6jSqqHAAA"
@@ -1481,6 +1534,7 @@
       {
         "src": "/cars/bmw-320-d-advantage/4.webp",
         "src800": "/cars/bmw-320-d-advantage/4-800.webp",
+        "src240": "/cars/bmw-320-d-advantage/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAwAA4BaJQBWACPRq1msHwIAAP6/XdM6aibjUxML+/iNRtJ4WqymLYDJMuMaN8lrZFapTWWYbeqf5NmU2bdk7Ybh/GpxZzIebegUAAA="
@@ -1488,6 +1542,7 @@
       {
         "src": "/cars/bmw-320-d-advantage/5.webp",
         "src800": "/cars/bmw-320-d-advantage/5-800.webp",
+        "src240": "/cars/bmw-320-d-advantage/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAwAA4BaJQBOgBnOFFECTgAA/tzbrC9tP7k37JEystJkR7LrKUeSS8NABNj6fDGmr6i/n+z4u9oIm5A0S1fzztIFMkJ/lWbdAAAA"
@@ -1586,6 +1641,7 @@
       {
         "src": "/cars/audi-q3-35-tdi/1.webp",
         "src800": "/cars/audi-q3-35-tdi/1-800.webp",
+        "src240": "/cars/audi-q3-35-tdi/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAABwAgCdASoQAAwAA4BaJZQCdAYtVzBr1sPwJpiAAP6sUsOnX2z5FPZwX1B1yzWQrqhjNjmtyuztCD6HbHW/8gmKvWCJvGx/hX6HXYY6fwkLd7HBOtea1jdegAA="
@@ -1593,6 +1649,7 @@
       {
         "src": "/cars/audi-q3-35-tdi/2.webp",
         "src800": "/cars/audi-q3-35-tdi/2-800.webp",
+        "src240": "/cars/audi-q3-35-tdi/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoQAAwAA4BaJaQAD5MxerrRYdnJBAAA/bZCsKaeVBPf2ow5CXEUbmQlOsfNk8M1uCl7Hand7nss7TpbZ5H3VMC5Np6McneDzPql6bHwISxyYc9V4J7+/9Lb6oAAAA=="
@@ -1600,6 +1657,7 @@
       {
         "src": "/cars/audi-q3-35-tdi/3.webp",
         "src800": "/cars/audi-q3-35-tdi/3-800.webp",
+        "src240": "/cars/audi-q3-35-tdi/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwAA4BaJZwAD5Gvt6zFtgAA/qwKzdOtktFD5lG3FsvxrVc02OWUlXPJIgp6AYjFLZmoMKTt2a9RPXiRkria0lmsXECEHl2Tk3IY0KAAAA=="
@@ -1607,6 +1665,7 @@
       {
         "src": "/cars/audi-q3-35-tdi/4.webp",
         "src800": "/cars/audi-q3-35-tdi/4-800.webp",
+        "src240": "/cars/audi-q3-35-tdi/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAwAA4BaJZwAD4fwxoizXHAA4n7OWuTiekJDaWfDHF+Ut1Np+0GEMC8gQLtIgbyUXNQtN5/qUZYDZkZZAAFkY+ZjstEvq/RkpxTDh5qLAAAA"
@@ -1614,6 +1673,7 @@
       {
         "src": "/cars/audi-q3-35-tdi/5.webp",
         "src800": "/cars/audi-q3-35-tdi/5-800.webp",
+        "src240": "/cars/audi-q3-35-tdi/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoQAAwAA4BaJZwCsAYsti/YSpqPwAD+o1g1xaAvGiGXAeZAmztGz/8fOugGZvAoI1k17OeHNVYYPv+xPOhCY8ZtkUv7Toi+yAyNxqu7tHT469NjAAA="
@@ -1715,6 +1775,7 @@
       {
         "src": "/cars/mercedes-c-180-c/1.webp",
         "src800": "/cars/mercedes-c-180-c/1-800.webp",
+        "src240": "/cars/mercedes-c-180-c/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAwAA4BaJYwAAwF/PQDyOzBgAP7q2/SS09+Q1FkRNzdB2e0I40UDlpgsZN0vZ6JiZSb7ZhlGnzgUAJUXDAJNvKsb7BD/zdWJl21E+atcAA=="
@@ -1722,6 +1783,7 @@
       {
         "src": "/cars/mercedes-c-180-c/2.webp",
         "src800": "/cars/mercedes-c-180-c/2-800.webp",
+        "src240": "/cars/mercedes-c-180-c/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoQAAwAA4BaJZwAD5CNtw8sHhQMAAD+79Z2F0af3oP4Z0CU+Xmr7Ul/ZsHqRMmKOsvXI4MLJCA51B5KvV4UXgTWKCRyy08+Yz/wp3ht8rO8m/VF9r2EWMHifY4AAA=="
@@ -1729,6 +1791,7 @@
       {
         "src": "/cars/mercedes-c-180-c/3.webp",
         "src800": "/cars/mercedes-c-180-c/3-800.webp",
+        "src240": "/cars/mercedes-c-180-c/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAwAA4BaJZQAApOKzS8nLQAA/uPA9ufpln/RLyULRXpuY8EhB8gCymAVgcSiT0eHX5vuS4AfgcW67ly8Mp+4LMXa/OVLjvtbQygA"
@@ -1736,6 +1799,7 @@
       {
         "src": "/cars/mercedes-c-180-c/4.webp",
         "src800": "/cars/mercedes-c-180-c/4-800.webp",
+        "src240": "/cars/mercedes-c-180-c/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoQAAwAA4BaJZwAAxfUVZuYn2jgAP7vXNu2bYFc2FmU2AVUvD1cF43r68k3YdLe/SGKm9BpC53hQPgnujhfsrO9EiltM/BBt41kWvLeOrjiR5HUZwQx4AAA"
@@ -1743,6 +1807,7 @@
       {
         "src": "/cars/mercedes-c-180-c/5.webp",
         "src800": "/cars/mercedes-c-180-c/5-800.webp",
+        "src240": "/cars/mercedes-c-180-c/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAwAgCdASoQAAwAA4BaJYwC7AED+nxb/lRwAAD+q0CR0EX5hln194YgxklBNM79jXzAyrTVUiVHsrStZz8IhezX6UveiZRkqlhVZtmCoHYYynp5FP8j75oTackAAA=="
@@ -1861,6 +1926,7 @@
       {
         "src": "/cars/volvo-xc60-allrad-4x4/1.webp",
         "src800": "/cars/volvo-xc60-allrad-4x4/1-800.webp",
+        "src240": "/cars/volvo-xc60-allrad-4x4/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAwAgCdASoQAAwAA4BaJaQAD43w59Dd65YVAAD+2rUEHWzW4l4FrYzPUKBfWN8q6Le58zPAdms7thSzUwDePRHU8SOYxfVN+qRktJZ/VVsAAA=="
@@ -1868,6 +1934,7 @@
       {
         "src": "/cars/volvo-xc60-allrad-4x4/2.webp",
         "src800": "/cars/volvo-xc60-allrad-4x4/2-800.webp",
+        "src240": "/cars/volvo-xc60-allrad-4x4/2-240.webp",
         "width": 1439,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACQAQCdASoQAAwAA4BaJaQAAaQKBSAA/sKDTe3G4xlgWUdoevu3KcuHxagOiHa2nmpQ85bFy+9c58zdSk/LrJs4CCat1d0rRAWv4iRBwAA="
@@ -1875,6 +1942,7 @@
       {
         "src": "/cars/volvo-xc60-allrad-4x4/3.webp",
         "src800": "/cars/volvo-xc60-allrad-4x4/3-800.webp",
+        "src240": "/cars/volvo-xc60-allrad-4x4/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAwAA4BaJaQAAn+tfoiLC4AA/uxSDQo7+lxtp1Rnn3mSl0NrchmQF+BAqDyxi2EuKtzm0MOQgiFr6WEq3fKLiB3oRnzpKUOAAA=="
@@ -1882,6 +1950,7 @@
       {
         "src": "/cars/volvo-xc60-allrad-4x4/4.webp",
         "src800": "/cars/volvo-xc60-allrad-4x4/4-800.webp",
+        "src240": "/cars/volvo-xc60-allrad-4x4/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAwAA4BaJZwAAuzTHVcZuNAA/oLZdQnFHlbw5JBfKcgJfNqNTOUBPAzIc7002itmhsMCBXg+LEigMgjIWAAA"
@@ -1889,6 +1958,7 @@
       {
         "src": "/cars/volvo-xc60-allrad-4x4/5.webp",
         "src800": "/cars/volvo-xc60-allrad-4x4/5-800.webp",
+        "src240": "/cars/volvo-xc60-allrad-4x4/5-240.webp",
         "width": 810,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JaQDGfYwS3vpIV2VuxXFH7EAA+6XJXh0Wm9VcH6MUhromqTZu+s5vxh9Ll8E1Jm2K8uLXWBQZp13tRwkPP5dyeTPjRdBd23IbeyIBZXbkiGhbjFLkibQALs5zgAAA"
@@ -1975,6 +2045,7 @@
       {
         "src": "/cars/chrysler-sonstige-jeep-commander/1.webp",
         "src800": "/cars/chrysler-sonstige-jeep-commander/1-800.webp",
+        "src240": "/cars/chrysler-sonstige-jeep-commander/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoQAAwAA4BaJZwAApx22uBgAAD+7YsZ1+dMy73uPgHcXKhh3rxoPrSqCaPGmBS8u1cNdFjMxB/MVwWFVnDidsqvvd8OnNtAIAA="
@@ -1982,6 +2053,7 @@
       {
         "src": "/cars/chrysler-sonstige-jeep-commander/2.webp",
         "src800": "/cars/chrysler-sonstige-jeep-commander/2-800.webp",
+        "src240": "/cars/chrysler-sonstige-jeep-commander/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAwAA4BaJZQAAsRAbPFZ/oAA/r5o3ENB8EPHSpBUe63cQ1IjmJCz4m93jmWr0Ch3JYTahtr5PIC9aUVPj2EmNTzr58TwEAA="
@@ -1989,6 +2061,7 @@
       {
         "src": "/cars/chrysler-sonstige-jeep-commander/3.webp",
         "src800": "/cars/chrysler-sonstige-jeep-commander/3-800.webp",
+        "src240": "/cars/chrysler-sonstige-jeep-commander/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAQCdASoQAAwAA4BaJZwC7AB4QZVAAP7yEn0QTvb9aQgHoylpqgnyZcRRtm1mPTf10PqzN8yx7oCZKGiOZyeJmYdreXRSvpKaStsr0YsPYlbE9qwn8AAA"
@@ -1996,6 +2069,7 @@
       {
         "src": "/cars/chrysler-sonstige-jeep-commander/4.webp",
         "src800": "/cars/chrysler-sonstige-jeep-commander/4-800.webp",
+        "src240": "/cars/chrysler-sonstige-jeep-commander/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAwAA4BaJZwAD4/QU+tRVgUAAP6J2VChx/j0TQBd9+mOqLzFPbs8/AavwBqN2aC123JNQ4G4wgtqw1v/rrFIZhECUtbNsSoFeAPqAgA="
@@ -2003,6 +2077,7 @@
       {
         "src": "/cars/chrysler-sonstige-jeep-commander/5.webp",
         "src800": "/cars/chrysler-sonstige-jeep-commander/5-800.webp",
+        "src240": "/cars/chrysler-sonstige-jeep-commander/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoQAAwAA4BaJZwAApwFYaw94ADOCblvaCONcrKZE4aKTlqNuB+4EY+vlPAw+r1Iv+1/bbRVh49ftpUHCo93c98uMI8PgIhBGRaIld9Dd/YyYuUAAAA="
@@ -2117,6 +2192,7 @@
       {
         "src": "/cars/landrover-range-rover-sport/1.webp",
         "src800": "/cars/landrover-range-rover-sport/1-800.webp",
+        "src240": "/cars/landrover-range-rover-sport/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADQAQCdASoQAAwAA4BaJZQAAl3HKf1ewAD+mRvJ2V3N1wpEn/TTPxloklhqaA37hyJlMHO8SmSRthDeMMrBCpSNIN79C3aw9d76GYpR9xdQdbt9ulfTMH3bjEVQMrCAAAA="
@@ -2124,6 +2200,7 @@
       {
         "src": "/cars/landrover-range-rover-sport/2.webp",
         "src800": "/cars/landrover-range-rover-sport/2-800.webp",
+        "src240": "/cars/landrover-range-rover-sport/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAADwAQCdASoQAAwAA4BaJZwAD4xwYdfvOAAA/uzh8T2koxRdCKlIxAnZq9tLrSOp3k8m3U3lnxQ7Py6dZE311Io2/kjsn8ZvpABLPqHmGF6gKWuVsdcqEYnzg5W5+mx3xg5rBPSi2zwAAA=="
@@ -2131,6 +2208,7 @@
       {
         "src": "/cars/landrover-range-rover-sport/3.webp",
         "src800": "/cars/landrover-range-rover-sport/3-800.webp",
+        "src240": "/cars/landrover-range-rover-sport/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoQAAwAA4BaJZwAD5FO6/GYRhdQAAD+9J1UzS/aTlTM+pf2J7V9GnupejSKDk0fiXm8SX8WgMl0pSZSDtS4uZDQmlHJ2ng9p2iKudCGzw22WOH1F5P3S/52nAAAAA=="
@@ -2138,6 +2216,7 @@
       {
         "src": "/cars/landrover-range-rover-sport/4.webp",
         "src800": "/cars/landrover-range-rover-sport/4-800.webp",
+        "src240": "/cars/landrover-range-rover-sport/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoQAAwAA4BaJZwAD4wPJMJeIbqMAAD+xe/WNz6NpbdHz2QIFzx+thlu/Jz5M36An3qlEpsGJCGPGOPSwajvkHgRjdUe9NGyhmHFYEYKGpuAexXhvCsT5uzvOeRfx/Jeg4AAAA=="
@@ -2145,6 +2224,7 @@
       {
         "src": "/cars/landrover-range-rover-sport/5.webp",
         "src800": "/cars/landrover-range-rover-sport/5-800.webp",
+        "src240": "/cars/landrover-range-rover-sport/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAwAA4BaJZwAD45QSmNS6xaAAP7zXcM1qqVxrHZs0PwhV7lomwPBgfPYbR+yWTIHTZUoBivqPOo4PBG2IT9Nnykfu/IW7p2v5fbnnrmGIvi4VLGjz9bXUiGAAA=="
@@ -2262,6 +2342,7 @@
       {
         "src": "/cars/bmw-x6-xdrive30d/1.webp",
         "src800": "/cars/bmw-x6-xdrive30d/1-800.webp",
+        "src240": "/cars/bmw-x6-xdrive30d/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoQAAwAA4BaJZQAAq4OcDmdONBAAP5Z//TLdO23DIjsrtPEndc/ZUJ7oTz6KZMbW3y7YEO0AzQWDtyaYsARkpy0AAA="
@@ -2269,6 +2350,7 @@
       {
         "src": "/cars/bmw-x6-xdrive30d/2.webp",
         "src800": "/cars/bmw-x6-xdrive30d/2-800.webp",
+        "src240": "/cars/bmw-x6-xdrive30d/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAwAA4BaJZQAApPEa/7XOgAA/mCu5PLoVF5OnpJAdJV/ofpUKrI31Drh2oGHPq3ZsZ5bOEcNHdPdqWrOZU0d+GgZpM95TrUAAA=="
@@ -2276,6 +2358,7 @@
       {
         "src": "/cars/bmw-x6-xdrive30d/3.webp",
         "src800": "/cars/bmw-x6-xdrive30d/3-800.webp",
+        "src240": "/cars/bmw-x6-xdrive30d/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAwAA4BaJYwC7ADbnIw5le3gAP6QMu6OVvj7iozTFdVnjeThj4f4H1Ld/se7DbGHqklU6Io1kV6W32GF5XNI6LkgAA=="
@@ -2283,6 +2366,7 @@
       {
         "src": "/cars/bmw-x6-xdrive30d/4.webp",
         "src800": "/cars/bmw-x6-xdrive30d/4-800.webp",
+        "src240": "/cars/bmw-x6-xdrive30d/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAABwAgCdASoQAAwAA4BaJYwCdAYuvy4VszQyMcoAAP6H41D9bdlFmXTGWC2rniLJ2t9GU7Sa+13uzDF6FpwFiyKYWTLWPEmp8pyos3HK1sPAj75Bx4AAAA=="
@@ -2290,6 +2374,7 @@
       {
         "src": "/cars/bmw-x6-xdrive30d/5.webp",
         "src800": "/cars/bmw-x6-xdrive30d/5-800.webp",
+        "src240": "/cars/bmw-x6-xdrive30d/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwAQCdASoQAAwAA4BaJZACdACRWkCMAP60GB91J0g5PrNfWC0vD6NN4D/m1s9cGg3ElNe0e6aApW5TRP4aTKoPKpfAtjEZfcMnW4I/gQw5rYJAfD7fzEQlAAA="
@@ -2401,6 +2486,7 @@
       {
         "src": "/cars/skoda-octavia-ambition-aut/1.webp",
         "src800": "/cars/skoda-octavia-ambition-aut/1-800.webp",
+        "src240": "/cars/skoda-octavia-ambition-aut/1-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAwAA4BaJYgCdAEWaWe0y+PwAAD+x0p4cZzDDl+fo2UMVV/3boo4p94GQ/eleQSK/wY9i6cYqsHJ+Tt/21ylv9iC8rThlxq7Np/zoDS2LDPX5nrKMAAA"
@@ -2408,6 +2494,7 @@
       {
         "src": "/cars/skoda-octavia-ambition-aut/2.webp",
         "src800": "/cars/skoda-octavia-ambition-aut/2-800.webp",
+        "src240": "/cars/skoda-octavia-ambition-aut/2-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwAgCdASoQAAwAA4BaJZQCdADw/Ft3auS14AD+9XpDEdkpNyQQ/ZMjPHOayc7buhhBMrwqCoE4DpWieZAKYUXWjVrGUp7e0XaLUQzWa5W+BImAAAA="
@@ -2415,6 +2502,7 @@
       {
         "src": "/cars/skoda-octavia-ambition-aut/3.webp",
         "src800": "/cars/skoda-octavia-ambition-aut/3-800.webp",
+        "src240": "/cars/skoda-octavia-ambition-aut/3-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAwAA4BaJQBWAMXSlARgqIVBgAD+8XH8VoUci7+9k2xz+FZTGgWpvMdqy3bhki0P3232Bw/4mjOATPw/Y8xpocsBE45bBcfp2WLYlv2IeRWuNSytAAAA"
@@ -2422,6 +2510,7 @@
       {
         "src": "/cars/skoda-octavia-ambition-aut/4.webp",
         "src800": "/cars/skoda-octavia-ambition-aut/4-800.webp",
+        "src240": "/cars/skoda-octavia-ambition-aut/4-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoQAAwAA4BaJYgCdAYuvijYcdUoAAD+8w44cV2+eMi5zCfzGj97nox8u4jStPCSxJGnvnTC7qRzX53vze+cDqppfaqw3gzOAczJwOYkGQ3z8+g+68HI5HBjDcUnYPgcKAAAAA=="
@@ -2429,6 +2518,7 @@
       {
         "src": "/cars/skoda-octavia-ambition-aut/5.webp",
         "src800": "/cars/skoda-octavia-ambition-aut/5-800.webp",
+        "src240": "/cars/skoda-octavia-ambition-aut/5-240.webp",
         "width": 1440,
         "height": 1080,
         "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoQAAwAA4BaJQBOgB4D4G9S2SoAAP70Mr7PUlztXUjudhVdtmmj1c+WxaLkY7mg6RRL0huHK6pMC6vbk1V+bhIP3eKDGmukDSagAA=="

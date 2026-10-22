@@ -388,13 +388,40 @@ input[type='date'].field-control::-webkit-calendar-picker-indicator {
   overflow: clip;
 }
 
-/* Hero title/lead are hidden only while JS is about to animate them (html.js),
-   and become visible on their own after 2.5 s if the script never runs. */
-.js [data-hero-reveal] {
-  visibility: hidden;
+/* Above-the-fold reveals run in CSS from the first paint (no JS, no LCP delay):
+   lines rise out of a mask at reading speed (t-4 per line, 120 ms apart). */
+.hero-line,
+.rise-mask {
+  display: block;
+  overflow: clip;
 }
-.js.reveal-fallback [data-hero-reveal] {
-  visibility: visible;
+.hero-line > span,
+.rise-mask > span {
+  display: block;
+  animation: line-up var(--t-4) var(--ease) both;
+  animation-delay: calc(200ms + var(--i, 0) * 120ms);
+}
+.hero-lead {
+  animation: rise var(--t-3) var(--ease) 500ms both;
+}
+.hero-ctas {
+  animation: fade-rise var(--t-3) var(--ease) 700ms both;
+}
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(16px);
+  }
+}
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
 }
 
 /* page enter fallback for browsers without the View Transitions API */
@@ -488,6 +515,18 @@ html[data-loader] .loader {
   letter-spacing: 0.32em;
   color: var(--color-ink);
   animation: loader-fade 300ms var(--ease) 600ms forwards;
+}
+.draw-group {
+  position: relative;
+}
+.draw-group::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--color-line);
+  transform: scaleX(var(--draw, 1));
+  transform-origin: left;
 }
 .loader-mark i {
   display: block;
@@ -849,8 +888,10 @@ details.disclosure[open] summary svg {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .js [data-hero-reveal] {
-    visibility: visible;
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0s !important;
   }
   html[data-loader] .loader {
     display: none;

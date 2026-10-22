@@ -24,7 +24,7 @@ export function CarImage({
   style?: CSSProperties
 }) {
   const portrait = photo.height > photo.width
-  const srcSet = photo.src800 ? `${photo.src800} 800w, ${photo.src} ${photo.width}w` : undefined
+  const srcSet = [`${photo.src240} 240w`, photo.src800 && `${photo.src800} 800w`, `${photo.src} ${photo.width}w`].filter(Boolean).join(', ')
   return (
     <span
       className={`relative block overflow-hidden bg-panel ${className}`}

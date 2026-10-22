@@ -1,23 +1,19 @@
 'use client'
 import { useRef } from 'react'
-import { gsap, useGSAP, MOTION_OK } from '@/lib/gsap'
+import { useMotion, MOTION_OK } from '@/lib/gsap'
 
 /** The MEGA CARS wordmark rises slowly as the page reaches its end (DESIGN.md §8.1 #8). */
 export function FooterWordmark() {
   const ref = useRef<HTMLDivElement>(null)
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add(MOTION_OK, () => {
-        gsap.fromTo(
-          ref.current!.firstElementChild,
-          { yPercent: 55 },
-          { yPercent: 0, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom bottom', scrub: 0.8 } },
-        )
-      })
-    },
-    { scope: ref },
-  )
+  useMotion(({ gsap }) => {
+    gsap.matchMedia().add(MOTION_OK, () => {
+      gsap.fromTo(
+        ref.current!.firstElementChild,
+        { yPercent: 55 },
+        { yPercent: 0, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom bottom', scrub: 0.8 } },
+      )
+    })
+  }, ref)
   return (
     <div ref={ref} aria-hidden="true" className="page-x mt-16 overflow-clip lg:mt-24">
       {/* decorative wordmark drawn as SVG so it scales to the full width */}

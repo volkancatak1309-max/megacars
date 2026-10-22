@@ -303,3 +303,95 @@
 - **22.10.2026** — "Çizgi film testi: neon, bounce, ucuz parıltı ya da jenerik Dribbble hissi varsa kaldır." — İlgili: kalite kontrolü
 - **22.10.2026** — "Konsol hatası 0 olsun; prefers-reduced-motion açıkken animasyonlar kapalı olsun; yatay taşma olmasın." — İlgili: kalite kontrolü
 - **22.10.2026** — "Sonra DUR. Volkan bir yön seçene kadar siteyi yeniden kurma." — İlgili: faz sırası
+
+## 22.10.2026 23:57 — Yön seçildi: "C — Nachtfahrt"; FAZ 4 yeniden kurulum, 1. aşama (talimat 23.10.2026)
+
+### Karar
+- **22.10.2026 23:57** — "Üç prototipten "C — Nachtfahrt" seçildi. Bütün site bu yönle, Awwwards Site of the Day seviyesinde yeniden kurulacak." — İlgili: bütün site, DESIGN.md
+- **22.10.2026 23:57** — "Tek değişiklik isteği: açılış videosundaki araç çok daha etkileyici, KIRMIZI bir araç olmalı. Volkan Maserati Alfieri ya da o ölçekte kırmızı bir araç istedi." — İlgili: Startseite açılış videosu
+- **23.10.2026** — "Bu kararı KARAR-DEFTERI'ne tarihiyle yaz. DESIGN.md'yi C yönünün tasarım sistemiyle baştan yaz (renk token'ları, fontlar ve lisansları, ölçekler, hareket kuralları, bileşenler); eski konsept metinleri silinsin." — İlgili: DESIGN.md
+
+### Sınır
+- **23.10.2026** — "main'e dokunma. fal.ai ya da başka ücretli iş yok; yapay zekâ ile görsel ya da video üretme. Vercel CLI ile elle deploy yok; yayın yalnız v2'ye push ile olur. Uydurma veri yok. BRIEF.md ve KARAR-DEFTERI.md'deki bütün kurallar geçerli: kırmızı vurgu, yatay kaydırma yok, en fazla bir ekran boyu pin, kepenk hover, kırmızı perde geçişi, bounce yok, 0,3 sn'den hızlı animasyon yok, imleci izleyen görsel önizleme yok, kare kare oynayan açılış yok, 1440 px'ten büyük bulanık fotoğraf yok." — İlgili: bu aşama
+
+### 1) Açılış videosu: kırmızı araç
+- **23.10.2026** — "Önce en fazla 5 dakika içinde, Maserati Alfieri'nin ticari kullanıma açık, GERÇEK kamera çekimi olan bir videosu var mı kontrol et. Varsa 3 adaydan biri o olsun. Yoksa bunu rapora yaz ve devam et. Alfieri'yi yapay zekâyla üretmek YASAK." — İlgili: açılış videosu
+- **23.10.2026** — "Pexels, Pixabay, Coverr ya da Mixkit'te ticari kullanıma açık, GERÇEK kamera çekimi (yapay zekâ ya da 3D değil) toplam 3 aday bul: Araç kırmızı, premium bir spor ya da GT araç olsun: Porsche 911, Mercedes-AMG GT, Audi R8 ya da BMW M sınıfı; Mega Cars'ın sattığı markalar öncelikli. Işık sinematik olsun: karanlık, gece ya da stüdyo ışığı. Kamera yavaş hareket etsin: dolly, push-in ya da yumuşak pan. En az 8 saniyelik kesintisiz bir bölüm olsun; tercihen 4K." — İlgili: açılış videosu adayları
+- **23.10.2026** — "Her adayı en az 8 kareyle kontrol et: logo, rozet ve plaka okunmayacak (gerekirse kadrajı kırp); yapay zekâ ya da 3D izi, ani kesim ve insan yüzü olmayacak. Her adayın kaynak linkini ve lisansını KARAR-DEFTERI'ne yaz." — İlgili: aday kontrolü
+- **23.10.2026** — "Video harflerin içinde iyi okunmalı: kırmızı boya ve ışık yansımaları dev "MEGA CARS" harflerinin içini doldurmalı." — İlgili: harf maskesi
+- **23.10.2026** — "Üç adayı aynı harf maskesi içinde yan yana gösteren bir sayfa yap: /de/prototyp/hero-adaylari (noindex). Siteye şimdilik en iyi adayı koy; Volkan seçince video tek değişiklikle değişebilsin." — İlgili: /de/prototyp/hero-adaylari
+- **23.10.2026** — "Kodlama: masaüstü 1920 px (en fazla 6 MB) + mobil 960 px (en fazla 2,5 MB) H.264 MP4 + WebP poster (LCP öğesi); döngü kesintisiz olsun." — İlgili: public/hero
+
+### 2) Tasarım sistemi ve ortak bileşenler
+- **23.10.2026** — "C'nin renkleri (koyu ağırlık + kemik rengi ve kırmızı bölümler), fontları (Unbounded + Hanken Grotesk, OFL) ve hareket dili bütün sayfalara uygulanır." — İlgili: bütün site
+- **23.10.2026** — "Bütün sitede şunlar olur: bütün düğme ve menü linklerinde kepenk hover (galzura-motion-demo'dan uyarlanan components/proto/Shutter.tsx); bütün sayfa geçişlerinde kırmızı perde; ilk ziyarette sayaçlı sinematik yükleyici (LCP'yi geciktirmeden); "Ansehen" yazan özel imleç (görsel önizlemesiz); manyetik CTA; başlıklarda maskeli / split-text açılış; görsellerde clip-path reveal; gerçek veriden sayı sayaçları; ince grain dokusu; masaüstünde Lenis." — İlgili: ortak hareket sistemi
+- **23.10.2026** — "Üst bar, mobil menü, footer, mobil alt eylem çubuğu (Anrufen · WhatsApp · Probefahrt) ve yüzen WhatsApp + en üste çık düğmesi C diliyle yeniden tasarlanır." — İlgili: ortak bileşenler
+- **23.10.2026** — "Prototip kodu ürün koduna taşınır; prototip/ klasöründe kalmaz. A ve B prototipleri ve karşılaştırma sayfası kaldırılır (git geçmişinde kalırlar). /prototyp/hero-adaylari sayfası Volkan seçim yapana kadar kalır." — İlgili: components/proto, app/[locale]/prototyp
+
+### 3) Ana sayfa
+- **23.10.2026** — "C prototipindeki açılış korunur ve son kaliteye getirilir: video dev "MEGA CARS" harflerinin içinde oynar; aşağı kaydırınca harfler açılır ve sayfa kilitlenmez." — İlgili: Startseite açılış
+- **23.10.2026** — "Ardından bu sırayla: 1. Hızlı arama: Marke · Preis bis · Karosserie ve gerçek sayıyı gösteren "… Fahrzeuge anzeigen" düğmesi. 2. Öne çıkan araçlar: dikey, clip-path reveal'lı. 3. İnce bir marka şeridi: yalnız stokta olan markalar. 4. Güven bölümü: yalnız kaynağı belli, güncel bilgiler ve galerinin kendi showroom fotoğrafı. 5. Hizmetler: yalnız doğrulanmış olanlar. 6. Konum: DSGVO'ya uygun, tıklanınca yüklenen harita; açılış saatleri; iletişim." — İlgili: Startseite bölüm sırası
+- **23.10.2026** — "Her bölümde en az bir etkileyici hareket olsun; bölümler arasında koyu / kemik rengi / kırmızı ritim kurulsun." — İlgili: Startseite
+
+### 4) Araç listesi
+- **23.10.2026** — "Filtre çubuğu ve filtre çipleri kepenk hover'lı olsun; mobilde filtre paneli alttan açılsın." — İlgili: Fahrzeuge filtre
+- **23.10.2026** — "Kartlar clip-path reveal ile gelsin. Kart hover'ında fotoğraf kendi çerçevesinde 1.04 büyüsün, kırmızı bir çizgi çizilsin ve imleçte "Ansehen" görünsün." — İlgili: araç kartı
+- **23.10.2026** — "Filtre değişince kartlar GSAP Flip ile yeniden dizilsin; sonuç sayısı sayaçla değişsin." — İlgili: Fahrzeuge
+- **23.10.2026** — "Sıralama: varsayılan "Empfohlen" (data/inventory.json sırası, öne çıkanlar başta). Ek seçenekler: Preis aufsteigend, Preis absteigend, Kilometerstand aufsteigend, Erstzulassung neueste zuerst, Erstzulassung älteste zuerst. İlan tarihi verisi olmadığı için "Neueste" etiketi kullanılmaz." — İlgili: Fahrzeuge sıralama
+
+### 5) Araç detay
+- **23.10.2026** — "Prototiplerde detay sayfası üç yönde aynı iskeletteydi; bu kez C'ye özgü tasarla." — İlgili: Fahrzeug-Detail
+- **23.10.2026** — "Karttan gelişte kırmızı perde insin ve fotoğraf büyüyerek sahneye yerleşsin; dev model adı (Unbounded) ve fiyat sayaçla gelsin." — İlgili: kart → detay
+- **23.10.2026** — "Temel bilgiler (Erstzulassung, Kilometerstand, Leistung, Kraftstoff, Getriebe, Karosserie) büyük rakamlı, sinematik bir "teknik kart" olarak dursun ve kaydırınca sırayla açılsın." — İlgili: teknik kart
+- **23.10.2026** — "Galeri: fotoğraflar arasında maske ya da perde geçişi, küçük resim şeridi ve tam ekran görünüm (klavye ve kaydırma ile)." — İlgili: detay galerisi
+- **23.10.2026** — "360 bileşeni yerinde dursun; spin verisi gelince kendiliğinden açılsın." — İlgili: 360 görüntüleyici
+- **23.10.2026** — "Eylem alanı masaüstünde yanda yapışkan, mobilde altta dursun: Anrufen; WhatsApp (araç adı + fiyat + link hazır dolu); Probefahrt anfragen (kısa form → WhatsApp'a hazır mesaj; sahte "gönderildi" ekranı yok)." — İlgili: eylem alanı
+- **23.10.2026** — "Donanım listesi dergi düzeninde dursun; benzer araçlar clip-path reveal ile gelsin." — İlgili: donanım, benzer araçlar
+
+### 6) Diğer sayfalar
+- **23.10.2026** — "Finanzierung, Ankauf, Kontakt & Über uns, Impressum ve Datenschutz şimdilik geçici sayfa olarak kalır, ama C diliyle giydirilir (başlık + gerçek iletişim bilgileri). Bu sayfaların içerikleri, formları ve İngilizce dil 2. aşamada yapılacak. Bu aşamada metinler Almanca ve Türkçe olacak; uzman tercüman seviyesinde ve yüklemli tam cümlelerle yazılacak." — İlgili: geçici sayfalar
+
+### 7) Performans ve kalite kapısı
+- **23.10.2026** — "Hız hedefleri (önizleme adresinde, her sayfa için 3 ölçümün ortancası): Lighthouse mobilde ana sayfa, liste ve detay için LCP < 3,0 sn. Mobil Performans ≥ 80, masaüstü ≥ 85; CLS < 0,1; ilk yük JS < 300 KB (gzip). LCP öğesi opacity 0'dan başlayan bir animasyonun arkasında beklemesin; kritik olmayan JS sonradan yüklensin." — İlgili: performans
+- **23.10.2026** — "390 / 1440 / 2560 px'te ekran görüntüsü ve kısa ekran kaydı al. Konsol hatası 0 olsun; yatay taşma olmasın; prefers-reduced-motion açıkken animasyonlar kapansın; klavyeyle gezinme çalışsın." — İlgili: kalite kapısı
+- **23.10.2026** — "Seçtiğin 2 Awwwards otomotiv sitesiyle yan yana koy. "Standart galeri şablonu gibi mi duruyor?" sorusuna dürüst cevap ver; cevap evetse düzelt. Çizgi film testi yap: neon, bounce ya da ucuz parıltı olmasın." — İlgili: kalite kapısı
+
+### 8) Yayın ve rapor
+- **23.10.2026** — "Anlamlı commit'lerle (feat:, fix:, perf:, a11y:) v2'ye push et. Sabit önizleme adresinde yeni sitenin ve hero adayları sayfasının girişsiz açıldığını doğrula. Ana sayfayı ve hero adayları sayfasını Volkan'ın tarayıcısında aç." — İlgili: yayın
+- **23.10.2026** — "En fazla 15 satırlık kısa Türkçe rapor ver ... Her maddede [DOĞRULANDI]+kaynak / [VARSAYIM] / [BİLMİYORUM] etiketi olsun. Sonra DUR." — İlgili: rapor
+
+### Kayıtlar (CC, kaynaklı) — 1. aşama uygulaması
+> Bu alt bölüm Volkan'ın cümlesi değildir; talimatın istediği kaynak, lisans ve kontrol kayıtlarıdır.
+
+**Maserati Alfieri kontrolü (≈ 5 dk, 23.10.2026): bulunamadı.** Pexels ("maserati", "maserati alfieri"), Pixabay, Coverr ve Mixkit'te Alfieri'nin gerçek kamera çekimi yok; genel aramada yalnız 2014 tarihli haber siteleri videoları (ticari lisans yok) çıktı. Maserati'nin basın sitesi media.stellantis.com kullanım koşulları sayfası 403 verdi; ticari lisans doğrulanamadığı için kullanılmadı. Yapay zekâyla üretim yapılmadı.
+
+**Sonuç:** Dört arşivde "kırmızı + premium marka + karanlık/stüdyo ışığı + yavaş kamera + ≥ 8 sn + okunur rozet yok" koşullarının hepsini aynı anda karşılayan gerçek çekim bulunamadı. Aşağıdaki üç aday gerçek çekimdir; her birinin bir eksiği vardır.
+
+**A — siteye konan aday (lib/hero.ts `HERO_ACTIVE = 'a'`)**
+- Mixkit 63 "Close up of red sports car", marcolopez — https://mixkit.co/free-stock-video/close-up-of-red-sports-car-63/ — lisans: Mixkit Stock Video Free License (https://mixkit.co/license/#videoFree; ticari kullanım serbest, atıf zorunlu değil).
+- Araç: Mazda MX-5 (ND), kırmızı; premium değil. Karanlık garaj, slider ile yavaş kayış (stop lambasından kapı koluna). Kaynak 3840×2160, 24 fps, 12,3 sn; sahne kesimi yok (en yüksek sahne puanı 0,037; eşik 0,30). Kırmızı boya karenin ≈ %80'i (harfleri en iyi dolduran aday).
+- Kontrol: 10 kare + tam çözünürlük üst şerit; rozet, plaka ve insan yüzü yok (üst kenardaki bulanık şekiller aracın iç mekânı); stop lambası biçimi meraklı biri için tanınabilir; yapay zekâ/3D izi yok.
+- Kodlama: 0–10 sn, ileri + geri döngü 19,9 sn (dikiş PSNR 26,26 dB = normal kare adımı 26,26 dB). Masaüstü 1920×1080 H.264 5,24 MB; mobil 540×960 (dikey kırpım) 2,15 MB; WebP poster 41 KB / 15 KB. Dosyalar: public/hero/a/.
+
+**B**
+- Mixkit 74 "Red sports car", franklandgrave — https://mixkit.co/free-stock-video/red-sports-car-74/ — lisans: Mixkit Stock Video Free License.
+- Araç: Mazda MX-5 (ND); premium değil. Karanlık garaj, alçak açıdan yavaş kayış; koyu kırmızı. 3840×2160, 24 fps, 10,2 sn, kesim yok.
+- Kontrol: jant göbeğinde Mazda amblemi okunuyor (kaynakta yüksekliğin ≈ %80'inde) → kadraj üst %69'la sınırlandı (masaüstü kırpım 2667×1500, mobil 844×1500); kırpılmış çıktıda 6 noktada tam çözünürlükte amblem görünmediği doğrulandı. Plaka ve yüz yok.
+- Kodlama: ileri + geri döngü 19,9 sn (dikiş PSNR 35,0 dB; normal adım 35,6 dB). Masaüstü 5,21 MB; mobil 2,18 MB; poster 31 KB / 8 KB. public/hero/b/.
+
+**C**
+- Pexels 33374869 "Luxurious Red Sports Car on Urban Street", Igor Vieira — https://www.pexels.com/video/luxurious-red-sports-car-on-urban-street-33374869/ — lisans: Pexels License (https://www.pexels.com/license/; ticari kullanım serbest, atıf zorunlu değil).
+- Araç: Chevrolet Corvette C8, kırmızı (tek premium aday); yan hava girişi yakın planı; amblem görünmüyor. Ama bulutlu gün ışığı ve sabit kamera; arka planda trafik ışığı ve kasklı bir motosikletli (yüz görünmüyor). 3840×2160, 23,976 fps, 8,6 sn, kesim yok.
+- Kodlama: arka plandaki trafik geri gitmesin diye ileri-geri değil, 1 sn çapraz geçişli döngü 7,6 sn (dikiş PSNR 37,4 dB; normal adım 37,2 dB). Masaüstü 5,19 MB; mobil 2,15 MB; poster 65 KB / 21 KB. public/hero/c/.
+
+**Elenenler (özet; ayrıntı ve kareler _work/faz4c/video/, repoya girmez)**
+- Pexels 29498796–29498827 (Michael Pronin) kırmızı Ferrari F50 + GMA T.50: görünüm ideal ama 3D render (kusursuz siyah boşluk, parlayan camgöbeği yansıma, aynı serideki nadir araç eşleşmesi); Ferrari amblemi ve "F50" yazısı okunuyor.
+- Pexels 5309351 (Ferrari 812, 720p, gün ışığı, amblem), 39810055 (turuncu GT86 benzeri), 10807128 / 30794587 / 33374862–68 (gün ışığı, kesim ya da plaka), 13358188 (3 sn dikey), 25397940 ve diğer dikey klipler; Pixabay 152184 / 230482 / 314039 (CGI), 347290 ("AI generated" etiketli), 93252 (yeşil perde); Coverr'daki kırmızı premium klipler (kendi verisinde yapay zekâ işaretli), BMW M4 arkası (gün ışığı, amblem); Mixkit 35576/35577 (CGI görünümlü, Restricted lisans), 49 (7,96 sn), 66 (araç kadrajda çok küçük).
+
+**Volkan için not:** Gerçek, karanlık, kırmızı ve premium bir açılış istenirse yol ya ücretli lisans ya da galerinin kendi aracıyla kısa bir çekimdir; ikisi de Volkan onayı gerektirir.
+
+**Başka kayıtlar**
+- Sıralama "Empfohlen": data/featured.json sırası, sonra data/inventory.json sırası (lib/inventory.ts `rankOf`). Eski "?sort=year" bağlantısı "Erstzulassung neueste zuerst" olarak okunur.
+- Güven bölümündeki "Gewissenhaft. Verlässlich. Professionell." galerinin kendi plaka kapağından (public/cars/mercedes-s-560-4matic/4.webp; FAZ 4A kaydı).
+- Detay sayfasında "Der Preis stammt aus dem Inserat." yazılır; KDV ya da pazarlık durumu bilinmediği için yazılmaz.
+- Hizmetler: yalnız Besichtigung, Probefahrt, Beratung (FAZ 4A'da doğrulananlar); Finanzierung, Inzahlungnahme, Leasing hâlâ "teyit bekliyor".

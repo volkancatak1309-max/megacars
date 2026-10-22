@@ -1,42 +1,75 @@
 /* ===========================================================================
-   Fahrzeuge: filter chips with the shutter hover, bottom sheet on phones,
-   cards that open by clip-path and re-arrange with GSAP Flip.
+   Fahrzeuge: a huge stock count, an instrument panel of filters with the
+   shutter hover, a bottom sheet on phones, numbered cards that open by
+   clip-path and re-arrange with GSAP Flip (grid or rows).
    =========================================================================== */
 
 .vl {
-  padding-top: calc(var(--ph-h) + clamp(40px, 6vw, 96px));
+  padding-top: calc(var(--ph-h) + clamp(28px, 4vw, 64px));
   padding-bottom: var(--section);
 }
 
+/* ---- head: the count, the sentence, the real span of the stock ------------------- */
 .vl-head {
   display: grid;
-  gap: 20px;
-  padding-bottom: clamp(32px, 4vw, 56px);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: end;
+  padding-bottom: clamp(36px, 5vw, 72px);
 }
 
-.vl-title {
-  max-width: 16ch;
-}
-
-.vl-title .tabular {
-  color: var(--red);
-}
-
-/* ---- filter chips --------------------------------------------------------------- */
-.vl-bar {
-  display: none;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding-block: 22px;
-  border-block: 1px solid var(--line);
-}
-
-@media (min-width: 1024px) {
-  .vl-bar {
-    display: flex;
+@media (min-width: 900px) {
+  .vl-head {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: clamp(32px, 5vw, 96px);
   }
 }
 
+.vl-num {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(8.5rem, 31vw, 25rem);
+  line-height: 0.78;
+  letter-spacing: -0.07em;
+  color: var(--red);
+  margin-left: -0.04em;
+}
+
+.vl-intro {
+  display: grid;
+  gap: 18px;
+  padding-bottom: 0.4em;
+}
+
+.vl-title {
+  max-width: 18ch;
+}
+
+.vl-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px clamp(24px, 3vw, 48px);
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.vl-stats dt {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.vl-stats dd {
+  margin-top: 4px;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  letter-spacing: -0.01em;
+}
+
+/* ---- filter chips (row, sheet trigger, sort, view) ---------------------------------- */
 .chip {
   position: relative;
   min-height: 46px;
@@ -61,7 +94,8 @@
   }
 }
 
-.chip[data-on] {
+.chip[data-on],
+.chip[aria-pressed='true'] {
   background: var(--bone);
   color: var(--night);
   border-color: var(--bone) !important;
@@ -97,6 +131,74 @@
   transform: scaleY(1);
 }
 
+/* ---- the instrument panel (desktop) ----------------------------------------------------- */
+.vl-bar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .vl-bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+}
+
+/* one row of eight only where every label fits */
+@media (min-width: 1800px) {
+  .vl-bar {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+.vl-bar .chip {
+  display: block;
+  min-height: 96px;
+  padding: 16px 18px 18px;
+  border: 0 !important;
+  background: var(--night);
+  text-align: left;
+}
+
+.vl-bar .chip .R {
+  display: grid;
+  width: 100%;
+}
+
+.vl-bar .chip .R-face {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  row-gap: 14px;
+  width: 100%;
+}
+
+.vl-bar .chip-key {
+  grid-column: 1 / -1;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.vl-bar .chip-val {
+  overflow: hidden;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* a set filter: bone cell with a red bar on top */
+.vl-bar .chip[data-on] {
+  background: var(--bone);
+  box-shadow: inset 0 3px 0 var(--red);
+}
+
 /* ---- result row -------------------------------------------------------------------- */
 .vl-row {
   display: flex;
@@ -104,7 +206,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 14px 24px;
-  padding-block: 24px;
+  padding-block: 28px 24px;
 }
 
 .vl-found {
@@ -138,6 +240,20 @@
   }
 }
 
+.vl-view {
+  display: inline-flex;
+}
+
+.vl-view .chip + .chip {
+  margin-left: -1px;
+}
+
+@media (max-width: 639px) {
+  .vl-view {
+    display: none;
+  }
+}
+
 .vl-active {
   display: flex;
   flex-wrap: wrap;
@@ -164,7 +280,7 @@
 /* ---- grid + card ---------------------------------------------------------------------- */
 .vl-grid {
   display: grid;
-  gap: clamp(48px, 5vw, 72px) clamp(20px, 2.4vw, 36px);
+  gap: clamp(52px, 5vw, 80px) clamp(20px, 2.4vw, 36px);
 }
 
 @media (min-width: 640px) {
@@ -189,7 +305,10 @@
 .vc-frame {
   position: relative;
   display: block;
+  overflow: hidden;
   background: var(--frame);
+  clip-path: inset(0);
+  transition: clip-path 0.9s var(--ease-io);
 }
 
 .vc-frame img {
@@ -206,6 +325,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.04em;
+  transition: opacity var(--t-1) var(--ease-out);
 }
 
 .vc-body {
@@ -213,11 +333,32 @@
   gap: 6px;
 }
 
+.vc-top {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.vc-index {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 0.875rem;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
 .vc-make {
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  color: var(--sub);
+}
+
+.vc-year {
+  margin-left: auto;
+  font-size: 0.8125rem;
+  font-weight: 600;
   color: var(--sub);
 }
 
@@ -252,26 +393,122 @@
   color: var(--sub);
 }
 
-.vc-price {
+.vc-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
   margin-top: 6px;
+}
+
+.vc-price {
   font-family: var(--f-display);
   font-weight: 600;
   font-size: 1.5rem;
   letter-spacing: -0.02em;
 }
 
+.vc-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition:
+    opacity var(--t-2) var(--ease-out),
+    transform var(--t-2) var(--ease-out);
+}
+
 @media (hover: hover) {
+  .vc:hover .vc-frame {
+    clip-path: inset(7% 0);
+  }
+
   .vc:hover .vc-frame img {
     transform: scale(1.04);
+  }
+
+  .vc:hover .vc-photos {
+    opacity: 0;
   }
 
   .vc:hover .vc-rule {
     transform: scaleX(1);
   }
+
+  .vc:hover .vc-go {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .vc:focus-visible .vc-rule {
   transform: scaleX(1);
+}
+
+.vc:focus-visible .vc-go {
+  opacity: 1;
+  transform: none;
+}
+
+/* touch screens never hover: "Ansehen" stays visible */
+@media (hover: none) {
+  .vc-go {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- rows: the same cards as an index (≥ 640 px) ---------------------------------------- */
+@media (min-width: 640px) {
+  .vl-grid[data-view='rows'] {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .vl-grid[data-view='rows'] .vc {
+    grid-template-columns: clamp(180px, 22vw, 320px) minmax(0, 1fr);
+    gap: clamp(20px, 3vw, 48px);
+    align-items: center;
+    padding-block: clamp(18px, 2vw, 28px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .vl-grid[data-view='rows'] .vc-body {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 32px;
+    align-items: baseline;
+  }
+
+  .vl-grid[data-view='rows'] .vc-body > * {
+    grid-column: 1;
+  }
+
+  .vl-grid[data-view='rows'] .vc-model {
+    font-size: clamp(1.75rem, 3.4vw, 3.5rem);
+  }
+
+  .vl-grid[data-view='rows'] .vc-foot {
+    grid-column: 2;
+    grid-row: 1 / span 5;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    align-self: center;
+  }
+
+  .vl-grid[data-view='rows'] .vc-price {
+    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  }
+
+  .vl-grid[data-view='rows'] .vc-photos {
+    display: none;
+  }
 }
 
 /* ---- filter sheet (phones) --------------------------------------------------------------- */

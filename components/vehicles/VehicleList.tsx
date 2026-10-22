@@ -32,12 +32,15 @@ const SORT_LABEL: Record<SortKey, string> = {
 }
 
 type Option = { value: string; label: string }
+type View = 'grid' | 'rows'
 
 /**
- * Fahrzeuge: state lives in the URL; on desktop every filter is a chip with the red
- * shutter (a native select lies over it), on phones the filters rise in a bottom sheet.
- * Cards re-arrange with GSAP Flip, the result count rolls to its new value, and cards
- * below the fold open by clip-path when they arrive.
+ * Fahrzeuge: the stock count opens huge and rises from its mask, next to the real
+ * price, make and year span. On desktop the filters form one instrument panel: every
+ * cell carries the red shutter and a native select lies over it; on phones the filters
+ * rise in a bottom sheet. Filter state lives in the URL. Cards are numbered like film
+ * slates, re-arrange with GSAP Flip (also when switching between grid and rows), the
+ * result count rolls to its new value, and cards below the fold open by clip-path.
  */
 export function VehicleList({ cards, options, initial }: { cards: CardVehicle[]; options: FilterOptions; initial: Filters }) {
   const t = useTranslations('list')
@@ -46,6 +49,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   const locale = useLocale()
   const [f, setF] = useState<Filters>(initial)
   const [sheet, setSheet] = useState(false)
+  const [view, setView] = useState<View>('grid')
   const grid = useRef<HTMLUListElement>(null)
   const dialog = useRef<HTMLDialogElement>(null)
   // GSAP arrives after the first paint; until then filtering simply re-renders
@@ -92,6 +96,19 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   }
   const set = <K extends keyof Filters>(key: K, value: Filters[K]) => update({ ...f, [key]: value })
 
+  const switchView = (next: View) => {
+    if (next === view) return
+    const el = grid.current
+    const m = motion.current
+    if (el && m && matchMedia(MOTION_OK).matches) {
+      entrance.current.forEach((st) => st.kill())
+      entrance.current = []
+      m.gsap.set(el.querySelectorAll('[data-card], [data-reveal]'), { clearProps: 'opacity,visibility,transform,clipPath' })
+      flipState.current = m.Flip.getState(el.querySelectorAll('[data-card], [data-card] .vc-frame, [data-card] .vc-model'))
+    }
+    setView(next)
+  }
+
   // back/forward restores the page from the router cache: the URL is the source of truth
   useEffect(() => {
     const fromUrl = parseFilters(new URLSearchParams(window.location.search))
@@ -120,7 +137,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
       onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, y: 32 }, { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.15, ease: 'power3.out' }),
       onLeave: (els) => gsap.to(els, { autoAlpha: 0, duration: 0.35 }),
     })
-  }, [f])
+  }, [f, view])
 
   useEffect(() => {
     loadMotion().then((m) => {
@@ -205,6 +222,17 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
 
   const reset = () => update({ ...EMPTY_FILTERS, sort: f.sort })
 
+  // running numbers follow the visible order
+  const order = new Map(sorted.filter((v) => visible.has(v.id)).map((v, i) => [v.id, i + 1]))
+
+  // the stock in real numbers: price span, makes, years of first registration
+  const years = cards.map((v) => Math.floor(v.firstRegistrationKey / 100))
+  const stats = [
+    { label: t('statPrice'), value: `${formatPrice(Math.min(...cards.map((v) => v.price)), locale)} – ${formatPrice(Math.max(...cards.map((v) => v.price)), locale)}` },
+    { label: t('statMakes'), value: String(options.makes.length) },
+    { label: t('statYears'), value: `${Math.min(...years)} – ${Math.max(...years)}` },
+  ]
+
   const sortChip = (
     <span className="sh sh--line chip" data-sort>
       <Faces>
@@ -225,12 +253,27 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   return (
     <div className="vl pg wide">
       <header className="vl-head">
-        <h1 className="vl-title d-l">
+        <p className="vl-num" aria-hidden="true">
           <span className="mline rise">
-            <span>{t('title', { count: cards.length })}</span>
+            <span className="tabular">{String(cards.length).padStart(2, '0')}</span>
           </span>
-        </h1>
-        <p className="lead fade-up">{t('lead')}</p>
+        </p>
+        <div className="vl-intro">
+          <h1 className="vl-title d-m">
+            <span className="mline rise">
+              <span>{t('title', { count: cards.length })}</span>
+            </span>
+          </h1>
+          <p className="lead fade-up">{t('lead')}</p>
+          <dl className="vl-stats fade-up">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <dt>{s.label}</dt>
+                <dd className="tabular">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </header>
 
       <section aria-label={t('filterTitle')} className="vl-bar">
@@ -238,7 +281,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
           <span key={field.key} className="sh sh--line chip" data-on={f[field.key] !== null || undefined}>
             <Faces>
               <span className="chip-key">{field.label}</span>
-              {valueLabel(field)}
+              <span className="chip-val">{valueLabel(field)}</span>
               <Icon name="chevronDown" size={14} />
             </Faces>
             <select aria-label={field.label} value={f[field.key] === null ? '' : String(f[field.key])} onChange={(e) => onPick(field, e.target.value)}>
@@ -259,6 +302,14 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
             {active ? t('filtersActive', { count: active }) : t('filters')}
           </ShutterButton>
           {sortChip}
+          <span className="vl-view" role="group" aria-label={t('view')}>
+            <ShutterButton kind="line" className="chip" aria-pressed={view === 'grid'} onClick={() => switchView('grid')}>
+              {t('viewGrid')}
+            </ShutterButton>
+            <ShutterButton kind="line" className="chip" aria-pressed={view === 'rows'} onClick={() => switchView('rows')}>
+              {t('viewRows')}
+            </ShutterButton>
+          </span>
         </div>
       </div>
 
@@ -289,10 +340,10 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
         </div>
       )}
 
-      <ul ref={grid} className="vl-grid">
+      <ul ref={grid} className="vl-grid" data-view={view}>
         {sorted.map((v, i) => (
           <li key={v.id} data-card data-flip-id={v.id} hidden={!visible.has(v.id)}>
-            <VehicleCard v={v} priority={i === 0 && visible.has(v.id)} headingLevel="h2" />
+            <VehicleCard v={v} priority={i === 0 && visible.has(v.id)} headingLevel="h2" index={order.get(v.id)} />
           </li>
         ))}
       </ul>

@@ -260,3 +260,46 @@
 - Liste sıralaması: ilan tarihi verisi olmadığı için "Neueste" yerine varsayılan "Jüngste Erstzulassung zuerst" (DESIGN.md Ek B #7 Volkan onayı bekliyor).
 - İkinci telefon +43 660 6969496 FAZ 4A talimatı gereği (yalnız +43 660 6877002 ve megacars@live.at) kullanılmadı.
 - Öne çıkanlar şeridi (data/featured.json): S 560, 340i Touring, Panamera, C 220 d Cabrio, A 35 AMG, Range Rover Sport, Octavia — fiyat aralığının tamamını göstermek için seçildi.
+
+## 22.10.2026 — Tasarım yönü yeniden: 3 premium prototip (A / B / C) + önizleme erişimi
+
+### Ret kararı ve gerekçeleri
+- **22.10.2026** — "FAZ 4A'nın görsel tasarımı REDDEDİLDİ." — İlgili: bütün site (görsel katman)
+- **22.10.2026** — "Açılış alanı, üst bar ve renkler premium hissettirmiyor; site standart bir galeri sitesi gibi duruyor. Hedef Awwwards seviyesi: site, sırf Awwwards'ta ödül almak için yapılmış gibi görsel olarak tatmin edici olmalı." — İlgili: açılış, üst bar, renkler
+- **22.10.2026** — "Ana sayfadaki yatay araç şeridi istenmiyor: aşağı kaydırırken sayfa sağa kayıyor." — İlgili: Startseite öne çıkanlar
+- **22.10.2026** — "Efektler, geçişler ve slaytlar premium değil. galzura.com'da düğmenin üzerine gelince kepenk iner gibi çok güzel bir geçiş var; bu sitede o bile yok." — İlgili: hareket dili, düğmeler
+- **22.10.2026** — "Mobbin kullanılması istenmişti; tasarımda izi görünmüyor." — İlgili: tasarım süreci
+- **22.10.2026** — "Site simsiyah; galerilerde canlı kırmızı çok çekici durur." — İlgili: renk
+- **22.10.2026** — "Galerinin sahibi sitesini görünce gurur duymalı." — İlgili: bütün site
+- **22.10.2026** — "Altyapı (Next.js, diller, veri, sayfa yapısı, filtreler, 360 bileşeni) KORUNUR; değişecek olan görsel katman ve hareket dilidir. DESIGN.md'deki "Die Übergabe" konsepti iptal edildi." — İlgili: DESIGN.md, kod tabanı
+
+### Sınır
+- **22.10.2026** — "main'e dokunma. fal.ai ya da başka ücretli iş yok; yapay zekâ ile görsel üretme. Vercel CLI ile elle deploy yok; yayın yalnız v2'ye push ile olur. Uydurma veri yok." — İlgili: bu oturum
+
+### Hemen yapılacaklar
+- **22.10.2026** — "Ana sayfadaki yatay araç şeridini (pin'li yatay kaydırma) kaldır; yerine şimdilik basit, dikey bir araç ızgarası koy." — İlgili: Startseite
+- **22.10.2026** — "Önizleme erişimi (Volkan onayladı): Vercel'deki "megacars" projesinde Deployment Protection → Vercel Authentication korumasını kapat; amaç önizlemenin telefondan ve paylaşılan linkten girişsiz açılması. Yalnız bu projeye dokun." — İlgili: Vercel proje ayarı (BRIEF'teki "Vercel proje ayarlarını değiştirme" kuralına Volkan'ın verdiği tek istisna)
+
+### Yeni kurallar (bütün yönler için)
+- **22.10.2026** — "Hedef: Awwwards Site of the Day seviyesi. Her ekran "bu bir ödül sitesi" dedirtmeli; standart galeri şablonu hissi başarısızlık sayılır." — İlgili: bütün site
+- **22.10.2026** — "Renk: Canlı kırmızı ana vurgu rengidir (ör. #E10600 ya da #D7141A çevresinde; düz renk olarak kullanılır, neon ışıltısı yok). Site simsiyah olmaz: bölümler arasında siyah, kırık beyaz/kemik rengi ve kırmızı ile ritim kurulur. Kontrast WCAG AA ile kanıtlanır (siyah zemin üstünde küçük kırmızı yazı yok; kırmızı zemin üstünde beyaz yazı)." — İlgili: renk sistemi
+- **22.10.2026** — "Tipografi: karakterli, büyük, iddialı bir başlık fontu (ör. geniş ya da sıkışık grotesk, ya da grotesk + serif eşleşmesi). Yalnız ticari kullanıma açık lisanslı fontlar (OFL ya da Fontshare); lisansı yaz." — İlgili: tipografi
+- **22.10.2026** — "Kaydırma her zaman sayfayı aşağı götürür: yatay kaydırma YOK; sayfayı kilitleyen uzun sabitleme (pin) YOK — bir bölüm en fazla bir ekran boyu sabit kalabilir. Kaydırmayla kare kare oynayan açılış ve imleci izleyen küçük görsel önizleme YASAK (Volkan ikisini de daha önce reddetti)." — İlgili: kaydırma, hareket
+- **22.10.2026** — "Kepenk hover: galzura.com'daki düğme hover efektini kaynağından bul (C:\Users\90553\Desktop\galzura-motion-demo deposu ve canlı galzura.com). Aynı kalitede ve kırmızı renkle bütün düğmelere ve menü linklerine uygula: imleç üzerine gelince renk paneli kepenk gibi iner ve yazı yuvarlanarak değişir; imleç çıkınca kepenk yukarı toplanır." — İlgili: düğmeler, menü linkleri
+- **22.10.2026** — "Hareket dili: her bölümde en az bir etkileyici hareket olur; bounce/spring/elastic yok, 0,3 sn'den hızlı animasyon yok. Kullanılacaklar: sayaçlı sinematik açılış yükleyicisi (yalnız ilk ziyarette, LCP'yi geciktirmeden); sayfa geçişlerinde kırmızı perde (curtain) geçişi; başlıklarda maskeli / split-text açılış; görsellerde clip-path ile açılan reveal'lar; slaytlarda perde ya da maske ile premium geçişler (sıradan kaydırma değil); manyetik CTA; hover'da "Ansehen" yazan özel imleç (görsel önizlemesiz); gerçek veriden sayı sayaçları; ince grain dokusu." — İlgili: hareket sistemi
+- **22.10.2026** — "Bileşen kaynakları: Animmaster kütüphanesi (C:\Users\90553\Downloads\300 Awwwards components.zip; katalog C:\Users\90553\Desktop\olgun-foods\GALZURA_BILESEN_KATALOG.md): bu sefer seçtiğin bileşenleri zip'ten gerçekten çıkar ve kullan. Mobbin MCP: header, mobil menü, araç kartı, filtre, araç detay ve sabit iletişim çubuğu için en az 6 ekran örneği bul; hangi örnekten neyi aldığını yaz. Awwwards'ın otomotiv kategorisindeki ödüllü sitelerden ve galzura.com'un hareket kalitesinden (hasib.site çizgisi) referans al." — İlgili: bileşenler, referanslar
+- **22.10.2026** — "Gerçek araç fotoğrafları 1440 px genişliğinde: 1440 px'ten büyük, bulanık tam ekran fotoğraf yok. Tam ekran alanlarda video ya da tipografi kullan; fotoğraflar çerçeveli ve keskin dursun." — İlgili: fotoğraf sunumu
+- **22.10.2026** — "Mobil birinci sınıf: her efektin mobil karşılığı tasarlanır; mobilde de premium his korunur." — İlgili: mobil
+
+### Üç prototip
+- **22.10.2026** — "Aynı içerikle (gerçek 18 aracın verisi ve fotoğrafları) birbirinden belirgin biçimde farklı üç tasarım yönü yap. Her prototip şunları içerir: açılış yükleyicisi; üst bar (kepenk hover'lı menü + dil seçici + telefon); açılış bölümü (hero); öne çıkan araçlar bölümü (dikey); bir hizmetler/güven bölümü; araç kartı hover'ı; karttan araç detayına kırmızı perde geçişi ve detay sayfasının ilk ekranı; footer'ın üst kısmı; mobil menü. Metinler Almanca ve Türkçe." — İlgili: /de/prototyp
+- **22.10.2026** — "Yön A — "Rosso": siyah + canlı kırmızı + beyaz; büyük, iddialı, sportif. Açılışta galerinin gerçek araçlarından oluşan premium bir slayt gösterisi (kırmızı perde/maske geçişleri, dev model adları)." — İlgili: /de/prototyp/a
+- **22.10.2026** — "Yön B — "Atelier": kırık beyaz/kemik zemin + siyah tipografi + kırmızı vurgu; lüks dergi düzeni, bol boşluk, büyük tipografi. Araçlar dergi sayfası gibi sunulur." — İlgili: /de/prototyp/b
+- **22.10.2026** — "Yön C — "Nachtfahrt": sinematik ve dramatik; koyu ağırlıklı, ama kırmızı ve kırık beyaz bölümlerle ritim kurulur (kırmızı düz renk, neon değil). Açılış videosu dev "MEGA CARS" harflerinin içinden görünür; kaydırınca harfler açılır (dikey, sayfayı kilitlemeden)." — İlgili: /de/prototyp/c
+- **22.10.2026** — "Prototipler mevcut Next.js uygulamasında ayrı adreslerde olsun (/de/prototyp/a, /de/prototyp/b, /de/prototyp/c ve /tr karşılıkları). Bir karşılaştırma sayfası (/de/prototyp) üçüne link versin. Prototip sayfaları noindex olsun." — İlgili: rotalar
+
+### Kalite kapısı ve kapanış
+- **22.10.2026** — "Her prototipi masaüstünde (1440 ve 2560 px) ve mobilde (390 px) ekran görüntüsü ve kısa ekran kaydıyla incele. Seçtiğin 2 Awwwards otomotiv sitesinin ekran görüntüleriyle yan yana koy. "Standart galeri şablonu gibi mi duruyor?" sorusuna dürüst cevap ver; cevap evetse düzelt." — İlgili: kalite kontrolü
+- **22.10.2026** — "Çizgi film testi: neon, bounce, ucuz parıltı ya da jenerik Dribbble hissi varsa kaldır." — İlgili: kalite kontrolü
+- **22.10.2026** — "Konsol hatası 0 olsun; prefers-reduced-motion açıkken animasyonlar kapalı olsun; yatay taşma olmasın." — İlgili: kalite kontrolü
+- **22.10.2026** — "Sonra DUR. Volkan bir yön seçene kadar siteyi yeniden kurma." — İlgili: faz sırası

@@ -1,6 +1,7 @@
 # MEGACARS V2 — PROJE BRİFİ
 
 > Kaynak: Volkan'ın 22.10.2026 tarihli FAZ 1 + FAZ 2 talimatı. Aynı gün ikinci talimatla (showroom yöntemi, künye, stok, kapak fotoğrafları, dönme kuralı, Wow 3) güncellendi; değişen cümleler Volkan'ın kararlarıdır, kaynak: `docs/KARAR-DEFTERI.md`.
+> 22.10.2026 (üçüncü güncelleme): FAZ 4A'nın görsel tasarımı Volkan tarafından reddedildi; "Die Übergabe" konsepti iptal. Görsel dil ve hareket kuralları aşağıdaki GÖRSEL DİL bölümüyle değişti; altyapı (Next.js, diller, veri, sayfa yapısı, filtreler, 360 bileşeni) korunur.
 > Sonraki bütün fazlarda işe başlamadan önce bu dosya okunur.
 
 ━━━ PROJE BRİFİ ━━━
@@ -21,7 +22,17 @@ HEDEF
 - Eski siteyi sıfırdan, Awwwards seviyesinde (10 üzerinden en az 9) yeniden kurmak.
 - Ziyaretçi üç şeyi zahmetsizce yapabilmeli: stoktaki aracı bulmak, aracı ayrıntılı incelemek, tek dokunuşla iletişime geçmek (Anrufen / WhatsApp / Probefahrt / Finanzierung / Inzahlungnahme talebi).
 - Site sade ve kullanıcı dostu olacak; karmaşık olmayacak.
-- Ton: sakin, kendinden emin premium Alman otomotiv; kamera ile çekilmiş film hissi. bugatti.com ve porsche.com yanına konduğunda aynı işçilikte durmalı, ama galerinin gerçek fiyat seviyesine yabancılaşmamalı (ulaşılabilir lüks).
+- Hedef seviye: Awwwards Site of the Day. Her ekran "bu bir ödül sitesi" dedirtmeli; standart galeri şablonu hissi başarısızlık sayılır. Site, sırf Awwwards'ta ödül almak için yapılmış gibi görsel olarak tatmin edici olmalı; galerinin sahibi sitesini görünce gurur duymalı. Galerinin gerçek fiyat seviyesine yabancılaşmaz (ulaşılabilir lüks).
+
+GÖRSEL DİL (Volkan, 22.10.2026; ayrıntı: docs/KARAR-DEFTERI.md)
+- Renk: Canlı kırmızı ana vurgu rengidir (#E10600 ya da #D7141A çevresinde; düz renk, neon ışıltısı yok). Site simsiyah olmaz: bölümler arasında siyah, kırık beyaz/kemik rengi ve kırmızı ile ritim kurulur. Kontrast WCAG AA ile kanıtlanır (siyah zemin üstünde küçük kırmızı yazı yok; kırmızı zemin üstünde beyaz yazı).
+- Tipografi: karakterli, büyük, iddialı bir başlık fontu (geniş ya da sıkışık grotesk, ya da grotesk + serif eşleşmesi). Yalnız ticari kullanıma açık lisanslı fontlar (OFL ya da Fontshare); lisans yazılır.
+- Kaydırma her zaman sayfayı aşağı götürür: yatay kaydırma YOK; sayfayı kilitleyen uzun sabitleme (pin) YOK — bir bölüm en fazla bir ekran boyu sabit kalabilir.
+- Kepenk hover: galzura.com'daki düğme hover efekti (kaynak: galzura-motion-demo deposu ve canlı galzura.com) aynı kalitede ve kırmızı renkle bütün düğmelere ve menü linklerine uygulanır: imleç üzerine gelince renk paneli kepenk gibi iner ve yazı yuvarlanarak değişir; imleç çıkınca kepenk yukarı toplanır.
+- Hareket dili: her bölümde en az bir etkileyici hareket; bounce/spring/elastic yok, 0,3 sn'den hızlı animasyon yok. Kullanılacaklar: sayaçlı sinematik açılış yükleyicisi (yalnız ilk ziyarette, LCP'yi geciktirmeden); sayfa geçişlerinde kırmızı perde (curtain) geçişi; başlıklarda maskeli / split-text açılış; görsellerde clip-path ile açılan reveal'lar; slaytlarda perde ya da maske ile premium geçişler (sıradan kaydırma değil); manyetik CTA; hover'da "Ansehen" yazan özel imleç (görsel önizlemesiz); gerçek veriden sayı sayaçları; ince grain dokusu.
+- Bileşen kaynakları: Animmaster kütüphanesinden (300 Awwwards components) seçilen bileşenler zip'ten gerçekten çıkarılıp kullanılır; Mobbin'den header, mobil menü, araç kartı, filtre, araç detay ve sabit iletişim çubuğu için en az 6 ekran örneği alınır ve neyin nereden alındığı yazılır; referans: Awwwards otomotiv kategorisindeki ödüllü siteler ve galzura.com'un hareket kalitesi (hasib.site çizgisi).
+- Fotoğraf: gerçek araç fotoğrafları 1440 px genişliğinde; 1440 px'ten büyük, bulanık tam ekran fotoğraf yok. Tam ekran alanlarda video ya da tipografi kullanılır; fotoğraflar çerçeveli ve keskin durur.
+- Mobil birinci sınıf: her efektin mobil karşılığı tasarlanır; mobilde de premium his korunur.
 
 SHOWROOM (360°) — SİTENİN İMZA ÖZELLİĞİ (Volkan'ın isteği, 22.10.2026)
 - Ziyaretçi bir araç sayfasına girdiğinde araç, kendi gerçek zemininin oluşturduğu sahnede durur ve yavaşça döner. Ziyaretçi fareyle ya da parmağıyla sürükleyerek aracı çepeçevre, istediği açıdan inceler.
@@ -42,7 +53,7 @@ TEKNİK KARARLAR
 - Next.js (güncel kararlı sürüm, App Router) + TypeScript + Tailwind + GSAP (ScrollTrigger, SplitText) + Lenis. Eski Vite + hash router yapısı terk ediliyor: her araç sayfası ayrı adresle Google'da indekslenmeli.
 - Diller: Almanca (varsayılan, /de), İngilizce (/en), Türkçe (/tr). İlk girişte tarayıcı diline göre otomatik seçim; üstte dil seçici. Çeviriler uzman tercüman seviyesinde olacak; makine çevirisi kokan tek cümle olmayacak. Müşteriye görünen her cümle (başlıklar dahil) yüklemli ve tam olacak; yarım ya da devrik cümle olmayacak.
 - Envanter: tek kaynak dosya (data/inventory.json) + tekrar çalıştırılabilir içe aktarma betiği. Her araç yalnız kendi ilanının fotoğraflarıyla gösterilir; satılmış ya da eski araç gösterilmez. Her araç kaydında isteğe bağlı bir 360 showroom alanı bulunur. Yapı, ileride günlük otomatik stok güncellemesi eklenebilecek şekilde kurulacak.
-- Çalışma dalı: v2. Yayın yalnız GitHub push → Vercel otomatik derleme ile olur; Vercel CLI ile elle deploy YASAK. Vercel proje ayarlarını değiştirme; Next.js önizleme derlemesi gerekirse dal içindeki vercel.json ile ayarlanır.
+- Çalışma dalı: v2. Yayın yalnız GitHub push → Vercel otomatik derleme ile olur; Vercel CLI ile elle deploy YASAK. Vercel proje ayarlarını değiştirme; Next.js önizleme derlemesi gerekirse dal içindeki vercel.json ile ayarlanır. Tek istisna (Volkan onayı, 22.10.2026): "megacars" projesinde Vercel Authentication koruması kapatıldı; önizleme telefondan ve paylaşılan linkten girişsiz açılır, noindex korunur.
 - Görseller: WebP, 1600w masaüstü + 800w mobil srcset, bulanık yer tutucu (blur-up), tembel yükleme. /cars, /hero ve /spin altındaki dosyalar için 1 yıl immutable önbellek başlığı.
 - Commit mesajları anlamlı olur: feat:, fix:, perf:, a11y:, docs:.
 - Volkan yazılımcı değil: ondan yalnız zorunlu onay istenir; Vercel dahil bütün teknik işleri CC yapar. Raporlar kısa Türkçe ve [DOĞRULANDI]+kaynak / [VARSAYIM] / [BİLMİYORUM] etiketli olur.
@@ -54,15 +65,16 @@ KESİN YASAKLAR
 - 3D araba modeli yok: hazır ya da jenerik GLB, ilkel geometriden model ve yapay zekâyla fotoğraftan üretilmiş 3D model YASAK — galerinin kendi aracı olmaz ve oyun gibi görünür. Showroom yalnız gerçek fotoğraflarla yapılır.
 - Yapay zekâ ile araba görseli üretilip stok aracı gibi gösterilmez. Araç fotoğraflarına renk filtresi, renkli katman ya da vurgu rengi uygulanmaz; vurgu rengi yalnız arayüzde kullanılır.
 - Volkan'ın daha önce reddettiği iki efekt kullanılmaz: imleci izleyen küçük görsel önizleme (image trail / hover preview) ve kaydırdıkça kare kare oynayan açılış (frame-scrub scroll sequence).
+- Yatay kaydırma ve sayfayı bir ekran boyundan uzun kilitleyen sabitleme (pin) yok (Volkan, 22.10.2026: "aşağı kaydırırken sayfa sağa kayıyor").
 - Açılış başlığı okunamayacak hızda geçmez.
 
 HAREKET VE WOW ANLARI
 - Her bölümde en az bir anlamlı hareket olur; tek başına düz fade-in yetmez.
-- Wow 1 — Açılış: tam ekran sinematik video (yavaş dolly, 24 fps). Başlık maskeli olarak satır satır, okunur hızda açılır. Aşağı kaydırınca kamera geri çekiliyormuş gibi hafif ölçek ve kararma olur. Video yüklenene kadar poster görünür (LCP öğesi = poster).
-- Wow 2 — Öne çıkan araçlar: masaüstünde sabitlenen (pin) yatay şerit. Kaydırma, kamera kayışı gibi araçları geçirir; fotoğraf kendi çerçevesinde hafif paralaks yapar; fiyat ve özellik yazıları yavaşça belirir. Mobilde parmakla kaydırılan, yapışkan (snap) şerit olur.
-- Wow 3 — Kart → detay: Kart → detay geçişinde kartın fotoğrafı büyüyerek detay sayfasının üstüne yerleşir; aracın 360° verisi varsa fotoğraf yumuşakça showroom sahnesine geçer ve dönmeye başlar. View Transitions API kullanılır; desteklemeyen tarayıcıda yumuşak geçiş olur.
+- Wow 1 — Açılış: seçilecek tasarım yönüne göre (prototip A slayt gösterisi / B dergi kapağı / C dev harflerin içinden video). Tam ekran alanda yalnız video ya da tipografi; başlık maskeli/split-text, okunur hızda açılır. LCP öğesi gecikmez.
+- Wow 2 — Öne çıkan araçlar: DİKEY bölüm (yatay şerit kaldırıldı, Volkan 22.10.2026). Kart hover'ında "Ansehen" yazan özel imleç; fotoğraflar clip-path ile açılır.
+- Wow 3 — Kart → detay: karttan araç detayına kırmızı perde (curtain) geçişi (Volkan, 22.10.2026); aracın 360° verisi varsa detayda showroom sahnesi açılır ve dönmeye başlar.
 - Wow 4 — 360° showroom: yukarıdaki SHOWROOM bölümü.
-- Ek hareketler: CTA'larda manyetik hover (scale 1.02 + hafif gölge, tıklamada 0.98, WCAG AA odak halkası); masaüstünde Lenis yumuşak kaydırma (dokunmatikte doğal kaydırma); sayfa açılışında kısa sinematik yükleyici (boş sayfa görünmez, LCP'yi geciktirmez); gerçek veriden sayı sayacı (ör. stoktaki araç sayısı).
+- Ek hareketler: bütün düğme ve menü linklerinde kırmızı kepenk hover; CTA'larda manyetik hover (tıklamada 0.98, WCAG AA odak halkası); masaüstünde Lenis yumuşak kaydırma (dokunmatikte doğal kaydırma); yalnız ilk ziyarette sayaçlı sinematik yükleyici (boş sayfa görünmez, LCP'yi geciktirmez); gerçek veriden sayı sayaçları; ince grain dokusu.
 
 SAYFA İSKELETİ (SADE)
 - Sayfalar: Startseite · Fahrzeuge (liste + filtre + sıralama) · Fahrzeug-Detail · Finanzierung · Ankauf/Inzahlungnahme · Kontakt & Über uns · Impressum · Datenschutz.
@@ -79,5 +91,5 @@ KALİTE EŞİĞİ (teslimden önce kanıtlanır)
 - Erişilebilirlik: bütün butonlarda ve yalnız ikonlu linklerde aria-label; kontrast ≥ 4.5:1; klavyeyle tam gezinme; prefers-reduced-motion açıkken animasyonlar kapanır.
 - SEO: robots.txt, sitemap.xml (hreflang'li), her sayfada generateMetadata (title, description, OG, Twitter), JSON-LD (AutoDealer; her araç için Car + Offer; BreadcrumbList), mutlak adresli OG görseli + yedeği. Demo sürümü canlıya çıkana kadar noindex kalır.
 - Production derlemesinde konsol hatası ve uyarısı 0.
-- Referans tonu: bugatti.com, porsche.com, studiofreight.com, locomotive.ca, apple.com. Dribbble ve jenerik Behance işleri referans alınmaz.
+- Referans tonu: Awwwards otomotiv kategorisindeki ödüllü siteler, galzura.com'un hareket kalitesi (hasib.site çizgisi), bugatti.com, porsche.com, studiofreight.com, locomotive.ca. Dribbble ve jenerik Behance işleri referans alınmaz.
 - Çizgi film testi: her bileşen için "Bu, porsche.com'da ya da apple.com'da olur mu?" sorusu sorulur; cevap hayırsa bileşen kullanılmaz.

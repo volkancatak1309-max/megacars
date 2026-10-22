@@ -193,3 +193,70 @@
 - **22.10.2026** — "docs/showroom-v2/ içindeki kare klasörlerini ve stok klibi .gitignore'a ekle; bunların hiçbiri commit'lenmez." — İlgili: .gitignore
 - **22.10.2026** — "Test sayfasını, görüntüleyici kodunu, boru hattı kodunu, README'yi ve çekim talimatını (md + pdf) commit'le; BRIEF.md, DESIGN.md ve KARAR-DEFTERI.md değişikliklerini de ekle." — İlgili: git
 - **22.10.2026** — "Commit mesajı: "docs: 360 olcek kurali, cekim talimati (DE+TR), yakinlastirma karari; showroom-v2 test kodu". v2'ye push et. main'e dokunma." — İlgili: git, v2 dalı
+
+## 22.10.2026 — FAZ 4A: site iskeleti + ana sayfa + araç listesi + araç detay
+
+### Sınır ve kapsam
+- **22.10.2026** — "fal.ai ya da başka bir yapay zekâ aracıyla görsel veya video üretme; para harcayan hiçbir iş yapma. Vercel proje ayarlarını değiştirme. Vercel CLI ile elle deploy yapma; yayın yalnız v2'ye push ile olur. Uydurma veri yok." — İlgili: bu faz
+- **22.10.2026** — "Finanzierung, Ankauf/Inzahlungnahme, Kontakt & Über uns, Impressum ve Datenschutz FAZ 4B'de yapılacak. Menüdeki linkler çalışsın diye bu sayfalar için geçici, sade bir sayfa koy: yalnız başlık ve BRIEF'teki gerçek iletişim bilgileri. Lorem ipsum ya da "yakında" yazısı yok. İngilizce de FAZ 4B'de eklenecek; bu oturumda dil seçicide yalnız DE ve TR görünsün." — İlgili: geçici sayfalar, dil seçici
+- **22.10.2026** — "Çelişki görürsen BRIEF.md ve KARAR-DEFTERI.md geçerlidir." — İlgili: belgeler
+
+### Açılış videosu
+- **22.10.2026** — "Coverr, Pexels ya da Mixkit'te ticari kullanıma açık, GERÇEK kamera çekimi bir açılış videosu bul (yapay zekâ üretimi ya da 3D animasyon değil): marka logosu okunmayan premium bir araç atmosferi; yavaş dolly, push-in ya da yumuşak pan; ani kesim yok; karanlık, sinematik ton; DESIGN.md'deki "Die Übergabe" konseptine uygun." — İlgili: açılış videosu
+- **22.10.2026** — "En az 8 kare çıkarıp kontrol et. Yapay zekâ ya da 3D izi, okunur rozet ya da plaka, ani kesim varsa o videoyu ele. Seçilen videonun kaynak linkini ve lisansını docs/KARAR-DEFTERI.md'ye yaz." — İlgili: açılış videosu
+- **22.10.2026** — "Kodlama: masaüstü 1920 px (en fazla 6 MB) ve mobil 960 px (en fazla 2,5 MB) H.264 MP4 + WebP poster (LCP öğesi). Döngü kesintisiz olsun." — İlgili: public/hero
+- **22.10.2026** — "Uygun video bulamazsan durma: açılışta Mega Cars'ın kendi showroom'unda çekilmiş gerçek bir ilan fotoğrafını (ör. "MEGA CARS" tabelalı S 560) yavaş bir kamera ilerlemesiyle (push-in) kullan ve bunu raporda yaz." — İlgili: açılış
+
+### Teknik iskelet
+- **22.10.2026** — "v2 dalında Vite projesini kaldır; Next.js (güncel kararlı sürüm, App Router) + TypeScript + Tailwind + GSAP (ScrollTrigger, SplitText, Flip) + Lenis kur. public/cars altındaki gerçek araç fotoğraflarını koru." — İlgili: kod tabanı
+- **22.10.2026** — "Diller: /de (varsayılan), /tr (bu oturumda), /en (FAZ 4B). İlk girişte tarayıcı diline göre yönlendirme; kayma animasyonlu dil seçici. Bu oturumdaki bütün metinler Almanca ve Türkçe, uzman tercüman seviyesinde ve yüklemli tam cümlelerle yazılır." — İlgili: i18n
+- **22.10.2026** — "vercel.json: dal içinde framework = nextjs; /cars ve /hero altındaki dosyalar için 1 yıl immutable önbellek başlığı." — İlgili: vercel.json
+- **22.10.2026** — "Bütün site şimdilik noindex (robots meta + X-Robots-Tag)." — İlgili: SEO
+- **22.10.2026** — "Envanter: data/inventory.json (cars-data.json'daki son bilinen 18 gerçek araçtan) + scripts/import-inventory.ts. Her araç için şu alanlar: slug, marka, model, sürüm, fiyat, km, ilk tescil, güç, yakıt, şanzıman, kasa tipi, donanım, fotoğraflar, isteğe bağlı spin alanı. Kaynakta olmayan alanı uydurma; boş bırak ve arayüzde o satırı gösterme." — İlgili: data/inventory.json
+- **22.10.2026** — "Fotoğraflar: WebP, srcset (kaynak 1440 px ise 1440w ve 800w), bulanık yer tutucu, tembel yükleme. Arka plan değiştirme ve renk filtresi yok." — İlgili: görseller
+
+### Ortak bileşenler ve sayfalar
+- **22.10.2026** — "Üst menü: Fahrzeuge, Finanzierung, Ankauf, Kontakt + dil seçici + telefon/WhatsApp." — İlgili: üst menü
+- **22.10.2026** — "Footer: iletişim, açılış saatleri, yasal linkler ve küçük bir "Website: Galzura" bağlantısı (galzura.com)." — İlgili: footer
+- **22.10.2026** — "İletişim bilgileri yalnız BRIEF.md'den alınır (+43 660 6877002, megacars@live.at). office@meral.at ve +43 660 1999472 hiçbir yerde geçmez." — İlgili: bütün site
+- **22.10.2026** — "Güven bölümü: yalnız kaynağı belli, güncel ve doğrulanmış bilgiler (her birinin kaynağını KARAR-DEFTERI'ne yaz) ve galerinin kendi showroom fotoğrafı. "Seit 2002" ifadesi sahibi teyit etmeden kullanılmaz." — İlgili: Startseite güven bölümü
+- **22.10.2026** — "Hizmetler: yalnız doğrulanmış olanlar. Teyit bekleyen hizmetleri (ör. Inzahlungnahme) KARAR-DEFTERI'ne "teyit bekliyor" diye yaz." — İlgili: Startseite hizmetler
+- **22.10.2026** — "Konum: DSGVO'ya uygun harita (önce statik önizleme, tıklanınca yüklenir), açılış saatleri ve iletişim." — İlgili: Startseite konum
+- **22.10.2026** — "Filtreler: Marke, Preis von–bis (en düşük fiyattan başlar), Kilometerstand, Erstzulassung, Kraftstoff, Getriebe, Karosserie. Sıralama da olsun. Filtre durumu adres çubuğunda saklanır; mobilde filtre paneli alttan açılır. Filtre değişince kartlar GSAP Flip ile yumuşakça yeniden dizilir." — İlgili: Fahrzeuge
+- **22.10.2026** — "Sayfanın üstünde: spin verisi varsa docs/showroom-v2'deki görüntüleyiciden üretilen 360 bileşeni, yoksa büyük galeri (tam ekran, kaydırma, klavye). Şu an hiçbir araçta spin verisi yok; bileşen hazır dursun, veri gelince kendiliğinden açılsın." — İlgili: Fahrzeug-Detail
+- **22.10.2026** — "CTA'lar: Anrufen; WhatsApp (araç adı + fiyat + sayfa linki hazır dolu); Probefahrt anfragen (kısa form → WhatsApp'a hazır mesaj; sahte "gönderildi" ekranı yok)." — İlgili: Fahrzeug-Detail
+- **22.10.2026** — "Önizleme adresi girişe kapalıysa (Vercel koruması), ölçümü yerelde production derlemesinde yap ve bunu raporda belirt; Vercel ayarını değiştirme." — İlgili: Lighthouse
+
+### Kayıtlar (CC, kaynaklı) — FAZ 4A uygulaması
+> Bu alt bölüm Volkan'ın cümlesi değildir; talimatın istediği kaynak ve lisans kayıtlarıdır.
+
+**Açılış videosu**
+- Seçilen: Pexels 6872081 "Footage of sportive car", çeken: Tima Miroshnichenko — https://www.pexels.com/video/footage-of-sportive-car-6872081/ — lisans: Pexels License (https://www.pexels.com/license/; ticari kullanım serbest, atıf zorunlu değil). Gerçek kamera çekimi; yavaş dolly.
+- Kontrol (22.10.2026): 10 kare + 1440p kırpım incelendi; sahne kesimi taraması boş (ani kesim yok); yapay zekâ/3D izi görülmedi; aynadaki yazı 1440p'de bile okunmuyor; çamurluktaki bayrak rozeti kadraj dışında bırakıldı (alt %12,5 ve sol %12,5 kırpıldı).
+- Kodlama: 25 → 24 fps (%4 yavaşlatma, kare atlanmadı), ileri-geri kesintisiz döngü 22,7 sn (dikiş PSNR 35,9 dB; ardışık iki kare 30,3 dB). Masaüstü 1920×1080 H.264 5,26 MB; mobil 540×960 (dikey) H.264 1,27 MB; WebP poster 36 KB / 12 KB (LCP öğesi). Dosyalar: public/hero/.
+- Elenenler: Pexels 6161372 (gövdede kanatlı marka logosu görünüyor, hızlı yakın planlar); Pexels 36282645 (kamera sabit, dolly/pan yok; turuncu jantlı modifiye araç konsepte uymuyor).
+
+**Güven bölümü — gösterilen bilgiler ve kaynakları**
+- "Mega Cars Murat Demir e.U., FN 447871 i, Landesgericht Feldkirch": Firmenbuch kaydı (firmeneintrag.creditreform.de; bu defterde 22.10.2026, a) maddesi).
+- Adres Radetzkystraße 80, 6845 Hohenems: BRIEF.md + OpenStreetMap way 307149900 "Mega Cars" (Nominatim sorgusu 22.10.2026; 47.3727136, 9.6940083).
+- Açılış saatleri Pzt–Cum 08:00–18:00, Cmt 09:00–15:00, Pazar kapalı: Cylex + OpenStreetMap. Öğle arası teyit edilmediği için gösterilmedi.
+- "Gewissenhaft - Verlässlich - Professionell": galerinin kendi plaka kapağı (public/cars/mercedes-s-560-4matic/4.webp karesinde okundu).
+- Stok sayısı 18 ve fiyat aralığı 23.900–64.900 €: data/inventory.json (son bilinen gerçek stok, Haziran 2026).
+- Showroom fotoğrafı: public/cars/mercedes-glc-220-d/4.webp; bina fotoğrafı: public/cars/audi-q3-35-tdi/1.webp (galerinin kendi ilan fotoğrafları).
+- Kullanılmadı: AutoScout24 puanı (Haziran 2026 ilan sayfasında "27 Bewertungen, 5 von 5"; 22.10.2026'da bayi profili autoscout24.at/haendler/mega-cars-hohenems "reviewCount 0" gösteriyor, güncel değil). "Seit 2002" kullanılmadı.
+
+**Hizmetler — sitede gösterilenler**
+- Showroom'da yerinde inceleme (adres ve saatler doğrulanmış), test sürüşü randevusu WhatsApp/telefonla (Volkan'ın CTA kararı), telefon/WhatsApp/e-posta ile danışma (iletişim bilgileri BRIEF.md).
+
+**Teyit bekliyor (sitede gösterilmedi)**
+- Finanzierung ("Wir erstellen Ihre Finanzierung individuell auch OHNE Anzahlung" — galerinin AutoScout24 ilan metni, Haziran 2026).
+- Inzahlungnahme, Leasing, Tausch ("Inzahlungnahme, Finanzierung, Leasing oder Tausch möglich" — aynı ilan metni).
+- Pazar ve resmî tatil günlerinde inceleme/test sürüşü ("Besichtigungen sowie Probefahrten auch an Sonn- und Feiertagen bei vorheriger Absprache" — aynı ilan metni).
+- Wartung und Pflege (Firmenbuch iş kolu kaydında geçiyor; müşteriye hizmet olarak sunulduğu teyit edilmedi).
+- +43 660 6877002 numarasının WhatsApp'ta açık olduğu; öğle arası; UID.
+
+**Veri notları**
+- Porsche Panamera'nın ilanında kasa tipi "Kleinwagen" yazıyor (ilan hatası); data/overrides.json ile yalnız gizlendi, yerine tahmin yazılmadı. Galeriden teyit bekliyor.
+- Liste sıralaması: ilan tarihi verisi olmadığı için "Neueste" yerine varsayılan "Jüngste Erstzulassung zuerst" (DESIGN.md Ek B #7 Volkan onayı bekliyor).
+- İkinci telefon +43 660 6969496 FAZ 4A talimatı gereği (yalnız +43 660 6877002 ve megacars@live.at) kullanılmadı.
+- Öne çıkanlar şeridi (data/featured.json): S 560, 340i Touring, Panamera, C 220 d Cabrio, A 35 AMG, Range Rover Sport, Octavia — fiyat aralığının tamamını göstermek için seçildi.

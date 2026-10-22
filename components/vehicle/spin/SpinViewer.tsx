@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, ViewTransition } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import type { Spin } from '@/lib/types'
 import { mountSpin } from './mountSpin'
@@ -11,7 +11,7 @@ const frameUrls = (id: string, spin: Spin, size: number) =>
  * 360° showroom (DESIGN.md §10). Rendered only when the vehicle has spin data; the first
  * frame is a server-rendered <img> (the page's LCP), the canvas viewer takes over after it.
  */
-export function SpinViewer({ id, spin, name, viewTransitionName }: { id: string; spin: Spin; name: string; viewTransitionName: string }) {
+export function SpinViewer({ id, spin, name }: { id: string; spin: Spin; name: string }) {
   const t = useTranslations('spin')
   const ref = useRef<HTMLDivElement>(null)
   const large = Math.max(...spin.sizes)
@@ -33,19 +33,19 @@ export function SpinViewer({ id, spin, name, viewTransitionName }: { id: string;
 
   return (
     <figure>
-      <ViewTransition name={viewTransitionName} share="car-photo" default="none">
-        <div
-          ref={ref}
-          tabIndex={0}
-          role="group"
-          aria-roledescription="360°"
-          aria-label={t('label', { name })}
-          className="mcs relative aspect-[4/3] overflow-clip rounded-[4px] bg-hall lg:aspect-[16/10]"
-        >
-          <img src={frames[0]} alt="" fetchPriority="high" className="mcs-poster absolute inset-0 h-full w-full object-cover" />
-        </div>
-      </ViewTransition>
-      <figcaption className="t-label mt-3">{t('note')}</figcaption>
+      <div
+        ref={ref}
+        tabIndex={0}
+        role="group"
+        aria-roledescription="360°"
+        aria-label={t('label', { name })}
+        className="mcs relative aspect-[4/3] overflow-clip bg-hall lg:aspect-[16/10]"
+      >
+        <img src={frames[0]} alt="" fetchPriority="high" className="mcs-poster absolute inset-0 h-full w-full object-cover" />
+      </div>
+      <figcaption className="label" style={{ marginTop: 12 }}>
+        {t('note')}
+      </figcaption>
     </figure>
   )
 }

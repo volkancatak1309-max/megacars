@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { Link } from '@/i18n/navigation'
 import { routing, type Locale } from '@/i18n/routing'
 import { getVehicle, similarVehicles, toCard, vehicles } from '@/lib/inventory'
 import { formatDecimal, formatKm, formatNumber, formatPower, formatPrice, vehicleFullName, vehicleName } from '@/lib/format'
@@ -9,15 +8,19 @@ import { alternates, breadcrumbLd, carLd, localizedUrl } from '@/lib/seo'
 import { SITE, siteOrigin, whatsappHref } from '@/lib/site'
 import { JsonLd } from '@/components/ui/JsonLd'
 import { Icon } from '@/components/ui/Icon'
-import { Magnetic } from '@/components/ui/Magnetic'
 import { CarImage } from '@/components/ui/CarImage'
-import { DrawGroup, RevealText, Stagger } from '@/components/motion/Reveal'
-import { Gallery, PhotoGrid } from '@/components/vehicle/Gallery'
+import { DrawGroup } from '@/components/motion/Reveal'
+import { CurtainLink } from '@/components/site/Curtain'
+import { Odometer } from '@/components/site/Loader'
+import { LinesUp } from '@/components/site/Reveals'
+import { ShutterA, ShutterLink } from '@/components/site/Shutter'
+import { ActionBar, TestDriveButton } from '@/components/site/ActionBar'
+import { Stage } from '@/components/vehicle/Stage'
+import { TechCard, RevealFrames, type TechFact } from '@/components/vehicle/TechCard'
 import { SpinViewer } from '@/components/vehicle/spin/SpinViewer'
 import { Equipment } from '@/components/vehicle/Equipment'
 import { TestDriveForm } from '@/components/vehicle/TestDriveForm'
 import { VehicleCard } from '@/components/vehicle/VehicleCard'
-import { MobileActionBar } from '@/components/layout/MobileActionBar'
 
 type Props = PageProps<'/[locale]/fahrzeuge/[slug]'>
 
@@ -53,6 +56,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+/** "Hybrid (Benzin/Elektro)" → big "Hybrid" + small "Benzin/Elektro"; "SUV / Geländewagen" likewise. */
+const split = (label: string): { value: string; note?: string } => {
+  const paren = label.match(/^(.*?) \((.*)\)$/)
+  if (paren) return { value: paren[1], note: paren[2] }
+  const slash = label.split(' / ')
+  return slash.length === 2 ? { value: slash[0], note: slash[1] } : { value: label }
+}
+
 export default async function VehiclePage({ params }: Props) {
   const { locale: raw, slug } = await params
   const locale = raw as Locale
@@ -64,7 +75,6 @@ export default async function VehiclePage({ params }: Props) {
   const tv = await getTranslations('vehicle')
   const tn = await getTranslations('nav')
   const tc = await getTranslations('common')
-  const tg = await getTranslations('gallery')
 
   const name = vehicleName(v)
   const fullName = vehicleFullName(v)
@@ -85,14 +95,18 @@ export default async function VehiclePage({ params }: Props) {
   const yesNo = (b: boolean | null) => (b === null ? null : b ? tc('yes') : tc('no'))
   const n = (x: number | null, unit = '') => (x === null ? null : `${formatNumber(x, locale)}${unit}`)
 
-  const keyFacts = [
+  const tech: TechFact[] = [
     { label: tv('registration'), value: v.firstRegistration },
-    { label: tv('mileage'), value: formatKm(v.mileage, locale) },
-    { label: tv('power'), value: formatPower(v.powerKw, v.powerPs, locale) },
-    { label: tv('fuel'), value: fuel },
-    { label: tv('gearbox'), value: gearbox },
-    { label: tv('body'), value: body },
-  ].filter((f): f is { label: string; value: string } => Boolean(f.value))
+    { label: tv('mileage'), value: formatNumber(v.mileage, locale), unit: 'km' },
+    v.powerPs
+      ? { label: tv('power'), value: formatNumber(v.powerPs, locale), unit: 'PS', note: v.powerKw ? `${formatNumber(v.powerKw, locale)} kW` : undefined }
+      : v.powerKw
+        ? { label: tv('power'), value: formatNumber(v.powerKw, locale), unit: 'kW' }
+        : null,
+    fuel ? { label: tv('fuel'), ...split(fuel) } : null,
+    gearbox ? { label: tv('gearbox'), value: gearbox } : null,
+    body ? { label: tv('body'), ...split(body) } : null,
+  ].filter((f): f is TechFact => Boolean(f))
 
   const data = [
     { label: tv('drive'), value: v.drive ? tv(`driveValues.${v.drive}`) : null },
@@ -117,10 +131,11 @@ export default async function VehiclePage({ params }: Props) {
 
   const similar = similarVehicles(v).map(toCard)
   const waHref = whatsappHref(t('whatsappMessage', vehicleRef))
-  const vtName = `car-${v.id}`
+  const chain = [v.firstRegistration, formatKm(v.mileage, locale), formatPower(v.powerKw, v.powerPs, locale)].filter(Boolean).join(' · ')
+  const hasEquipment = Object.values(v.equipment).some((g) => g.length)
 
   return (
-    <div className="pt-[var(--header-h)]">
+    <article aria-labelledby="vd-title">
       <JsonLd data={carLd(v, locale, { fuel, gearbox, body })} />
       <JsonLd
         data={breadcrumbLd([
@@ -130,148 +145,138 @@ export default async function VehiclePage({ params }: Props) {
         ])}
       />
 
-      <div className="container-max page-x">
-        <nav aria-label={t('breadcrumb')} className="py-5 text-[0.875rem] text-ink-3">
-          <ol className="flex flex-wrap items-center gap-2">
+      <header className="vd-head s-night pg wide">
+        <nav aria-label={t('breadcrumb')} className="vd-crumbs">
+          <ol>
             <li>
-              <Link href="/" className="transition-colors duration-300 hover:text-ink">
-                {tn('home')}
-              </Link>
+              <CurtainLink href="/">{tn('home')}</CurtainLink>
             </li>
             <li aria-hidden="true">/</li>
             <li>
-              <Link href="/fahrzeuge" className="transition-colors duration-300 hover:text-ink">
-                {tn('vehicles')}
-              </Link>
+              <CurtainLink href="/fahrzeuge">{tn('vehicles')}</CurtainLink>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="text-ink-2">
-              {name}
-            </li>
+            <li aria-current="page">{name}</li>
           </ol>
         </nav>
+        <p className="vd-make">{v.make}</p>
+        <h1 id="vd-title" className={`vd-model${v.model.length > 10 ? ' is-long' : ''}`}>
+          <span className="sr-only">{v.make} </span>
+          <span className="mline rise">
+            <span>{v.model}</span>
+          </span>
+        </h1>
+        {v.version && (
+          <p className="vd-version fade-up" style={{ ['--i' as string]: 1 }}>
+            {v.version}
+          </p>
+        )}
+      </header>
 
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-          <div className="min-w-0 lg:col-span-7 xl:col-span-8">
-            {v.spin ? (
-              <SpinViewer id={v.id} spin={v.spin} name={fullName} viewTransitionName={vtName} />
-            ) : (
-              <Gallery photos={v.photos} alts={alts} name={fullName} viewTransitionName={vtName} whatsapp={waHref} />
-            )}
-          </div>
-
-          <aside className="min-w-0 lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:col-span-5 lg:self-start xl:col-span-4">
-            <h1 className="t-h1">{name}</h1>
-            {v.version && <p className="t-lead mt-2">{v.version}</p>}
-            <p className="mt-6">
-              <span className="t-label block">{tc('price')}</span>
-              <span className="t-price">{price}</span>
-            </p>
-
-            <Stagger as="dl" className="mt-8 grid grid-cols-2 border-t border-line" start="top 100%">
-              {keyFacts.map((f) => (
-                <div key={f.label} data-stagger className="border-b border-line py-4 pr-4">
-                  <dt className="t-label">{f.label}</dt>
-                  <dd className="tabular mt-1 text-ink">{f.value}</dd>
-                </div>
-              ))}
-            </Stagger>
-
-            <div className="mt-8 grid gap-3">
-              <Magnetic>
-                <a href="#probefahrt" className="btn btn-primary">
-                  <Icon name="calendar" size={18} />
-                  {t('testDrive')}
-                </a>
-              </Magnetic>
-              <div className="grid grid-cols-2 gap-3">
-                <Magnetic>
-                  <a href={waHref} target="_blank" rel="noopener" className="btn btn-secondary">
-                    <Icon name="whatsapp" size={18} />
-                    {tc('whatsapp')}
-                  </a>
-                </Magnetic>
-                <Magnetic>
-                  <a href={SITE.phoneHref} className="btn btn-secondary">
-                    <Icon name="phone" size={18} />
-                    {tc('call')}
-                  </a>
-                </Magnetic>
-              </div>
-            </div>
-          </aside>
+      <div className="vd-main s-night pg wide">
+        <div className="vd-stage">
+          {v.spin && <SpinViewer id={v.id} spin={v.spin} name={fullName} />}
+          <Stage photos={v.photos} alts={alts} name={fullName} whatsapp={waHref} />
         </div>
+        <section className="vd-tech" aria-labelledby="tc-title">
+          <div className="tc-head">
+            <LinesUp id="tc-title" className="d-s">
+              {t('techTitle')}
+            </LinesUp>
+          </div>
+          <TechCard facts={tech} label={t('keyFacts')} />
+        </section>
+
+        <aside className="vd-side" aria-label={t('actionsLabel')}>
+          <p className="vd-price">
+            <span className="label">{tc('price')}</span>
+            <Odometer text={price} className="vd-price-value tabular" />
+            <span className="vd-price-note">{t('priceNote')}</span>
+          </p>
+          <p className="vd-chain tabular">{chain}</p>
+          <div className="vd-ctas">
+            <TestDriveButton label={t('testDrive')} />
+            <div className="vd-ctas-row">
+              <ShutterA href={waHref} target="_blank" rel="noopener" kind="line">
+                <Icon name="whatsapp" size={17} />
+                {tc('whatsapp')}
+              </ShutterA>
+              <ShutterA href={SITE.phoneHref} kind="line">
+                <Icon name="phone" size={17} />
+                {tc('call')}
+              </ShutterA>
+            </div>
+          </div>
+          <p className="vd-direct">{t('visitNote')}</p>
+        </aside>
       </div>
 
-      <section aria-labelledby="photos-title" className="container-max page-x pt-[var(--section-y)]">
-        <RevealText id="photos-title" className="t-h2 max-w-[30ch]">
-          {t('photosTitle', { count: v.photos.length })}
-        </RevealText>
-        <div className="mt-8">
-          <PhotoGrid photos={v.photos} alts={alts} labels={v.photos.map((_, i) => tg('open', { index: i + 1 }))} />
-        </div>
-      </section>
-
-      {Object.values(v.equipment).some((g) => g.length) && (
-        <section aria-labelledby="equipment-title" className="container-max page-x pt-[var(--section-y)]">
-          <RevealText id="equipment-title" className="t-h2 mb-8 max-w-[30ch]">
-            {t('equipmentTitle')}
-          </RevealText>
-          <Equipment equipment={v.equipment} />
+      {hasEquipment && (
+        <section className="eq s-bone" aria-labelledby="eq-title">
+          <div className="pg wide">
+            <LinesUp id="eq-title" className="eq-title d-l">
+              {t('equipmentTitle')}
+            </LinesUp>
+            <Equipment equipment={v.equipment} />
+          </div>
         </section>
       )}
 
-      <section aria-labelledby="data-title" className="container-max page-x pt-[var(--section-y)]">
-        <RevealText id="data-title" className="t-h2 mb-8 max-w-[30ch]">
-          {t('dataTitle')}
-        </RevealText>
-        <dl className="grid gap-x-12 md:grid-cols-2">
-          {data.map((row) => (
-            <DrawGroup key={row.label} className="grid grid-cols-[1fr_auto] gap-6 py-4">
-              <dt className="text-ink-2">{row.label}</dt>
-              <dd className="tabular text-right text-ink">{row.value}</dd>
-            </DrawGroup>
-          ))}
-        </dl>
+      <section className="dd s-night" aria-labelledby="dd-title">
+        <div className="pg wide">
+          <LinesUp id="dd-title" className="dd-title d-m">
+            {t('dataTitle')}
+          </LinesUp>
+          <dl className="dd-list">
+            {data.map((row) => (
+              <DrawGroup key={row.label}>
+                <dt>{row.label}</dt>
+                <dd className="tabular">{row.value}</dd>
+              </DrawGroup>
+            ))}
+          </dl>
+        </div>
       </section>
 
-      <section id="probefahrt" aria-label={t('testDrive')} className="scroll-mt-[var(--header-h)] pt-[var(--section-y)]">
-        <div className="container-max page-x">
-          <div className="grid gap-10 border-y border-line py-12 lg:grid-cols-12 lg:gap-8 lg:py-16">
-            <div className="lg:col-span-7">
-              <TestDriveForm vehicle={vehicleRef} />
-            </div>
-            <div className="hidden lg:col-span-4 lg:col-start-9 lg:block">
-              <CarImage photo={v.photos[v.cover]} alt={alts[v.cover]} sizes="30vw" className="aspect-[4/3] rounded-[4px]" />
-              <p className="t-h3 mt-4">{fullName}</p>
-              <p className="t-price-s mt-1">{price}</p>
-            </div>
+      <section id="probefahrt" className="td s-red" aria-label={t('testDrive')}>
+        <div className="td-grid pg wide">
+          <TestDriveForm vehicle={vehicleRef} />
+          <div className="td-car">
+            <CarImage photo={v.photos[v.cover]} alt={alts[v.cover]} sizes="(min-width: 1024px) 30vw, 100vw" className="aspect-[4/3]" />
+            <p className="d-s">{fullName}</p>
+            <p className="tabular" style={{ fontWeight: 700, fontSize: '1.25rem' }}>
+              {price}
+            </p>
           </div>
         </div>
       </section>
 
       {similar.length > 0 && (
-        <section aria-labelledby="similar-title" className="py-[var(--section-y)]">
-          <div className="container-max page-x flex flex-wrap items-end justify-between gap-4">
-            <RevealText id="similar-title" className="t-h2 max-w-[26ch]">
-              {t('similarTitle')}
-            </RevealText>
-            <Link href="/fahrzeuge" className="link-arrow">
-              {t('allVehicles')}
-              <Icon name="arrowRight" size={18} />
-            </Link>
+        <section className="sim s-night" aria-labelledby="sim-title">
+          <div className="pg wide">
+            <div className="sim-head">
+              <LinesUp id="sim-title" className="sim-title d-l">
+                {t('similarTitle')}
+              </LinesUp>
+              <ShutterLink href="/fahrzeuge" kind="line">
+                {t('allVehicles')}
+                <Icon name="arrowRight" size={18} />
+              </ShutterLink>
+            </div>
+            <RevealFrames>
+              <ul className="vl-grid">
+                {similar.slice(0, 6).map((s) => (
+                  <li key={s.id}>
+                    <VehicleCard v={s} />
+                  </li>
+                ))}
+              </ul>
+            </RevealFrames>
           </div>
-          <ul className="snap-strip container-max mt-10 gap-6">
-            {similar.map((s) => (
-              <li key={s.id} className="w-[82vw] sm:w-[45vw] lg:w-[calc((min(100vw,1440px)-2*var(--page-x)-48px)/3)]">
-                <VehicleCard v={s} sizes="(min-width: 1024px) 31vw, (min-width: 640px) 45vw, 82vw" />
-              </li>
-            ))}
-          </ul>
         </section>
       )}
 
-      <MobileActionBar vehicle={vehicleRef} />
-    </div>
+      <ActionBar vehicle={vehicleRef} />
+    </article>
   )
 }

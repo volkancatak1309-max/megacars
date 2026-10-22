@@ -1,0 +1,799 @@
+/* ===========================================================================
+   Fahrzeug-Detail ("Nachtfahrt"): the photo grows into the stage under a giant
+   model name, the price rolls like an odometer, the technical card opens cell
+   by cell, the gallery changes photos behind a red wipe. Rhythm: night →
+   bone (equipment) → night (data) → red (test drive) → night (similar).
+   =========================================================================== */
+
+.vd-head {
+  padding-top: calc(var(--ph-h) + clamp(20px, 3vw, 40px));
+  padding-bottom: clamp(20px, 2.6vw, 36px);
+}
+
+.vd-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em 0.8em;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.vd-crumbs a {
+  color: var(--bone);
+}
+
+.vd-make {
+  margin-top: clamp(28px, 4vw, 56px);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.vd-model {
+  margin-top: 8px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 11vw, 11.5rem);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.vd-model.is-long {
+  font-size: clamp(2.5rem, 7.4vw, 8rem);
+}
+
+.vd-version {
+  margin-top: 14px;
+  font-size: clamp(1.0625rem, 1.4vw, 1.375rem);
+  color: var(--muted);
+}
+
+/* ---- main grid: stage + technical card | sticky actions ------------------------------ */
+.vd-main {
+  display: grid;
+  gap: clamp(36px, 5vw, 64px);
+  padding-bottom: var(--section);
+}
+
+.vd-stage,
+.vd-tech {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  min-width: 0;
+}
+
+.vd-tech {
+  margin-top: clamp(24px, 4vw, 56px);
+}
+
+/* phones: stage, price and actions, then the technical card */
+@media (min-width: 1024px) {
+  .vd-main {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    grid-template-areas:
+      'stage side'
+      'tech side';
+    column-gap: clamp(32px, 3.5vw, 64px);
+    align-items: start;
+  }
+
+  .vd-stage {
+    grid-area: stage;
+  }
+
+  .vd-tech {
+    grid-area: tech;
+  }
+
+  .vd-side {
+    grid-area: side;
+    position: sticky;
+    top: calc(var(--ph-h) + 24px);
+  }
+}
+
+/* ---- stage gallery ---------------------------------------------------------------------- */
+.st {
+  display: grid;
+  gap: 12px;
+}
+
+.st-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  background: var(--night-3);
+  touch-action: pan-y;
+  outline-offset: 4px;
+  user-select: none;
+}
+
+/* arrival: the photo grows from a window into the full stage (CSS, first paint) */
+.st-arrive {
+  position: absolute;
+  inset: 0;
+  animation: st-arrive 1.4s var(--ease-io) 0.55s both;
+}
+
+.st-arrive img {
+  animation: st-arrive-img 1.6s var(--ease-out) 0.55s both;
+}
+
+@keyframes st-arrive {
+  from {
+    clip-path: inset(12% 16% 12% 16%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes st-arrive-img {
+  from {
+    transform: scale(1.22);
+  }
+}
+
+.st-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.st-layer[data-dir='next'] {
+  animation: st-in-next 1s var(--ease-io) 0.12s both;
+}
+
+.st-layer[data-dir='prev'] {
+  animation: st-in-prev 1s var(--ease-io) 0.12s both;
+}
+
+.st-layer[data-dir='next'] img {
+  animation: st-img-next 1.12s var(--ease-io) both;
+}
+
+.st-layer[data-dir='prev'] img {
+  animation: st-img-prev 1.12s var(--ease-io) both;
+}
+
+.st-wipe {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--red);
+  pointer-events: none;
+}
+
+.st-wipe[data-dir='next'] {
+  animation: st-wipe-next 1s var(--ease-io) both;
+}
+
+.st-wipe[data-dir='prev'] {
+  animation: st-wipe-prev 1s var(--ease-io) both;
+}
+
+@keyframes st-in-next {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes st-in-prev {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes st-img-next {
+  from {
+    transform: translateX(18%) scale(1.08);
+  }
+}
+
+@keyframes st-img-prev {
+  from {
+    transform: translateX(-18%) scale(1.08);
+  }
+}
+
+@keyframes st-wipe-next {
+  0% {
+    clip-path: inset(0 0 0 100%);
+  }
+  45% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes st-wipe-prev {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  45% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+.st-ui {
+  position: absolute;
+  inset: auto 12px 12px 12px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.st-ui > * {
+  pointer-events: auto;
+}
+
+.st-count {
+  padding: 6px 12px;
+  background: rgb(11 11 13 / 0.82);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.st-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.st-buttons .sh {
+  background: rgb(11 11 13 / 0.82);
+  border-color: transparent !important;
+}
+
+.st-thumbs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.st-thumb {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: var(--night-3);
+  opacity: 0.55;
+  transition: opacity var(--t-2) var(--ease-out);
+}
+
+.st-thumb::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-3) var(--ease-io);
+}
+
+.st-thumb[aria-current='true'] {
+  opacity: 1;
+}
+
+.st-thumb[aria-current='true']::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .st-thumb:hover {
+    opacity: 0.9;
+  }
+}
+
+/* full-screen view */
+dialog.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-full);
+  width: 100%;
+  max-width: 100%;
+  height: 100svh;
+  max-height: 100svh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #000;
+  color: var(--bone);
+  opacity: 0;
+  transition:
+    opacity var(--t-2) var(--ease-out),
+    overlay var(--t-2) allow-discrete,
+    display var(--t-2) allow-discrete;
+}
+
+dialog.lightbox[open] {
+  opacity: 1;
+}
+
+@starting-style {
+  dialog.lightbox[open] {
+    opacity: 0;
+  }
+}
+
+dialog.lightbox::backdrop {
+  background: #000;
+}
+
+.lb {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100%;
+}
+
+.lb-top,
+.lb-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px var(--page);
+}
+
+.lb-bottom {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+
+.lb-stage {
+  position: relative;
+  overflow: clip;
+  touch-action: pan-y;
+}
+
+.lb-stage .st-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lb-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+}
+
+.lb-arrow[data-side='prev'] {
+  left: 12px;
+}
+
+.lb-arrow[data-side='next'] {
+  right: 12px;
+}
+
+.lb-arrow .sh {
+  background: rgb(11 11 13 / 0.7);
+}
+
+.lb-thumbs {
+  display: flex;
+  gap: 8px;
+}
+
+.lb-thumbs .st-thumb {
+  width: 72px;
+}
+
+/* ---- sticky action panel --------------------------------------------------------------- */
+.vd-side {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+.vd-price {
+  display: grid;
+  gap: 6px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.vd-price-value {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(2.75rem, 4.6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.vd-price-note {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.vd-chain {
+  color: var(--muted);
+}
+
+.vd-ctas {
+  display: grid;
+  gap: 10px;
+}
+
+.vd-ctas-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.vd-ctas .sh {
+  width: 100%;
+}
+
+.vd-direct {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* ---- technical card ------------------------------------------------------------------------ */
+.tc-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: clamp(20px, 3vw, 36px);
+}
+
+.tc {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line);
+}
+
+.tc > div {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  padding: 22px 16px 26px 0;
+}
+
+.tc dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tc dd {
+  display: grid;
+  gap: 4px;
+}
+
+.tc-value {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.06em;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(1.375rem, 2.05vw, 2.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.tc-value > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.tc-unit {
+  font-size: 0.45em;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-left: 0.2em;
+}
+
+.tc-note {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .tc {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tc > div:not(:nth-child(3n + 1)) {
+    padding-left: 22px;
+    border-left: 1px solid var(--line);
+  }
+}
+
+/* ---- equipment, magazine layout (bone) ---------------------------------------------------- */
+.eq {
+  padding-block: var(--section);
+}
+
+.eq-title {
+  max-width: 20ch;
+}
+
+.eq-groups {
+  display: grid;
+  gap: clamp(48px, 6vw, 88px);
+  margin-top: clamp(48px, 6vw, 96px);
+}
+
+.eq-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--night);
+}
+
+.eq-group-head h3 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.eq-group-head span {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+  color: var(--red);
+}
+
+.eq-list {
+  columns: 1;
+  column-gap: 40px;
+  margin-top: 8px;
+}
+
+.eq-list li {
+  break-inside: avoid;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-ink);
+}
+
+@media (min-width: 640px) {
+  .eq-list {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1280px) {
+  .eq-list {
+    columns: 3;
+  }
+}
+
+/* ---- all data -------------------------------------------------------------------------------- */
+.dd {
+  padding-block: var(--section);
+}
+
+.dd-title {
+  max-width: 22ch;
+}
+
+.dd-list {
+  display: grid;
+  column-gap: 56px;
+  margin-top: clamp(40px, 5vw, 72px);
+}
+
+.dd-list > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  padding: 16px 0;
+}
+
+.dd-list dt {
+  color: var(--muted);
+}
+
+.dd-list dd {
+  text-align: right;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .dd-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- test drive (red) ------------------------------------------------------------------------ */
+.td {
+  padding-block: var(--section);
+}
+
+.td-grid {
+  display: grid;
+  gap: clamp(40px, 5vw, 80px);
+}
+
+.td-car {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.td-car .d-s {
+  margin-top: 6px;
+}
+
+@media (min-width: 1024px) {
+  .td-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  }
+}
+
+.tdf {
+  display: grid;
+  gap: 20px;
+}
+
+.tdf-title {
+  max-width: 20ch;
+}
+
+.tdf-row {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .tdf-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tdf-note {
+  max-width: 56ch;
+  font-size: 0.9375rem;
+  color: var(--sub);
+}
+
+.tdf-direct {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 22px;
+  font-size: 0.9375rem;
+  color: var(--sub);
+}
+
+.s-red .field-control {
+  border-color: rgb(255 255 255 / 0.6);
+}
+
+.s-red select.field-control option {
+  background: var(--night-2);
+  color: var(--bone);
+}
+
+.s-red .field-control::placeholder {
+  color: rgb(255 255 255 / 0.75);
+}
+
+/* ---- similar vehicles ------------------------------------------------------------------------- */
+.sim {
+  padding-block: var(--section);
+}
+
+.sim-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+
+.sim-title {
+  max-width: 22ch;
+}
+
+/* ---- 360° viewer (DESIGN.md §10) ----------------------------------------------------------------- */
+.mcs {
+  outline-offset: 4px;
+  cursor: grab;
+  user-select: none;
+}
+
+.mcs.is-dragging {
+  cursor: grabbing;
+}
+
+.mcs-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mcs.is-live .mcs-poster {
+  visibility: hidden;
+}
+
+.mcs.is-full {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-full);
+  aspect-ratio: auto;
+}
+
+.mcs-ui {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.mcs-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: rgb(11 11 13 / 0.75);
+  color: var(--bone);
+  transition: background-color var(--t-1) var(--ease-out);
+}
+
+.mcs-btn:hover {
+  background: var(--red);
+}
+
+.mcs-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mcs-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  background: rgb(11 11 13 / 0.75);
+  font-size: 0.8125rem;
+  color: var(--bone);
+  pointer-events: none;
+  transition: opacity var(--t-2) var(--ease-out);
+}
+
+.mcs-hint.is-gone {
+  opacity: 0;
+}

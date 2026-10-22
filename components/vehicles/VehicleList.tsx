@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import {
   EMPTY_FILTERS,
+  SORTS,
   activeCount,
   matches,
   parseFilters,
@@ -15,22 +16,28 @@ import {
   type SortKey,
 } from '@/lib/filter'
 import { formatKm, formatPrice } from '@/lib/format'
-import { loadMotion, useMotion, MOTION_OK, type Motion } from '@/lib/gsap'
+import { loadMotion, useMotion, MOTION_OK, REDUCED, type Motion } from '@/lib/gsap'
 import { Icon } from '@/components/ui/Icon'
-import { RevealText, RiseHeading } from '@/components/motion/Reveal'
 import { lockScroll } from '@/components/motion/SmoothScroll'
+import { Faces, ShutterButton } from '@/components/site/Shutter'
 import { VehicleCard } from '@/components/vehicle/VehicleCard'
 
 const SORT_LABEL: Record<SortKey, string> = {
-  year: 'sortYear',
+  recommended: 'sortRecommended',
   'price-asc': 'sortPriceAsc',
   'price-desc': 'sortPriceDesc',
   km: 'sortKm',
+  'year-desc': 'sortYearDesc',
+  'year-asc': 'sortYearAsc',
 }
 
+type Option = { value: string; label: string }
+
 /**
- * Bestand with filters (DESIGN.md §7.3): state lives in the URL, mobile filters open in
- * a bottom sheet, and cards re-arrange with GSAP Flip (t-2) when the result changes.
+ * Fahrzeuge: state lives in the URL; on desktop every filter is a chip with the red
+ * shutter (a native select lies over it), on phones the filters rise in a bottom sheet.
+ * Cards re-arrange with GSAP Flip, the result count rolls to its new value, and cards
+ * below the fold open by clip-path when they arrive.
  */
 export function VehicleList({ cards, options, initial }: { cards: CardVehicle[]; options: FilterOptions; initial: Filters }) {
   const t = useTranslations('list')
@@ -50,6 +57,26 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   const visible = useMemo(() => new Set(sorted.filter((v) => matches(v, f)).map((v) => v.id)), [sorted, f])
   const count = visible.size
   const active = activeCount(f)
+  const [shown, setShown] = useState(count)
+
+  // the result count rolls to its new value
+  useEffect(() => {
+    if (matchMedia(REDUCED).matches) {
+      setShown(count)
+      return
+    }
+    let cancelled = false
+    const state = { n: shown }
+    let tween: { kill: () => void } | null = null
+    loadMotion().then(({ gsap }) => {
+      if (!cancelled) tween = gsap.to(state, { n: count, duration: 0.6, snap: { n: 1 }, ease: 'power3.out', onUpdate: () => setShown(state.n) })
+    })
+    return () => {
+      cancelled = true
+      tween?.kill()
+    }
+    // `shown` is the tween's start value only
+  }, [count])
 
   const update = (next: Filters) => {
     const el = grid.current
@@ -58,7 +85,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
       // finish any first-view entrance before measuring
       entrance.current.forEach((st) => st.kill())
       entrance.current = []
-      m.gsap.set(el.querySelectorAll('[data-card]'), { clearProps: 'opacity,visibility,transform' })
+      m.gsap.set(el.querySelectorAll('[data-card], [data-reveal]'), { clearProps: 'opacity,visibility,transform,clipPath' })
       flipState.current = m.Flip.getState(el.querySelectorAll('[data-card]'))
     }
     setF(next)
@@ -85,34 +112,41 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
     flipState.current = null
     const { gsap } = m
     m.Flip.from(state, {
-      duration: 0.45,
-      ease: 'power3.out',
+      duration: 0.7,
+      ease: 'power3.inOut',
       absolute: true,
       nested: true,
       prune: true,
-      onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.45, delay: 0.1 }),
-      onLeave: (els) => gsap.to(els, { autoAlpha: 0, duration: 0.3 }),
+      onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, y: 32 }, { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.15, ease: 'power3.out' }),
+      onLeave: (els) => gsap.to(els, { autoAlpha: 0, duration: 0.35 }),
     })
   }, [f])
 
-  // first view: cards settle 24 px upward in batches (t-3, 90 ms)
   useEffect(() => {
     loadMotion().then((m) => {
       motion.current = m
     })
   }, [])
+
+  // first view: frames below the fold open from their lower edge when they arrive
   useMotion(({ gsap, ScrollTrigger }) => {
     gsap.matchMedia().add(MOTION_OK, () => {
-      // cards already on screen when motion arrives stay as they are
-      const items = [...grid.current!.querySelectorAll<HTMLElement>('[data-card]:not([hidden])')].filter(
-        (el) => el.getBoundingClientRect().top > window.innerHeight,
+      const frames = [...grid.current!.querySelectorAll<HTMLElement>('[data-card]:not([hidden]) [data-reveal]')].filter(
+        (el) => el.getBoundingClientRect().top > window.innerHeight * 0.95,
       )
-      if (!items.length) return
-      gsap.set(items, { autoAlpha: 0, y: 24 })
-      entrance.current = ScrollTrigger.batch(items, {
+      if (!frames.length) return
+      gsap.set(frames, { clipPath: 'inset(100% 0% 0% 0%)' })
+      entrance.current = ScrollTrigger.batch(frames, {
         start: 'top 92%',
         once: true,
-        onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.09, overwrite: true }),
+        onEnter: (batch) => {
+          gsap.to(batch, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, stagger: 0.12, ease: 'expo.out', overwrite: true })
+          gsap.fromTo(
+            batch.map((b) => b.querySelector('img')),
+            { scale: 1.2 },
+            { scale: 1, duration: 1.5, stagger: 0.12, ease: 'expo.out', clearProps: 'transform' },
+          )
+        },
       })
     })
   }, grid)
@@ -126,126 +160,136 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   }, [sheet])
 
   // counts for an option while the other filters stay as they are
-  const countWith = (key: FilterKey, value: Filters[FilterKey]) =>
-    cards.filter((v) => matches(v, { ...f, [key]: value })).length
+  const countWith = (key: FilterKey, value: Filters[FilterKey]) => cards.filter((v) => matches(v, { ...f, [key]: value })).length
 
-  const chips: { key: FilterKey; label: string }[] = []
-  if (f.make) chips.push({ key: 'make', label: options.makes.find((m) => m.value === f.make)?.label ?? f.make })
-  if (f.priceMin !== null) chips.push({ key: 'priceMin', label: t('fromPrice', { value: formatPrice(f.priceMin, locale) }) })
-  if (f.priceMax !== null) chips.push({ key: 'priceMax', label: t('upToPrice', { value: formatPrice(f.priceMax, locale) }) })
-  if (f.kmMax !== null) chips.push({ key: 'kmMax', label: t('upToKm', { value: formatKm(f.kmMax, locale) }) })
-  if (f.yearMin !== null) chips.push({ key: 'yearMin', label: t('fromYear', { value: f.yearMin }) })
-  if (f.fuel) chips.push({ key: 'fuel', label: tv(`fuelValues.${f.fuel}`) })
-  if (f.gearbox) chips.push({ key: 'gearbox', label: tv(`gearboxValues.${f.gearbox}`) })
-  if (f.body) chips.push({ key: 'body', label: tv(`bodyValues.${f.body}`) })
+  const priceFrom = options.priceFrom.map((p) => ({ value: String(p), label: t('fromPrice', { value: formatPrice(p, locale) }) }))
+  const priceTo = options.priceTo.map((p) => ({ value: String(p), label: t('upToPrice', { value: formatPrice(p, locale) }) }))
+  const kmTo = options.kmTo.map((k) => ({ value: String(k), label: t('upToKm', { value: formatKm(k, locale) }) }))
+  const yearFrom = options.yearFrom.map((y) => ({ value: String(y), label: t('fromYear', { value: y }) }))
+  const fuels = options.fuels.map((x) => ({ value: x, label: tv(`fuelValues.${x}`) }))
+  const gears = options.gearboxes.map((x) => ({ value: x, label: tv(`gearboxValues.${x}`) }))
+  const bodies = options.bodies.map((x) => ({ value: x, label: tv(`bodyValues.${x}`) }))
+
+  const FIELDS: { key: FilterKey; label: string; items: Option[]; parse: (s: string) => Filters[FilterKey]; any: string }[] = [
+    { key: 'make', label: t('make'), items: options.makes, parse: (s) => s, any: t('allMakes') },
+    { key: 'priceMin', label: t('priceMin'), items: priceFrom, parse: Number, any: t('any') },
+    { key: 'priceMax', label: t('priceMax'), items: priceTo, parse: Number, any: t('any') },
+    { key: 'kmMax', label: t('kmMax'), items: kmTo, parse: Number, any: t('any') },
+    { key: 'yearMin', label: t('yearMin'), items: yearFrom, parse: Number, any: t('any') },
+    { key: 'fuel', label: t('fuel'), items: fuels, parse: (s) => s as Filters['fuel'], any: t('any') },
+    { key: 'gearbox', label: t('gearbox'), items: gears, parse: (s) => s as Filters['gearbox'], any: t('any') },
+    { key: 'body', label: t('body'), items: bodies, parse: (s) => s as Filters['body'], any: t('any') },
+  ]
+
+  const valueLabel = (field: (typeof FIELDS)[number]) => {
+    const v = f[field.key]
+    if (v === null) return field.any
+    return field.items.find((o) => o.value === String(v))?.label ?? String(v)
+  }
+
+  const options$ = (field: (typeof FIELDS)[number]) => (
+    <>
+      <option value="">{field.any}</option>
+      {field.items.map((o) => {
+        const n = countWith(field.key, field.parse(o.value))
+        return (
+          <option key={o.value} value={o.value} disabled={n === 0 && String(f[field.key]) !== o.value}>
+            {t('optionCount', { label: o.label, count: n })}
+          </option>
+        )
+      })}
+    </>
+  )
+
+  const onPick = (field: (typeof FIELDS)[number], raw: string) => set(field.key, raw ? field.parse(raw) : null)
 
   const reset = () => update({ ...EMPTY_FILTERS, sort: f.sort })
 
-  const select = (id: string, key: FilterKey, label: string, items: { value: string; label: string }[], parse: (s: string) => Filters[FilterKey]) => (
-    <div className="field" key={key}>
-      <label htmlFor={id} className="field-label">
-        {label}
-      </label>
-      <select id={id} className="field-control tabular" value={f[key] === null ? '' : String(f[key])} onChange={(e) => set(key, e.target.value ? parse(e.target.value) : null)}>
-        <option value="">{key === 'make' ? t('allMakes') : t('any')}</option>
-        {items.map((o) => {
-          const n = countWith(key, parse(o.value))
-          return (
-            <option key={o.value} value={o.value} disabled={n === 0 && String(f[key]) !== o.value}>
-              {t('optionCount', { label: o.label, count: n })}
-            </option>
-          )
-        })}
-      </select>
-    </div>
-  )
-
-  const fields = (prefix: string) => [
-    select(`${prefix}-make`, 'make', t('make'), options.makes, (s) => s),
-    select(`${prefix}-pmin`, 'priceMin', t('priceMin'), options.priceFrom.map((p) => ({ value: String(p), label: t('fromPrice', { value: formatPrice(p, locale) }) })), Number),
-    select(`${prefix}-pmax`, 'priceMax', t('priceMax'), options.priceTo.map((p) => ({ value: String(p), label: t('upToPrice', { value: formatPrice(p, locale) }) })), Number),
-    select(`${prefix}-km`, 'kmMax', t('kmMax'), options.kmTo.map((k) => ({ value: String(k), label: t('upToKm', { value: formatKm(k, locale) }) })), Number),
-    select(`${prefix}-year`, 'yearMin', t('yearMin'), options.yearFrom.map((y) => ({ value: String(y), label: t('fromYear', { value: y }) })), Number),
-    select(`${prefix}-fuel`, 'fuel', t('fuel'), options.fuels.map((x) => ({ value: x, label: tv(`fuelValues.${x}`) })), (s) => s as Filters['fuel']),
-    select(`${prefix}-gear`, 'gearbox', t('gearbox'), options.gearboxes.map((x) => ({ value: x, label: tv(`gearboxValues.${x}`) })), (s) => s as Filters['gearbox']),
-    select(`${prefix}-body`, 'body', t('body'), options.bodies.map((x) => ({ value: x, label: tv(`bodyValues.${x}`) })), (s) => s as Filters['body']),
-  ]
-
-  const sortSelect = (
-    <div className="field min-w-[15rem]">
-      <label htmlFor="sort" className="field-label">
-        {t('sort')}
-      </label>
-      <select id="sort" className="field-control" value={f.sort} onChange={(e) => set('sort', e.target.value as SortKey)}>
-        {(Object.keys(SORT_LABEL) as SortKey[]).map((s) => (
+  const sortChip = (
+    <span className="sh sh--line chip" data-sort>
+      <Faces>
+        <span className="chip-key">{t('sort')}</span>
+        {t(SORT_LABEL[f.sort])}
+        <Icon name="chevronDown" size={14} />
+      </Faces>
+      <select aria-label={t('sort')} value={f.sort} onChange={(e) => set('sort', e.target.value as SortKey)}>
+        {SORTS.map((s) => (
           <option key={s} value={s}>
             {t(SORT_LABEL[s])}
           </option>
         ))}
       </select>
-    </div>
+    </span>
   )
 
   return (
-    <div className="container-max page-x pb-[var(--section-y)]">
-      <header className="pt-10 pb-8 lg:pt-16 lg:pb-10">
-        <RiseHeading className="t-h1 max-w-[22ch]">{t('title', { count: cards.length })}</RiseHeading>
-        <p className="t-lead mt-4 measure">{t('lead')}</p>
+    <div className="vl pg wide">
+      <header className="vl-head">
+        <h1 className="vl-title d-l">
+          <span className="mline rise">
+            <span>{t('title', { count: cards.length })}</span>
+          </span>
+        </h1>
+        <p className="lead fade-up">{t('lead')}</p>
       </header>
 
-      {/* desktop filter bar: native selects never get clipped */}
-      <section aria-label={t('filterTitle')} className="hidden border-y border-line py-6 lg:block">
-        <div className="grid grid-cols-4 gap-4 2xl:grid-cols-8">{fields('d')}</div>
+      <section aria-label={t('filterTitle')} className="vl-bar">
+        {FIELDS.map((field) => (
+          <span key={field.key} className="sh sh--line chip" data-on={f[field.key] !== null || undefined}>
+            <Faces>
+              <span className="chip-key">{field.label}</span>
+              {valueLabel(field)}
+              <Icon name="chevronDown" size={14} />
+            </Faces>
+            <select aria-label={field.label} value={f[field.key] === null ? '' : String(f[field.key])} onChange={(e) => onPick(field, e.target.value)}>
+              {options$(field)}
+            </select>
+          </span>
+        ))}
       </section>
 
-      <div className="flex flex-wrap items-end justify-between gap-4 py-6">
-        <div className="flex flex-wrap items-center gap-3">
-          <button type="button" onClick={() => setSheet(true)} aria-haspopup="dialog" className="btn btn-secondary btn-sm gap-2 lg:hidden">
-            <Icon name="sliders" size={16} />
+      <div className="vl-row">
+        <p className="vl-found" aria-live="polite">
+          <b className="tabular">{shown}</b>
+          <span>{t('foundLabel', { count })}</span>
+        </p>
+        <div className="vl-tools">
+          <ShutterButton kind="line" className="vl-filters-btn chip" onClick={() => setSheet(true)} aria-haspopup="dialog">
+            <Icon name="sliders" size={15} />
             {active ? t('filtersActive', { count: active }) : t('filters')}
-          </button>
-          <p className="tabular text-ink-2" aria-live="polite">
-            {t('found', { count })}
-          </p>
+          </ShutterButton>
+          {sortChip}
         </div>
-        {sortSelect}
       </div>
 
-      {chips.length > 0 && (
-        <ul className="-mt-2 mb-6 flex flex-wrap gap-2">
-          {chips.map((c) => (
-            <li key={c.key}>
-              <button
-                type="button"
-                onClick={() => set(c.key, null)}
-                aria-label={t('removeFilter', { label: c.label })}
-                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-signal bg-signal-12 px-4 text-[0.875rem] text-ink transition-colors duration-300 hover:bg-signal/20"
-              >
-                {c.label}
-                <Icon name="close" size={14} />
-              </button>
+      {active > 0 && (
+        <ul className="vl-active">
+          {FIELDS.filter((field) => f[field.key] !== null).map((field) => (
+            <li key={field.key}>
+              <ShutterButton kind="line" onClick={() => set(field.key, null)} aria-label={t('removeFilter', { label: valueLabel(field) })}>
+                {valueLabel(field)}
+                <Icon name="close" size={13} />
+              </ShutterButton>
             </li>
           ))}
           <li>
-            <button type="button" onClick={reset} className="link-arrow min-h-10 px-2 text-[0.875rem] text-ink-2">
+            <ShutterButton kind="text" onClick={reset} style={{ margin: 0, padding: '0 0.8em', minHeight: 40 }}>
               {t('reset')}
-            </button>
+            </ShutterButton>
           </li>
         </ul>
       )}
 
       {count === 0 && (
-        <div className="border-y border-line py-16 text-center">
-          <RevealText as="p" className="t-h3 mx-auto max-w-[30ch] font-normal" start="top 100%">
-            {t('empty')}
-          </RevealText>
-          <button type="button" onClick={reset} className="btn btn-secondary mt-6">
+        <div className="vl-empty">
+          <p className="d-s">{t('empty')}</p>
+          <ShutterButton kind="solid" onClick={reset}>
             {t('reset')}
-          </button>
+          </ShutterButton>
         </div>
       )}
 
-      <ul ref={grid} className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 2xl:grid-cols-4">
+      <ul ref={grid} className="vl-grid">
         {sorted.map((v, i) => (
           <li key={v.id} data-card data-flip-id={v.id} hidden={!visible.has(v.id)}>
             <VehicleCard v={v} priority={i === 0 && visible.has(v.id)} headingLevel="h2" />
@@ -253,25 +297,36 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
         ))}
       </ul>
 
-      <dialog ref={dialog} onClose={() => setSheet(false)} aria-label={t('filterTitle')} className="sheet lg:hidden">
-        <div className="flex max-h-[90svh] flex-col">
-          <div className="flex items-center justify-between border-b border-line px-5 py-3">
-            <p className="t-h3 font-normal">{t('filters')}</p>
-            <button type="button" onClick={() => setSheet(false)} className="btn btn-secondary btn-sm gap-2">
-              <Icon name="close" size={16} />
-              {tc('close')}
+      <dialog ref={dialog} onClose={() => setSheet(false)} aria-label={t('filterTitle')} className="sheet">
+        <div style={{ display: 'flex', flexDirection: 'column', maxHeight: '90svh' }}>
+          <div className="sheet-head">
+            <p className="d-s">{t('filters')}</p>
+            <button type="button" onClick={() => setSheet(false)} className="sh sh--line sh--sm">
+              <Faces>
+                <Icon name="close" size={15} />
+                {tc('close')}
+              </Faces>
             </button>
           </div>
-          <div className="grid gap-5 overflow-y-auto px-5 py-6" data-lenis-prevent>
-            {fields('m')}
-            <button type="button" onClick={reset} className="link-arrow justify-self-start text-ink-2">
+          <div className="sheet-body vl-sheet-fields" data-lenis-prevent>
+            {FIELDS.map((field) => (
+              <div className="field" key={field.key}>
+                <label htmlFor={`m-${field.key}`} className="field-label">
+                  {field.label}
+                </label>
+                <select id={`m-${field.key}`} className="field-control tabular" value={f[field.key] === null ? '' : String(f[field.key])} onChange={(e) => onPick(field, e.target.value)}>
+                  {options$(field)}
+                </select>
+              </div>
+            ))}
+            <ShutterButton kind="text" onClick={reset} style={{ justifySelf: 'start', margin: 0 }}>
               {t('reset')}
-            </button>
+            </ShutterButton>
           </div>
-          <div className="border-t border-line px-5 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))]">
-            <button type="button" onClick={() => setSheet(false)} className="btn btn-primary tabular w-full" aria-disabled={count === 0 || undefined}>
+          <div className="sheet-foot">
+            <ShutterButton kind="solid" className="sh--wide tabular" onClick={() => setSheet(false)} aria-disabled={count === 0 ? 'true' : undefined}>
               {t('show', { count })}
-            </button>
+            </ShutterButton>
           </div>
         </div>
       </dialog>

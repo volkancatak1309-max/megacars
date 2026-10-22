@@ -5,7 +5,9 @@ import type { BodyType, Fuel, Photo, Transmission, Vehicle } from './types'
 export const FUELS = ['benzin', 'diesel', 'hybrid', 'elektro'] as const satisfies readonly Fuel[]
 export const GEARBOXES = ['automatik', 'schaltgetriebe'] as const satisfies readonly Transmission[]
 export const BODIES = ['limousine', 'kombi', 'cabrio', 'coupe', 'suv', 'van', 'kleinwagen'] as const satisfies readonly BodyType[]
-export const SORTS = ['year', 'price-asc', 'price-desc', 'km'] as const
+// "Empfohlen" keeps the order of data/inventory.json with the featured cars first; there is
+// no listing date, so nothing is called "Neueste" (KARAR-DEFTERI 23.10.2026).
+export const SORTS = ['recommended', 'price-asc', 'price-desc', 'km', 'year-desc', 'year-asc'] as const
 export type SortKey = (typeof SORTS)[number]
 
 export interface Filters {
@@ -30,7 +32,7 @@ export const EMPTY_FILTERS: Filters = {
   fuel: null,
   gearbox: null,
   body: null,
-  sort: 'year',
+  sort: 'recommended',
 }
 
 /** The slice of a vehicle that list cards and filters need on the client. */
@@ -52,7 +54,7 @@ export type CardVehicle = Pick<
   | 'transmission'
   | 'body'
   | 'colorBase'
-> & { cover: Photo; photoCount: number; hasSpin: boolean }
+> & { cover: Photo; photoCount: number; hasSpin: boolean; rank: number }
 
 type FilterFields = Pick<CardVehicle, 'makeSlug' | 'price' | 'mileage' | 'firstRegistrationKey' | 'fuel' | 'transmission' | 'body'>
 type ParamSource = URLSearchParams | Record<string, string | string[] | undefined>
@@ -77,7 +79,7 @@ export function parseFilters(src: ParamSource): Filters {
     fuel: oneOf(read(src, 'fuel'), FUELS),
     gearbox: oneOf(read(src, 'gearbox'), GEARBOXES),
     body: oneOf(read(src, 'body'), BODIES),
-    sort: oneOf(read(src, 'sort'), SORTS) ?? 'year',
+    sort: oneOf(read(src, 'sort') === 'year' ? 'year-desc' : read(src, 'sort'), SORTS) ?? 'recommended',
   }
 }
 
@@ -102,12 +104,14 @@ export function matches(v: FilterFields, f: Filters, ignore?: FilterKey) {
   return true
 }
 
-export function sortVehicles<T extends Pick<CardVehicle, 'price' | 'mileage' | 'firstRegistrationKey'>>(list: T[], sort: SortKey): T[] {
+export function sortVehicles<T extends Pick<CardVehicle, 'price' | 'mileage' | 'firstRegistrationKey' | 'rank'>>(list: T[], sort: SortKey): T[] {
   const by: Record<SortKey, (a: T, b: T) => number> = {
-    year: (a, b) => b.firstRegistrationKey - a.firstRegistrationKey || a.price - b.price,
+    recommended: (a, b) => a.rank - b.rank,
     'price-asc': (a, b) => a.price - b.price,
     'price-desc': (a, b) => b.price - a.price,
     km: (a, b) => a.mileage - b.mileage,
+    'year-desc': (a, b) => b.firstRegistrationKey - a.firstRegistrationKey || a.price - b.price,
+    'year-asc': (a, b) => a.firstRegistrationKey - b.firstRegistrationKey || a.price - b.price,
   }
   return [...list].sort(by[sort])
 }

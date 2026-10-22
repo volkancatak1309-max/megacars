@@ -5,7 +5,7 @@ import { toCard, vehicles } from '@/lib/inventory'
 import { buildOptions, parseFilters } from '@/lib/filter'
 import { alternates } from '@/lib/seo'
 import { VehicleList } from '@/components/vehicles/VehicleList'
-import { MobileActionBar } from '@/components/layout/MobileActionBar'
+import { ActionBar } from '@/components/site/ActionBar'
 
 type Props = PageProps<'/[locale]/fahrzeuge'>
 
@@ -27,9 +27,9 @@ export default async function VehiclesPage({ params, searchParams }: Props) {
   const cards = vehicles.map(toCard)
 
   return (
-    <div className="pt-[var(--header-h)]">
+    <>
       <VehicleList cards={cards} options={buildOptions(cards)} initial={initial} />
-      <MobileActionBar />
-    </div>
+      <ActionBar />
+    </>
   )
 }

@@ -7,6 +7,10 @@ export const vehicles = raw as unknown as Vehicle[]
 
 export const getVehicle = (slug: string) => vehicles.find((v) => v.slug === slug) ?? null
 
+const featuredRank = new Map((featuredIds as string[]).map((id, i) => [id, i]))
+/** "Empfohlen": featured cars first, then the order of data/inventory.json. */
+const rankOf = (v: Vehicle) => featuredRank.get(v.id) ?? 100 + vehicles.indexOf(v)
+
 export function toCard(v: Vehicle): CardVehicle {
   return {
     id: v.id,
@@ -28,6 +32,7 @@ export function toCard(v: Vehicle): CardVehicle {
     cover: v.photos[v.cover],
     photoCount: v.photos.length,
     hasSpin: v.spin !== null,
+    rank: rankOf(v),
   }
 }
 

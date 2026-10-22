@@ -1,17 +1,16 @@
-import { ViewTransition } from 'react'
 import { useTranslations } from 'next-intl'
-import { Link } from '@/i18n/navigation'
 import type { CardVehicle } from '@/lib/filter'
-import { vehicleName } from '@/lib/format'
 import { CarImage } from '@/components/ui/CarImage'
+import { CurtainLink } from '@/components/site/Curtain'
 import { useVehicleLabels } from './labels'
 
-export const CARD_SIZES = '(min-width: 1536px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'
+export const CARD_SIZES = '(min-width: 1024px) 31vw, (min-width: 640px) 47vw, 100vw'
 
 /**
- * Vehicle card (DESIGN.md §7.2): original cover photo 4:3, name, one spec line, price.
- * The whole card is one link; the photo carries the shared view-transition name that
- * grows into the detail page (Wow 3).
+ * Vehicle card: the original cover photo in its own frame (it grows 1.04 inside the
+ * frame on hover), make, model in display type, a red rule drawn across, one spec
+ * line and the price. The whole card is one link behind the red curtain; the cursor
+ * says "Ansehen" (no image preview).
  */
 export function VehicleCard({
   v,
@@ -28,29 +27,19 @@ export function VehicleCard({
   const label = useVehicleLabels()
   const Heading = headingLevel
   return (
-    <Link
-      href={{ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } }}
-      className="group block rounded-[4px] transition-transform duration-300 active:scale-[0.99]"
-    >
-      <ViewTransition name={`car-${v.id}`} share="car-photo" default="none">
-        <CarImage
-          photo={v.cover}
-          alt={label.photoAlt(v, 1, v.photoCount)}
-          sizes={sizes}
-          priority={priority}
-          className="aspect-[4/3] rounded-[4px]"
-          imgClassName="transition-transform duration-700 ease-[var(--ease)] group-hover:scale-[1.02]"
-        />
-      </ViewTransition>
-      <div className="mt-4 grid gap-1">
-        <Heading className="t-h3 line-clamp-2 decoration-1 underline-offset-4 group-hover:underline">{vehicleName(v)}</Heading>
-        {v.version && <p className="line-clamp-1 text-ink-2">{v.version}</p>}
-        <p className="tabular mt-1 text-[0.9375rem] text-ink-2">{label.chain(v)}</p>
-        <div className="mt-2 flex items-baseline justify-between gap-4">
-          <p className="t-price-s text-ink">{label.price(v.price)}</p>
-          <p className="t-label">{tc('photos', { count: v.photoCount })}</p>
-        </div>
-      </div>
-    </Link>
+    <CurtainLink href={{ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } }} className="vc" data-cursor>
+      <span className="vc-frame clip-reveal" data-reveal>
+        <CarImage photo={v.cover} alt={label.photoAlt(v, 1, v.photoCount)} sizes={sizes} priority={priority} className="aspect-[4/3] h-full w-full" />
+        <span className="vc-photos tabular">{tc('photos', { count: v.photoCount })}</span>
+      </span>
+      <span className="vc-body">
+        <span className="vc-make">{v.make}</span>
+        <Heading className="vc-model">{v.model}</Heading>
+        {v.version && <span className="vc-version">{v.version}</span>}
+        <span className="vc-rule" aria-hidden="true" />
+        <span className="vc-chain tabular">{label.chain(v)}</span>
+        <span className="vc-price tabular">{label.price(v.price)}</span>
+      </span>
+    </CurtainLink>
   )
 }

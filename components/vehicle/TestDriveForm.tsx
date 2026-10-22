@@ -5,6 +5,8 @@ import { SITE, whatsappHref } from '@/lib/site'
 import { Icon } from '@/components/ui/Icon'
 import { ShutterA, ShutterButton } from '@/components/site/Shutter'
 
+const DATE_LOCALE: Record<string, string> = { de: 'de-AT', en: 'en-GB', tr: 'tr-TR' }
+
 export type VehicleRef = {
   name: string
   price: string
@@ -41,7 +43,7 @@ export function TestDriveForm({ vehicle, headingLevel = 'h2' }: { vehicle: Vehic
       t('messageIntro', vehicle),
       '',
       t('messageName', { value: name }),
-      date && t('messageDate', { value: new Date(`${date}T12:00:00`).toLocaleDateString(document.documentElement.lang === 'tr' ? 'tr-TR' : 'de-AT') }),
+      date && t('messageDate', { value: new Date(`${date}T12:00:00`).toLocaleDateString(DATE_LOCALE[document.documentElement.lang] ?? 'de-AT') }),
       slot && t('messageSlot', { value: slot }),
       phone && t('messagePhone', { value: phone }),
       message && `\n${message}`,

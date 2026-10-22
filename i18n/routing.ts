@@ -1,19 +1,22 @@
 import { defineRouting } from 'next-intl/routing'
 
 export const routing = defineRouting({
-  // EN follows in FAZ 4B.
-  locales: ['de', 'tr'],
+  // order = order in the language switch: DE · EN · TR
+  locales: ['de', 'en', 'tr'],
   defaultLocale: 'de',
   localePrefix: 'always',
+  // The first visit follows Accept-Language; afterwards the address carries the language.
+  // No NEXT_LOCALE cookie: the site sets no cookies at all (Datenschutz).
+  localeCookie: false,
   pathnames: {
     '/': '/',
-    '/fahrzeuge': { de: '/fahrzeuge', tr: '/araclar' },
-    '/fahrzeuge/[slug]': { de: '/fahrzeuge/[slug]', tr: '/araclar/[slug]' },
-    '/finanzierung': { de: '/finanzierung', tr: '/finansman' },
-    '/ankauf': { de: '/ankauf', tr: '/takas' },
-    '/kontakt': { de: '/kontakt', tr: '/iletisim' },
-    '/impressum': { de: '/impressum', tr: '/kunye' },
-    '/datenschutz': { de: '/datenschutz', tr: '/gizlilik' },
+    '/fahrzeuge': { de: '/fahrzeuge', en: '/vehicles', tr: '/araclar' },
+    '/fahrzeuge/[slug]': { de: '/fahrzeuge/[slug]', en: '/vehicles/[slug]', tr: '/araclar/[slug]' },
+    '/finanzierung': { de: '/finanzierung', en: '/financing', tr: '/finansman' },
+    '/ankauf': { de: '/ankauf', en: '/trade-in', tr: '/takas' },
+    '/kontakt': { de: '/kontakt', en: '/contact', tr: '/iletisim' },
+    '/impressum': { de: '/impressum', en: '/imprint', tr: '/kunye' },
+    '/datenschutz': { de: '/datenschutz', en: '/privacy', tr: '/gizlilik' },
   },
 })
 

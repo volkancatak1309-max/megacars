@@ -1,6 +1,6 @@
 import { useLocale, useTranslations } from 'next-intl'
 import type { CardVehicle } from '@/lib/filter'
-import { formatKm, formatPower, formatPrice, vehicleName } from '@/lib/format'
+import { formatKm, formatNumber, formatPower, formatPrice, inSentence, vehicleName } from '@/lib/format'
 
 /** Localised labels for vehicle values; works in server and client components. */
 export function useVehicleLabels() {
@@ -26,7 +26,7 @@ export function useVehicleLabels() {
       [
         v.firstRegistration,
         formatKm(v.mileage, locale),
-        v.powerPs ? `${new Intl.NumberFormat(locale === 'tr' ? 'tr-TR' : 'de-DE').format(v.powerPs)} PS` : null,
+        v.powerPs ? `${formatNumber(v.powerPs, locale)} PS` : null,
         v.fuel ? t(`fuelValues.${v.fuel}`) : null,
         v.transmission ? t(`gearboxValues.${v.transmission}`) : null,
       ]
@@ -36,7 +36,7 @@ export function useVehicleLabels() {
       const name = [vehicleName(v), v.version].filter(Boolean).join(' ')
       const color = mapped('colorValues', v.colorBase)
       return color
-        ? t('photoAlt', { name, color: locale === 'tr' ? color.toLocaleLowerCase('tr') : color, index, total })
+        ? t('photoAlt', { name, color: inSentence(color, locale), index, total })
         : t('photoAltNoColor', { name, index, total })
     },
   }

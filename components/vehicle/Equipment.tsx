@@ -1,15 +1,16 @@
 import { getLocale, getTranslations } from 'next-intl/server'
+import enDictionary from '@/data/equipment-en.json'
 import trDictionary from '@/data/equipment-tr.json'
 import type { EquipmentGroup, Vehicle } from '@/lib/types'
 import { DrawGroup } from '@/components/motion/Reveal'
 
 const ORDER: EquipmentGroup[] = ['comfort', 'safety', 'media', 'extras']
-const TR = trDictionary as Record<string, string>
+const DICTIONARY: Record<string, Record<string, string>> = { en: enDictionary, tr: trDictionary }
 
 /**
  * Only the equipment named in the listing, set like a magazine page: each group under
  * a heavy rule with its count, items in columns. German terms come from the listing;
- * Turkish uses a controlled dictionary, and a missing term stays German with lang="de".
+ * English and Turkish use controlled dictionaries, a missing term stays German with lang="de".
  */
 export async function Equipment({ equipment }: { equipment: Vehicle['equipment'] }) {
   const t = await getTranslations('detail')
@@ -30,7 +31,7 @@ export async function Equipment({ equipment }: { equipment: Vehicle['equipment']
           </div>
           <ul className="eq-list">
             {equipment[g].map((item) => {
-              const translated = locale === 'tr' ? TR[item] : item
+              const translated = locale === 'de' ? item : DICTIONARY[locale]?.[item]
               return (
                 <li key={item} lang={translated ? undefined : 'de'}>
                   {translated ?? item}

@@ -2,6 +2,7 @@
 // Scroll-linked motion primitives. Every element is fully visible in the server HTML;
 // motion is added only when GSAP has loaded and the visitor allows motion (DESIGN.md §6).
 import { useRef, type ElementType, type ReactNode } from 'react'
+import { numberLocale } from '@/lib/format'
 import { useMotion, MOTION_OK, fontsReady } from '@/lib/gsap'
 
 type Tag = 'h1' | 'h2' | 'h3' | 'p' | 'div'
@@ -162,7 +163,7 @@ export function Stagger({
 /** Counts up from zero once when visible (1200 ms). Only for numbers from real data. */
 export function Ticker({ value, locale, className }: { value: number; locale: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const fmt = new Intl.NumberFormat(locale === 'tr' ? 'tr-TR' : 'de-DE')
+  const fmt = new Intl.NumberFormat(numberLocale(locale))
   useMotion(
     ({ gsap }) => {
       gsap.matchMedia().add(MOTION_OK, () => {

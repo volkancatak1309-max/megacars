@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Photo, Vehicle } from '@/lib/types'
 import { SITE, mailHref, routeHref, whatsappHref } from '@/lib/site'
-import { formatPrice, vehicleFullName } from '@/lib/format'
+import { formatNumber, formatPrice, inSentence, vehicleFullName } from '@/lib/format'
 import { CarImage } from '@/components/ui/CarImage'
 import { Icon } from '@/components/ui/Icon'
 import { DrawGroup, Stagger, Ticker } from '@/components/motion/Reveal'
@@ -15,7 +15,6 @@ export async function FeaturedCars({ cars }: { cars: Vehicle[] }) {
   const t = await getTranslations('featured')
   const tv = await getTranslations('vehicle')
   const locale = await getLocale()
-  const nf = new Intl.NumberFormat(locale === 'tr' ? 'tr-TR' : 'de-DE')
 
   return (
     <section className="fc s-night" aria-labelledby="fc-title">
@@ -31,9 +30,9 @@ export async function FeaturedCars({ cars }: { cars: Vehicle[] }) {
             const color = v.colorBase && tv.has(`colorValues.${v.colorBase}`) ? tv(`colorValues.${v.colorBase}`) : v.colorBase
             const name = vehicleFullName(v)
             const alt = color
-              ? tv('photoAlt', { name, color: locale === 'tr' ? color.toLocaleLowerCase('tr') : color, index: 1, total: v.photos.length })
+              ? tv('photoAlt', { name, color: inSentence(color, locale), index: 1, total: v.photos.length })
               : tv('photoAltNoColor', { name, index: 1, total: v.photos.length })
-            const chain = [v.firstRegistration, `${nf.format(v.mileage)} km`, v.powerPs ? `${nf.format(v.powerPs)} PS` : null].filter(Boolean).join(' · ')
+            const chain = [v.firstRegistration, `${formatNumber(v.mileage, locale)} km`, v.powerPs ? `${formatNumber(v.powerPs, locale)} PS` : null].filter(Boolean).join(' · ')
             return (
               <li key={v.id}>
                 <CurtainLink href={{ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } }} className="fc-card" data-cursor>

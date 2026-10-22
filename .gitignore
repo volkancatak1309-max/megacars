@@ -3,6 +3,9 @@ node_modules/
 
 # build output
 dist/
+.next/
+next-env.d.ts
+*.tsbuildinfo
 .vercel/
 
 # local scratch & tooling (NOT deployed)

@@ -1,0 +1,91 @@
+import type { Metadata, Viewport } from 'next'
+import { Hanken_Grotesk } from 'next/font/google'
+import { notFound } from 'next/navigation'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
+import { siteOrigin } from '@/lib/site'
+import { NOINDEX } from '@/lib/seo'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { FloatingActions } from '@/components/layout/FloatingActions'
+import { SmoothScroll } from '@/components/motion/SmoothScroll'
+import '../globals.css'
+
+const hanken = Hanken_Grotesk({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-hanken',
+  display: 'swap',
+  adjustFontFallback: true,
+})
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'meta' })
+  return {
+    metadataBase: new URL(siteOrigin()),
+    title: t('homeTitle'),
+    description: t('homeDescription'),
+    applicationName: 'Mega Cars',
+    robots: NOINDEX,
+    formatDetection: { telephone: false, address: false, email: false },
+    openGraph: {
+      type: 'website',
+      siteName: t('siteName'),
+      locale: locale === 'tr' ? 'tr_TR' : 'de_AT',
+      images: [{ url: '/og/default.jpg', width: 1200, height: 630 }],
+    },
+    twitter: { card: 'summary_large_image' },
+  }
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0d0e11',
+  colorScheme: 'dark',
+  viewportFit: 'cover',
+}
+
+// Runs before first paint: marks JS, View Transitions support and the first visit
+// of the session (loader, max 900 ms, never on top of the LCP poster's paint).
+const BOOT = `(function(){var d=document.documentElement;d.classList.add('js');if(!('startViewTransition' in document))d.classList.add('no-vt');try{if(!sessionStorage.getItem('mc-visited')){sessionStorage.setItem('mc-visited','1');d.setAttribute('data-loader','');setTimeout(function(){d.removeAttribute('data-loader')},1300)}}catch(e){}setTimeout(function(){d.classList.add('reveal-fallback')},2500)})()`
+
+export default async function LocaleLayout({ children, params }: LayoutProps<'/[locale]'>) {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) notFound()
+  setRequestLocale(locale)
+  const t = await getTranslations('common')
+
+  return (
+    <html lang={locale} className={hanken.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: BOOT }} />
+      </head>
+      <body>
+        <a href="#main" className="skip-link">
+          {t('skip')}
+        </a>
+        <div className="loader" aria-hidden="true">
+          <div className="loader-bar" data-pos="top" />
+          <div className="loader-bar" data-pos="bottom" />
+          <div className="loader-mark">
+            MEGA CARS
+            <i />
+          </div>
+        </div>
+        <NextIntlClientProvider>
+          <SmoothScroll />
+          <Header />
+          <main id="main" tabIndex={-1} className="outline-none">
+            {children}
+          </main>
+          <Footer />
+          <FloatingActions />
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  )
+}

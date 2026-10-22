@@ -1,0 +1,514 @@
+/* ===========================================================================
+   Yön B — "Atelier": bone paper, black type, red accent. A car magazine.
+   Display: Instrument Serif (OFL). Text: Instrument Sans (OFL).
+   Contrast: #141414 on #EFEBE3 15.6:1; #5E5A53 on #EFEBE3 5.9:1;
+   white on #D7141A 5.2:1; red text on bone only at display sizes (≥ 3:1).
+   =========================================================================== */
+
+:root:has(.proto-b) body {
+  background: #efebe3;
+}
+
+.proto-b {
+  --bg: #efebe3;
+  --fg: #141414;
+  --ink: #141414;
+  --red: #d7141a;
+  --muted: #5e5a53;
+  --line: #cbc3b5;
+  --frame: #e2dcd1;
+  --focus: #141414;
+  --btn-radius: 999px;
+  --btn-bg: #141414;
+  --btn-ink: #efebe3;
+  --btn-fill: var(--red);
+  --btn-on-fill: #fff;
+  --loader-bg: #efebe3;
+  --loader-ink: #141414;
+  --menu-bg: #efebe3;
+  --ph-h: 80px;
+  --grain: 0.09;
+}
+
+.proto-b .sh {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.proto-b .ploader-bar {
+  background: var(--red);
+}
+
+.proto-b .odo,
+.proto-b .ploader-mark {
+  font-family: var(--f-display);
+}
+
+.proto-b .odo {
+  color: var(--red);
+}
+
+/* ---- top bar ---------------------------------------------------------------- */
+.proto-b .ph-logo {
+  font-size: 1.625rem;
+  letter-spacing: 0.08em;
+}
+
+.proto-b .ph[data-solid] {
+  border-color: var(--fg);
+}
+
+.proto-b .ph-nav .sh,
+.proto-b .ph-lang .sh,
+.proto-b .ph-tel {
+  font-size: 0.9375rem;
+}
+
+/* ---- menu (ZARA-like serif list) -------------------------------------------- */
+.proto-b .pmenu-top .ph-logo {
+  font-size: 1.625rem;
+}
+
+.proto-b .pmenu-link {
+  font-size: clamp(3rem, 13vw, 7rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.proto-b .pmenu-nav .sh--text:hover {
+  font-style: italic;
+}
+
+/* ---- cover -------------------------------------------------------------------- */
+.rb-cover {
+  padding-top: calc(var(--ph-h) + 20px);
+  padding-bottom: clamp(64px, 8vw, 120px);
+}
+
+.rb-issue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 10px;
+  border-block: 1px solid var(--fg);
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.rb-title {
+  margin-top: clamp(28px, 4vw, 64px);
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(3.25rem, 10.4vw, 11.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+}
+
+.rb-cover-grid {
+  display: grid;
+  gap: 32px;
+  margin-top: clamp(32px, 5vw, 72px);
+}
+
+.rb-cover-frame {
+  display: block;
+  aspect-ratio: 4 / 3;
+}
+
+.rb-cover-figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.rb-cover-side {
+  display: grid;
+  gap: 28px;
+  align-content: end;
+  justify-items: start;
+}
+
+.rb-lead {
+  max-width: 34ch;
+  font-family: var(--f-display);
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+  line-height: 1.15;
+}
+
+.rb-stamp {
+  display: grid;
+  align-content: end;
+  gap: 6px;
+  width: clamp(150px, 14vw, 200px);
+  aspect-ratio: 1;
+  padding: 18px;
+  background: var(--red);
+  color: #fff;
+}
+
+.rb-stamp-n {
+  font-family: var(--f-display);
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  line-height: 0.9;
+}
+
+.rb-stamp > span:last-child {
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 1024px) {
+  .rb-cover-in {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-areas:
+      'issue issue'
+      'title figure'
+      'side figure';
+    column-gap: clamp(40px, 5vw, 96px);
+  }
+
+  .rb-issue {
+    grid-area: issue;
+  }
+
+  .rb-title {
+    grid-area: title;
+    font-size: clamp(3.5rem, 7.6vw, 9.5rem);
+  }
+
+  .rb-cover-grid {
+    display: contents;
+  }
+
+  .rb-cover-figure {
+    grid-area: figure;
+    align-self: start;
+    margin-top: clamp(28px, 4vw, 64px);
+  }
+
+  .rb-cover-side {
+    grid-area: side;
+    align-content: start;
+    margin-top: 40px;
+    grid-template-columns: auto auto;
+    align-items: end;
+    justify-content: start;
+    column-gap: 40px;
+  }
+
+  .rb-lead {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---- table of contents --------------------------------------------------------- */
+.rb-toc {
+  padding-block: clamp(80px, 10vw, 160px);
+  border-top: 1px solid var(--fg);
+}
+
+.rb-h2 {
+  max-width: 22ch;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5.5vw, 5.75rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+.rb-toc-list {
+  margin-top: clamp(32px, 5vw, 72px);
+  border-bottom: 1px solid var(--fg);
+}
+
+.rb-toc-row {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 8px 20px;
+  padding: 16px 10px;
+  border-top: 1px solid var(--fg);
+  transition: color 0.5s var(--ease-io);
+}
+
+.rb-toc-panel {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--red);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform 0.55s var(--ease-io);
+}
+
+@media (hover: hover) {
+  .rb-toc-row:hover {
+    color: #fff;
+  }
+
+  .rb-toc-row:hover .rb-toc-panel {
+    transform: scaleY(1);
+  }
+
+  .rb-toc-row:hover .rb-toc-page {
+    color: #fff;
+  }
+}
+
+.rb-toc-row:focus-visible .rb-toc-panel {
+  transform: scaleY(1);
+}
+
+.rb-toc-row:focus-visible {
+  color: #fff;
+}
+
+.rb-toc-page {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.5s var(--ease-io);
+}
+
+.rb-toc-name {
+  font-family: var(--f-display);
+  font-size: clamp(1.75rem, 3.4vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.rb-toc-lead {
+  display: none;
+}
+
+.rb-toc-price {
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .rb-toc-row {
+    grid-template-columns: 7rem auto 1fr auto;
+  }
+
+  .rb-toc-lead {
+    display: block;
+    border-bottom: 1px dotted currentColor;
+    transform: translateY(-0.3em);
+  }
+}
+
+/* ---- spreads -------------------------------------------------------------------- */
+.rb-spread {
+  display: grid;
+  gap: 28px;
+  padding-block: clamp(56px, 8vw, 128px);
+  border-top: 1px solid var(--line);
+}
+
+.rb-spread-photo {
+  display: block;
+  background: var(--frame);
+}
+
+.rb-spread-photo img {
+  transition: transform 1s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .rb-spread-photo:hover img {
+    transform: scale(1.03);
+  }
+}
+
+.rb-spread-text {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  align-content: center;
+}
+
+.rb-spread-page {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rb-spread-make {
+  margin-top: 8px;
+  font-size: 0.8125rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.rb-spread-model {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 6.5vw, 7.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.rb-spread-version {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+  color: var(--muted);
+}
+
+.rb-spread-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 16px;
+  border-top: 1px solid var(--fg);
+}
+
+.rb-spread-facts > div {
+  padding: 10px 12px 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.rb-spread-facts dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rb-spread-facts dd {
+  font-weight: 500;
+}
+
+.rb-spread-price {
+  margin-block: 14px 10px;
+  font-family: var(--f-display);
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+  line-height: 1;
+}
+
+@media (min-width: 1024px) {
+  .rb-spread {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: clamp(40px, 6vw, 112px);
+    align-items: center;
+  }
+
+  .rb-spread.is-flip {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .rb-spread.is-flip .rb-spread-photo {
+    order: 2;
+  }
+}
+
+/* ---- trust (black page) ------------------------------------------------------------ */
+.rb-trust {
+  background: #141414;
+  color: #efebe3;
+  padding-block: clamp(96px, 12vw, 200px);
+  --line: rgb(239 235 227 / 0.22);
+  --pf-line: rgb(239 235 227 / 0.22);
+  --ps-line: rgb(239 235 227 / 0.22);
+  --focus: #efebe3;
+}
+
+.rb-trust-lead {
+  max-width: 50ch;
+  margin-top: 28px;
+  font-size: 1.1875rem;
+  line-height: 1.55;
+  color: #d9d3c7;
+}
+
+.rb-facts,
+.rb-services {
+  margin-top: clamp(56px, 7vw, 110px);
+}
+
+.rb-trust .ps h3 {
+  font-weight: 400;
+}
+
+.rb-trust .sh--solid {
+  --btn-bg: var(--red);
+  --btn-ink: #fff;
+  --btn-fill: #efebe3;
+  --btn-on-fill: #141414;
+}
+
+/* ---- footer (red page) ------------------------------------------------------------- */
+.rb-foot {
+  background: var(--red);
+  color: #fff;
+  --line: rgb(255 255 255 / 0.45);
+  --focus: #fff;
+}
+
+.rb-foot .sh--text {
+  --fill: #141414;
+}
+
+.rb-foot .pfoot-title {
+  font-style: italic;
+  font-size: clamp(2.5rem, 5.6vw, 6rem);
+  line-height: 1;
+}
+
+.rb-foot .pfoot-word {
+  letter-spacing: -0.02em;
+}
+
+.rb-foot .pfoot-base {
+  border-top: 1px solid var(--line);
+}
+
+/* ---- detail -------------------------------------------------------------------------- */
+.proto-b .pd-make {
+  font-size: 0.8125rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.proto-b .pd-model {
+  font-weight: 400;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+
+.proto-b .pd-version {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--muted);
+}
+
+.proto-b .pd-price-label {
+  color: var(--muted);
+}
+
+.proto-b .pd-price-value {
+  font-family: var(--f-display);
+  font-size: clamp(2.5rem, 4vw, 3.75rem);
+  line-height: 1;
+}
+
+.proto-b .pd-facts {
+  border-color: var(--fg);
+}

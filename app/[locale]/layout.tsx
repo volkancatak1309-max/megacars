@@ -6,9 +6,6 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import { routing } from '@/i18n/routing'
 import { siteOrigin } from '@/lib/site'
 import { NOINDEX } from '@/lib/seo'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
-import { FloatingActions } from '@/components/layout/FloatingActions'
 import { SmoothScroll } from '@/components/motion/SmoothScroll'
 import '../globals.css'
 
@@ -52,7 +49,7 @@ export const viewport: Viewport = {
 }
 
 // Only namespaces used by client components travel to the browser.
-const CLIENT_NAMESPACES = ['common', 'nav', 'lang', 'hero', 'quickSearch', 'featured', 'location', 'list', 'vehicle', 'detail', 'gallery', 'spin', 'testDrive']
+const CLIENT_NAMESPACES = ['common', 'nav', 'lang', 'hero', 'quickSearch', 'featured', 'location', 'list', 'vehicle', 'detail', 'gallery', 'spin', 'testDrive', 'proto']
 const pick = (all: Record<string, unknown>, keys: string[]) => Object.fromEntries(keys.filter((k) => k in all).map((k) => [k, all[k]]))
 
 // Runs before first paint: marks JS, View Transitions support and the first visit
@@ -75,22 +72,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         <a href="#main" className="skip-link">
           {t('skip')}
         </a>
-        <div className="loader" aria-hidden="true">
-          <div className="loader-bar" data-pos="top" />
-          <div className="loader-bar" data-pos="bottom" />
-          <div className="loader-mark">
-            MEGA CARS
-            <i />
-          </div>
-        </div>
         <NextIntlClientProvider messages={pick(messages, CLIENT_NAMESPACES)}>
           <SmoothScroll />
-          <Header />
-          <main id="main" tabIndex={-1} className="outline-none">
-            {children}
-          </main>
-          <Footer />
-          <FloatingActions />
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

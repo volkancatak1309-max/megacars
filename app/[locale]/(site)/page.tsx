@@ -8,7 +8,7 @@ import { alternates, autoDealerLd } from '@/lib/seo'
 import { JsonLd } from '@/components/ui/JsonLd'
 import { Hero } from '@/components/home/Hero'
 import { QuickSearch } from '@/components/home/QuickSearch'
-import { FeaturedStrip } from '@/components/home/FeaturedStrip'
+import { FeaturedGrid } from '@/components/home/FeaturedGrid'
 import { Trust } from '@/components/home/Trust'
 import { Services } from '@/components/home/Services'
 import { Location } from '@/components/home/Location'
@@ -52,7 +52,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
       <JsonLd data={autoDealerLd(locale as Locale)} />
       <Hero />
       <QuickSearch vehicles={quick} options={{ ...options, priceFrom: [], kmTo: [], yearFrom: [] }} />
-      <FeaturedStrip cards={featuredVehicles().map(toCard)} />
+      <FeaturedGrid cards={featuredVehicles().map(toCard).slice(0, 6)} />
       <Trust photo={photoOf(SHOWROOM)} stock={stockStats} />
       <Services />
       <Location map={map as MapData} building={photoOf(BUILDING)} />

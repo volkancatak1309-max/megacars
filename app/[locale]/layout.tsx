@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Hanken_Grotesk } from 'next/font/google'
+import { Hanken_Grotesk, Unbounded } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
@@ -16,6 +16,13 @@ const hanken = Hanken_Grotesk({
   variable: '--font-hanken',
   display: 'swap',
   adjustFontFallback: true,
+})
+
+// Display face (SIL OFL 1.1): wide, confident capitals for headings and the opening letters.
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  variable: '--font-unbounded',
+  display: 'swap',
 })
 
 export function generateStaticParams() {
@@ -43,18 +50,18 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0d0e11',
+  themeColor: '#0b0b0d',
   colorScheme: 'dark',
   viewportFit: 'cover',
 }
 
 // Only namespaces used by client components travel to the browser.
-const CLIENT_NAMESPACES = ['common', 'nav', 'lang', 'hero', 'quickSearch', 'featured', 'location', 'list', 'vehicle', 'detail', 'gallery', 'spin', 'testDrive', 'proto']
+const CLIENT_NAMESPACES = ['common', 'nav', 'lang', 'hero', 'quickSearch', 'location', 'list', 'vehicle', 'detail', 'gallery', 'spin', 'testDrive']
 const pick = (all: Record<string, unknown>, keys: string[]) => Object.fromEntries(keys.filter((k) => k in all).map((k) => [k, all[k]]))
 
-// Runs before first paint: marks JS, View Transitions support and the first visit
-// of the session (loader, max 900 ms, never on top of the LCP poster's paint).
-const BOOT = `(function(){var d=document.documentElement;d.classList.add('js');if(!('startViewTransition' in document))d.classList.add('no-vt');try{if(!sessionStorage.getItem('mc-visited')){sessionStorage.setItem('mc-visited','1');d.setAttribute('data-loader','');setTimeout(function(){d.removeAttribute('data-loader')},1300)}}catch(e){}})()`
+// Runs before first paint: marks JS and shows the counter loader only on the first
+// page of a visit (it is pure CSS and never delays the poster underneath).
+const BOOT = `(function(){var d=document.documentElement;d.classList.add('js');try{if(sessionStorage.getItem('mc-loader'))d.setAttribute('data-loader-off','');else sessionStorage.setItem('mc-loader','1')}catch(e){d.setAttribute('data-loader-off','')}})()`
 
 export default async function LocaleLayout({ children, params }: LayoutProps<'/[locale]'>) {
   const { locale } = await params
@@ -64,7 +71,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={hanken.variable} suppressHydrationWarning>
+    <html lang={locale} className={`${hanken.variable} ${unbounded.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       </head>

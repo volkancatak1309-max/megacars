@@ -2,6 +2,7 @@
 import { createContext, forwardRef, useCallback, useContext, useEffect, useRef, type ComponentProps, type MouseEvent } from 'react'
 import { usePathname as useRawPathname } from 'next/navigation'
 import { Link, useRouter } from '@/i18n/navigation'
+import { getLenis } from '@/components/motion/SmoothScroll'
 
 export type CurtainHref = ComponentProps<typeof Link>['href']
 
@@ -66,7 +67,10 @@ export function CurtainProvider({ mark, children }: { mark: string; children: Re
     if (pathname === lastPath.current) return
     lastPath.current = pathname
     if (!pending.current) return
-    window.scrollTo(0, 0)
+    // behind the closed curtain the new page starts at its top
+    const lenis = getLenis()
+    if (lenis) lenis.scrollTo(0, { immediate: true, force: true })
+    else window.scrollTo(0, 0)
     let id = requestAnimationFrame(() => {
       id = requestAnimationFrame(() => reveal())
     })

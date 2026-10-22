@@ -24,7 +24,10 @@
     "photos": "{count} fotoğraf",
     "whatsappGeneric": "Merhaba, araç teklifleriniz hakkında bir sorum var.",
     "whatsappTestDriveGeneric": "Merhaba, bir test sürüşü için randevu almak istiyorum.",
-    "testDriveShort": "Test sürüşü"
+    "testDriveShort": "Test sürüşü",
+    "reachUs": "Bize şöyle ulaşabilirsiniz",
+    "quickContact": "Hızlı iletişim",
+    "view": "İncele"
   },
   "nav": {
     "label": "Ana menü",
@@ -48,14 +51,11 @@
     "tr": "Türkçe"
   },
   "hero": {
-    "line1": "Bir sonraki aracınız",
-    "line2": "Hohenems'te sizi bekliyor.",
-    "lead": "Her aracı olduğu gibi gösteriyoruz: kendi showroom'umuzda çekilmiş gerçek fotoğraflar ve ilandaki bütün bilgilerle.",
-    "ctaPrimary": "Araçları inceleyin",
-    "ctaSecondary": "WhatsApp'tan yazın",
     "pause": "Videoyu durdur",
     "play": "Videoyu oynat",
-    "videoLabel": "Koyu renkli bir otomobil, bir salonun ışığında duruyor."
+    "title": "Bir sonraki aracınız Hohenems'te sizi bekliyor.",
+    "cta": "Araçları inceleyin",
+    "scroll": "Kaydırın"
   },
   "quickSearch": {
     "title": "Aradığınız aracı birkaç adımda bulun.",
@@ -65,10 +65,11 @@
     "anyPrice": "Fark etmez",
     "body": "Kasa tipi",
     "allBodies": "Tüm kasa tipleri",
-    "submit": "{count, plural, =0 {Uygun araç yok} other {# aracı göster}}"
+    "submit": "{count, plural, =0 {Uygun araç yok} other {# aracı göster}}",
+    "all": "Tümü"
   },
   "featured": {
-    "title": "Bu seçki stokumuzun genişliğini gösteriyor.",
+    "title": "Bu altı aracı size tanıtıyoruz.",
     "lead": "Ekonomik bir station wagon'dan S‑Serisi'ne kadar her aracı gerçek fotoğraflarıyla görürsünüz.",
     "viewAll": "Bütün araçları inceleyin",
     "listLabel": "Seçili araçlar"
@@ -117,7 +118,8 @@
     "hours": "Çalışma saatleri",
     "legal": "Yasal bilgiler",
     "website": "Website: Galzura",
-    "copyright": "© {year} Mega Cars Murat Demir e.U."
+    "copyright": "© {year} Mega Cars Murat Demir e.U.",
+    "title": "Radetzkystraße 80'de görüşmek üzere."
   },
   "list": {
     "title": "Stokumuzda {count} araç bulunuyor.",
@@ -136,7 +138,6 @@
     "any": "Fark etmez",
     "allMakes": "Tüm markalar",
     "sort": "Sıralama",
-    "sortYear": "En yeni tescil önce",
     "sortPriceAsc": "Fiyat: düşükten yükseğe",
     "sortPriceDesc": "Fiyat: yüksekten düşüğe",
     "sortKm": "Kilometre: azdan çoğa",
@@ -149,7 +150,11 @@
     "fromPrice": "{value} ve üzeri",
     "fromYear": "{value} ve sonrası",
     "upToPrice": "{value}'ya kadar",
-    "upToKm": "{value}'ye kadar"
+    "upToKm": "{value}'ye kadar",
+    "sortRecommended": "Önerilen",
+    "sortYearDesc": "İlk tescil: en yeni önce",
+    "sortYearAsc": "İlk tescil: en eski önce",
+    "foundLabel": "{count, plural, other {araç bulundu}}"
   },
   "vehicle": {
     "registration": "İlk tescil",
@@ -239,7 +244,12 @@
     "similarTitle": "Bu araçlar da ilginizi çekebilir.",
     "allVehicles": "Bütün araçları inceleyin",
     "notFound": "Bu araç artık satışta değil.",
-    "notFoundLead": "Diğer araçlarımızdan biri size uygun olabilir."
+    "notFoundLead": "Diğer araçlarımızdan biri size uygun olabilir.",
+    "techTitle": "En önemli bilgileri burada bir bakışta görürsünüz.",
+    "actionsLabel": "Talep ve iletişim",
+    "priceNote": "Fiyat, aracın ilanından alınmıştır.",
+    "visitNote": "Aracı Hohenems'te, Radetzkystraße 80'deki showroom'umuzda görebilirsiniz.",
+    "equipmentCount": "{count} donanım özelliği"
   },
   "gallery": {
     "label": "{name} fotoğrafları",
@@ -294,61 +304,25 @@
     "privacy": "Gizlilik",
     "imprintCompany": "Şirket",
     "imprintOwner": "Sahibi",
-    "imprintRegister": "Ticaret sicili"
+    "imprintRegister": "Ticaret sicili",
+    "lead": "Sorularınız için Mega Cars'a telefonla, WhatsApp'tan ya da e-postayla ulaşabilirsiniz."
   },
   "notFound": {
     "title": "Aradığınız sayfa bizde yok.",
     "lead": "Araçlarımızı stok sayfasında bulabilirsiniz.",
     "cta": "Stoka git"
   },
-  "proto": {
-    "compareTitle": "Mega Cars'ın yeni sitesi için üç tasarım yönü seçiminizi bekliyor.",
-    "compareLead": "Üç prototip de aynı 18 aracı gerçek fotoğraflarıyla gösteriyor. Mega Cars'ı en iyi taşıyan yönü seçin.",
-    "compareNote": "Prototipler yalnız seçim içindir ve arama motorlarına kapalıdır.",
-    "open": "Prototipi aç",
-    "aName": "Rosso",
-    "aDesc": "Siyah, kırmızı ve beyaz: dev model adları ve kırmızı maskelerle gerçek araçlardan bir slayt gösterisi.",
-    "bName": "Atelier",
-    "bDesc": "Kemik beyazı, siyah ve kırmızı: her araç büyük serif yazılı kendi dergi sayfasını alıyor.",
-    "cName": "Nachtfahrt",
-    "cDesc": "Koyu ve sinematik: video dev MEGA CARS harflerinin içinde oynuyor; aşağı kaydırınca harfler açılıyor.",
-    "view": "İncele",
-    "detailCta": "Aracı inceleyin",
-    "allVehicles": "Tüm araçlar",
-    "back": "Seçkiye dön",
-    "allPhotos": "{count} fotoğrafın tümü",
-    "next": "Sonraki araç",
-    "prev": "Önceki araç",
-    "pause": "Slaytı durdur",
-    "play": "Slayta devam et",
-    "slideOf": "Araç {index}/{total}",
-    "stock": "Stokta {count} araç",
-    "range": "{min} ile {max} arası",
-    "hours": "Pzt–Cum 08–18 · Cmt 09–15",
-    "menuContact": "Bize şöyle ulaşırsınız",
-    "aKicker": "Hohenems'te ikinci el otomobiller",
-    "aIntro": "Mega Cars'taki seçki <r>{min}</r> ile <r>{max}</r> arasında uzanıyor.",
-    "aIntroLead": "Her aracı gerçek fotoğraflarla ve ilandaki bütün bilgilerle gösteriyoruz.",
-    "aFeaturedTitle": "Bu altı araç, Hohenems'te sizi neyin beklediğini gösteriyor.",
-    "aTrustLead": "Titiz, güvenilir ve profesyonel: Her plaka kapağımızda bu yazıyor.",
-    "aFootTitle": "Uğrayın; her aracı size yerinde gösterelim.",
-    "bIssue": "Araç kataloğu · Hohenems, Vorarlberg",
-    "bHeroTitle": "Bizde her aracın kendi sayfası var.",
-    "bHeroLead": "Showroom'umuzda çekilmiş gerçek fotoğraflarla {count} aracı sayfa sayfa inceleyin.",
-    "bTocTitle": "Bu sayıda altı araç sizi bekliyor.",
-    "bPage": "Sayfa {n}",
-    "bOpen": "Sayfayı aç",
-    "bTrustTitle": "Titiz, güvenilir, profesyonel: Bu üç kelime plaka kapaklarımızda yazıyor.",
-    "bTrustLead": "Mega Cars, Murat Demir'in Hohenems'teki otomobil galerisidir. Bizde yalnız belgeleyebildiğimiz bilgileri görürsünüz.",
-    "bFootTitle": "Bir sonraki sayfayı showroom'umuzda birlikte açalım.",
-    "cHeroTitle": "Bir sonraki aracınız Hohenems'te sizi bekliyor.",
-    "cScroll": "Kaydırın",
-    "cIntro": "Her aracı Hohenems'teki showroom'umuzda çekilmiş gerçek fotoğraflarla gösteriyoruz.",
-    "cFeaturedTitle": "Bu altı araç stokumuzdan.",
-    "cFactsTitle": "Mega Cars'ın arkasında Hohenems'te kayıtlı bir otomobil galerisi var.",
-    "cRedTitle": "Test sürüşü randevusunu doğrudan WhatsApp'tan ya da telefonla alırsınız.",
-    "cFootTitle": "Radetzkystraße 80'de görüşmek üzere.",
-    "word": "Prototip",
-    "wordMany": "Prototipler"
+  "brands": {
+    "title": "Stokumuzda bu markalar var",
+    "linkLabel": "{make}: {count} aracı inceleyin"
+  },
+  "heroCandidates": {
+    "metaTitle": "Açılış videosu: üç aday",
+    "title": "Açılış için kırmızı otomobilli üç video arasından seçim yapabilirsiniz.",
+    "lead": "Her video, ana sayfadaki harflerin aynısının içinde oynuyor. İşaretli video şu anda ana sayfada görünüyor.",
+    "active": "Ana sayfada",
+    "source": "Kaynak",
+    "licence": "Lisans",
+    "note": "Üç video da Mixkit ve Pexels'ten alınmış, ticari kullanıma açık gerçek kamera çekimleridir. Bu arşivlerde kırmızı bir premium spor otomobili hem karanlık ışıkta hem de yavaş kamerayla gösteren bir çekim yok; bu yüzden her adayın bir eksiği var. Bu sayfa yalnız seçim içindir ve arama motorlarına kapalıdır."
   }
 }

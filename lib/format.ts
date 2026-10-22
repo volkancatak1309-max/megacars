@@ -2,7 +2,7 @@ const numberLocale = (locale: string) => (locale === 'tr' ? 'tr-TR' : 'de-DE')
 
 export const formatNumber = (n: number, locale: string) => new Intl.NumberFormat(numberLocale(locale)).format(n)
 
-/** "64.900 €" in both DE and TR (DESIGN.md §14) */
+/** "64.900 €" in both DE and TR (DESIGN.md §13) */
 export const formatPrice = (n: number, locale: string) => `${formatNumber(n, locale)} €`
 
 export const formatKm = (n: number, locale: string) => `${formatNumber(n, locale)} km`

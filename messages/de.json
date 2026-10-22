@@ -24,7 +24,10 @@
     "photos": "{count, plural, one {# Foto} other {# Fotos}}",
     "whatsappGeneric": "Guten Tag, ich habe eine Frage zu Ihrem Fahrzeugangebot.",
     "whatsappTestDriveGeneric": "Guten Tag, ich möchte eine Probefahrt vereinbaren.",
-    "testDriveShort": "Probefahrt"
+    "testDriveShort": "Probefahrt",
+    "reachUs": "So erreichen Sie uns",
+    "quickContact": "Schnellkontakt",
+    "view": "Ansehen"
   },
   "nav": {
     "label": "Hauptnavigation",
@@ -48,14 +51,11 @@
     "tr": "Türkçe"
   },
   "hero": {
-    "line1": "Ihr nächster Wagen",
-    "line2": "wartet in Hohenems.",
-    "lead": "Wir zeigen jedes Fahrzeug so, wie es ist: mit echten Fotos aus unserem Showroom und allen Daten aus dem Inserat.",
-    "ctaPrimary": "Fahrzeuge ansehen",
-    "ctaSecondary": "WhatsApp schreiben",
     "pause": "Video anhalten",
     "play": "Video abspielen",
-    "videoLabel": "Ein dunkles Fahrzeug steht im Licht einer Halle."
+    "title": "Ihr nächster Wagen wartet in Hohenems.",
+    "cta": "Fahrzeuge ansehen",
+    "scroll": "Scrollen"
   },
   "quickSearch": {
     "title": "Finden Sie Ihr Fahrzeug in wenigen Schritten.",
@@ -65,10 +65,11 @@
     "anyPrice": "Beliebig",
     "body": "Karosserie",
     "allBodies": "Alle Karosserien",
-    "submit": "{count, plural, =0 {Kein passendes Fahrzeug} one {# Fahrzeug anzeigen} other {# Fahrzeuge anzeigen}}"
+    "submit": "{count, plural, =0 {Kein passendes Fahrzeug} one {# Fahrzeug anzeigen} other {# Fahrzeuge anzeigen}}",
+    "all": "Alle"
   },
   "featured": {
-    "title": "Diese Auswahl zeigt die Bandbreite unseres Bestands.",
+    "title": "Diese sechs Wagen stellen wir Ihnen vor.",
     "lead": "Vom sparsamen Kombi bis zur S‑Klasse sehen Sie jedes Fahrzeug mit seinen echten Fotos.",
     "viewAll": "Alle Fahrzeuge ansehen",
     "listLabel": "Ausgewählte Fahrzeuge"
@@ -117,7 +118,8 @@
     "hours": "Öffnungszeiten",
     "legal": "Rechtliches",
     "website": "Website: Galzura",
-    "copyright": "© {year} Mega Cars Murat Demir e.U."
+    "copyright": "© {year} Mega Cars Murat Demir e.U.",
+    "title": "Wir sehen uns in der Radetzkystraße 80."
   },
   "list": {
     "title": "{count, plural, one {Unser Bestand umfasst # Fahrzeug.} other {Unser Bestand umfasst # Fahrzeuge.}}",
@@ -136,7 +138,6 @@
     "any": "Beliebig",
     "allMakes": "Alle Marken",
     "sort": "Sortieren nach",
-    "sortYear": "Jüngste Erstzulassung zuerst",
     "sortPriceAsc": "Preis aufsteigend",
     "sortPriceDesc": "Preis absteigend",
     "sortKm": "Kilometerstand aufsteigend",
@@ -149,7 +150,11 @@
     "fromPrice": "ab {value}",
     "fromYear": "ab {value}",
     "upToPrice": "bis {value}",
-    "upToKm": "bis {value}"
+    "upToKm": "bis {value}",
+    "sortRecommended": "Empfohlen",
+    "sortYearDesc": "Erstzulassung neueste zuerst",
+    "sortYearAsc": "Erstzulassung älteste zuerst",
+    "foundLabel": "{count, plural, =0 {Fahrzeuge gefunden} one {Fahrzeug gefunden} other {Fahrzeuge gefunden}}"
   },
   "vehicle": {
     "registration": "Erstzulassung",
@@ -224,7 +229,12 @@
     "similarTitle": "Diese Fahrzeuge könnten Sie ebenfalls interessieren.",
     "allVehicles": "Alle Fahrzeuge ansehen",
     "notFound": "Dieses Fahrzeug ist nicht mehr verfügbar.",
-    "notFoundLead": "Vielleicht passt eines unserer anderen Fahrzeuge zu Ihnen."
+    "notFoundLead": "Vielleicht passt eines unserer anderen Fahrzeuge zu Ihnen.",
+    "techTitle": "Die wichtigsten Daten sehen Sie hier auf einen Blick.",
+    "actionsLabel": "Anfrage und Kontakt",
+    "priceNote": "Der Preis stammt aus dem Inserat.",
+    "visitNote": "Sie sehen das Fahrzeug in unserem Showroom in der Radetzkystraße 80 in Hohenems.",
+    "equipmentCount": "{count, plural, one {# Ausstattungsmerkmal} other {# Ausstattungsmerkmale}}"
   },
   "gallery": {
     "label": "Fotos von {name}",
@@ -279,61 +289,25 @@
     "privacy": "Datenschutz",
     "imprintCompany": "Unternehmen",
     "imprintOwner": "Inhaber",
-    "imprintRegister": "Firmenbuch"
+    "imprintRegister": "Firmenbuch",
+    "lead": "Bei Fragen erreichen Sie Mega Cars telefonisch, per WhatsApp oder per E-Mail."
   },
   "notFound": {
     "title": "Diese Seite gibt es bei uns nicht.",
     "lead": "Unsere Fahrzeuge finden Sie im Bestand.",
     "cta": "Zum Bestand"
   },
-  "proto": {
-    "compareTitle": "Drei Richtungen für die neue Website von Mega Cars stehen zur Wahl.",
-    "compareLead": "Alle drei Prototypen zeigen dieselben 18 Fahrzeuge mit echten Fotos. Wählen Sie die Richtung, die Mega Cars am besten trägt.",
-    "compareNote": "Die Prototypen dienen nur der Auswahl und sind für Suchmaschinen gesperrt.",
-    "open": "Prototyp öffnen",
-    "aName": "Rosso",
-    "aDesc": "Schwarz, Rot und Weiß: Eine Diashow der echten Fahrzeuge mit riesigen Modellnamen und roten Masken.",
-    "bName": "Atelier",
-    "bDesc": "Knochenweiß, Schwarz und Rot: Jedes Fahrzeug bekommt eine eigene Magazinseite mit großer Serifenschrift.",
-    "cName": "Nachtfahrt",
-    "cDesc": "Dunkel und filmisch: Das Video läuft in den riesigen Buchstaben MEGA CARS, die sich beim Scrollen öffnen.",
-    "view": "Ansehen",
-    "detailCta": "Fahrzeug ansehen",
-    "allVehicles": "Alle Fahrzeuge",
-    "back": "Zurück zur Auswahl",
-    "allPhotos": "Alle {count} Fotos",
-    "next": "Nächstes Fahrzeug",
-    "prev": "Vorheriges Fahrzeug",
-    "pause": "Diashow anhalten",
-    "play": "Diashow fortsetzen",
-    "slideOf": "Fahrzeug {index} von {total}",
-    "stock": "{count, plural, one {# Fahrzeug im Bestand} other {# Fahrzeuge im Bestand}}",
-    "range": "von {min} bis {max}",
-    "hours": "Mo–Fr 08–18 · Sa 09–15",
-    "menuContact": "So erreichen Sie uns",
-    "aKicker": "Gebrauchtwagen in Hohenems",
-    "aIntro": "Von <r>{min}</r> bis <r>{max}</r> reicht die Auswahl bei Mega Cars.",
-    "aIntroLead": "Jedes Fahrzeug zeigen wir mit echten Fotos und allen Daten aus dem Inserat.",
-    "aFeaturedTitle": "Diese sechs Fahrzeuge zeigen, was in Hohenems auf Sie wartet.",
-    "aTrustLead": "Gewissenhaft, verlässlich und professionell: So steht es auf jedem unserer Kennzeichenhalter.",
-    "aFootTitle": "Kommen Sie vorbei, wir zeigen Ihnen jeden Wagen persönlich.",
-    "bIssue": "Fahrzeugkatalog · Hohenems, Vorarlberg",
-    "bHeroTitle": "Bei uns hat jeder Wagen seine eigene Seite.",
-    "bHeroLead": "Blättern Sie durch {count} Fahrzeuge mit echten Fotos aus unserem Showroom.",
-    "bTocTitle": "In dieser Ausgabe finden Sie sechs Fahrzeuge.",
-    "bPage": "Seite {n}",
-    "bOpen": "Seite aufschlagen",
-    "bTrustTitle": "Gewissenhaft, verlässlich, professionell: Diese drei Worte stehen auf unseren Kennzeichenhaltern.",
-    "bTrustLead": "Mega Cars ist der Autohandel von Murat Demir in Hohenems. Sie sehen bei uns nur Angaben, die wir belegen können.",
-    "bFootTitle": "Die nächste Seite schlagen Sie bei uns im Showroom auf.",
-    "cHeroTitle": "Ihr nächster Wagen wartet in Hohenems.",
-    "cScroll": "Scrollen",
-    "cIntro": "Jedes Fahrzeug zeigen wir mit echten Fotos aus unserem Showroom in Hohenems.",
-    "cFeaturedTitle": "Diese sechs Fahrzeuge stammen aus unserem Bestand.",
-    "cFactsTitle": "Hinter Mega Cars steht ein eingetragener Autohandel in Hohenems.",
-    "cRedTitle": "Eine Probefahrt vereinbaren Sie direkt per WhatsApp oder Telefon.",
-    "cFootTitle": "Wir sehen uns in der Radetzkystraße 80.",
-    "word": "Prototyp",
-    "wordMany": "Prototypen"
+  "brands": {
+    "title": "Diese Marken stehen bei uns",
+    "linkLabel": "{make}: {count, plural, one {# Fahrzeug} other {# Fahrzeuge}} ansehen"
+  },
+  "heroCandidates": {
+    "metaTitle": "Eröffnungsfilm: drei Kandidaten",
+    "title": "Drei Filme mit einem roten Wagen stehen für die Eröffnung zur Wahl.",
+    "lead": "Jeder Film läuft in denselben Buchstaben wie auf der Startseite. Der markierte Film ist gerade auf der Startseite zu sehen.",
+    "active": "Auf der Startseite",
+    "source": "Quelle",
+    "licence": "Lizenz",
+    "note": "Alle drei Filme sind echte Kameraaufnahmen mit kommerzieller Lizenz von Mixkit und Pexels. In diesen Archiven gibt es keine Aufnahme, die zugleich einen roten Premium-Sportwagen, dunkles Licht und eine langsame Kamera zeigt; deshalb hat jeder Kandidat einen Kompromiss. Diese Seite dient nur der Auswahl und ist für Suchmaschinen gesperrt."
   }
 }

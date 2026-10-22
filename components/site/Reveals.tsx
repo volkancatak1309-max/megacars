@@ -97,7 +97,7 @@ export function ClipReveal({ className, children, from = 'bottom' }: { className
 }
 
 /** Masked heading lines rise when they reach the viewport (Animmaster Text Animations 17). */
-export function LinesUp({ as = 'h2', className, children, id }: { as?: ElementType; className?: string; children: ReactNode; id?: string }) {
+export function LinesUp({ as = 'h2', className, children, id, lang }: { as?: ElementType; className?: string; children: ReactNode; id?: string; lang?: string }) {
   const ref = useRef<HTMLElement>(null)
   useMotion(({ gsap, SplitText }, ctx) => {
     const el = ref.current!
@@ -121,7 +121,7 @@ export function LinesUp({ as = 'h2', className, children, id }: { as?: ElementTy
   }, ref)
   const Comp = as
   return (
-    <Comp ref={ref} className={className} id={id}>
+    <Comp ref={ref} className={className} id={id} lang={lang}>
       {children}
     </Comp>
   )

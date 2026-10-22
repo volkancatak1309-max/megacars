@@ -1,0 +1,478 @@
+/* ===========================================================================
+   Mega Cars v2 — "Nachtfahrt" (DESIGN.md). Tokens, base elements, type, layout.
+   Contrast (WCAG 2.2, measured): bone #ECE7DE on night #0B0B0D 15.97:1;
+   muted #9C978F on night 6.78:1; white on red #D7141A 5.24:1;
+   night on bone 15.97:1; muted-ink #5C574F on bone 5.82:1.
+   Red on night is 3.75:1, so red text on dark is used only at display sizes.
+   =========================================================================== */
+
+:root {
+  --night: #0b0b0d;
+  --night-2: #141417;
+  --night-3: #1c1c21;
+  --bone: #ece7de;
+  --bone-2: #e1dbd0;
+  --red: #d7141a;
+  --red-deep: #b8100f;
+  --muted: #9c978f;
+  --muted-ink: #5c574f;
+  --line: rgb(236 231 222 / 0.14);
+  --line-strong: rgb(236 231 222 / 0.34);
+  --line-ink: rgb(11 11 13 / 0.16);
+  --line-ink-strong: rgb(11 11 13 / 0.4);
+
+  /* contextual roles; every section theme sets them again */
+  --bg: var(--night);
+  --fg: var(--bone);
+  --sub: var(--muted);
+  --rule: var(--line);
+  --rule-strong: var(--line-strong);
+  --frame: var(--night-3);
+  --focus: var(--bone);
+  --btn-bg: var(--red);
+  --btn-ink: #fff;
+  --btn-fill: var(--bone);
+  --btn-on-fill: var(--night);
+  --fill: var(--red);
+  --on-fill: #fff;
+
+  --f-display: var(--font-unbounded), 'Arial Black', ui-sans-serif, sans-serif;
+  --f-text: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-hop: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-film: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --t-1: 300ms;
+  --t-2: 450ms;
+  --t-3: 700ms;
+  --t-4: 1000ms;
+  --t-5: 1400ms;
+
+  --page: clamp(20px, 4.5vw, 72px);
+  --section: clamp(96px, 12vw, 200px);
+  --wide: 1680px;
+  --ph-h: 68px;
+  --bar-h: 64px;
+
+  /* z-index scale */
+  --z-raised: 10;
+  --z-header: 100;
+  --z-bar: 200;
+  --z-float: 210;
+  --z-sheet: 400;
+  --z-full: 500;
+  --z-menu: 600;
+  --z-curtain: 900;
+  --z-grain: 940;
+  --z-loader: 950;
+  --z-cursor: 960;
+  --z-skip: 990;
+
+  interpolate-size: allow-keywords;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --ph-h: 80px;
+  }
+}
+
+/* ---- section themes: night (default), bone and red -------------------------- */
+.s-night {
+  --bg: var(--night);
+  --fg: var(--bone);
+  --sub: var(--muted);
+  --rule: var(--line);
+  --rule-strong: var(--line-strong);
+  --frame: var(--night-3);
+  --focus: var(--bone);
+  --btn-bg: var(--red);
+  --btn-ink: #fff;
+  --btn-fill: var(--bone);
+  --btn-on-fill: var(--night);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.s-bone {
+  --bg: var(--bone);
+  --fg: var(--night);
+  --sub: var(--muted-ink);
+  --rule: var(--line-ink);
+  --rule-strong: var(--line-ink-strong);
+  --frame: var(--bone-2);
+  --focus: var(--night);
+  --btn-bg: var(--night);
+  --btn-ink: var(--bone);
+  --btn-fill: var(--red);
+  --btn-on-fill: #fff;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.s-red {
+  --bg: var(--red);
+  --fg: #fff;
+  --sub: rgb(255 255 255 / 0.86);
+  --rule: rgb(255 255 255 / 0.36);
+  --rule-strong: rgb(255 255 255 / 0.7);
+  --frame: var(--red-deep);
+  --focus: #fff;
+  --btn-bg: var(--night);
+  --btn-ink: #fff;
+  --btn-fill: #fff;
+  --btn-on-fill: var(--night);
+  --fill: var(--night);
+  --on-fill: #fff;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+@layer base {
+  html {
+    background: var(--night);
+    color: var(--bone);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--night);
+    color: var(--bone);
+    font-family: var(--f-text);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--red);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: var(--z-skip);
+  padding: 0.75rem 1.25rem;
+  background: var(--bone);
+  color: var(--night);
+  font-weight: 600;
+  transform: translateY(-200%);
+  transition: transform var(--t-1) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ---- layout --------------------------------------------------------------------- */
+.pg {
+  padding-inline: var(--page);
+}
+
+.wide {
+  max-width: var(--wide);
+  margin-inline: auto;
+}
+
+.sec {
+  padding-block: var(--section);
+}
+
+/* ---- type ----------------------------------------------------------------------- */
+.d-xl,
+.d-l,
+.d-m,
+.d-s {
+  font-family: var(--f-display);
+  letter-spacing: -0.025em;
+}
+
+.d-xl {
+  font-weight: 800;
+  font-size: clamp(3rem, 10.5vw, 11rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+}
+
+.d-l {
+  font-weight: 700;
+  font-size: clamp(2.125rem, 5.6vw, 6rem);
+  line-height: 1.02;
+}
+
+.d-m {
+  font-weight: 600;
+  font-size: clamp(1.625rem, 3.4vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.d-s {
+  font-weight: 600;
+  font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.lead {
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+  line-height: 1.55;
+  color: var(--sub);
+  max-width: 52ch;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sub);
+}
+
+/* ---- form controls (dark, bone and red sections) -------------------------------- */
+.field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.field-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--sub);
+}
+
+.field-control {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 1rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  transition: border-color var(--t-1) var(--ease-out);
+}
+
+textarea.field-control {
+  min-height: 116px;
+  padding-block: 0.875rem;
+  resize: vertical;
+}
+
+select.field-control {
+  appearance: none;
+  padding-right: 2.75rem;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(-45deg, transparent 50%, currentColor 50%);
+  background-position:
+    right 1.35rem center,
+    right 1rem center;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+select.field-control option {
+  background: var(--night-2);
+  color: var(--bone);
+}
+
+@media (hover: hover) {
+  .field-control:hover {
+    border-color: var(--fg);
+  }
+}
+
+.field-control:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-color: var(--fg);
+}
+
+.field-control[aria-invalid='true'] {
+  border-color: var(--fg);
+  border-width: 2px;
+}
+
+.field-error {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+input[type='date'].field-control::-webkit-calendar-picker-indicator {
+  filter: invert(0.85);
+}
+
+.s-bone input[type='date'].field-control::-webkit-calendar-picker-indicator {
+  filter: none;
+}
+
+/* ---- dialogs that rise from the bottom (filters, test drive) --------------------- */
+dialog.sheet {
+  position: fixed;
+  inset: auto 0 0 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 90svh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--night-2);
+  color: var(--bone);
+  border-top: 2px solid var(--red);
+  transform: translateY(100%);
+  transition:
+    transform var(--t-3) var(--ease-hop),
+    overlay var(--t-3) allow-discrete,
+    display var(--t-3) allow-discrete;
+}
+
+dialog.sheet[open] {
+  transform: translateY(0);
+}
+
+@starting-style {
+  dialog.sheet[open] {
+    transform: translateY(100%);
+  }
+}
+
+dialog.sheet::backdrop {
+  background: rgb(11 11 13 / 0);
+  transition:
+    background-color var(--t-2) var(--ease-out),
+    overlay var(--t-2) allow-discrete,
+    display var(--t-2) allow-discrete;
+}
+
+dialog.sheet[open]::backdrop {
+  background: rgb(11 11 13 / 0.72);
+}
+
+@starting-style {
+  dialog.sheet[open]::backdrop {
+    background: rgb(11 11 13 / 0);
+  }
+}
+
+.sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem var(--page);
+  border-bottom: 1px solid var(--line);
+}
+
+.sheet-body {
+  overflow-y: auto;
+  padding: 1.5rem var(--page);
+}
+
+.sheet-foot {
+  padding: 0.75rem var(--page) calc(0.75rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 768px) {
+  dialog.sheet.sheet-center {
+    inset: 0;
+    margin: auto;
+    width: min(620px, calc(100% - 2 * var(--page)));
+    max-height: 88svh;
+    border-top: 0;
+    border-left: 2px solid var(--red);
+    transform: translateY(32px);
+    opacity: 0;
+    transition:
+      transform var(--t-3) var(--ease-out),
+      opacity var(--t-2) var(--ease-out),
+      overlay var(--t-3) allow-discrete,
+      display var(--t-3) allow-discrete;
+  }
+
+  dialog.sheet.sheet-center[open] {
+    transform: none;
+    opacity: 1;
+  }
+
+  @starting-style {
+    dialog.sheet.sheet-center[open] {
+      transform: translateY(32px);
+      opacity: 0;
+    }
+  }
+}
+
+html.lock,
+html.lock body {
+  overflow: hidden;
+}
+
+/* ---- Lenis (desktop smooth scroll) ------------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ---- reduced motion: nothing slides, rolls, drifts or counts ---------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

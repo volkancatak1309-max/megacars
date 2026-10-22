@@ -101,7 +101,7 @@ export function DrawGroup({ className = '', children }: { className?: string; ch
     })
   }, ref)
   return (
-    <div ref={ref} className={`draw-group ${className}`}>
+    <div ref={ref} className={`draw ${className}`}>
       {children}
     </div>
   )

@@ -1,12 +1,12 @@
 'use client'
-import { useEffect, useRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ReactNode, type RefObject } from 'react'
-import { CurtainLink, type CurtainHref } from './Curtain'
+import { useEffect, useRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ComponentProps, type ReactNode, type RefObject } from 'react'
+import { CurtainLink } from './Curtain'
 
 /**
  * galzura.com's button family (galzura-motion-demo/src/d6/Roll.tsx): two faces stand
  * one above the other in a one-face window; on hover, focus or touch the top face
  * rolls up and out and the copy rolls in. Mega Cars adds a red panel that drops like
- * a shutter (proto.css .sh::before) and folds back up when the pointer leaves.
+ * a shutter (styles/motion.css .sh::before) and folds back up when the pointer leaves.
  */
 export function Faces({ children }: { children: ReactNode }) {
   return (
@@ -61,7 +61,7 @@ export function useMagnet(ref: RefObject<HTMLElement | null>, reach = 8) {
   }, [ref, reach])
 }
 
-type Kind = 'solid' | 'line' | 'text'
+export type Kind = 'solid' | 'line' | 'text'
 const cls = (kind: Kind, className = '') => `sh sh--${kind} ${className}`
 
 /** External, tel: or mailto: link in the button family. */
@@ -77,23 +77,15 @@ export function ShutterA({ kind = 'line', className, children, ...rest }: Anchor
 
 /** Internal link: opens the next page behind the red curtain. */
 export function ShutterLink({
-  href,
   kind = 'line',
   className,
   children,
   ...rest
-}: {
-  href: CurtainHref
-  kind?: Kind
-  className?: string
-  children: ReactNode
-  'aria-label'?: string
-  'aria-current'?: 'page'
-}) {
+}: Omit<ComponentProps<typeof CurtainLink>, 'ref'> & { kind?: Kind; children: ReactNode }) {
   const ref = useRef<HTMLAnchorElement>(null)
   useMagnet(ref, kind === 'text' ? 0 : 8)
   return (
-    <CurtainLink ref={ref} href={href} className={cls(kind, className)} {...rest}>
+    <CurtainLink ref={ref} className={cls(kind, className)} {...rest}>
       <Faces>{children}</Faces>
     </CurtainLink>
   )

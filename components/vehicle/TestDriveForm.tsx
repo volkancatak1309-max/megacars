@@ -3,6 +3,7 @@ import { useId, useState, type FormEvent } from 'react'
 import { useTranslations } from 'next-intl'
 import { SITE, whatsappHref } from '@/lib/site'
 import { Icon } from '@/components/ui/Icon'
+import { ShutterA, ShutterButton } from '@/components/site/Shutter'
 
 export type VehicleRef = {
   name: string
@@ -12,7 +13,8 @@ export type VehicleRef = {
 
 /**
  * Probefahrt request. There is no server yet, so the form says plainly that it opens a
- * prepared WhatsApp message which the visitor sends themselves (DESIGN.md §7.6).
+ * prepared WhatsApp message which the visitor sends themselves; there is no fake
+ * "sent" screen.
  */
 export function TestDriveForm({ vehicle, headingLevel = 'h2' }: { vehicle: VehicleRef; headingLevel?: 'h2' | 'h3' }) {
   const t = useTranslations('testDrive')
@@ -52,8 +54,8 @@ export function TestDriveForm({ vehicle, headingLevel = 'h2' }: { vehicle: Vehic
   const today = new Date().toISOString().slice(0, 10)
 
   return (
-    <form onSubmit={submit} noValidate className="grid gap-5" aria-labelledby={`${id}-title`}>
-      <Heading id={`${id}-title`} className="t-h3 font-normal">
+    <form onSubmit={submit} noValidate className="tdf" aria-labelledby={`${id}-title`}>
+      <Heading id={`${id}-title`} className="tdf-title d-m">
         {t('title')}
       </Heading>
       <div className="field">
@@ -76,7 +78,7 @@ export function TestDriveForm({ vehicle, headingLevel = 'h2' }: { vehicle: Vehic
           </p>
         )}
       </div>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="tdf-row">
         <div className="field">
           <label htmlFor={`${id}-date`} className="field-label">
             {t('dateOptional')}
@@ -106,19 +108,21 @@ export function TestDriveForm({ vehicle, headingLevel = 'h2' }: { vehicle: Vehic
         </label>
         <textarea id={`${id}-message`} name="message" rows={3} className="field-control" />
       </div>
-      <p className="text-[0.9375rem] text-ink-2">{t('note')}</p>
-      <button type="submit" className="btn btn-primary w-full sm:w-auto sm:justify-self-start">
-        <Icon name="whatsapp" size={18} />
-        {t('submit')}
-      </button>
-      <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.9375rem] text-ink-3">
+      <p className="tdf-note">{t('note')}</p>
+      <div>
+        <ShutterButton type="submit" kind="solid">
+          <Icon name="whatsapp" size={18} />
+          {t('submit')}
+        </ShutterButton>
+      </div>
+      <p className="tdf-direct">
         {t('direct')}
-        <a href={SITE.phoneHref} className="link-arrow text-ink-2">
+        <ShutterA href={SITE.phoneHref} kind="text">
           {tc('call')}
-        </a>
-        <a href={whatsappHref(t('messageIntro', vehicle))} target="_blank" rel="noopener" className="link-arrow text-ink-2">
+        </ShutterA>
+        <ShutterA href={whatsappHref(t('messageIntro', vehicle))} target="_blank" rel="noopener" kind="text">
           WhatsApp
-        </a>
+        </ShutterA>
       </p>
     </form>
   )

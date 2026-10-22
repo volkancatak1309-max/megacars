@@ -39,8 +39,11 @@ export const osmEmbedHref = (() => {
   return `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`
 })()
 
-/** Absolute origin of this deployment (preview, production or local). */
+/** Absolute origin of this deployment: the production domain, the fixed branch address of a preview, or local. */
 export function siteOrigin() {
-  const host = process.env.VERCEL_BRANCH_URL || process.env.VERCEL_URL
+  const host =
+    process.env.VERCEL_ENV === 'production'
+      ? process.env.VERCEL_PROJECT_PRODUCTION_URL
+      : process.env.VERCEL_BRANCH_URL || process.env.VERCEL_URL
   return host ? `https://${host}` : `http://localhost:${process.env.PORT || 3000}`
 }

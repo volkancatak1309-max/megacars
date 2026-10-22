@@ -5,7 +5,7 @@ import type { Locale } from '@/i18n/routing'
 import { featuredVehicles, stockStats, toCard, vehicles } from '@/lib/inventory'
 import { buildOptions } from '@/lib/filter'
 import { HERO } from '@/lib/hero'
-import { alternates, autoDealerLd } from '@/lib/seo'
+import { autoDealerLd, pageMeta } from '@/lib/seo'
 import { JsonLd } from '@/components/ui/JsonLd'
 import { HeroLetters } from '@/components/home/HeroLetters'
 import { QuickSearch } from '@/components/home/QuickSearch'
@@ -16,11 +16,7 @@ import { ActionBar } from '@/components/site/ActionBar'
 export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
-  return {
-    title: t('homeTitle'),
-    description: t('homeDescription'),
-    alternates: alternates('/', locale as Locale),
-  }
+  return pageMeta({ locale: locale as Locale, href: '/', title: t('homeTitle'), description: t('homeDescription') })
 }
 
 // The dealer's own photos: showroom interior and the building with its sign.

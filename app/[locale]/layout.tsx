@@ -5,7 +5,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { siteOrigin } from '@/lib/site'
-import { NOINDEX } from '@/lib/seo'
+import { DEFAULT_OG, ROBOTS } from '@/lib/seo'
 import { SmoothScroll } from '@/components/motion/SmoothScroll'
 import '../globals.css'
 
@@ -37,14 +37,10 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
     title: t('homeTitle'),
     description: t('homeDescription'),
     applicationName: 'Mega Cars',
-    robots: NOINDEX,
+    robots: ROBOTS,
     formatDetection: { telephone: false, address: false, email: false },
-    openGraph: {
-      type: 'website',
-      siteName: t('siteName'),
-      locale: locale === 'tr' ? 'tr_TR' : 'de_AT',
-      images: [{ url: '/og/default.jpg', width: 1200, height: 630 }],
-    },
+    // fallback for pages without their own share data (pageMeta sets it everywhere else)
+    openGraph: { type: 'website', siteName: t('siteName'), images: [DEFAULT_OG] },
     twitter: { card: 'summary_large_image' },
   }
 }
@@ -56,12 +52,14 @@ export const viewport: Viewport = {
 }
 
 // Only namespaces used by client components travel to the browser.
-const CLIENT_NAMESPACES = ['common', 'nav', 'lang', 'hero', 'quickSearch', 'location', 'list', 'vehicle', 'detail', 'gallery', 'spin', 'testDrive']
+const CLIENT_NAMESPACES = ['common', 'nav', 'lang', 'hero', 'quickSearch', 'location', 'list', 'vehicle', 'detail', 'gallery', 'spin', 'testDrive', 'form']
 const pick = (all: Record<string, unknown>, keys: string[]) => Object.fromEntries(keys.filter((k) => k in all).map((k) => [k, all[k]]))
 
-// Runs before first paint: marks JS and shows the counter loader only on the first
-// page of a visit (it is pure CSS and never delays the poster underneath).
-const BOOT = `(function(){var d=document.documentElement;d.classList.add('js');try{if(sessionStorage.getItem('mc-loader'))d.setAttribute('data-loader-off','');else sessionStorage.setItem('mc-loader','1')}catch(e){d.setAttribute('data-loader-off','')}})()`
+// Runs before first paint: marks JS and shows the counter loader only when a visit
+// arrives from outside (not after a reload, back/forward or a link within the site).
+// Nothing is stored on the device (Datenschutz: no cookies, no storage). The loader is
+// pure CSS and never delays the poster underneath.
+const BOOT = `(function(){var d=document.documentElement;d.classList.add('js');try{var n=performance.getEntriesByType('navigation')[0],r=document.referrer;if((r&&new URL(r).origin===location.origin)||(n&&n.type!=='navigate'))d.setAttribute('data-loader-off','')}catch(e){d.setAttribute('data-loader-off','')}})()`
 
 export default async function LocaleLayout({ children, params }: LayoutProps<'/[locale]'>) {
   const { locale } = await params

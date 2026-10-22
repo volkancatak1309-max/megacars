@@ -1,5 +1,7 @@
+import type { Metadata } from 'next'
 import { getPathname } from '@/i18n/navigation'
 import { routing, type Locale } from '@/i18n/routing'
+import { INDEXABLE } from './launch'
 import { SITE, siteOrigin } from './site'
 import type { Vehicle } from './types'
 import { vehicleFullName } from './format'
@@ -9,17 +11,67 @@ type Href = Parameters<typeof getPathname>[0]['href']
 export const localizedPath = (href: Href, locale: Locale) => getPathname({ href, locale })
 export const localizedUrl = (href: Href, locale: Locale) => siteOrigin() + localizedPath(href, locale)
 
-const hreflang = (l: Locale) => (l === 'de' ? 'de-AT' : l)
+const HREFLANG: Record<Locale, string> = { de: 'de-AT', en: 'en', tr: 'tr' }
+const OG_LOCALE: Record<Locale, string> = { de: 'de_AT', en: 'en_GB', tr: 'tr_TR' }
 
-export function alternates(href: Href, locale: Locale) {
+export function languageAlternates(href: Href) {
   const languages: Record<string, string> = {}
-  for (const l of routing.locales) languages[hreflang(l)] = localizedUrl(href, l)
+  for (const l of routing.locales) languages[HREFLANG[l]] = localizedUrl(href, l)
   languages['x-default'] = localizedUrl(href, routing.defaultLocale)
-  return { canonical: localizedUrl(href, locale), languages }
+  return languages
 }
 
-/** Demo stays out of search engines until it goes live (KARAR-DEFTERI 22.10.2026). */
-export const NOINDEX = { index: false, follow: false, googleBot: { index: false, follow: false } } as const
+export function alternates(href: Href, locale: Locale) {
+  return { canonical: localizedUrl(href, locale), languages: languageAlternates(href) }
+}
+
+/** Demo stays out of search engines until it goes live (one switch: lib/launch.ts). */
+export const ROBOTS: Metadata['robots'] = INDEXABLE
+  ? { index: true, follow: true }
+  : { index: false, follow: false, googleBot: { index: false, follow: false } }
+
+/** Fallback share image: the dealer's own photo of the S 560 in its showroom. */
+export const DEFAULT_OG = { url: '/og/default.jpg', width: 1200, height: 630 }
+
+/**
+ * Complete metadata for one page: title, description, canonical + hreflang, Open Graph
+ * and Twitter with absolute addresses (the share image falls back to DEFAULT_OG).
+ */
+export function pageMeta({
+  locale,
+  href,
+  title,
+  description,
+  image,
+  imageAlt,
+}: {
+  locale: Locale
+  href: Href
+  title: string
+  description: string
+  image?: { url: string; width: number; height: number }
+  imageAlt?: string
+}): Metadata {
+  const img = image ?? DEFAULT_OG
+  const abs = img.url.startsWith('http') ? img.url : siteOrigin() + img.url
+  const url = localizedUrl(href, locale)
+  return {
+    title,
+    description,
+    alternates: { canonical: url, languages: languageAlternates(href) },
+    openGraph: {
+      type: 'website',
+      siteName: SITE.name,
+      locale: OG_LOCALE[locale],
+      alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => OG_LOCALE[l]),
+      url,
+      title,
+      description,
+      images: [{ url: abs, width: img.width, height: img.height, alt: imageAlt ?? title }],
+    },
+    twitter: { card: 'summary_large_image', title, description, images: [abs] },
+  }
+}
 
 const DAY: Record<string, string> = {
   Mo: 'Monday',
@@ -33,6 +85,7 @@ const DAY: Record<string, string> = {
 
 const dealerId = () => `${siteOrigin()}/#dealer`
 
+/** Only verified facts (BRIEF.md, KARAR-DEFTERI.md): name, register, address, contact, hours. */
 export function autoDealerLd(locale: Locale) {
   return {
     '@context': 'https://schema.org',

@@ -9,13 +9,15 @@ import { DEFAULT_OG, ROBOTS } from '@/lib/seo'
 import { SmoothScroll } from '@/components/motion/SmoothScroll'
 import '../globals.css'
 
-// Only the Latin file is preloaded; latin-ext (ş, ğ, ı …) still loads through
-// unicode-range as soon as a Turkish page needs it.
+// Body face is not preloaded: on a slow line its 34 KB would compete with the LCP
+// photo/poster; the metric-adjusted fallback keeps the swap free of layout shift.
+// latin-ext (ş, ğ, ı …) loads through unicode-range as soon as a Turkish page needs it.
 const hanken = Hanken_Grotesk({
   subsets: ['latin'],
   variable: '--font-hanken',
   display: 'swap',
   adjustFontFallback: true,
+  preload: false,
 })
 
 // Display face (SIL OFL 1.1): wide, confident capitals for headings and the opening letters.

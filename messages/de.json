@@ -11,7 +11,6 @@
   },
   "common": {
     "skip": "Zum Inhalt springen",
-    "brandHome": "Mega Cars – zur Startseite",
     "call": "Anrufen",
     "whatsapp": "WhatsApp",
     "whatsappWrite": "WhatsApp schreiben",
@@ -27,7 +26,8 @@
     "testDriveShort": "Probefahrt",
     "reachUs": "So erreichen Sie uns",
     "quickContact": "Schnellkontakt",
-    "view": "Ansehen"
+    "view": "Ansehen",
+    "homeSuffix": "zur Startseite"
   },
   "nav": {
     "label": "Hauptnavigation",

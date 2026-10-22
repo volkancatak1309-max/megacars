@@ -11,7 +11,6 @@
   },
   "common": {
     "skip": "İçeriğe geç",
-    "brandHome": "Mega Cars – ana sayfaya dön",
     "call": "Arayın",
     "whatsapp": "WhatsApp",
     "whatsappWrite": "WhatsApp'tan yazın",
@@ -27,7 +26,8 @@
     "testDriveShort": "Test sürüşü",
     "reachUs": "Bize şöyle ulaşabilirsiniz",
     "quickContact": "Hızlı iletişim",
-    "view": "İncele"
+    "view": "İncele",
+    "homeSuffix": "ana sayfaya dön"
   },
   "nav": {
     "label": "Ana menü",

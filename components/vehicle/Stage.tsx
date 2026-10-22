@@ -172,7 +172,7 @@ export function Stage({ photos, alts, name, whatsapp }: { photos: Photo[]; alts:
       {photos.map((p, i) => (
         <li key={p.src}>
           <button type="button" className="st-thumb" onClick={() => go(i, i > l.index ? 'next' : 'prev')} aria-label={t('counter', { index: i + 1, total })} aria-current={i === l.index ? 'true' : undefined}>
-            <CarImage photo={p} alt="" sizes="120px" className="aspect-[4/3]" />
+            <CarImage photo={p} alt="" sizes="120px" className="aspect-[4/3]" quiet />
           </button>
         </li>
       ))}

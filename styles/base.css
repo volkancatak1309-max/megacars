@@ -114,7 +114,8 @@
 .s-red {
   --bg: var(--red);
   --fg: #fff;
-  --sub: rgb(255 255 255 / 0.86);
+  /* secondary text stays pure white: 86 % white on red is only 4.1:1 (WCAG AA needs 4.5:1) */
+  --sub: #fff;
   --rule: rgb(255 255 255 / 0.36);
   --rule-strong: rgb(255 255 255 / 0.7);
   --frame: var(--red-deep);

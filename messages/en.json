@@ -11,7 +11,6 @@
   },
   "common": {
     "skip": "Skip to content",
-    "brandHome": "Mega Cars – back to the home page",
     "call": "Call",
     "whatsapp": "WhatsApp",
     "whatsappWrite": "Message on WhatsApp",
@@ -27,7 +26,8 @@
     "testDriveShort": "Test drive",
     "reachUs": "How to reach us",
     "quickContact": "Quick contact",
-    "view": "View"
+    "view": "View",
+    "homeSuffix": "back to the home page"
   },
   "nav": {
     "label": "Main navigation",

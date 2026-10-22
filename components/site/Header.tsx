@@ -74,8 +74,9 @@ export function Header({ stock }: { stock: number }) {
   return (
     <header className="ph" data-solid={solid || open || undefined} data-hidden={(hidden && !open) || undefined}>
       <div className="ph-in pg">
-        <CurtainLink href="/" className="ph-logo" aria-label={tc('brandHome')}>
-          MEGA<i> </i>CARS
+        {/* the visible words start the accessible name (WCAG 2.5.3 label in name) */}
+        <CurtainLink href="/" className="ph-logo">
+          MEGA<i> </i>CARS<span className="sr-only"> – {tc('homeSuffix')}</span>
         </CurtainLink>
         <nav className="ph-nav" aria-label={t('label')}>
           {NAV.map((l) => (
@@ -94,10 +95,10 @@ export function Header({ stock }: { stock: number }) {
                 hrefLang={l}
                 lang={l}
                 aria-current={l === locale ? 'true' : undefined}
-                aria-label={l === locale ? undefined : tlang('switchTo', { language: tlang(l) })}
                 className="sh sh--text R-host"
               >
                 <Faces>{l.toUpperCase()}</Faces>
+                {l !== locale && <span className="sr-only"> – {tlang('switchTo', { language: tlang(l) })}</span>}
               </CurtainLink>
             ))}
           </span>

@@ -11,6 +11,7 @@ export function CarImage({
   alt,
   sizes,
   priority = false,
+  quiet = false,
   className = '',
   imgClassName = '',
   style,
@@ -19,6 +20,8 @@ export function CarImage({
   alt: string
   sizes: string
   priority?: boolean
+  /** small helper images (thumbnails) that must never compete with the LCP photo */
+  quiet?: boolean
   className?: string
   imgClassName?: string
   style?: CSSProperties
@@ -41,7 +44,7 @@ export function CarImage({
         height={photo.height}
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : undefined}
+        fetchPriority={priority ? 'high' : quiet ? 'low' : undefined}
         decoding={priority ? 'auto' : 'async'}
         className={`h-full w-full ${portrait ? 'object-contain' : 'object-cover'} ${imgClassName}`}
       />

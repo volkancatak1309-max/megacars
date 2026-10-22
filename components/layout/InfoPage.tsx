@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { SITE, mailHref, whatsappHref } from '@/lib/site'
 import { Icon } from '@/components/ui/Icon'
-import { DrawLine, RevealText } from '@/components/motion/Reveal'
+import { DrawGroup, RiseHeading } from '@/components/motion/Reveal'
 import { MobileActionBar } from './MobileActionBar'
 
 /**
@@ -29,15 +29,11 @@ export async function InfoPage({ title, imprint = false }: { title: string; impr
   return (
     <div className="pt-[var(--header-h)]">
       <section className="container-max page-x py-[var(--section-y)]">
-        <RevealText as="h1" className="t-h1" start="top 100%">
-          {title}
-        </RevealText>
+        <RiseHeading className="t-h1">{title}</RiseHeading>
         <p className="t-lead mt-6">{t('reach')}</p>
-        <dl className="mt-10 max-w-3xl">
+        <dl className="mt-10 max-w-3xl border-b border-line">
           {rows.map((r) => (
-            <div key={r.label}>
-              <DrawLine />
-              <div className="grid gap-1 py-5 sm:grid-cols-[12rem_1fr] sm:gap-6">
+            <DrawGroup key={r.label} className="grid gap-1 py-5 sm:grid-cols-[12rem_1fr] sm:gap-6">
                 <dt className="t-label pt-0.5">{r.label}</dt>
                 <dd className="tabular text-ink">
                   {'href' in r && r.href ? (
@@ -48,10 +44,8 @@ export async function InfoPage({ title, imprint = false }: { title: string; impr
                     r.value
                   )}
                 </dd>
-              </div>
-            </div>
+            </DrawGroup>
           ))}
-          <DrawLine />
         </dl>
         <div className="mt-10 flex flex-wrap gap-3">
           <a href={SITE.phoneHref} className="btn btn-primary">

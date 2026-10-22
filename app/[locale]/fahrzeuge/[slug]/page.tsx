@@ -11,7 +11,7 @@ import { JsonLd } from '@/components/ui/JsonLd'
 import { Icon } from '@/components/ui/Icon'
 import { Magnetic } from '@/components/ui/Magnetic'
 import { CarImage } from '@/components/ui/CarImage'
-import { DrawLine, RevealText, Stagger } from '@/components/motion/Reveal'
+import { DrawGroup, RevealText, Stagger } from '@/components/motion/Reveal'
 import { Gallery, PhotoGrid } from '@/components/vehicle/Gallery'
 import { SpinViewer } from '@/components/vehicle/spin/SpinViewer'
 import { Equipment } from '@/components/vehicle/Equipment'
@@ -227,13 +227,10 @@ export default async function VehiclePage({ params }: Props) {
         </RevealText>
         <dl className="grid gap-x-12 md:grid-cols-2">
           {data.map((row) => (
-            <div key={row.label}>
-              <DrawLine />
-              <div className="grid grid-cols-[1fr_auto] gap-6 py-4">
-                <dt className="text-ink-2">{row.label}</dt>
-                <dd className="tabular text-right text-ink">{row.value}</dd>
-              </div>
-            </div>
+            <DrawGroup key={row.label} className="grid grid-cols-[1fr_auto] gap-6 py-4">
+              <dt className="text-ink-2">{row.label}</dt>
+              <dd className="tabular text-right text-ink">{row.value}</dd>
+            </DrawGroup>
           ))}
         </dl>
       </section>

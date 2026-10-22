@@ -3,7 +3,7 @@ import type { Photo } from '@/lib/types'
 import { SITE } from '@/lib/site'
 import { formatPrice } from '@/lib/format'
 import { CarImage } from '@/components/ui/CarImage'
-import { DrawLine, RevealText, Ticker, WindowReveal } from '@/components/motion/Reveal'
+import { DrawGroup, RevealText, Ticker, WindowReveal } from '@/components/motion/Reveal'
 
 /**
  * "This dealer is real": only facts with a source (KARAR-DEFTERI, FAZ 4A) — Firmenbuch
@@ -52,29 +52,22 @@ export async function Trust({ photo, stock }: { photo: Photo; stock: { count: nu
           </RevealText>
           <p className="t-lead mt-6 measure">{t('lead')}</p>
 
-          <dl className="mt-10">
+          <dl className="mt-10 border-b border-line">
             {facts.map((f) => (
-              <div key={f.label}>
-                <DrawLine />
-                <div className="grid gap-1 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
-                  <dt className="t-label pt-0.5">{f.label}</dt>
-                  <dd className="text-ink">{f.value}</dd>
-                </div>
-              </div>
+              <DrawGroup key={f.label} className="grid gap-1 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+                <dt className="t-label pt-0.5">{f.label}</dt>
+                <dd className="text-ink">{f.value}</dd>
+              </DrawGroup>
             ))}
-            <div>
-              <DrawLine />
-              <div className="grid gap-1 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
-                <dt className="t-label pt-3">{t('stockLabel')}</dt>
-                <dd>
-                  <Ticker value={stock.count} locale={locale} className="t-price block" />
-                  <span className="tabular text-ink-2">
-                    {t('stockRange', { min: formatPrice(stock.min, locale), max: formatPrice(stock.max, locale) })}
-                  </span>
-                </dd>
-              </div>
-              <DrawLine />
-            </div>
+            <DrawGroup className="grid gap-1 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+              <dt className="t-label pt-3">{t('stockLabel')}</dt>
+              <dd>
+                <Ticker value={stock.count} locale={locale} className="t-price block" />
+                <span className="tabular text-ink-2">
+                  {t('stockRange', { min: formatPrice(stock.min, locale), max: formatPrice(stock.max, locale) })}
+                </span>
+              </dd>
+            </DrawGroup>
           </dl>
         </div>
       </div>

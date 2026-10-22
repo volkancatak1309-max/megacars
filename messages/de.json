@@ -300,14 +300,5 @@
   "brands": {
     "title": "Diese Marken stehen bei uns",
     "linkLabel": "{make}: {count, plural, one {# Fahrzeug} other {# Fahrzeuge}} ansehen"
-  },
-  "heroCandidates": {
-    "metaTitle": "Eröffnungsfilm: drei Kandidaten",
-    "title": "Drei Filme mit einem roten Wagen stehen für die Eröffnung zur Wahl.",
-    "lead": "Jeder Film läuft in denselben Buchstaben wie auf der Startseite. Der markierte Film ist gerade auf der Startseite zu sehen.",
-    "active": "Auf der Startseite",
-    "source": "Quelle",
-    "licence": "Lizenz",
-    "note": "Alle drei Filme sind echte Kameraaufnahmen mit kommerzieller Lizenz von Mixkit und Pexels. In diesen Archiven gibt es keine Aufnahme, die zugleich einen roten Premium-Sportwagen, dunkles Licht und eine langsame Kamera zeigt; deshalb hat jeder Kandidat einen Kompromiss. Diese Seite dient nur der Auswahl und ist für Suchmaschinen gesperrt."
   }
 }

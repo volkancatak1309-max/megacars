@@ -14,8 +14,6 @@ export const routing = defineRouting({
     '/kontakt': { de: '/kontakt', tr: '/iletisim' },
     '/impressum': { de: '/impressum', tr: '/kunye' },
     '/datenschutz': { de: '/datenschutz', tr: '/gizlilik' },
-    // opening-film candidates (KARAR-DEFTERI 23.10.2026); stays until Volkan has chosen
-    '/prototyp/hero-adaylari': { de: '/prototyp/hero-adaylari', tr: '/prototip/hero-adaylari' },
   },
 })
 

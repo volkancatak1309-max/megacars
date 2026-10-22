@@ -183,15 +183,16 @@ Finanzierung, Ankauf, Kontakt, Impressum, Datenschutz: dev başlık (dağınık 
 ### 8.5 404
 Kırmızı dev "404", tam cümle başlık, "Zum Bestand".
 
-### 8.6 Açılış videosu adayları
-`/de/prototyp/hero-adaylari` (noindex): üç aday aynı harf maskesinde yan yana; seçim `lib/hero.ts` içinde `HERO_ACTIVE` tek satır değişikliğiyle yapılır.
+### 8.6 Açılış filmi
+Pexels 33374869, kırmızı Chevrolet Corvette C8 (Volkan'ın seçimi, 23.10.2026); `lib/hero.ts`, dosyalar `public/hero/c8/`. Doğal, koyu renk düzeni (gölgeler derin, en parlak değer %88, kırmızı doygun, hafif vinyet; gece taklidi yok). Yeni kodlama her zaman yeni klasöre gider (/hero/* bir yıl immutable).
 
 ---
 
 ## 9. Açılış (Wow 1) teknik tarifi
 - SVG maske (yatay 1600×900, dikey 900×1600, `xMidYMid slice`): Unbounded 900 "MEGA" / "CARS" doğal oranında (MEGA = 4,03 em, büyük harf yüksekliği 0,75 em); CARS harf aralığıyla MEGA genişliğine açılır.
 - Video `load`'dan sonra eklenir; Save-Data, 2G ve reduced motion'da eklenmez. Poster (WebP) LCP öğesidir.
-- ScrollTrigger scrub 0,6: maske 1 → 14 ölçek (`power2.in`), dönüş noktası E harfinin orta kolu (`getStartPositionOfChar` ile hesaplanır), %60'tan sonra maske kaybolur; film 1.12 → 1.
+- ScrollTrigger scrub 0,6: maske 1 → 14 ölçek (`power2.in`), dönüş noktası E harfinin orta kolu (`getStartPositionOfChar` ile hesaplanır), %60'tan sonra maske kaybolur; film 1.06 → 1.
+- Sabit kamerayı kırmak için film kendi içinde çok yavaş yakınlaşır (`.hl-push`: 12 sn'de %6, ileri-geri); taban ölçeğiyle birlikte en büyük büyütme ≈ 1,12 (1920 px dosyanın keskin kaldığı sınır). Reduced motion'da kapalı.
 - Video sahne ekrandan çıkınca durur; duraklat/oynat düğmesi (WCAG 2.2.2).
 
 ---

@@ -315,14 +315,5 @@
   "brands": {
     "title": "Stokumuzda bu markalar var",
     "linkLabel": "{make}: {count} aracı inceleyin"
-  },
-  "heroCandidates": {
-    "metaTitle": "Açılış videosu: üç aday",
-    "title": "Açılış için kırmızı otomobilli üç video arasından seçim yapabilirsiniz.",
-    "lead": "Her video, ana sayfadaki harflerin aynısının içinde oynuyor. İşaretli video şu anda ana sayfada görünüyor.",
-    "active": "Ana sayfada",
-    "source": "Kaynak",
-    "licence": "Lisans",
-    "note": "Üç video da Mixkit ve Pexels'ten alınmış, ticari kullanıma açık gerçek kamera çekimleridir. Bu arşivlerde kırmızı bir premium spor otomobili hem karanlık ışıkta hem de yavaş kamerayla gösteren bir çekim yok; bu yüzden her adayın bir eksiği var. Bu sayfa yalnız seçim içindir ve arama motorlarına kapalıdır."
   }
 }

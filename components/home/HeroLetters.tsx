@@ -82,7 +82,7 @@ export function useFilm(film: HeroFilm) {
  */
 export function HeroLetters({ film, title, cta, count }: { film: HeroFilm; title: string; cta: string; count: number }) {
   const t = useTranslations('hero')
-  const locale = useLocale() as 'de' | 'tr'
+  const locale = useLocale() as keyof HeroFilm['label']
   const root = useRef<HTMLElement>(null)
   const video = useRef<HTMLVideoElement>(null)
   const [src, setSrc] = useFilm(film)
@@ -137,23 +137,26 @@ export function HeroLetters({ film, title, cta, count }: { film: HeroFilm; title
     <section ref={root} className="hl" aria-labelledby="hl-title">
       <div className="hl-stage">
         <div className="hl-film">
-          <picture>
-            <source media={PORTRAIT} srcSet={film.posterMobile} width={540} height={960} />
-            <img src={film.posterDesktop} width={1920} height={1080} alt="" fetchPriority="high" />
-          </picture>
-          {src && (
-            <video
-              ref={video}
-              src={src}
-              muted
-              loop
-              playsInline
-              autoPlay={!paused}
-              preload="auto"
-              aria-label={film.label[locale]}
-              onPlaying={(e) => e.currentTarget.setAttribute('data-playing', '')}
-            />
-          )}
+          {/* a very slow push-in breaks the locked-off camera; it never adds to the scroll zoom's peak */}
+          <div className="hl-push">
+            <picture>
+              <source media={PORTRAIT} srcSet={film.posterMobile} width={540} height={960} />
+              <img src={film.posterDesktop} width={1920} height={1080} alt="" fetchPriority="high" />
+            </picture>
+            {src && (
+              <video
+                ref={video}
+                src={src}
+                muted
+                loop
+                playsInline
+                autoPlay={!paused}
+                preload="auto"
+                aria-label={film.label[locale]}
+                onPlaying={(e) => e.currentTarget.setAttribute('data-playing', '')}
+              />
+            )}
+          </div>
         </div>
         <LetterMask id="hl-m-l" portrait={false} />
         <LetterMask id="hl-m-p" portrait />
@@ -181,23 +184,5 @@ export function HeroLetters({ film, title, cta, count }: { film: HeroFilm; title
         </p>
       </div>
     </section>
-  )
-}
-
-/** Small, static version for the candidate comparison page: same letters, same layout. */
-export function FilmInLetters({ film, id, label }: { film: HeroFilm; id: string; label: string }) {
-  const [src] = useFilm(film)
-  return (
-    <div className="hc-stage">
-      <div className="hl-film" style={{ transform: 'none' }}>
-        <picture>
-          <source media={PORTRAIT} srcSet={film.posterMobile} />
-          <img src={film.posterDesktop} width={1920} height={1080} alt="" loading="lazy" />
-        </picture>
-        {src && <video src={src} muted loop playsInline autoPlay preload="metadata" aria-label={label} onPlaying={(e) => e.currentTarget.setAttribute('data-playing', '')} />}
-      </div>
-      <LetterMask id={`${id}-l`} portrait={false} />
-      <LetterMask id={`${id}-p`} portrait />
-    </div>
   )
 }

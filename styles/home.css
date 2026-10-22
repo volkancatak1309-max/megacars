@@ -22,7 +22,27 @@
 .hl-film {
   position: absolute;
   inset: 0;
-  transform: scale(1.12);
+  transform: scale(1.06);
+}
+
+/* Slow push-in (6 % in 12 s, then back): breaks the locked-off camera. With the scroll
+   zoom's 1.06 the peak stays at 1.12, so the 1920 px file is never enlarged more than
+   before (on 1440/1536 px screens it is not enlarged at all). */
+.hl-push {
+  position: absolute;
+  inset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hl-push {
+    animation: hl-push 12s var(--ease-film) infinite alternate;
+  }
+}
+
+@keyframes hl-push {
+  to {
+    transform: scale(1.06);
+  }
 }
 
 .hl-film img,

@@ -8,14 +8,14 @@ brand
 
 ## Users
 
-- Mercedes-Benz, BMW, Audi ya da Porsche'den orta-üst segment ikinci el araç arayan alıcılar (brif). Bölge ve yaş aralığı [VARSAYIM]: Vorarlberg, Bodensee çevresi ve İsviçre sınırı; 30–60 yaş. Fiyat bandı repodaki Haziran 2026 verisine göre 23.900–64.900 € (güncel stok doğrulanamadı, bkz. `docs/ARASTIRMA.md`).
+- İkinci el araç arayan geniş bir alıcı kitlesi: stok yalnız premium değil; geçmiş AutoScout24 kaydında 3.900 €'luk Renault Kangoo ve 12.900 €'luk Ford Kuga'dan 64.900 €'luk Mercedes S 560'a kadar uzanıyordu (brif, 22.10.2026). Galerinin sloganı: "Autos zu Top Preisen. Auch für die kleine Geldtasche." Site premium görünür ama bütçe arayanı dışlamaz. Bölge ve yaş aralığı [VARSAYIM]: Vorarlberg, Bodensee çevresi ve İsviçre sınırı; 30–60 yaş. Güncel stok bilinmiyor; demo, Haziran 2026'daki 18 araçla çalışır.
 - Bağlam [VARSAYIM]: akşam kanepede telefondan ilan karşılaştırıyor, ertesi gün iş arasında masaüstünden ayrıntıya bakıyor. Temkinli; galeriye güvenip güvenemeyeceğini tartıyor.
 - Yapmak istediği üç iş: stoktaki aracı bulmak, aracı ayrıntılı incelemek, tek dokunuşla iletişime geçmek (Anrufen / WhatsApp / Probefahrt / Finanzierung / Inzahlungnahme).
 - Diller: Almanca (varsayılan), İngilizce, Türkçe.
 
 ## Product Purpose
 
-Mega Cars'ın gerçek stoğunu, her aracın kendi fotoğraflarıyla, dürüst ve sinematik bir vitrinde göstermek; ziyaretçiyi en kısa yoldan telefona, WhatsApp'a ya da randevuya taşımak. Başarı ölçütü: ilan başına daha çok doğrudan iletişim ve "bu galeri ciddi" izlenimi. İmza özellik: araç sayfasında, gerçek video karelerinden yapılmış ve döner platformda duran 360° showroom.
+Mega Cars'ın gerçek stoğunu, her aracın kendi fotoğraflarıyla, dürüst ve sinematik bir vitrinde göstermek; ziyaretçiyi en kısa yoldan telefona, WhatsApp'a ya da randevuya taşımak. Başarı ölçütü: ilan başına daha çok doğrudan iletişim ve "bu galeri ciddi" izlenimi. İmza özellik: araç sayfasında, gerçek video karelerinden yapılmış, aracın gerçek zemini ve gölgesiyle dikişsiz bir fonun önünde saat yönünde dönen 360° showroom.
 
 ## Brand Personality
 
@@ -37,12 +37,12 @@ Mega Cars'ın gerçek stoğunu, her aracın kendi fotoğraflarıyla, dürüst ve
 1. **Araç sahnenin tek yıldızıdır.** Arayüz geri çekilir; fotoğraf ve showroom önde durur.
 2. **Gerçeklik pazarlıksızdır.** Bilinmeyen bilgi gösterilmez; aracın pikseline dokunulmaz; eksik açı doldurulmaz.
 3. **Her ekranda bir sonraki adım bellidir.** Ara, yaz, randevu al: her zaman bir dokunuş uzaklıkta.
-4. **Hareket kameradır, oyuncak değil.** Yavaş dolly, geri çekilme, platformun ağır dönüşü; zıplama ve yaylanma yok.
+4. **Hareket kameradır, oyuncak değil.** Yavaş dolly, geri çekilme, aracın ağır ve saat yönünde dönüşü; zıplama ve yaylanma yok.
 5. **Önce telefon.** Akşam kanepede tek elle kullanılabilirlik, masaüstünden önce gelir.
 
 ## Accessibility & Inclusion
 
 - WCAG 2.2 AA: metin kontrastı ≥ 4.5:1, büyük metin ve arayüz sınırları ≥ 3:1.
 - Bütün düğmelerde ve yalnız ikonlu bağlantılarda aria-label; tam klavye gezintisi; görünür odak halkası.
-- `prefers-reduced-motion: reduce` açıkken bütün animasyonlar kapanır ya da anlık geçişe döner; 360 platform kendiliğinden dönmez.
+- `prefers-reduced-motion: reduce` açıkken bütün animasyonlar kapanır ya da anlık geçişe döner; 360° görüntüleyicide araç kendiliğinden dönmez.
 - Üç dilde tam ve yüklemli cümleler; makine çevirisi yok.

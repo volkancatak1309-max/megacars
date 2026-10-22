@@ -94,3 +94,68 @@
 ### Görsel planı kuralları (FAZ 3 için)
 - **22.10.2026** — "Prompt kuralı: "photorealistic", "shot on Sony FX9" veya "shot on Phase One medium format", "natural lighting" veya "professional studio lighting", "documentary realism", "no CGI feel", "shallow depth of field", "natural color grading", "cinematic 35mm" veya "85mm lens" ifadeleri zorunlu. "cartoon", "illustration", "low-poly", "stylized", "neon", "vibrant colors" yasak." — İlgili: docs/GORSEL-PLANI.md
 - **22.10.2026** — "Video kuralı: 24 fps, doğal hareket bulanıklığı; kamera yalnız dolly, push-in, tilt-up veya yumuşak pan yapar; ani kesim, zoom flaşı, parçacık patlaması ve sert sarsıntı yok; doğal renk düzenlemesi." — İlgili: docs/GORSEL-PLANI.md
+
+## 22.10.2026 — Showroom yöntemi değişikliği + 360° denemesi (ikinci talimat)
+
+### Önceki denemenin reddi
+- **22.10.2026** — "Volkan sonucu "çok amatör" bulup reddetti. Nedenleri: platform düz ve derinliksiz; araç başka bir ışıkta çekildiği için karanlık sahnede yapıştırılmış duruyor; tekerleklerin altında gerçek gölge yok; perspektif tutmuyor." — İlgili: docs/showroom-deneme/
+
+### Oturum sınırı
+- **22.10.2026** — "Site koduna dokunma. Deploy etme. fal.ai ile görsel ya da video üretme. Mega Cars'ın gerçek fotoğraflarını düzenleme. Yalnız belgeleri güncelle, showroom denemesini yap, raporla ve dur." — İlgili: bu oturum
+- **22.10.2026** — "main dalı eski canlı sitedir (megacars-one.vercel.app); main'e dokunma, main'e push etme." — İlgili: main dalı
+- **22.10.2026** — "docs/BRIEF.md ve DESIGN.md'de ilgili bölümleri aşağıdaki kararlarla değiştir; eski hâli silinsin, çelişen hiçbir cümle kalmasın." — İlgili: docs/BRIEF.md, DESIGN.md
+
+### a) İletişim ve künye
+- **22.10.2026** — "Sahibi: Murat Demir. Firmenbuch kaydı: "Mega Cars Murat Demir e.U.", FN 447871 i, Landesgericht Feldkirch (kaynak: firmeneintrag.creditreform.de). Bazı dizinlerde "Mega Cars OG" geçiyor; Impressum Firmenbuch kaydına göre yazılır. UID bilinmiyor." — İlgili: Impressum
+- **22.10.2026** — "Ana telefon: +43 660 6877002 (kaynak: galerinin Facebook sayfası facebook.com/Autohaus.MegaCars, AutoScout24 kaydındaki "Demir Murat" iletişim bilgisi, OpenStreetMap). İkinci numara: +43 660 6969496 (Firmenbuch dizinleri: creditreform, firmenabc, herold)." — İlgili: Kontakt, alt eylem çubuğu, footer
+- **22.10.2026** — "E-posta: megacars@live.at (Facebook, firmenabc, herold, OpenStreetMap)." — İlgili: Kontakt, formlar, Impressum
+- **22.10.2026** — "Açılış saatleri: Pazartesi–Cuma 08:00–18:00, Cumartesi 09:00–15:00, Pazar kapalı (Cylex, OpenStreetMap). Öğle arası kaynaklar arasında farklı; teyit edilecek." — İlgili: Kontakt, JSON-LD openingHours
+- **22.10.2026** — "Eski sitedeki office@meral.at ve +43 660 1999472 galeriye ait DEĞİL; yeni sitede hiçbir yerde kullanılmaz. WhatsApp bağlantısı wa.me/436606877002 olur (numaranın WhatsApp'ta açık olduğu teyit edilecek)." — İlgili: WhatsApp CTA, bütün site
+- **22.10.2026** — "Galerinin AutoScout24 profil metninde "seit 2002" yazıyor; Firmenbuch'taki e.U. kaydı 02.02.2016 tarihli. "Seit 2002" sitede yalnız sahibi teyit ederse kullanılır." — İlgili: Über uns
+
+### b) Stok
+- **22.10.2026** — "Bugün AutoScout24'te ve galerinin Facebook'ta verdiği gebrauchtwagen.at sayfasında (cid=9564827) Mega Cars ilanı yok. Güncel stok kaynağı Gökhan'dan öğrenilecek." — İlgili: data/inventory.json, içe aktarma
+- **22.10.2026** — "Stok yalnız premium değil: geçmiş AutoScout24 kaydında 3.900 €'luk Renault Kangoo ve 12.900 €'luk Ford Kuga'dan 64.900 €'luk Mercedes S 560'a kadar geniş bir fiyat aralığı vardı. Facebook sloganı: "Autos zu Top Preisen. Auch für die kleine Geldtasche." Site premium görünür, ama bütçe arayan ziyaretçiyi dışlayan dil ve filtre kullanılmaz; fiyat filtresi en düşük fiyattan başlar. Brifteki "orta-üst segment" ifadesi bununla değiştirilir." — İlgili: brif, filtre, metin dili
+- **22.10.2026** — "Demo sürümünde son bilinen gerçek stok (Haziran 2026, 18 araç) kullanılır; site canlıya çıkana kadar noindex kalır; canlıya çıkmadan önce güncel stoka geçilir." — İlgili: demo, robots/noindex
+
+### c) Kapak fotoğrafları
+- **22.10.2026** — "İlan fotoğraflarında arka plan değiştirme İPTAL. Kartlarda, öne çıkanlar şeridinde ve detay sayfasında Mega Cars'ın kendi showroom'unda çekilmiş orijinal fotoğraflar kullanılır; yalnız oran ve kırpma tek tip yapılır; mümkünse showroom içinde çekilmiş açı kapak seçilir." — İlgili: araç kartı, öne çıkanlar, detay galerisi
+
+### d) Showroom (360°) yeni yöntemi
+- **22.10.2026** — "Araç, altındaki gerçek zemin ve gerçek gölgesi korunur; yalnız arka plandaki duvarlar ve uzak çevre dikişsiz bir fonla değiştirilir. Camdan görünen arka plan da yeni fona uyarlanır; aracın gövdesine, rengine ve çiziğine dokunulmaz. Kaynak yine aracın etrafında yürünerek çekilmiş telefon videosudur." — İlgili: showroom boru hattı
+
+### e) Dönme kuralı
+- **22.10.2026** — "Detay sayfası açılınca araç, üstten bakıldığında saat yönünde ve yavaş döner (1 tam tur ≈ 40 sn; hız ve yön tek ayardan değişir). Ziyaretçi sürükleyince araç fareyi ya da parmağı takip eder; bırakınca ataletle yumuşakça durur; 3 sn dokunulmazsa yine yavaşça dönmeye başlar. prefers-reduced-motion açıkken kendiliğinden dönme kapalıdır. Tek açılı ilan fotoğrafları döndürülmez." — İlgili: 360 görüntüleyici
+
+### f) Wow 3 güncellemesi
+- **22.10.2026** — "Kart → detay geçişinde kartın fotoğrafı büyüyerek detay sayfasının üstüne yerleşir; aracın 360° verisi varsa fotoğraf yumuşakça showroom sahnesine geçer ve dönmeye başlar." — İlgili: kart → detay geçişi
+
+### fal.ai anahtarı
+- **22.10.2026** — "FAL_KEY ya da FAL_API_KEY'i önce ortam değişkenlerinde, sonra bu bilgisayardaki diğer projelerin .env dosyalarında ara (C:\Users\90553\Desktop\business\*, C:\Users\90553\Desktop\*, C:\Users\90553\*; node_modules ve .git klasörlerini atla). Değeri ASLA ekrana, log'a, rapora ya da repoya yazma." — İlgili: .env.local
+- **22.10.2026** — "Bulursan değeri bu projedeki .env.local dosyasına FAL_KEY olarak yaz ve .env.local'ın .gitignore'da olduğunu doğrula. Raporda yalnız "bulundu (hangi dosyadan)" ya da "bulunamadı" yaz." — İlgili: .env.local, .gitignore
+
+### 360° denemesi
+- **22.10.2026** — "Amaç: Yeni yöntemin gerçekten fotoğraf gibi durduğunu, Mega Cars'tan çekim istemeden önce kanıtlamak." — İlgili: docs/showroom-v2/
+- **22.10.2026** — "Ticari kullanıma açık (Pexels, Coverr ya da Mixkit) bir stok video bul. Videoda kamera bir aracın etrafında sabit yükseklikte tam tur dönmeli; ortam kapalı bir showroom ya da stüdyo olmalı; çözünürlük en az 1080p olmalı. Kaynak linkini ve lisansını yaz. Bu video yalnız denemedir; sitede ASLA yayınlanmaz. Uygun video bulamazsan dur ve raporla." — İlgili: deneme videosu
+- **22.10.2026** — "Boru hattı (yalnız yerel ve ücretsiz araçlar; ev PC'de NVIDIA RTX 4050 6 GB var)" — İlgili: showroom boru hattı
+- **22.10.2026** — "Kurulum ya da ekran kartı belleği sorun çıkarırsa geçici çözüm uydurma; dur ve raporla." — İlgili: showroom boru hattı
+- **22.10.2026** — "A — Açık stüdyo: açık gri ya da kırık beyaz dikişsiz fon; gerçek zemin ve gerçek gölge korunur." — İlgili: docs/showroom-v2/
+- **22.10.2026** — "B — Karanlık salon: koyu fon; aracın altında gerçek zeminden oluşan doğal bir ışık havuzu (sahne)." — İlgili: docs/showroom-v2/
+- **22.10.2026** — "C — Platformlu: B'ye ek olarak aracın altında ince bir platform kenarı. Platformun perspektifi COLMAP'in zemin düzleminden ve kamera konumlarından hesaplanır; gerçek gölge platformun üstüne düşer; araç platformla birlikte döner. Sahte duruyorsa bunu dürüstçe yaz." — İlgili: docs/showroom-v2/
+- **22.10.2026** — "Görüntüleyici: hafif, özel bir canvas 360 görüntüleyici yaz (Three.js yok)." — İlgili: 360 görüntüleyici
+- **22.10.2026** — "Kalite kontrolü (kendin, dürüstçe): zemin–fon geçişi, tekerleğin zemine teması, gölge, camdan görünen fon, maske titremesi, kareler arası zıplama. Her birini %200 yakınlaştırmayla kontrol et; başarısız olan noktayı gizleme, rapora yaz." — İlgili: docs/showroom-v2/
+
+### Çekim rehberi
+- **22.10.2026** — "Tercih edilen yer Mega Cars'ın kapalı showroom'u; aracın çevresinde yaklaşık 3 m boş alan." — İlgili: docs/360-CEKIM-REHBERI.md
+- **22.10.2026** — "Mesafe, yükseklik ve tur süresini denemedeki boru hattının ihtiyacına göre yaz." — İlgili: docs/360-CEKIM-REHBERI.md
+
+### Kapanış
+- **22.10.2026** — ".playwright-mcp/ klasörünü .gitignore'a ekle. docs/ ve DESIGN.md değişikliklerini v2 dalına commit et (mesaj: "docs: showroom v2 yontemi, kunye ve stok guncellemesi, 360 denemesi") ve v2'yi push et. Stok videonun kendisini ve büyük kare klasörlerini commit etme; yalnız index.html, en fazla 10 MB'lık önizleme MP4'leri ve küçük örnekler girsin." — İlgili: git
+
+## 22.10.2026 — Stok video bulunamadıktan sonraki karar (üçüncü talimat)
+- **22.10.2026** — "KARAR: (a) + (c) birlikte." — İlgili: 360° denemesi
+- **22.10.2026** — "Belge değişikliklerini şimdi commit'le ve push et. Commit mesajı yalnız yapılanı söylesin, ör. "docs: künye, showroom yöntemi ve Wow 3 güncellendi; .gitignore". "360 denemesi" ifadesi geçmeyecek. main'e değil, çalıştığın dala." — İlgili: git, v2 dalı
+- **22.10.2026** — "Mega Cars'tan tek araçlık deneme çekimini Volkan isteyecek. Senden: çekim için kısa, Almanca bir talep metni yaz (mesafe, yükseklik, tur süresi, kapalı showroom, 3 m boş alan). Rakamlar kesin değilse [VARSAYIM] yaz." — İlgili: çekim talebi
+- **22.10.2026** — "Çekim gelene kadar Pexels 854754 ile YALNIZ boru hattını kur: kare çıkarma, 72 kare, görüntüleyici, ölçümler (kare boyutu, ilk kare süresi, JS boyutu, işlem süresi). Raporda bunun yöntemi kanıtlamadığını açıkça yaz." — İlgili: docs/showroom-v2/
+- **22.10.2026** — "fal.ai anahtarını Volkan onay vermeden hiçbir ücretli işte kullanma." — İlgili: .env.local, fal.ai
+- **22.10.2026** — "Rapordan sonra dur." — İlgili: faz sırası

@@ -8,7 +8,7 @@
 
 ## 1. Konsept: **Die Übergabe** (Teslim anı)
 
-Her araç, teslim alınacağı an gibi sunulur: sakin, karanlık bir teslim salonu, mat zemin, yukarıdan tek bir yumuşak ışık ve platformun üstünde yalnız o araç. Arayüz bu salondaki iyi bir satış danışmanı gibi davranır: sessiz, kesin ve dürüsttür; her rakam gerçektir, her fotoğraf aracın kendisidir. Hareketler bir kameranın hareketleridir: yavaş dolly, geri çekilme ve bir insanın aracın etrafında yürüme hızında dönen platform.
+Her araç, teslim alınacağı an gibi sunulur: sakin bir salonda, kendi gerçek zemini ve gölgesiyle, sade bir fonun önünde yalnız o araç. Arayüz bu salondaki iyi bir satış danışmanı gibi davranır: sessiz, kesin ve dürüsttür; her rakam gerçektir, her fotoğraf aracın kendisidir. Hareketler bir kameranın hareketleridir: yavaş dolly, geri çekilme ve üstten bakıldığında saat yönünde, bir insanın aracın etrafında yürüme hızında dönen araç.
 
 **Sahne cümlesi (tema seçimi için):** Vorarlberg'de bir alıcı akşam kanepede, loş ışıkta, telefonundan ikinci el Mercedes ve BMW ilanlarını karşılaştırıyor; temkinli, ama doğru aracı görünce hemen yazmak istiyor. → **Koyu tema.** Akşam ekran parlaklığı, sinematik fotoğraf ve karanlık showroom konsepti aynı yönü gösteriyor. Tema düğmesi yok.
 
@@ -133,10 +133,10 @@ Adımlar arası oran başlıklarda ≥ 1,25. Görünür en küçük metin 13 px'
 
 ## 5. Fotoğraf sunum kuralları
 
-1. **Araç pikseline dokunulmaz.** Renk, parlaklık, kontrast, keskinlik, rötuş, çizik ya da hasar düzeltmesi yok. Yalnız geometrik ölçekleme (tarayıcının yaptığı gibi) ve kırpma yapılır.
-2. **Arka plan değişimi yalnız showroom görünümündedir:** 360 sahnesi, liste kartları ve öne çıkanlar şeridindeki kapak. Ayırma kalitesi yetersizse (jant boşluğunda ya da camda belirgin eski arka plan, kenarda hale) o araçta **orijinal fotoğraf** kullanılır. Karar araç başına `inventory.json` içindeki `cover.mode: "showroom" | "original"` alanında tutulur.
-3. **Detay sayfasında orijinal ilan fotoğrafları her zaman ayrıca gösterilir.** Showroom sahnesinin altında küçük bir not durur: DE "Fahrzeug unverändert, nur der Hintergrund ist digital ersetzt." (öneri; Volkan onayı).
-4. **Oranlar:** kart ve galeri 4:3 (kaynak fotoğraflar 1440×1080 olduğu için kırpma gerekmez). Showroom ana kareleri 4:3 1600×1200 üretilir; masaüstü sahne 16:10 gösterir ve tavanı ve zemini kırpar (`object-position: 50% 62%`), araç asla kırpılmaz. Açılış videosu 16:9 masaüstü, mobilde `object-fit: cover` ile belirlenmiş odak noktasından kırpılır.
+1. **Aracın gövdesine, rengine ve çiziğine dokunulmaz.** Renk, parlaklık, kontrast, keskinlik, rötuş, çizik ya da hasar düzeltmesi yok. Yalnız geometrik ölçekleme (tarayıcının yaptığı gibi) ve kırpma yapılır.
+2. **İlan fotoğraflarında arka plan değiştirilmez.** Kartlarda, öne çıkanlar şeridinde ve detay sayfasında Mega Cars'ın kendi showroom'unda çekilmiş orijinal fotoğraflar kullanılır; yalnız oran ve kırpma tek tip yapılır; mümkünse showroom içinde çekilmiş açı kapak seçilir. Kapak seçimi araç başına `inventory.json` içindeki `cover` alanında (fotoğraf sırası) tutulur.
+3. **Arka plan değişimi yalnız 360° showroom sahnesindedir:** aracın altındaki gerçek zemin ve gerçek gölge korunur; yalnız duvarlar ve uzak çevre dikişsiz bir fonla değiştirilir; camdan görünen arka plan da yeni fona uyarlanır. Detay sayfasında orijinal ilan fotoğrafları her zaman ayrıca gösterilir. 360° sahnesinin altında küçük bir not durur: DE "Fahrzeug unverändert, nur der Hintergrund ist digital ersetzt." (öneri; Volkan onayı).
+4. **Oranlar:** kart ve galeri 4:3 (kaynak fotoğraflar 1440×1080 olduğu için kırpma gerekmez; farklı oranlı fotoğraf 4:3'e merkezden kırpılır, araç kesilmez). Showroom ana kareleri 4:3 1600×1200 üretilir; masaüstü sahne 16:10 gösterir ve tavanı ve zemini kırpar (`object-position: 50% 62%`), araç asla kırpılmaz. Açılış videosu 16:9 masaüstü, mobilde `object-fit: cover` ile belirlenmiş odak noktasından kırpılır.
 5. **Kırpma kuralı:** araç gövdesi, aynalar ve tekerlekler hiçbir kırpımda kesilmez. Dikey fotoğraf (1/90) kartta `contain` ile, panel zemin üzerinde gösterilir.
 6. **Üst katman yasağı:** araç fotoğrafına renkli katman, filtre, vurgu rengi ya da degrade konmaz. Tek istisna: açılış videosunda **yalnız metin bölgesinde** nötr `--scrim` karartması (renksiz).
 7. **Plaka:** fotoğraflarda galerinin kendi "MEGA CARS.at" plaka kapağı görünüyor; bırakılır. Gerçek plaka görünen kare yayına girmez.
@@ -147,7 +147,7 @@ Adımlar arası oran başlıklarda ≥ 1,25. Görünür en küçük metin 13 px'
 
 ## 6. Hareket felsefesi
 
-"Hareket kameradır." Her hareket bir kamera ya da gerçek bir nesne gibi davranır: dolly, geri çekilme, perdenin aralanması, platformun dönmesi. Yaylanma, zıplama, sekme yok.
+"Hareket kameradır." Her hareket bir kamera ya da gerçek bir nesne gibi davranır: dolly, geri çekilme, perdenin aralanması, aracın yavaşça dönmesi. Yaylanma, zıplama, sekme yok.
 
 ### Süre tablosu (hiçbir animasyon 300 ms'den kısa değildir)
 
@@ -157,8 +157,8 @@ Adımlar arası oran başlıklarda ≥ 1,25. Görünür en küçük metin 13 px'
 | `--t-2` | 450 ms | Menü, sheet, sekme, dil seçici, filtre sonucu yeniden diziliş (Flip) |
 | `--t-3` | 700 ms | Kart ve metin bloğu girişleri, ayraç çizgisinin çizilmesi |
 | `--t-4` | 1000 ms | Başlık satırı maske açılışı (satır başına), görsel pencere açılışı |
-| `--t-5` | 1400 ms | Kart → showroom sayfa geçişi, showroom ışıklarının yanması |
-| `--t-6` | 2400 ms | Platformun çeyrek tur dönüşü (Wow 3) |
+| `--t-5` | 1400 ms | Kart → detay sayfa geçişi (Wow 3) |
+| Spin | 40 sn / tur | 360° aracın kendiliğinden dönüşü (9°/sn, §10.2) |
 | Kademe | 90–120 ms | Satırlar ve kartlar arası gecikme |
 
 ### Easing
@@ -176,7 +176,7 @@ Adımlar arası oran başlıklarda ≥ 1,25. Görünür en küçük metin 13 px'
 `gsap.matchMedia()` ile tek yerden yönetilir:
 - Lenis kapalı, pin ve scrub yok; yatay şerit doğal yatay kaydırma + snap olur.
 - Başlıklar ve içerik anında görünür (maske yok); video otomatik oynamaz, poster + "Video abspielen" düğmesi görünür.
-- Showroom kendiliğinden dönmez, çeyrek tur girişi yapmaz, atalet kapalıdır; sürükleme kare kare çalışır.
+- Showroom kendiliğinden dönmez, atalet kapalıdır; sürükleme kare kare çalışır.
 - View Transition kapalı; sayfa anında değişir.
 - Sayaç son değeri doğrudan gösterir.
 - **İçerik görünürlüğü animasyona bağlı değildir:** varsayılan durum görünürdür; animasyon yalnız JS ve hareket izni varsa eklenir (impeccable kuralı: arka plan sekmede ya da başsız tarayıcıda içerik boş kalmaz).
@@ -198,7 +198,7 @@ Her etkileşimli öğe: normal · hover · odak (`:focus-visible`, 2 px signal h
 - Her ikon düğmesinde `aria-label` (ör. `aria-label="Per WhatsApp schreiben"`).
 
 ### 7.2 Araç kartı
-- Yapı: fotoğraf 4:3 (showroom kapağı ya da orijinal) → başlık (Marke + Modell, en fazla 2 satır, h3) → tek satır özellik zinciri `02/2019 · 148.000 km · 469 PS · Benzin · Automatik` (ink-2, tabular) → fiyat (price-s 22 px, ink) → küçük fotoğraf sayısı ("18 Fotos", ink-3). Tamamı tek bir `<a>`.
+- Yapı: orijinal ilan fotoğrafı 4:3 (mümkünse showroom içinde çekilmiş açı) → başlık (Marke + Modell, en fazla 2 satır, h3) → tek satır özellik zinciri `02/2019 · 148.000 km · 469 PS · Benzin · Automatik` (ink-2, tabular) → fiyat (price-s 22 px, ink) → küçük fotoğraf sayısı ("18 Fotos", ink-3). Tamamı tek bir `<a>`.
 - Durumlar: normal · **hover:** fotoğraf kendi çerçevesinde ölçek 1.02 (`--t-3`), başlık alt çizgisi · **odak:** kartın tamamında halka · **basılı:** ölçek 0.99 · **yükleniyor:** blur-up yer tutucu · "Showroom 360°" rozeti yalnız spin verisi varsa (signal-12 zemin, ink metin).
 - Yasak: parıltı, kart çevirme, renkli fiyat, sahte "Top-Angebot" rozeti.
 
@@ -207,6 +207,7 @@ Her etkileşimli öğe: normal · hover · odak (`:focus-visible`, 2 px signal h
 - **Masaüstü:** üstte yatay filtre çubuğu; her filtre bir popover (native Popover API, kırpılma yok) + "Alle Filter" sheet'i + sıralama seçici (Preis ↑↓, Kilometer ↑, Erstzulassung ↓, Neueste).
 - Etkin filtreler çip olarak görünür (signal-12 zemin + "×").
 - Erişilebilirlik: her değişiklik `aria-live="polite"` ile duyurulur ("24 Fahrzeuge gefunden").
+- **Bütçeyi dışlamaz:** stok 3.900 €'luk küçük araçtan 64.900 €'luk S-Klasse'ye kadar uzanır. Fiyat seçenekleri stoktaki en düşük fiyattan başlar; "ab 20.000 €" gibi dışlayan varsayılan, "nur Premium" gibi dil yoktur. Sıralama varsayılanı fiyata göre değil "Neueste"dir.
 - Durumlar: seçili değil · hover · odak · seçili (signal-12 + signal çerçeve) · devre dışı (o filtrede 0 sonuç veren seçenek, "(0)" ile).
 - Boş sonuç: "Für diese Auswahl haben wir gerade kein Fahrzeug." + "Filter zurücksetzen".
 
@@ -216,7 +217,7 @@ Her etkileşimli öğe: normal · hover · odak (`:focus-visible`, 2 px signal h
 - Odak kapanınca tetikleyen fotoğrafa geri döner.
 
 ### 7.5 360° görüntüleyici: bkz. §10
-Durumlar: ilk kare (poster) · yükleniyor (platformun altında ince signal çizgisi 12 → 36 → 72 kare) · etkileşime hazır ("Zum Drehen ziehen" ipucu) · sürükleniyor (`cursor: grabbing`) · atalet · boşta · kendiliğinden dönüyor · yakınlaştırılmış · tam ekran · hata (karelerden biri gelmezse galeri moduna düşer).
+Durumlar: ilk kare (poster) · yükleniyor (sahnenin altında ince signal çizgisi 12 → 36 → 72 kare) · etkileşime hazır ("Zum Drehen ziehen" ipucu) · sürükleniyor (`cursor: grabbing`) · atalet · boşta · kendiliğinden dönüyor · yakınlaştırılmış · tam ekran · hata (karelerden biri gelmezse galeri moduna düşer).
 
 ### 7.6 Formlar (Probefahrt, Finanzierung, Inzahlungnahme, Kontakt)
 - Etiket alanın üstünde (label 13 px/500), alan 52 px, zemin panel, 1 px line-strong, r-s.
@@ -228,7 +229,7 @@ Durumlar: ilk kare (poster) · yükleniyor (platformun altında ince signal çiz
 ### 7.7 Gezinme (üst menü)
 - Açılışın üstünde saydam; 80 px kaydırınca night zemin + alt `--line` çizgisi (`--t-2`).
 - Masaüstü: logo · Fahrzeuge · Finanzierung · Ankauf · Kontakt · telefon ikonu + numara · dil seçici.
-- Mobil: logo · telefon ikon düğmesi · "Menü" düğmesi → tam ekran menü (katalog #7): büyük bağlantılar kelime kelime alttan gelir; altta adres, açılış saatleri (doğrulanırsa), telefon ve WhatsApp.
+- Mobil: logo · telefon ikon düğmesi · "Menü" düğmesi → tam ekran menü (katalog #7): büyük bağlantılar kelime kelime alttan gelir; altta adres, açılış saatleri (Mo–Fr 08:00–18:00, Sa 09:00–15:00), telefon +43 660 6877002 ve WhatsApp.
 - Etkin sayfa: `aria-current="page"` + 1 px signal alt çizgi.
 - "Zum Inhalt springen" bağlantısı ilk odakta görünür.
 
@@ -264,11 +265,11 @@ Adres yapısı §13'te. Her bölümde en az bir anlamlı hareket var (yalnız fa
 |---|---|---|---|---|
 | 1 | **Açılış (Wow 1)** | İlk izlenim, tonu kurmak | Tam ekran 24 fps video (poster = LCP). Başlık 2 satır, ör. "Jeder Wagen, so wie er ist." + tek cümle alt metin + 2 CTA: "Fahrzeuge ansehen" (birincil), "WhatsApp schreiben" (ikincil). Sağ altta video duraklat düğmesi. | Başlık satırları maskeden alttan açılır (`--t-4`, 120 ms kademe); kaydırınca video 1 → 0,92 ölçeklenir ve %0 → %55 kararır ("kamera geri çekiliyor"). |
 | 2 | **Hızlı arama** | Stoktaki araca 2 dokunuşta varmak | Marke · Preis bis · Karosserie + "24 Fahrzeuge anzeigen" (canlı, gerçek sayı). | Alanlar sırayla 24 px yukarıdan yerleşir (`--t-3`); sayı değişiminde rakam yumuşak sayar (`--t-1`). |
-| 3 | **Öne çıkanlar (Wow 2)** | Seçilmiş araçları sinematik göstermek | 4–8 araç (veride `featured: true`), showroom kapağı, ad, fiyat, 3 özellik. | Masaüstünde pin'li yatay şerit; mobilde snap'li şerit. Ayrıntı §9. |
-| 4 | **Showroom tanıtımı** | İmza özelliği göstermek | Spin verisi olan bir araç: sahne + "Ziehen, um den Wagen zu drehen." **En az bir aracın spin verisi yoksa bu bölüm hiç render edilmez.** | Kaydırdıkça platform 0° → 90° döner (scrub, 72 karenin ilk çeyreği). |
+| 3 | **Öne çıkanlar (Wow 2)** | Seçilmiş araçları sinematik göstermek | 4–8 araç (veride `featured: true`), orijinal kapak fotoğrafı (mümkünse showroom içinde çekilmiş açı), ad, fiyat, 3 özellik. Bütçe dostu araçlar da seçilebilir. | Masaüstünde pin'li yatay şerit; mobilde snap'li şerit. Ayrıntı §9. |
+| 4 | **Showroom tanıtımı** | İmza özelliği göstermek | Spin verisi olan bir araç: canlı 360° görüntüleyici + "Ziehen, um den Wagen zu drehen." **Hiçbir aracın spin verisi yoksa bu bölüm hiç render edilmez.** | Bölüm görünür olunca araç dönme kuralıyla (§10.2) saat yönünde dönmeye başlar. |
 | 5 | **Galeri ve güven** | "Bu galeri gerçek" demek | Gerçek showroom fotoğrafı (galeriden istenecek), adres, galerinin kendi sloganı "Gewissenhaft. Verlässlich. Professionell.", stoktaki araç sayısı (sayaç). Uydurma yorum, yıl, garanti yok. | Fotoğraf dar bir pencereden tam genişliğe açılır (katalog #4); sayaç sayar. |
 | 6 | **Hizmetler** | Finanzierung, Inzahlungnahme, Probefahrt'a yönlendirmek | Üç satır (aynı kart ızgarası değil): tek cümle + metin bağlantısı. | Satır ayraçları soldan sağa çizilir (`--t-3`), metin maskeden çıkar. |
-| 7 | **İletişim bandı** | Son adımı kolaylaştırmak | Telefon, WhatsApp, adres, açılış saatleri (doğrulanırsa), "Route planen" bağlantısı. Harita tıklayınca yüklenir (gizlilik). | Telefon numarası maskeden açılır; harita önizlemesi pencere açılışıyla gelir. |
+| 7 | **İletişim bandı** | Son adımı kolaylaştırmak | Telefon +43 660 6877002, WhatsApp (wa.me/436606877002, WhatsApp'ta açık olduğu teyit edilecek), adres, açılış saatleri (Mo–Fr 08:00–18:00, Sa 09:00–15:00; öğle arası teyit edilecek), "Route planen" bağlantısı. Harita tıklayınca yüklenir (gizlilik). | Telefon numarası maskeden açılır; harita önizlemesi pencere açılışıyla gelir. |
 | 8 | **Footer** | Yasal ve yardımcı bağlantılar | Impressum · Datenschutz · dil · küçük "Website: Galzura" (galzura.com). | Footer kelimesi (MEGA CARS) kaydırma sonunda yavaşça yukarı kayar (`--t-4`). |
 
 ### 8.2 Fahrzeuge (liste + filtre + sıralama)
@@ -308,12 +309,12 @@ Adres yapısı §13'te. Her bölümde en az bir anlamlı hareket var (yalnız fa
 ### 8.6 Kontakt & Über uns
 | Bölüm | İçerik | Hareket |
 |---|---|---|
-| İletişim | Telefon(lar), WhatsApp, e-posta (Volkan onayından sonra), adres, açılış saatleri (doğrulanırsa) | Satırlar maskeden açılır |
+| İletişim | Ana telefon +43 660 6877002, ikinci numara +43 660 6969496, WhatsApp wa.me/436606877002 (teyit edilecek), e-posta megacars@live.at, Radetzkystraße 80, 6845 Hohenems, açılış saatleri Mo–Fr 08:00–18:00, Sa 09:00–15:00, So geschlossen (öğle arası teyit edilecek). office@meral.at ve +43 660 1999472 hiçbir yerde kullanılmaz. | Satırlar maskeden açılır |
 | Harita | Tıklayınca yüklenen harita (önizleme görseli + "Karte laden") | Pencere açılışı |
-| Über uns | Yalnız doğrulanmış bilgiler: kimiz, nerede, ne satıyoruz; ekip fotoğrafı ve adları yalnız izinle | Fotoğraf pencere açılışı |
+| Über uns | Yalnız doğrulanmış bilgiler: kimiz, nerede, ne satıyoruz; ekip fotoğrafı ve adları yalnız izinle. "Seit 2002" yalnız sahibi teyit ederse yazılır (Firmenbuch e.U. kaydı 02.02.2016). | Fotoğraf pencere açılışı |
 
 ### 8.7 Impressum ve Datenschutz
-Okunabilir uzun metin düzeni (68ch, h2 ve h3 hiyerarşisi). Hareket: yalnız başlık maskesi (yasal metin sakin kalır). İçerik avukat ya da galeri tarafından doğrulanır; bilinmeyen alan sitede **gösterilmez** (v1'deki "[wird ergänzt]" yer tutucuları yok).
+Okunabilir uzun metin düzeni (68ch, h2 ve h3 hiyerarşisi). Hareket: yalnız başlık maskesi (yasal metin sakin kalır). Impressum Firmenbuch kaydına göre yazılır: "Mega Cars Murat Demir e.U.", Inhaber Murat Demir, FN 447871 i, Landesgericht Feldkirch, Radetzkystraße 80, 6845 Hohenems, Tel. +43 660 6877002, megacars@live.at. UID bilinmediği için gösterilmez. İçerik avukat ya da galeri tarafından doğrulanır; bilinmeyen alan sitede **gösterilmez** (v1'deki "[wird ergänzt]" yer tutucuları yok).
 
 ### 8.8 Satılmış araç adresi ve 404
 Satılmış araç adresi 410 döner ve kibar bir sayfa gösterir: "Dieses Fahrzeug ist nicht mehr verfügbar." + benzer araçlar + "Alle Fahrzeuge ansehen" (Porsche Finder deseni). Sitemap'ten düşer. Hareket: başlık maskesi + şerit.
@@ -336,13 +337,13 @@ Satılmış araç adresi 410 döner ve kibar bir sayfa gösterir: "Dieses Fahrze
 4. **Mobil ve tablet:** pin yok; `overflow-x: auto; scroll-snap-type: x mandatory`; kart genişliği 82 vw; parmakla kaydırılır; sağda bir sonraki kartın kenarı görünür.
 5. Reduced-motion: masaüstünde de doğal yatay kaydırma + snap.
 
-### Wow 3 — Kart → showroom geçişi
-1. **View Transitions API** (Next.js App Router'da `next.config` `experimental.viewTransition` ya da `document.startViewTransition`): kart fotoğrafı ve detay sahnesindeki ilk kare aynı `view-transition-name: car-<id>` adını taşır; tarayıcı fotoğrafı büyüterek platformdaki araca taşır (`--t-5`, `cubic-bezier(0.25, 0.1, 0.25, 1)`).
-2. **Işıklar:** sahne iki önceden üretilmiş zeminle gelir: "ışık kapalı" ve "ışık açık". Geçiş bitince açık zemin 0 → 1 opaklıkla 1400 ms'de belirir (fotoğrafik ışık; Spotlight SVG değil).
-3. **Çeyrek tur:** spin karelerinin ilk 18'i (0° → 90°) 2400 ms'de `power3.out` ile oynatılır ve durur.
-4. **İpucu:** "Zum Drehen ziehen" etiketi + iki yönlü ince ok, 600 ms sonra belirir, ilk sürüklemede kaybolur.
-5. **Desteklemeyen tarayıcı:** kart fotoğrafı ile sahne arasında 450 ms çapraz geçiş. Reduced-motion: geçiş yok, çeyrek tur yok.
-6. Spin verisi olmayan araç: aynı geçiş büyük galerinin ilk fotoğrafına yapılır.
+### Wow 3 — Kart → detay geçişi
+Karar (Volkan, 22.10.2026): kart → detay geçişinde kartın fotoğrafı büyüyerek detay sayfasının üstüne yerleşir; aracın 360° verisi varsa fotoğraf yumuşakça showroom sahnesine geçer ve dönmeye başlar.
+1. **View Transitions API** (Next.js App Router'da `next.config` `experimental.viewTransition` ya da `document.startViewTransition`): kart fotoğrafı ve detay sayfasının üstündeki büyük fotoğraf aynı `view-transition-name: car-<id>` adını taşır; tarayıcı fotoğrafı büyüterek sayfanın üstüne yerleştirir (`--t-5`, `cubic-bezier(0.25, 0.1, 0.25, 1)`).
+2. **Showroom'a geçiş (yalnız spin verisi varsa):** yerleşen orijinal fotoğraf, 360° sahnesinin ilk karesiyle 700 ms'de (`--t-3`) çapraz geçişle yer değiştirir; ardından araç dönme kuralıyla (§10.2) saat yönünde dönmeye başlar.
+3. **İpucu:** "Zum Drehen ziehen" etiketi + iki yönlü ince ok dönme başladıktan 600 ms sonra belirir, ilk sürüklemede kaybolur.
+4. **Desteklemeyen tarayıcı:** kart fotoğrafı ile detay üst alanı arasında 450 ms çapraz geçiş. Reduced-motion: geçiş yok, kendiliğinden dönme yok.
+5. Spin verisi olmayan araç: geçiş büyük galerinin ilk fotoğrafında biter; tek açılı fotoğraf döndürülmez.
 
 ### Wow 4 — 360° showroom
 §10'daki görüntüleyici.
@@ -351,13 +352,13 @@ Satılmış araç adresi 410 döner ve kibar bir sayfa gösterir: "Dieses Fahrze
 
 ## 10. Showroom (360°)
 
-### 10.1 Sahne kompozisyonu
-- **Oda:** karanlık, mat, gri-antrasit duvar ve zemin; yukarıdan geniş ve yumuşak tek ışık (softbox); ufuk çizgisi kamera yüksekliğinde; yumuşak köşeli "sonsuz" duvar-zemin geçişi. Neon, LED şeridi, renkli ışık yok. Porsche ve Mercedes teslim merkezi havası.
-- **Platform:** zeminle aynı mat malzemeden, kenarı 1 cm koyu bant, üst kenarında ince açık çizgi; kenar bandında her 3°'de bir ince, her 30°'de bir uzun işaret çizgisi (dönüşü gösterir). "MEGA CARS" yazısı kenara oyulmuş hâlde **yalnız gerçekçi durursa** eklenir (FAZ 3'te iki varyant denenir).
-- **Araç:** platform merkezinde, genişliği platform çapının ≈ %78'i; tekerlek temas çizgisi sabit bir y değerinde.
-- **Gölge:** iki katman çarpma: geniş ve soluk ambiyans gölgesi (araç ayak izi, açıyla birlikte döner) + tekerlek altlarında küçük ve koyu temas gölgesi.
-- **Yansıma:** aracın aynalanmış hâli, temas çizgisine yapışık, %10 opaklık, araç yüksekliğinin %30'unda solar, hafif bulanık (mat zemin).
-- **Işık sabittir; yalnız platform ve araç döner.**
+### 10.1 Sahne kompozisyonu (yöntem: Volkan kararı, 22.10.2026)
+- **Gerçek zemin ve gerçek gölge korunur.** Aracın altındaki gerçek zemin dairesi (tekerlek temasları ve aracın kendi gölgesi dahil) çekimden olduğu gibi gelir; yapay gölge ya da yapay yansıma eklenmez.
+- **Yalnız duvarlar ve uzak çevre değişir:** gerçek zemin dairesinin dışında kalan her şey dikişsiz bir fonla değiştirilir. Zemin dairesinin kenarı fona yumuşak ve doğal geçer; sert kenar yoktur.
+- **Cam:** camdan görünen arka plan da yeni fona uyarlanır; aracın gövdesine, rengine ve çiziğine dokunulmaz.
+- **Fon görünümü (deneme sonrası Volkan seçer):** A açık stüdyo (açık gri ya da kırık beyaz dikişsiz fon) · B karanlık salon (koyu fon; aracın altında gerçek zeminden oluşan doğal ışık havuzu) · C B'ye ek ince platform kenarı (perspektifi COLMAP zemin düzlemi ve kamera konumlarından hesaplanır; gerçek gölge platformun üstüne düşer; yalnız gerçekçi duruyorsa).
+- **Neon, LED şeridi, renkli ışık yok.** Fotoğraf gibi gerçekçi; oyun ya da CGI hissi yok.
+- **Araç:** her karede aynı boyut ve konumda; zemin dairesinin merkezi tuvalde sabit bir noktada.
 
 ### 10.2 Görüntüleyici davranışı (özel canvas, Three.js yok)
 | Davranış | Değer |
@@ -365,7 +366,9 @@ Satılmış araç adresi 410 döner ve kibar bir sayfa gösterir: "Dieses Fahrze
 | Sürükleme | Pointer Events; yatay 1 px = 0,5° (masaüstü), 1 px = 0,9° (mobil); `touch-action: pan-y` → dikey kaydırma sayfanındır |
 | Sürükleme kilidi | İlk 8 px hareketin yönüne bakılır: yatay ise döndürme, dikey ise sayfa |
 | Atalet | Bırakınca son hız korunur ve her karede ×0,92 azalır (≈ 0,6 sn'de durur); yaylanma yok |
-| Kendiliğinden dönme | 4 sn dokunulmazsa 9°/sn (bir tur 40 sn), 1,2 sn'de hızlanarak başlar; sekme görünmüyorsa ya da reduced-motion açıksa kapalı |
+| Kendiliğinden dönme | Sayfa açılınca başlar: araç **üstten bakıldığında saat yönünde**, 9°/sn (1 tam tur ≈ 40 sn). Hız ve yön tek ayardan değişir: `autoRotate: { degPerSec: 9, direction: "cw" }`. Sürükleme sırasında durur; bırakıp **3 sn** dokunulmazsa 1,2 sn'de yumuşakça hızlanarak yeniden başlar. Sekme görünmüyorsa ya da reduced-motion açıksa kapalı |
+| Kare yönü | Kareler kameranın araç etrafındaki açısına göre sıralanır. Kamera aracın etrafında saat yönünde yürüdüyse (üstten) araç ekranda saat yönünün tersine dönüyormuş gibi görünür; bu yüzden "araç saat yönünde döner" için kareler kamera açısının **azalan** yönünde oynatılır. Boru hattı her spin için `cameraDirection` değerini veriye yazar |
+| Tek açılı fotoğraf | Döndürülmez; spin verisi olmayan araçta görüntüleyici yüklenmez |
 | Yakınlaştırma | Tekerlek ve iki parmak; 1× → 2,5×; yakınlaşınca o açının 2400 px yüksek çözünürlüklü tek karesi yüklenir; yakınken sürükleme kaydırır, çift dokunma geri alır |
 | Tam ekran | Fullscreen API (iOS'ta sabit katman); Esc ve "Schließen" |
 | Klavye | Odaklanabilir (`tabindex="0"`, `role="img"` + `aria-roledescription="360-Grad-Ansicht"`); ← → 5°, Shift+← → 45°, + ve − yakınlaştırma, F tam ekran; ayrıca görünür ← → düğmeleri |
@@ -376,16 +379,16 @@ Satılmış araç adresi 410 döner ve kibar bir sayfa gösterir: "Dieses Fahrze
 - **72 kare** (5°), en az 36 (10°). Ana kare 4:3 **1600×1200** WebP (≈ 90–140 KB) ve mobil **960×720** WebP (≈ 40–60 KB) [VARSAYIM: boyut tahmini]; yakınlaştırma için istek üzerine 2400×1800.
 - **Sıra:** (1) ilk kare `<img>` olarak sunucuda render edilir = detay sayfasının LCP'si; (2) görüntüleyici ekrana girince 12 kare (her 30°), (3) sonra 36, (4) ilk etkileşimde ya da boşta (`requestIdleCallback`) 72; yavaş bağlantıda 36'da kalınır. Eksik kare gelmeden o açıya gelinirse en yakın yüklü kare gösterilir.
 - Dosya yolu: `/spin/<arac-id>/<v>/1600/000.webp … 071.webp`; `immutable` 1 yıl; sürüm klasörü (`<v>`) yeniden işlemede değişir.
-- Veri modeli: `inventory.json` içinde isteğe bağlı `spin: { version, frames: 72, angleStep: 5, sizes: [960, 1600], zoom: 2400, background: "hall-01" }`. Alan varsa showroom kendiliğinden açılır.
+- Veri modeli: `inventory.json` içinde isteğe bağlı `spin: { version, frames: 72, angleStep: 5, sizes: [960, 1600], zoom: 2400, backdrop: "A" | "B" | "C", cameraDirection: "cw" | "ccw" }`. Alan varsa showroom kendiliğinden açılır.
 
 ### 10.4 Mobil hareketler
 Yatay sürükleme döndürür; dikey kaydırma sayfayı kaydırır (kilit yok); iki parmak yakınlaştırır; çift dokunma 1×'e döner; tam ekran düğmesi sağ altta. Alt eylem çubuğu sahnenin altında kalır, üstüne binmez.
 
 ### 10.5 Videosu olmayan araç
-Detay sayfasında showroom alanı **hiç yoktur**; yerinde büyük galeri durur (ilk fotoğraf 4:3 tam genişlik + kaydırılabilir şerit + "Alle 18 Fotos"). "Bald verfügbar" ya da boş sahne yok. Liste kartı ve öne çıkanlar şeridinde kapak fotoğrafı showroom zeminine yerleştirilir; kalite yetersizse orijinali kullanılır (§5.2).
+Detay sayfasında showroom alanı **hiç yoktur**; yerinde büyük galeri durur (ilk fotoğraf 4:3 tam genişlik + kaydırılabilir şerit + "Alle 18 Fotos"). "Bald verfügbar" ya da boş sahne yok. Liste kartı ve öne çıkanlar şeridinde Mega Cars'ın kendi showroom'unda çekilmiş orijinal kapak fotoğrafı kullanılır; arka planı değiştirilmez (§5.2).
 
 ### 10.6 Boru hattı özeti (FAZ 3)
-ffmpeg → COLMAP global mapper (açı) → 5° ızgara seçimi → BiRefNet alfası × SAM 2.1 bölgesi → çekirdek alfa opak (≥ 250) → renk orijinal kareden → ölçek ve temas çizgisi sabitleme → platform(θ) + gölge + yansıma → WebP 1600/960/2400 → `inventory.json` güncellemesi. Ayrıntı: `docs/ARASTIRMA.md` §f, deneme kodu: `docs/showroom-deneme/kod/`.
+ffmpeg → COLMAP (kamera konumları ve zemin düzlemi) → 5° ızgarada 72 kare seçimi (en az 36) → SAM 2.1 (video modu) + BiRefNet ile araç + aracın çevresindeki gerçek zemin dairesi (gölgeler dahil), zamanda titremeyen tek maske → camdan görünen arka planın yeni fona uyarlanması → zemin dairesi merkezine göre ölçek ve konum sabitleme → dikişsiz fon (A/B, isteğe bağlı C platform kenarı) → WebP 1600/960/2400 → `inventory.json` güncellemesi. Durum (22.10.2026): stok videoyla deneme yapılamadı, çünkü Pexels, Coverr ve Mixkit'te kapalı mekânda kameranın aracın etrafında tam tur döndüğü uygun klip bulunamadı; ilk gerçek girdi Mega Cars'ın deneme çekimi olacak. Eski "kodla çizilmiş platform" denemesi (`docs/showroom-deneme/`) Volkan tarafından reddedildi ve yöntem olarak geçersizdir.
 
 ---
 
@@ -397,7 +400,7 @@ ffmpeg → COLMAP global mapper (açı) → 5° ızgara seçimi → BiRefNet alf
 | **CardHoverEffect** | Evet (uyarlanmış) | Araç kartı: yalnız fotoğraf ölçek 1.02, parıltı ve arka plan lekesi yok. |
 | **StickyScrollReveal** | Evet (katalog #5 ile uyarlanmış) | Finanzierung ve Ankauf "nasıl işler" adımları. |
 | **ParallaxScroll** | Kısmen | Yalnız öne çıkanlar şeridindeki çerçeve içi paralaks mantığı; hazır bileşen değil. |
-| Spotlight | Hayır | Showroom ışığı fotoğrafik zeminle verilir; SVG ışık huzmesi CGI hissi verir. |
+| Spotlight | Hayır | Showroom ışığı gerçek çekimden gelir; SVG ışık huzmesi CGI hissi verir. |
 | TracingBeam | Hayır | Uzun okuma sayfamız yok. |
 | TextGenerateEffect | Hayır | Kelime kelime belirme yapay zekâ metni hissi veriyor; başlıklar satır maskesiyle açılır. |
 | BorderBeam | Hayır | Kenarda dolaşan ışık "dönen kenarlık" yasağına çok yakın. |
@@ -446,12 +449,13 @@ ffmpeg → COLMAP global mapper (açı) → 5° ızgara seçimi → BiRefNet alf
 | Datenschutz | `/de/datenschutz` | `/en/privacy` | `/tr/gizlilik` |
 - `/` → tarayıcı diline göre 307 yönlendirme (Next.js 16 `proxy.ts`), çerez varsa çerez önceliklidir; `x-default` = `/de`.
 - Her sayfada `generateMetadata`: title (≤ 60), description (≤ 155), canonical, `alternates.languages` (de-AT, en, tr, x-default), Open Graph (mutlak adresli görsel), Twitter `summary_large_image`.
-- **OG görseli:** araç sayfalarında `next/og` ile üretilen 1200×630 (showroom kapağı + ad + fiyat), mutlak adres; yedek `/og/default.jpg`.
+- **OG görseli:** araç sayfalarında `next/og` ile üretilen 1200×630 (orijinal kapak fotoğrafı + ad + fiyat), mutlak adres; yedek `/og/default.jpg`.
 - **JSON-LD:**
-  - Her sayfa: `AutoDealer` (name, legalName (doğrulanınca), address PostalAddress, geo, telephone, url, sameAs Facebook; `openingHoursSpecification` yalnız doğrulanırsa; `aggregateRating` **yok**, kendi sitemizde toplanmadıkça).
+  - Her sayfa: `AutoDealer` (name "Mega Cars", legalName "Mega Cars Murat Demir e.U.", address PostalAddress, geo, telephone "+43 660 6877002", email "megacars@live.at", url, sameAs https://www.facebook.com/Autohaus.MegaCars/; `openingHoursSpecification` Mo–Fr 08:00–18:00, Sa 09:00–15:00, öğle arası teyit edilince bölünür; `aggregateRating` **yok**, kendi sitemizde toplanmadıkça).
   - Araç sayfası: `Car` (brand, model, vehicleConfiguration, productionDate/`dateVehicleFirstRegistered`, `mileageFromOdometer` QuantitativeValue KMT, fuelType, vehicleTransmission, bodyType, color, vehicleEngine.enginePower) + `Offer` (price, priceCurrency EUR, availability InStock, itemCondition UsedCondition, seller → AutoDealer).
   - `BreadcrumbList`: Startseite › Fahrzeuge › Araç.
-- `robots.txt`: hepsine izin, `/api/` hariç; sitemap adresi.
+- **Demo:** site canlıya çıkana kadar her sayfada `robots: { index: false, follow: false }` ve `robots.txt` içinde `Disallow: /`; demo, son bilinen gerçek stokla (Haziran 2026, 18 araç) çalışır. Canlıya çıkmadan önce güncel stoka geçilir ve noindex kaldırılır.
+- `robots.txt` (canlı): hepsine izin, `/api/` hariç; sitemap adresi.
 - `sitemap.xml`: her adres için `xhtml:link rel="alternate" hreflang` üç dil + x-default; satılmış araçlar günlük güncellemede çıkar (410).
 
 ---
@@ -479,5 +483,7 @@ ffmpeg → COLMAP global mapper (açı) → 5° ızgara seçimi → BiRefNet alf
 1. Konsept adı "Die Übergabe" ve koyu tek tema (tema düğmesi kaldırıldı).
 2. Vurgu renginin tabeladan türetilmesi (`#a4b5ef`).
 3. Yazı tipi: Hanken Grotesk tek aile.
-4. Showroom sahnesinin altında "arka plan dijital olarak değiştirildi" notu.
+4. 360° sahnesinin altında "arka plan dijital olarak değiştirildi" notu.
 5. Kaydırmaya bağlı şeritte `ease: "none"` teknik istisnası.
+6. 360° fon görünümü A, B ya da C (deneme yapıldıktan sonra).
+7. Liste sıralamasının varsayılanı "Neueste".

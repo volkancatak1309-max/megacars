@@ -19,3 +19,10 @@ Thumbs.db
 # (the site needs the real photos, hero video and inventory data at runtime).
 
 .vercel
+
+# local secrets (never committed)
+.env
+.env*.local
+
+# browser automation scratch
+.playwright-mcp/

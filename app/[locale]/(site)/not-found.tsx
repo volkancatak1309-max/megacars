@@ -1,18 +1,22 @@
 import { getTranslations } from 'next-intl/server'
-import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/ui/Icon'
-import { RiseHeading } from '@/components/motion/Reveal'
+import { ShutterLink } from '@/components/site/Shutter'
 
 export default async function NotFound() {
   const t = await getTranslations('notFound')
   return (
-    <section className="container-max page-x flex min-h-[70svh] flex-col justify-center pt-[var(--header-h)] pb-[var(--section-y)]">
-      <RiseHeading className="t-h1 max-w-[20ch]">{t('title')}</RiseHeading>
-      <p className="t-lead mt-6">{t('lead')}</p>
-      <Link href="/fahrzeuge" className="btn btn-primary mt-10 self-start">
+    <section className="nf s-night pg wide">
+      <p className="nf-code" aria-hidden="true">
+        404
+      </p>
+      <h1 className="nf-title d-l">{t('title')}</h1>
+      <p className="lead" style={{ marginTop: 20 }}>
+        {t('lead')}
+      </p>
+      <ShutterLink href="/fahrzeuge" kind="solid">
         {t('cta')}
         <Icon name="arrowRight" size={18} />
-      </Link>
+      </ShutterLink>
     </section>
   )
 }

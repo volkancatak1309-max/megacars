@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/i18n/routing'
 import { alternates } from '@/lib/seo'
-import { InfoPage } from '@/components/layout/InfoPage'
+import { InfoPage } from '@/components/site/InfoPage'
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/datenschutz'>): Promise<Metadata> {
   const { locale } = await params
@@ -14,5 +14,5 @@ export default async function Page({ params }: PageProps<'/[locale]/datenschutz'
   const { locale } = await params
   setRequestLocale(locale as Locale)
   const t = await getTranslations('info')
-  return <InfoPage title={t('privacy')} />
+  return <InfoPage title={t('privacy')} lead={t('lead')} />
 }

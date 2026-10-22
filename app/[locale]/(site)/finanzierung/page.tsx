@@ -1,18 +1,77 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/i18n/routing'
-import { alternates } from '@/lib/seo'
-import { InfoPage } from '@/components/site/InfoPage'
+import { vehicles } from '@/lib/inventory'
+import { formatPrice, vehicleName } from '@/lib/format'
+import { breadcrumbLd, localizedUrl, pageMeta } from '@/lib/seo'
+import { JsonLd } from '@/components/ui/JsonLd'
+import { ActionBar } from '@/components/site/ActionBar'
+import { PageHero, Steps } from '@/components/site/PageHero'
+import { RequestForm, type FormField } from '@/components/site/RequestForm'
+import { Chars } from '@/components/site/Loader'
 
-export async function generateMetadata({ params }: PageProps<'/[locale]/finanzierung'>): Promise<Metadata> {
+type Props = PageProps<'/[locale]/finanzierung'>
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'info' })
-  return { title: `${t('financing')} – Mega Cars`, alternates: alternates('/finanzierung', locale as Locale) }
+  const t = await getTranslations({ locale, namespace: 'financingPage' })
+  return pageMeta({ locale: locale as Locale, href: '/finanzierung', title: t('metaTitle'), description: t('metaDescription') })
 }
 
-export default async function Page({ params }: PageProps<'/[locale]/finanzierung'>) {
-  const { locale } = await params
-  setRequestLocale(locale as Locale)
-  const t = await getTranslations('info')
-  return <InfoPage title={t('financing')} lead={t('lead')} />
+/**
+ * Financing request: no rates, partner banks or conditions (none are confirmed) — only
+ * a plain explanation and a form that goes to the dealer by WhatsApp or e-mail.
+ * Visibility in menu and sitemap: lib/launch.ts PAGES.financing.
+ */
+export default async function FinancingPage({ params, searchParams }: Props) {
+  const { locale: raw } = await params
+  const locale = raw as Locale
+  setRequestLocale(locale)
+  const t = await getTranslations('financingPage')
+  const tn = await getTranslations('nav')
+  const tf = await getTranslations('form')
+  const wanted = (await searchParams).fahrzeug
+  const preset = typeof wanted === 'string' && vehicles.some((v) => v.slug === wanted) ? wanted : undefined
+
+  const fields: FormField[] = [
+    {
+      name: 'vehicle',
+      kind: 'select',
+      options: [
+        { value: 'open', label: tf('financing.vehicleOpen') },
+        ...vehicles.map((v) => ({ value: v.slug, label: `${vehicleName(v)} · ${formatPrice(v.price, locale)}` })),
+      ],
+    },
+    { name: 'downPayment', kind: 'text', inputMode: 'decimal', half: true },
+    { name: 'term', kind: 'text', half: true },
+    { name: 'name', kind: 'text', required: true, autoComplete: 'name', half: true },
+    { name: 'phone', kind: 'tel', required: true, autoComplete: 'tel', half: true },
+    { name: 'email', kind: 'email', autoComplete: 'email' },
+    { name: 'message', kind: 'textarea' },
+  ]
+
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: tn('home'), url: localizedUrl('/', locale) },
+          { name: tn('financing'), url: localizedUrl('/finanzierung', locale) },
+        ])}
+      />
+      <PageHero word={t('word')} title={t('title')} lead={t('lead')} />
+      <Steps title={t('stepsTitle')} steps={[t('step1'), t('step2'), t('step3')]} />
+      <section className="rf-section s-red" aria-label={tf('financing.title')}>
+        <div className="rf-grid pg wide">
+          <div className="rf-aside">
+            <p className="rf-aside-word" aria-hidden="true">
+              <Chars text={t('formWord')} />
+            </p>
+            <p className="lead">{t('formLead')}</p>
+          </div>
+          <RequestForm kind="financing" fields={fields} initial={preset ? { vehicle: preset } : {}} />
+        </div>
+      </section>
+      <ActionBar />
+    </>
+  )
 }

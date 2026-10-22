@@ -446,6 +446,15 @@ dialog.lightbox::backdrop {
   width: 100%;
 }
 
+/* financing request: a quiet text link under the buttons */
+.vd-ctas .vd-fin {
+  width: auto;
+  justify-self: start;
+  margin: 0.25em -0.65em 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
 .vd-direct {
   font-size: 0.875rem;
   color: var(--muted);

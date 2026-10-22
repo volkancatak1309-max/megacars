@@ -4,18 +4,20 @@ import { useParams } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { usePathname } from '@/i18n/navigation'
 import { routing } from '@/i18n/routing'
+import { PAGES } from '@/lib/launch'
 import { SITE, mailHref, whatsappHref } from '@/lib/site'
 import { Icon } from '@/components/ui/Icon'
 import { lockScroll } from '@/components/motion/SmoothScroll'
 import { CurtainLink, type CurtainHref } from './Curtain'
 import { Faces, ShutterA, ShutterLink } from './Shutter'
 
+// Pages waiting for the dealer's confirmation stay out of the menu (lib/launch.ts).
 const NAV = [
-  { href: '/fahrzeuge', key: 'vehicles' },
-  { href: '/finanzierung', key: 'financing' },
-  { href: '/ankauf', key: 'tradeIn' },
-  { href: '/kontakt', key: 'contact' },
-] as const
+  { href: '/fahrzeuge', key: 'vehicles', on: true },
+  { href: '/finanzierung', key: 'financing', on: PAGES.financing },
+  { href: '/ankauf', key: 'tradeIn', on: PAGES.tradeIn },
+  { href: '/kontakt', key: 'contact', on: true },
+].filter((l) => l.on) as { href: '/fahrzeuge' | '/finanzierung' | '/ankauf' | '/kontakt'; key: 'vehicles' | 'financing' | 'tradeIn' | 'contact' }[]
 
 /**
  * Top bar: transparent over the opening film, solid once the page moves, out of the way
@@ -162,7 +164,7 @@ export function Header({ stock }: { stock: number }) {
               <span>
                 {routing.locales.map((l) => (
                   <CurtainLink key={l} href={here} locale={l} hrefLang={l} lang={l} aria-current={l === locale ? 'true' : undefined} className="sh sh--text R-host" style={{ marginRight: '1.2em' }}>
-                    <Faces>{l === 'de' ? 'Deutsch' : 'Türkçe'}</Faces>
+                    <Faces>{tlang(l)}</Faces>
                   </CurtainLink>
                 ))}
               </span>

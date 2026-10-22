@@ -3,9 +3,10 @@ import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing, type Locale } from '@/i18n/routing'
 import { getVehicle, similarVehicles, toCard, vehicles } from '@/lib/inventory'
-import { formatDecimal, formatKm, formatNumber, formatPower, formatPrice, vehicleFullName, vehicleName } from '@/lib/format'
-import { alternates, breadcrumbLd, carLd, localizedUrl } from '@/lib/seo'
-import { SITE, siteOrigin, whatsappHref } from '@/lib/site'
+import { formatDecimal, formatKm, formatNumber, formatPower, formatPrice, inSentence, vehicleFullName, vehicleName } from '@/lib/format'
+import { breadcrumbLd, carLd, localizedUrl, pageMeta } from '@/lib/seo'
+import { PAGES } from '@/lib/launch'
+import { SITE, whatsappHref } from '@/lib/site'
 import { JsonLd } from '@/components/ui/JsonLd'
 import { Icon } from '@/components/ui/Icon'
 import { CarImage } from '@/components/ui/CarImage'
@@ -47,13 +48,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     fuel: v.fuel ? tv(`fuelValues.${v.fuel}`) : '',
     gearbox: v.transmission ? tv(`gearboxValues.${v.transmission}`) : '',
   })
-  return {
-    title,
-    description,
-    alternates: alternates(href, locale as Locale),
-    openGraph: { title, description, type: 'website', url: localizedUrl(href, locale as Locale), images: [{ url: `${siteOrigin()}${v.og}`, width: 1200, height: 630, alt: name }] },
-    twitter: { card: 'summary_large_image', title, description, images: [`${siteOrigin()}${v.og}`] },
-  }
+  // share image: 1200×630 from the car's own cover photo (scripts/import-inventory.ts)
+  return pageMeta({ locale: locale as Locale, href, title, description, image: { url: v.og, width: 1200, height: 630 }, imageAlt: name })
 }
 
 /** "Hybrid (Benzin/Elektro)" → big "Hybrid" + small "Benzin/Elektro"; "SUV / Geländewagen" likewise. */
@@ -89,7 +85,7 @@ export default async function VehiclePage({ params }: Props) {
   const interiorColor = v.interiorColor && tv.has(`colorValues.${v.interiorColor}`) ? tv(`colorValues.${v.interiorColor}`) : v.interiorColor
   const alts = v.photos.map((_, i) =>
     color
-      ? tv('photoAlt', { name: fullName, color: locale === 'tr' ? color.toLocaleLowerCase('tr') : color, index: i + 1, total: v.photos.length })
+      ? tv('photoAlt', { name: fullName, color: inSentence(color, locale), index: i + 1, total: v.photos.length })
       : tv('photoAltNoColor', { name: fullName, index: i + 1, total: v.photos.length }),
   )
   const yesNo = (b: boolean | null) => (b === null ? null : b ? tc('yes') : tc('no'))
@@ -206,6 +202,12 @@ export default async function VehiclePage({ params }: Props) {
                 {tc('call')}
               </ShutterA>
             </div>
+            {PAGES.financing && (
+              <ShutterLink href={{ pathname: '/finanzierung', query: { fahrzeug: slug } }} kind="text" className="vd-fin">
+                {t('financingLink')}
+                <Icon name="arrowRight" size={16} />
+              </ShutterLink>
+            )}
           </div>
           <p className="vd-direct">{t('visitNote')}</p>
         </aside>

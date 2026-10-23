@@ -7,11 +7,19 @@ import { loadMotion } from '@/lib/gsap'
 let lenis: Lenis | null = null
 export const getLenis = () => lenis
 
-/** Locks page scroll behind sheets and fullscreen views (DESIGN.md §6 "Kaydırma"). */
+/**
+ * Locks page scroll behind sheets and fullscreen views (DESIGN.md §6 "Kaydırma").
+ * Applied after the next paint: overflow on <html> relayouts the whole page, and the
+ * dialog that asked for the lock should be on screen first (INP).
+ */
 export function lockScroll(on: boolean) {
-  document.documentElement.classList.toggle('lock', on)
-  if (on) lenis?.stop()
-  else lenis?.start()
+  requestAnimationFrame(() =>
+    setTimeout(() => {
+      document.documentElement.classList.toggle('lock', on)
+      if (on) lenis?.stop()
+      else lenis?.start()
+    }),
+  )
 }
 
 export function scrollToTop() {

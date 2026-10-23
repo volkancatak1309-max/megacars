@@ -539,6 +539,78 @@
 - **23.10.2026** — "Anlamlı commit'lerle v2'ye push et; main'e dokunma. Önizlemede doğrula. Ana sayfayı ve /de/prototyp/logo sayfasını Volkan'ın tarayıcısında aç." — İlgili: yayın
 - **23.10.2026** — "En fazla 12 satırlık kısa Türkçe rapor ver ... Her maddede [DOĞRULANDI]+kaynak / [VARSAYIM] / [BİLMİYORUM] etiketi olsun. Sonra DUR." — İlgili: rapor
 
+## 23.10.2026 — Araç yönetim paneli: galeri sahibi araç eklesin, satıldı işaretlesin, kaldırsın (talimat)
+
+### Volkan'ın kararı (23.10.2026)
+- **23.10.2026** — "Galeri sahibi araçlarını kendisi yönetmek istiyor; site dinamik olacak." — İlgili: bütün site, veri katmanı
+- **23.10.2026** — "Galeri sahibi bir yönetim panelinden araç ekleyebilecek (fotoğraf + bilgiler), düzenleyebilecek, ana sayfadaki öne çıkan araçları seçebilecek, aracı "satıldı" olarak işaretleyebilecek ve siteden kaldırabilecek." — İlgili: /admin
+- **23.10.2026** — "Sistem 100'ün üzerinde araçla sorunsuz çalışacak." — İlgili: liste sayfası, veritabanı
+
+### Sınır
+- **23.10.2026** — "main'e dokunma. Vercel CLI ile elle deploy yok; yayın yalnız v2'ye push ile olur. Ücretli tek yeni kalem: Supabase'de Mega Cars için ayrı bir proje (madde 1). Şifre, anahtar ve gizli bilgiler ASLA repoya, KARAR-DEFTERI'ne ya da rapora yazılmaz. Uydurma veri yok. BRIEF.md ve KARAR-DEFTERI.md'deki bütün kurallar geçerli; özellikle "seçili dil dışında tek kelime yok" kuralı. Galzura Fleet'in Supabase projelerine (HAK61, Sendigo, galzura-demo vb.) KESİNLİKLE dokunma." — İlgili: bu oturum
+
+### 1) Veritabanı ve depolama (Supabase)
+- **23.10.2026** — "Galzura'nın Supabase Pro hesabında Mega Cars için ayrı bir proje aç (bölge: AB / Frankfurt). Önce bu projenin aylık ek maliyetini Supabase'in güncel fiyat sayfasından doğrula ve rapora yaz. Proje açmak için gereken erişim bu bilgisayarda yoksa dur ve Volkan'ın yapacağı TEK adımı yaz." — İlgili: Supabase projesi
+- **23.10.2026** — "Tablolar: araçlar: marka, model, versiyon, kasa tipi, ilk tescil, km, güç, yakıt, vites, renk, fiyat, fiyata KDV notu alanı, donanım listesi, özellik işaretleri, öne çıkan, sıra, durum (satışta / rezerve / satıldı), sitede görünür/gizli, eklenme ve güncellenme tarihi, isteğe bağlı 360 verisi; araç fotoğrafları: sıra ve kapak fotoğrafı bilgisiyle." — İlgili: veritabanı şeması
+- **23.10.2026** — "Silme yumuşak olsun (arşiv): yanlışlıkla silinen araç geri alınabilsin." — İlgili: arşiv
+- **23.10.2026** — "Güvenlik: Row Level Security açık. Herkes yalnız "sitede görünür" araçları okuyabilir; yazma yalnız yetkili yöneticilere açık. Fotoğraf deposunda da aynı kural geçerli." — İlgili: RLS, Storage
+- **23.10.2026** — "Supabase anahtarlarını Vercel'deki megacars projesinin ortam değişkenlerine (önizleme + production) ve yerelde .env.local'a yaz; repoya yazma." — İlgili: ortam değişkenleri
+
+### 2) Site artık veritabanından okur
+- **23.10.2026** — "Ana sayfadaki öne çıkan araçlar, araç listesi ve araç detay sayfaları veritabanından gelir. Öne çıkan olarak işaretli araç 6'dan azsa boşluk en yeni eklenen araçlarla doldurulur." — İlgili: Startseite, Fahrzeuge, Fahrzeug-Detail
+- **23.10.2026** — "Galeri sahibi kaydettiğinde site birkaç saniye içinde güncellenir (önbellek yenileme). Veritabanına ulaşılamazsa site çökmez; zarif bir boş durum gösterir." — İlgili: önbellek, boş durum
+- **23.10.2026** — "Satıldı işaretli araç listede "Verkauft / Satıldı / Sold" etiketiyle görünür; galeri sahibi isterse tek tuşla gizler. Gizlenen ya da silinen aracın sayfasına gelen ziyaretçi araç listesine yönlendirilir; bozuk link kalmaz." — İlgili: liste, detay, yönlendirme
+- **23.10.2026** — "Sıralama: Gerçek eklenme tarihi olduğu için "Neu eingetroffen" (en yeni gelenler) seçeneği eklenir ve varsayılan olur. Diğer sıralamalar (fiyat, km, ilk tescil) kalır." — İlgili: liste sıralaması
+- **23.10.2026** — "100+ araçta liste sayfası hızlı kalsın (sayfalama ya da "daha fazla göster"); filtreler çalışsın." — İlgili: liste
+- **23.10.2026** — "Mevcut 18 demo aracı fotoğraflarıyla birlikte veritabanına aktar (tekrar çalıştırılabilir bir betikle). data/inventory.json yalnız yedek olarak kalır." — İlgili: aktarım betiği
+
+### 3) Yönetim paneli (/admin)
+- **23.10.2026** — "Giriş: e-posta + şifre (Supabase Auth). Kayıt sayfası yok; hesapları yalnız Galzura açar. Şimdilik iki hesap aç: (a) Galzura yönetici hesabı, (b) galeriye gösterilecek demo hesabı. Galeri sahibinin gerçek hesabı, e-postası netleşince açılacak." — İlgili: Supabase Auth
+- **23.10.2026** — "Şifreleri güçlü üret ve repoya yazma. Giriş bilgilerini C:\Users\90553\Desktop\megacars-giris-bilgileri.txt dosyasına yaz (repo klasörünün DIŞINDA); bana yalnız dosyanın yerini söyle." — İlgili: giriş bilgileri
+- **23.10.2026** — "Panel dili Almanca ve Türkçe olsun (seçilebilir); seçili dil dışında kelime olmasın. Panel telefonda birinci sınıf çalışmalı: galeri sahibi galeride arabanın fotoğraflarını telefonla çekip doğrudan yükleyebilmeli." — İlgili: /admin
+- **23.10.2026** — "Araç ekleme / düzenleme: Fotoğraflar: çoklu yükleme, sürükleyerek sıralama, kapak seçimi, silme. Yüklemeden önce tarayıcıda otomatik küçültme ve WebP'ye çevirme (1600 px ve 800 px sürümleri). Telefon fotoğraflarındaki konum ve cihaz bilgisi (EXIF) silinir. Bilgiler seçmeli alanlarla girilir: marka ve model (listeden seçim + yeni ekleme), kasa tipi, yakıt, vites, renk, ilk tescil, km, güç (kW ve PS otomatik çevrilir), fiyat. Donanım ve özellikler, önceden üç dile çevrilmiş geniş bir onay listesinden işaretlenir (ör. navigasyon, deri koltuk, panorama tavan, çeki demiri, koltuk ısıtma, servis kitapçıklı bakım, ilk sahibinden). Bu ilk aşamada serbest açıklama metni YOK: Almanca yazılan bir metin Türkçe ve İngilizce sayfada Almanca kalırdı. "Öne çıkan" anahtarı ve sıra. Durum: satışta / rezerve / satıldı; "sitede göster" anahtarı; arşive gönder (silme) ve arşivden geri al. Kaydetmeden önce önizleme: aracın sitede nasıl görüneceği." — İlgili: araç formu
+- **23.10.2026** — "Paneldeki araç listesinde arama, durum filtresi ve toplu işlem (ör. birden çok aracı gizleme) olsun. Panel tasarımı sitenin C diliyle uyumlu, sade ve premium olsun. Kepenk hover ve kırmızı vurgu panelde de kullanılır, ama kullanım kolaylığı önce gelir." — İlgili: panel listesi, tasarım
+
+### 4) Belgeler
+- **23.10.2026** — "docs/ARAC-PANELI-REHBERI.md ve .pdf: galeri sahibi için Almanca + Türkçe, ekran görüntülü, kısa bir kullanım rehberi. Konular: giriş, araç ekleme, fotoğraf sıralama, öne çıkarma, satıldı işaretleme, gizleme, arşivden geri alma. Datenschutz sayfasını üç dilde güncelle: Supabase (AB bölgesi) veri işleyen olarak; yönetim paneli girişinin kullandığı çerezler. KARAR-DEFTERI ve BRIEF.md'yi yeni yapıyla güncelle." — İlgili: docs, Datenschutz
+
+### 5) Test
+- **23.10.2026** — "Playwright ile, önizleme adresinde uçtan uca test yap: 1. Demo hesabıyla giriş yap. 2. Yeni bir araç ekle (3 fotoğraf, bilgiler, donanım). 3. Aracın sitede üç dilde göründüğünü doğrula. 4. Aracı öne çıkar; ana sayfada göründüğünü doğrula. 5. Satıldı olarak işaretle; etiketi doğrula. 6. Gizle; listeden kalktığını ve eski linkin yönlendirdiğini doğrula. 7. Arşive gönder ve arşivden geri al. Telefon görünümünde (390 px) de fotoğraf yükleme ve kaydetme akışını dene." — İlgili: uçtan uca test
+- **23.10.2026** — "Güvenlik testi: giriş yapmadan panel açılmıyor; giriş yapmadan veritabanına yazılamıyor; gizli araç sitede ve doğrudan adresle görünmüyor. Dil testi: yeni eklenen aracın sayfasında seçili dil dışında kelime yok; docs/DIL-TESTI.md'yi güncelle. Production derlemesi temiz olsun; konsol hatası 0 olsun. Test için eklediğin aracı en sonda tamamen sil (arşivde de bırakma)." — İlgili: güvenlik, dil, temizlik
+
+### 6) Yayın ve rapor
+- **23.10.2026** — "Anlamlı commit'lerle v2'ye push et; main'e dokunma. Önizlemede doğrula. Paneli ve ana sayfayı Volkan'ın tarayıcısında aç. En fazla 15 satırlık kısa Türkçe rapor ver ... Her maddede [DOĞRULANDI]+kaynak / [VARSAYIM] / [BİLMİYORUM] etiketi olsun. Sonra DUR." — İlgili: yayın, rapor
+
+### Kayıtlar (CC, kaynaklı) — araç yönetim paneli, 1. oturum (23.10.2026)
+> Bu alt bölüm Volkan'ın cümlesi değildir; maliyet, erişim, yapılanlar, doğrulananlar ve CC varsayımlarıdır.
+
+**Aylık maliyet (supabase.com/pricing, 23.10.2026)** — Pro plan 25 $/ay; "Pro and Team plans include $10/month in compute credits, which covers one Micro instance."; "Additional projects each add their own compute cost." → Galzura'nın Pro hesabında Mega Cars için ikinci proje: Micro örneği ≈ **+10 $/ay** (ilk proje krediyle karşılanıyorsa; projeler duraklatılmaz). Disk: proje başına 8 GB dahil, sonrası 0,125 $/GB/ay. Bölge kodu: eu-central-1 "Central EU (Frankfurt)" (supabase.com/docs/guides/platform/regions, 23.10.2026).
+
+**Erişim** — Supabase CLI bu bilgisayarda yok; bu projenin `.env.local` dosyasında Supabase anahtarı yok; `C:\Users\90553\galzura-oto\.env.local` içinde `SUPABASE_ACCESS_TOKEN` adlı bir satır bulundu (değeri okunmadı, yazılmadı). Claude Code'un otomatik mod izin denetleyicisi, başka projenin `.env` dosyasını okuyan komutu ve ardından Docker'ı / çalışan süreçleri yoklayan komutları "Credential Exploration" gerekçesiyle reddetti; bu yüzden bulut projesi açılamadı ve yerel Supabase (Docker) da kurulamadı. Volkan'ın tek adımı raporda.
+
+**Bu oturumda yapılanlar (yerel commit'ler; v2'ye PUSH EDİLMEDİ — veritabanı yokken push edilseydi önizleme boş görünürdü)**
+- Şema + Row Level Security + Storage politikaları: `supabase/migrations/20261023120000_vehicles.sql` (`admin_users`, `is_admin()`, `vehicles`, `vehicle_photos`, kova `vehicles`).
+- Veri katmanı: `lib/supabase/{env,public,server,browser,rows}.ts`, `lib/inventory.ts` (`unstable_cache`, etiket `vehicles`, 5 dk güvenlik yenilemesi; kaydedince `revalidateTag` + `revalidatePath('/', 'layout')`), `lib/types.ts` (durum, görünür, öne çıkan, KDV notu, özellik işaretleri, zaman damgaları), `lib/options.ts` (seçmeli listeler, kW↔PS), `lib/equipment.ts` + `data/equipment.json` (117 terim × 3 dil; eski `equipment-en/tr.json` sözlüklerinden üretildi, `_work/faz8/equipment.mjs`), `lib/dealer-photos.ts` (showroom ve bina fotoğrafları yedek dosyadan).
+- Site: ana sayfa (öne çıkanlar 6'ya tamamlanır, boş durum `StockEmpty`), liste (varsayılan "Neu eingetroffen", 24'er "Weitere anzeigen", boş durum), detay (gizli/silinmiş → listeye yönlendirme; "Verkauft/Reserviert" etiketi; KDV notu; özellik satırları; donanım anahtarlardan), kart ve öne çıkanlarda `.status-chip`, sitemap/kontakt/finanzierung/layout veritabanından; JSON-LD `availability` duruma göre.
+- Panel: `proxy.ts` (oturum yenileme, girişsiz → `/admin/login`, `/en/admin` → `/de/admin`), `app/[locale]/(admin)/admin/*` (giriş, liste, yeni, düzenle, arşiv, `actions.ts`), `components/admin/*` (liste + arama/filtre/toplu işlem, form, fotoğraf alanı, donanım seçici, önizleme), `lib/admin/{schema,slug,queries,image}.ts`, `styles/admin.css`, `messages/de|tr.json` → `admin`.
+- Aktarım betiği `scripts/migrate-inventory.ts` (`npm run migrate` kuru çalışma, `-- --write` yazar; legacy_id ile tekrar çalıştırılabilir; fotoğraflar `public/cars` dosyalarından kovaya). Eski `scripts/import-inventory.ts` `scripts/legacy-types.ts` ile derlenmeye devam eder.
+- Datenschutz 3 dilde: yeni "Wo liegen die Fahrzeugdaten?" bölümü (Supabase Pte. Ltd., 65 Chulia Street #38-02/03, OCBC Centre, Singapur 049513; SCC (AB) 2021/914 — kaynak supabase.com/legal/dpa, 23.10.2026; bölge Frankfurt) ve çalışan giriş çerezleri (`sb-*`) paragrafı. BRIEF.md "Envanter" maddesi, DESIGN.md §16, `docs/ARAC-PANELI-REHBERI.md` (metin; ekran görüntüleri ve PDF canlı panelde çekilecek).
+
+**Doğrulananlar (yerel)** — `npm run typecheck` temiz; `npm run build` temiz; Playwright (Chromium, 1440 ve 390 px, veritabanısız production sunucusu): boş durumlar DE/EN/TR ana sayfa + liste, bilinmeyen araç adresi → liste (3 dil), `/de/admin` ve `/tr/admin/neu` → giriş sayfası, `/en/admin` → `/de/admin/login`, giriş sayfası DE ve TR'de tek dil, Datenschutz'ta yeni bölüm 3 dilde, konsol hatası 0 (`_work/faz8/pw-local.mjs`).
+
+**Doğrulanmayanlar (bulut projesi gerekiyor)** — giriş ve oturum, kaydetme, fotoğraf yükleme hattı, RLS'nin gerçek davranışı, önbellek yenileme süresi, 18 aracın aktarımı, uçtan uca/güvenlik/dil testleri önizlemede, rehber ekran görüntüleri ve PDF, Vercel ortam değişkenleri.
+
+**CC varsayımları ve kararları (Volkan değiştirebilir)**
+1. Fotoğraf kovası herkese açık okunur (statik sayfalara gömülü adresler süresiz çalışmalı); yazma yalnız yönetici. Yollar iki rastgele UUID içerir; gizlenen aracın fotoğrafı sitede hiçbir yerde bağlantılı kalmaz; arşivden tamamen silinen aracın dosyaları silinir. "Fotoğraf deposunda da aynı kural" tam anlamıyla (gizli aracın fotoğrafı adresi bilinse de açılmasın) istenirse imzalı adresler ya da bir sunucu geçidi gerekir — [VARSAYIM].
+2. "Version / Ausstattungslinie" kısa serbest metin (ör. "4Matic AMG-Line"); donanım paketi adları özel ad sayılır, her dilde aynı görünür; `versionLabel` bilinen Almanca sözcükleri çevirmeye devam eder.
+3. Aktarılan 18 aracın "eklenme tarihi" gerçek değildir: öne çıkanlar önce, sonra dosya sırası, birer dakika arayla verilir ki "Neu eingetroffen" sırası bugünkü "Empfohlen" sırasıyla aynı kalsın.
+4. KDV notu: aktarılan araçlarda "bilinmiyor" → sitede eski "Der Preis stammt aus dem Inserat." yazısı; panelde "Endpreis inkl. MwSt." / "Differenzbesteuert" seçenekleri (teyit bekliyor 6 ile birlikte).
+5. Özellik işaretleri: Unfallfrei, Erstbesitz, Garantie, Begutachtung nach § 57a neu; varsayılan "işaretsiz" ve sitede gösterilmez (uydurma veri yok).
+6. Panel yalnız DE/TR; `/en/admin` Almancaya gider.
+7. Veri önbelleği tek liste olarak tutulur (100–200 araç için yeterli; 300+ araçta araç başına önbelleğe geçilmeli).
+
+**Sonraki oturumun sırası** — token → proje "megacars" (eu-central-1) → şema (`supabase db push` ya da SQL) → kayıt (signup) kapalı → Galzura yönetici + demo hesabı, `admin_users` → anahtarlar Vercel (preview + production) ve `.env.local` → `npm run migrate -- --write` → push v2 → önizlemede E2E/güvenlik/dil testleri → rehber ekran görüntüleri + PDF → rapor.
+
 ### Kayıtlar (CC, kaynaklı) — dil seçici ve karışık dil temizliği
 > Bu alt bölüm Volkan'ın cümlesi değildir; kök neden, kaynak ve kontrol kayıtlarıdır. Tarih: 23.10.2026.
 

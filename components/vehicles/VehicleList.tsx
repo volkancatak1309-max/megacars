@@ -235,6 +235,43 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
 
   const reset = () => update({ ...EMPTY_FILTERS, sort: f.sort })
 
+  // the filter panel and the sheet fields only change with the filters: opening the
+  // sheet or a menu must not rebuild 16 selects with their counted options (INP)
+  const deck = useMemo(
+    () => (
+      <section aria-label={t('filterTitle')} className="vl-bar">
+        {FIELDS.map((field) => (
+          <span key={field.key} className="sh sh--line chip" data-on={f[field.key] !== null || undefined}>
+            <Faces>
+              <span className="chip-key">{field.label}</span>
+              <span className="chip-val">{valueLabel(field)}</span>
+              <Icon name="chevronDown" size={14} />
+            </Faces>
+            <select aria-label={field.label} value={f[field.key] === null ? '' : String(f[field.key])} onChange={(e) => onPick(field, e.target.value)}>
+              {options$(field)}
+            </select>
+          </span>
+        ))}
+      </section>
+    ),
+    // FIELDS, labels and handlers derive from the filters and the (fixed) options
+    [f, countWith],
+  )
+  const sheetFields = useMemo(
+    () =>
+      FIELDS.map((field) => (
+        <div className="field" key={field.key}>
+          <label htmlFor={`m-${field.key}`} className="field-label">
+            {field.label}
+          </label>
+          <select id={`m-${field.key}`} className="field-control tabular" value={f[field.key] === null ? '' : String(f[field.key])} onChange={(e) => onPick(field, e.target.value)}>
+            {options$(field)}
+          </select>
+        </div>
+      )),
+    [f, countWith],
+  )
+
   // running numbers follow the visible order
   const order = useMemo(() => new Map(sorted.filter((v) => visible.has(v.id)).map((v, i) => [v.id, i + 1])), [sorted, visible])
 
@@ -300,20 +337,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
         </div>
       </header>
 
-      <section aria-label={t('filterTitle')} className="vl-bar">
-        {FIELDS.map((field) => (
-          <span key={field.key} className="sh sh--line chip" data-on={f[field.key] !== null || undefined}>
-            <Faces>
-              <span className="chip-key">{field.label}</span>
-              <span className="chip-val">{valueLabel(field)}</span>
-              <Icon name="chevronDown" size={14} />
-            </Faces>
-            <select aria-label={field.label} value={f[field.key] === null ? '' : String(f[field.key])} onChange={(e) => onPick(field, e.target.value)}>
-              {options$(field)}
-            </select>
-          </span>
-        ))}
-      </section>
+      {deck}
 
       <div className="vl-row">
         <p className="vl-found" aria-live="polite">
@@ -380,16 +404,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
             </button>
           </div>
           <div className="sheet-body vl-sheet-fields" data-lenis-prevent>
-            {FIELDS.map((field) => (
-              <div className="field" key={field.key}>
-                <label htmlFor={`m-${field.key}`} className="field-label">
-                  {field.label}
-                </label>
-                <select id={`m-${field.key}`} className="field-control tabular" value={f[field.key] === null ? '' : String(f[field.key])} onChange={(e) => onPick(field, e.target.value)}>
-                  {options$(field)}
-                </select>
-              </div>
-            ))}
+            {sheetFields}
             <ShutterButton kind="text" onClick={reset} style={{ justifySelf: 'start', margin: 0 }}>
               {t('reset')}
             </ShutterButton>

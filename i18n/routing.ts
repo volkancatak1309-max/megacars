@@ -5,9 +5,12 @@ export const routing = defineRouting({
   locales: ['de', 'en', 'tr'],
   defaultLocale: 'de',
   localePrefix: 'always',
-  // The first visit follows Accept-Language; afterwards the address carries the language.
-  // No NEXT_LOCALE cookie: the site sets no cookies at all (Datenschutz).
-  localeCookie: false,
+  // Only a visit to "/" picks a language: the NEXT_LOCALE cookie (set when the visitor
+  // chooses a language) wins, then Accept-Language. Prefixed addresses are served as
+  // they are. The cookie is strictly necessary (no consent, TKG 2021 § 165 Abs. 3) and
+  // is named in the Datenschutz page; it lives one year (Volkan, 23.10.2026: the
+  // chosen language must survive a return visit).
+  localeCookie: { maxAge: 60 * 60 * 24 * 365, sameSite: 'lax' },
   pathnames: {
     '/': '/',
     '/fahrzeuge': { de: '/fahrzeuge', en: '/vehicles', tr: '/araclar' },

@@ -6,7 +6,7 @@ import { getLenis } from '@/components/motion/SmoothScroll'
 
 export type CurtainHref = ComponentProps<typeof Link>['href']
 
-type Ctx = { go: (href: CurtainHref) => void }
+type Ctx = { go: (href: CurtainHref, locale?: string) => void }
 const CurtainContext = createContext<Ctx | null>(null)
 
 const EASE = 'cubic-bezier(0.76, 0, 0.24, 1)'
@@ -43,10 +43,13 @@ export function CurtainProvider({ mark, children }: { mark: string; children: Re
   }, [])
 
   const go = useCallback(
-    async (href: CurtainHref) => {
+    async (href: CurtainHref, locale?: string) => {
+      // the language switch passes its target locale: router.push alone would keep the
+      // current one (the bug Volkan found on 23.10.2026 — EN/DE did not switch)
+      const opts = locale ? ({ locale } as never) : undefined
       const el = root.current
       if (!el || reduced() || pending.current) {
-        router.push(href as never)
+        router.push(href as never, opts)
         return
       }
       pending.current = true
@@ -56,7 +59,7 @@ export function CurtainProvider({ mark, children }: { mark: string; children: Re
         ...rows().map((r) => r.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { duration: 700, easing: EASE, fill: 'forwards' }).finished),
         w?.animate([{ transform: 'translateY(110%)' }, { transform: 'translateY(0)' }], { duration: 650, delay: 250, easing: EASE, fill: 'forwards' }).finished,
       ])
-      router.push(href as never)
+      router.push(href as never, opts)
       // never leave the visitor behind a curtain if the page does not change
       window.setTimeout(() => pending.current && reveal(), 4000)
     },
@@ -100,29 +103,32 @@ export function CurtainProvider({ mark, children }: { mark: string; children: Re
  * hover or touch instead, and the closing curtain covers the rest of the wait.
  */
 export const CurtainLink = forwardRef<HTMLAnchorElement, ComponentProps<typeof Link>>(function CurtainLink(
-  { href, onClick, onMouseEnter, onTouchStart, prefetch = false, ...rest },
+  { href, locale, onClick, onMouseEnter, onTouchStart, prefetch = false, ...rest },
   ref,
 ) {
   const ctx = useContext(CurtainContext)
   const router = useRouter()
+  const opts = locale ? ({ locale } as never) : undefined
   return (
     <Link
       ref={ref}
       href={href}
+      locale={locale}
       prefetch={prefetch}
       onMouseEnter={(e) => {
         onMouseEnter?.(e)
-        router.prefetch(href as never)
+        router.prefetch(href as never, opts)
       }}
       onTouchStart={(e) => {
         onTouchStart?.(e)
-        router.prefetch(href as never)
+        router.prefetch(href as never, opts)
       }}
       onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+        // next-intl's Link has already written the locale cookie at this point
         onClick?.(e)
         if (e.defaultPrevented || !ctx || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
         e.preventDefault()
-        ctx.go(href)
+        ctx.go(href, locale)
       }}
       {...rest}
     />

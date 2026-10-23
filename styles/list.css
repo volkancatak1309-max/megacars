@@ -25,13 +25,23 @@
 }
 
 .vl-num {
+  /* The size follows the number of digits (--digits from the component), so 9, 66 or
+     120 all fit the room on every width: Unbounded 900 digits take ≈ 0.8 em each with
+     this spacing. */
+  --vl-room: calc(100vw - 2 * var(--page));
   font-family: var(--f-display);
   font-weight: 900;
-  font-size: clamp(8.5rem, 31vw, 25rem);
+  font-size: min(clamp(8.5rem, 31vw, 25rem), calc(var(--vl-room) / (var(--digits, 2) * 0.84)));
   line-height: 0.78;
   letter-spacing: -0.07em;
   color: var(--red);
   margin-left: -0.04em;
+}
+
+@media (min-width: 900px) {
+  .vl-num {
+    --vl-room: calc(min(100vw - 2 * var(--page), var(--wide)) * 0.55);
+  }
 }
 
 .vl-intro {

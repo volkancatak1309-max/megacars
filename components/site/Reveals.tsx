@@ -112,7 +112,14 @@ export function LinesUp({ as = 'h2', className, children, id, lang }: { as?: Ele
             tag: 'span',
             aria: 'none',
             autoSplit: true,
-            onSplit: (self) => gsap.from(self.lines, { yPercent: 110, duration: 1.1, stagger: 0.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } }),
+            onSplit: (self) => {
+              // the line masks get room for the last glyph's overhang (see .mline in motion.css)
+              ;((self as unknown as { masks?: HTMLElement[] }).masks ?? []).forEach((m) => {
+                m.style.paddingRight = '0.15em'
+                m.style.marginRight = '-0.15em'
+              })
+              return gsap.from(self.lines, { yPercent: 110, duration: 1.1, stagger: 0.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } })
+            },
           })
         }),
       )

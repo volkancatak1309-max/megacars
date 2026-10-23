@@ -314,7 +314,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   return (
     <div className="vl pg wide">
       <header className="vl-head">
-        <p className="vl-num" aria-hidden="true">
+        <p className="vl-num" aria-hidden="true" style={{ ['--digits' as string]: String(cards.length).padStart(2, '0').length }}>
           <span className="mline rise">
             <span className="tabular">{String(cards.length).padStart(2, '0')}</span>
           </span>

@@ -23,6 +23,10 @@ function entries(href: Href): MetadataRoute.Sitemap {
   return routing.locales.map((l) => ({ url: localizedUrl(href, l), alternates: { languages } }))
 }
 
+// rendered per request: a vehicle saved in the panel must appear without a new build
+// (the vehicle data itself comes from the tagged cache, so this costs no database call)
+export const dynamic = 'force-dynamic'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const cards = await getCards()
   return [

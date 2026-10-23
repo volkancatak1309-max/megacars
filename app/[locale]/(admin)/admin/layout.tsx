@@ -11,6 +11,11 @@ export const metadata: Metadata = {
 
 // Only the panel's own words travel to the browser.
 const NAMESPACES = ['admin', 'vehicle', 'common', 'form']
+/** the equipment picker shows the group names of the site's detail page */
+const detailSubset = (all: Record<string, unknown>) => {
+  const detail = all.detail as Record<string, unknown> | undefined
+  return detail?.equipmentGroups ? { detail: { equipmentGroups: detail.equipmentGroups } } : {}
+}
 const pick = (all: Record<string, unknown>, keys: string[]) => Object.fromEntries(keys.filter((k) => k in all).map((k) => [k, all[k]]))
 
 /** Admin panel shell: no loader, curtain or site chrome; German or Turkish (proxy.ts). */
@@ -19,7 +24,7 @@ export default async function AdminLayout({ children, params }: LayoutProps<'/[l
   setRequestLocale(locale as Locale)
   const messages = await getMessages()
   return (
-    <NextIntlClientProvider messages={pick(messages, NAMESPACES)}>
+    <NextIntlClientProvider messages={{ ...pick(messages, NAMESPACES), ...detailSubset(messages) }}>
       <div className="adm s-night">{children}</div>
     </NextIntlClientProvider>
   )

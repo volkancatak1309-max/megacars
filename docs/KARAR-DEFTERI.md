@@ -567,3 +567,54 @@
 
 **Varlıklar ve derleme**
 - `scripts/brand-assets.ts` (`npm run brand`, `prebuild`): `app/icon.svg` (64 px), `app/apple-icon.png` (180 px, gece zemin), `public/og/default.jpg` (1200 × 630, dikey krom lockup + kırmızı çizgi). Konsept değişince tek satır (`LOGO_CONCEPT`) + derleme yeter.
+
+## 23.10.2026 — Volkan'ın Gökhan'a mesajı (galeriye iletilecek sorular ve istekler; aynen)
+
+- **23.10.2026** — "Gökhan, Mega Cars'ın yeni sitesinin demosu hazır: https://megacars-git-v2-volkancatak1309-maxs-projects.vercel.app — Telefonda da açılıyor. Dil otomatik seçiliyor; üstten DE / EN / TR arasında değiştirilebiliyor." — İlgili: önizleme
+- **23.10.2026** — "Sitedeki araçlar, galerinin haziranda AutoScout24'te ilanda olan gerçek araçları. Demo olduğu için şimdilik bunlar duruyor; güncel araçların fotoğrafları ve bilgileri gelince değişecek." — İlgili: data/inventory.json
+- **23.10.2026** — "Logo galeriye bir öneri: "M" harfi ve ona bitişik kırmızı bir "C". İsterlerse kendi mevcut logoları da kullanılabilir." — İlgili: logo (konsept A)
+- **23.10.2026** — "Site şu an Google'a kapalı. Galeri onaylayınca kendi adresleri olan megacars.at üzerinden yayına alınacak." — İlgili: lib/launch.ts INDEXABLE, alan adı
+- **23.10.2026** — "1) Araçlarını şu an hangi sitede ilana koyuyorlar? AutoScout24'teki mağazaları kapalı görünüyor." — İlgili: stok kaynağı (teyit bekliyor 13)
+- **23.10.2026** — "2) Sitede telefon +43 660 6877002, e-posta megacars@live.at yazıyor. Bunlar doğru mu? Bu numara WhatsApp'ta açık mı? İkinci numara (+43 660 6969496) da sitede yazsın mı?" — İlgili: Kontakt, Impressum (teyit bekliyor 4, 9)
+- **23.10.2026** — "3) Açılış saatleri hafta içi 08:00–18:00, cumartesi 09:00–15:00 olarak yazıyor. Öğle arası veriyorlar mı? Pazar günü randevuyla açıyorlar mı?" — İlgili: saatler (teyit bekliyor 3, 11)
+- **23.10.2026** — "4) Hangi hizmetleri veriyorlar: kredi (Finanzierung), takas (Inzahlungnahme), araç değişimi (Tausch), müşteriden araç satın alma (Ankauf), leasing, bakım? Sitede yalnız gerçekten verdikleri hizmetleri yazacağız." — İlgili: hizmetler, PAGES (teyit bekliyor 1, 2, 10)
+- **23.10.2026** — "5) İlan fiyatları KDV dahil son fiyat mı? Bazı araçlar "differenzbesteuert" (KDV'si ayrıca gösterilmeyen ikinci el satış) mi satılıyor? Avusturya'da sitede bunun yazması gerekiyor." — İlgili: fiyat notu, § 5 Abs. 2 ECG (teyit bekliyor 6)
+- **23.10.2026** — "6) Firmanın UID numarası (Umsatzsteuer-Identifikationsnummer) ne? Firma dizinlerinde ATU70884019 yazıyor, ama bu numara AB'nin sorgu sisteminde geçersiz çıkıyor; doğru numarayı öğrenmemiz lazım. Firmenbuch'taki tam unvanları da lazım (ör. "Mega Cars Murat Demir e.U."). Künye (Impressum) sayfası için ikisi de yasal olarak gerekli." — İlgili: Impressum (teyit bekliyor 5, 8)
+- **23.10.2026** — "7) Sitede "Seit 2002" yazabilir miyiz? Galerinin eski AutoScout24 tanıtımında 2002'den beri çalıştıkları yazıyordu." — İlgili: Über uns (teyit bekliyor 7)
+- **23.10.2026** — "8) Şu anki araçların fotoğrafları ve bilgileri: Her araç için ayrı bir klasör olsun; klasörün adı aracın adı olsun (ör. Mercedes-S560-2019). Her klasörde 10–20 tane yatay, net, üstüne yazı ya da logo basılmamış orijinal fotoğraf olsun. Her aracın bilgileri de olsun: marka, model, versiyon, kasa tipi (Limousine, Kombi, SUV, Cabrio vb.), ilk tescil tarihi, kilometre, güç, yakıt, vites, renk, fiyat ve donanım listesi. Dosyaları WhatsApp'tan normal fotoğraf olarak göndermesinler, çünkü kalite düşüyor. Google Drive ya da WeTransfer linkiyle göndersinler." — İlgili: stok teslim biçimi, scripts/import-inventory.ts
+- **23.10.2026** — "9) Ekteki PDF'teki talimata göre tek bir arabanın etrafında yürüyerek bir deneme videosu çekilmesi lazım. Sitede araba bir platformun üstünde dönüyormuş gibi görünecek. Fotoğrafları çektikleri gün bunu da çekebilirlerse çok iyi olur." — İlgili: docs/showroom-v2/CEKIM-TALEBI.pdf, 360° denemesi
+- **23.10.2026** — "10) megacars.at alan adı kimin yönetiminde, hangi firmada kayıtlı? Site oraya taşınırken alan adı ayarlarına (DNS) erişim gerekecek; şimdiden öğrenirsek zaman kazanırız." — İlgili: alan adı, canlıya geçiş
+- Not (CC): Bu mesaj, Gökhan'a gönderilen son sürümdür (23.10.2026); önceki taslak bununla değiştirildi.
+
+## 23.10.2026 — Dil hataları: önce dil seçici (hemen yayınla), sonra karışık dil temizliği (talimat)
+
+### Volkan'ın bulduğu iki hata
+- **23.10.2026** — "1) Dil seçici çalışmıyor: EN'e basınca İngilizceye geçmiyor; DE'ye basınca Almancaya geçmiyor." — İlgili: components/site/Header.tsx, components/site/Curtain.tsx
+- **23.10.2026** — "2) Türkçe seçiliyken sayfada Almanca yazılar görünüyor. Örnek: "GEWISSENHAFT. VERLÄSSLICH. PROFESSIONELL." büyük başlığı Türkçe sayfada Almanca duruyor; aynı bölümde "SHOWROOM" etiketi İngilizce." — İlgili: Startseite güven bölümü, messages/*.json
+- **23.10.2026** — "Önceki raporda "İngilizce tamam [DOĞRULANDI]" yazılmıştı. Bu doğrulama yetersizdi: yalnız çeviri dosyaları kontrol edilmiş, ekranda tıklanarak test edilmemiş. Bu oturumda doğrulama gerçek tıklamayla ve ekrandaki metnin taranmasıyla yapılacak." — İlgili: doğrulama yöntemi
+
+### Sınır ve bağlam
+- **23.10.2026** — "main dalı eski canlı sitedir; main'e dokunma." / "KARAR-DEFTERI'nde commit'lenmemiş Gökhan mesajı kaydı varsa koru; bu oturumun commit'lerine kat." — İlgili: git
+
+### 1) Dil seçici
+- **23.10.2026** — "Doğru davranış: Otomatik dil seçimi yalnız ilk girişte, dil belirtilmemiş adreste (/) çalışır. Ziyaretçi dil seçiciden bir dil seçerse aynı sayfanın o dildeki karşılığına gider ve seçimi hatırlanır. Sonraki sayfa geçişlerinde, sayfa yenilemede ve siteye tekrar girişte o dil kalır. Dil seçici masaüstünde ve mobil menüde çalışır." — İlgili: i18n/routing.ts, proxy.ts, Header
+- **23.10.2026** — "Playwright ile, önizleme adresinde gerçek tıklama testi yap: ana sayfada, araç listesinde ve bir araç sayfasında DE → EN → TR → DE sırasıyla tıkla. Her tıklamada adresin ve sayfadaki metnin değiştiğini doğrula; sayfa yenileyince dilin korunduğunu doğrula. Testi masaüstünde (1440 px) ve mobil menüden (390 px) yap." — İlgili: dil testi
+- **23.10.2026** — "Test geçince HEMEN commit'le ve v2'ye push et (mesaj: "fix(i18n): dil secici"). Vercel önizlemesinin güncellendiğini doğrula. Siteyi Volkan'ın tarayıcısında aç ve bana tek satırla yaz: "Dil seçici düzeltildi, önizlemede deneyebilirsin." Sonra 2. bölüme geç." — İlgili: yayın sırası
+
+### 2) Karışık dili temizle — KESİN KURAL
+- **23.10.2026** — "KESİN KURAL (Volkan): Hangi dil seçiliyse sayfada yalnız o dil görünür; başka dilde tek kelime kalmaz." — İlgili: bütün site × 3 dil
+- **23.10.2026** — "İstisna yalnız özel isimlerdir: firma adı, marka ve model adları, cadde adı, mahkeme ve sicil gibi resmî kurum adları. Resmî kurum adları ilk geçtiği yerde o dildeki açıklamasıyla birlikte yazılır (ör. TR: "Feldkirch Eyalet Mahkemesi (Landesgericht Feldkirch)")." — İlgili: Impressum, Datenschutz, Kontakt
+- **23.10.2026** — "Karşılığı olan yabancı kelimeler (ör. "Showroom") her dilde o dilin kelimesiyle yazılır." — İlgili: bütün metinler
+- **23.10.2026** — "Galerinin sloganı "Gewissenhaft. Verlässlich. Professionell." Almanca sayfada aynen kalır. Türkçe ve İngilizce sayfalarda uzman tercüman seviyesinde çevrilir (ör. TR: "Titiz. Güvenilir. Profesyonel." · EN: "Conscientious. Reliable. Professional."). Büyük harflerle de kesilmeden sığdığını üç genişlikte kontrol et." — İlgili: Startseite güven bölümü
+- **23.10.2026** — "Kapsam: bütün sayfalar × 3 dil. Görünen metinlerin yanında şunlar da taranır: görsel açıklamaları (alt), aria-label'lar, title'lar, form yer tutucuları ve hata mesajları, WhatsApp'a ve e-postaya giden hazır mesajlar, sayfa başlıkları ve paylaşım (OG) metinleri, 404 sayfası, açılış ekranı ve yasal sayfalar (Impressum, Datenschutz)." — İlgili: tarama kapsamı
+- **23.10.2026** — "Ekrandaki metni otomatik tara: her dil sayfasındaki bütün metinleri çıkar; bir dil algılama aracı ve kelime listesiyle o dile ait olmayan kelimeleri bul; özel isimler için bir izin listesi tut. Bulduklarını uzman tercüman seviyesinde çevir. Ardından her sayfanın her dildeki ekran görüntüsüne kendin bak ve otomatik taramanın kaçırdığını yakala." — İlgili: tarama yöntemi
+
+### 3) Tam tıklama testi
+- **23.10.2026** — "Bütün sayfa tiplerinde dil seçici testini (DE → EN → TR → DE, sayfa geçişi, yenileme) masaüstünde ve mobilde tekrarla. Sonuçları docs/DIL-TESTI.md'ye yaz: her sayfa × dil × cihaz için geçti/kaldı ve ekran görüntüsünün yolu. Tek bir "kaldı" kalmayana kadar düzelt ve yeniden test et." — İlgili: docs/DIL-TESTI.md
+
+### 4) Küçük temizlik
+- **23.10.2026** — "Volkan logo konsepti A'yı seçti (23.10.2026); bunu KARAR-DEFTERI'ne yaz. /prototyp/logo sayfasını ve kullanılmayan B ve C logo kodlarını kaldır (git geçmişinde kalırlar)." — İlgili: logo (A Monogramm kesinleşti), lib/brand/marks.ts, app/[locale]/prototyp/logo
+
+### 5) Yayın ve rapor
+- **23.10.2026** — "Production derlemesi temiz olsun; konsol hatası 0 olsun. Anlamlı commit'lerle (fix:, i18n:, chore:, docs:) v2'ye push et; önizlemede doğrula; main'e dokunma. Ana sayfayı Türkçe olarak Volkan'ın tarayıcısında aç." — İlgili: yayın
+- **23.10.2026** — "En fazla 12 satırlık kısa Türkçe rapor ver ... Her maddede [DOĞRULANDI]+kaynak / [VARSAYIM] / [BİLMİYORUM] etiketi olsun. Sonra DUR." — İlgili: rapor

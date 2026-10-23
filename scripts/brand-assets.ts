@@ -1,24 +1,22 @@
 /**
- * Writes the logo files that cannot be inline SVG from the concept in lib/launch.ts
- * (LOGO_CONCEPT): app/icon.svg (favicon), app/apple-icon.png (180 px) and
- * public/og/default.jpg (1200 × 630 share image). Runs before every build
- * (npm run brand / prebuild), so switching the concept is one line.
+ * Writes the logo files that cannot be inline SVG (lib/brand/marks.ts): app/icon.svg
+ * (favicon), app/apple-icon.png (180 px) and public/og/default.jpg (1200 × 630 share
+ * image). Runs before every build (npm run brand / prebuild), so a change to the marks
+ * reaches every file.
  */
 import fs from 'node:fs'
 import sharp from 'sharp'
-import { LOGO_CONCEPT } from '../lib/launch'
 import { BRAND, iconSvg, logoSvg } from '../lib/brand/marks'
 
-const concept = LOGO_CONCEPT
 const inner = (svg: string) => svg.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '')
 
-fs.writeFileSync('app/icon.svg', iconSvg(concept, 64))
+fs.writeFileSync('app/icon.svg', iconSvg(64))
 
-await sharp(Buffer.from(iconSvg(concept, 180, true))).png({ compressionLevel: 9 }).toFile('app/apple-icon.png')
+await sharp(Buffer.from(iconSvg(180))).png({ compressionLevel: 9 }).toFile('app/apple-icon.png')
 
 const W = 1200
 const H = 630
-const lockup = logoSvg(concept, 'stacked', { tone: 'dark', chrome: true, id: 'og' })
+const lockup = logoSvg('stacked', { tone: 'dark', chrome: true, id: 'og' })
 const w = 620
 const h = (w * lockup.height) / lockup.width
 const x = (W - w) / 2
@@ -31,4 +29,4 @@ const og =
   `</svg>`
 await sharp(Buffer.from(og)).jpeg({ quality: 88, mozjpeg: true }).toFile('public/og/default.jpg')
 
-console.log(`brand assets written for concept "${concept}": app/icon.svg, app/apple-icon.png, public/og/default.jpg`)
+console.log('brand assets written: app/icon.svg, app/apple-icon.png, public/og/default.jpg')

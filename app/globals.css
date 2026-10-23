@@ -6,7 +6,6 @@
 @import '../styles/list.css';
 @import '../styles/detail.css';
 @import '../styles/pages.css';
-@import '../styles/proto.css';
 
 /* Tailwind utilities read the same "Nachtfahrt" palette (DESIGN.md §2). */
 @theme {

@@ -1,5 +1,4 @@
-import { LOGO_CONCEPT } from '@/lib/launch'
-import { loaderSvg, type Concept } from '@/lib/brand/marks'
+import { loaderSvg } from '@/lib/brand/marks'
 
 /**
  * Opening screen (Volkan, 23.10.2026): no counter, no bar. The emblem is drawn in thin
@@ -9,10 +8,10 @@ import { loaderSvg, type Concept } from '@/lib/brand/marks'
  * device. The head script in app/[locale]/layout.tsx hides it for the rest of the visit
  * (links within the site, reload, back/forward). Reduced motion: a plain fade only.
  */
-export function Loader({ concept = LOGO_CONCEPT, demo = false }: { concept?: Concept; demo?: boolean }) {
-  const { svg } = loaderSvg(concept)
+export function Loader() {
+  const { svg } = loaderSvg()
   return (
-    <div className="loader" aria-hidden="true" data-demo={demo || undefined}>
+    <div className="loader" aria-hidden="true">
       <div className="loader-red" />
       <div className="loader-night" dangerouslySetInnerHTML={{ __html: svg }} />
     </div>

@@ -609,6 +609,10 @@
 6. Panel yalnız DE/TR; `/en/admin` Almancaya gider.
 7. Veri önbelleği tek liste olarak tutulur (100–200 araç için yeterli; 300+ araçta araç başına önbelleğe geçilmeli).
 
+- **23.10.2026** — "devam" (Volkan; Supabase erişim belirtecini bu projenin `.env.local` dosyasına koyduktan sonra; iş aynı oturumda 2. bölümle sürdü). — İlgili: .env.local, Supabase projesi
+
+- CC (23.10.2026, "devam" sonrası): `.env.local`'daki belirteç doğru biçimde (sbp_ + 40 karakter), ama Supabase Management API iki uç noktada da 401 "Invalid access token" döndürdü → belirteç iptal edilmiş ya da süresi dolmuş [DOĞRULANDI: api.supabase.com/v1/organizations ve /v1/profile]. Talimat gereği yeniden duruldu; Volkan'ın tek adımı: supabase.com/dashboard/account/tokens'ta yeni belirteç üretip aynı dosyadaki değeri değiştirmek.
+
 **Sonraki oturumun sırası** — token → proje "megacars" (eu-central-1) → şema (`supabase db push` ya da SQL) → kayıt (signup) kapalı → Galzura yönetici + demo hesabı, `admin_users` → anahtarlar Vercel (preview + production) ve `.env.local` → `npm run migrate -- --write` → push v2 → önizlemede E2E/güvenlik/dil testleri → rehber ekran görüntüleri + PDF → rapor.
 
 ### Kayıtlar (CC, kaynaklı) — dil seçici ve karışık dil temizliği

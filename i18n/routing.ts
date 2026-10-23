@@ -20,6 +20,12 @@ export const routing = defineRouting({
     '/kontakt': { de: '/kontakt', en: '/contact', tr: '/iletisim' },
     '/impressum': { de: '/impressum', en: '/imprint', tr: '/kunye' },
     '/datenschutz': { de: '/datenschutz', en: '/privacy', tr: '/gizlilik' },
+    // admin panel (German and Turkish; /en/admin is sent to /de/admin by proxy.ts)
+    '/admin': '/admin',
+    '/admin/login': '/admin/login',
+    '/admin/neu': '/admin/neu',
+    '/admin/archiv': '/admin/archiv',
+    '/admin/[id]': '/admin/[id]',
   },
 })
 

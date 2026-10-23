@@ -175,11 +175,11 @@ export function AdminList({ rows, locale }: { rows: AdminRow[]; locale: string }
                 <Faces>{t('edit')}</Faces>
               </Link>
               {r.visible && (
-                <a href={`/${locale}/fahrzeuge/${r.slug}`} target="_blank" rel="noopener" className="sh sh--text adm-row-open" aria-label={t('open')}>
+                <Link href={{ pathname: '/fahrzeuge/[slug]', params: { slug: r.slug } }} target="_blank" rel="noopener" className="sh sh--text adm-row-open" aria-label={t('open')}>
                   <Faces>
                     <Icon name="arrowRight" size={15} />
                   </Faces>
-                </a>
+                </Link>
               )}
             </span>
           </li>

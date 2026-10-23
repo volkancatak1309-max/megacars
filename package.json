@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run brand",
     "build": "next build",
+    "brand": "tsx scripts/brand-assets.ts",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "inventory": "tsx scripts/import-inventory.ts",

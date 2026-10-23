@@ -15,3 +15,10 @@ export const PAGES = {
   financing: true,
   tradeIn: false,
 } as const
+
+/**
+ * Logo concept in use everywhere (opening screen, top bar, footer, favicon, apple icon,
+ * share image): 'a' Monogramm · 'b' Plakette · 'c' Wappen — compare at /de/prototyp/logo.
+ * The icon and share files are generated from this switch before every build (npm run brand).
+ */
+export const LOGO_CONCEPT: 'a' | 'b' | 'c' = 'a'

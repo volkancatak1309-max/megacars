@@ -25,7 +25,7 @@ const NAV = [
  * the galzura roll + red shutter. The mobile menu drops in full screen (Animmaster
  * Navigation Menus 19; Mobbin: Open's black menu with large links).
  */
-export function Header({ stock }: { stock: number }) {
+export function Header({ stock, brand }: { stock: number; brand: React.ReactNode }) {
   const t = useTranslations('nav')
   const tc = useTranslations('common')
   const tl = useTranslations('location')
@@ -74,9 +74,10 @@ export function Header({ stock }: { stock: number }) {
   return (
     <header className="ph" data-solid={solid || open || undefined} data-hidden={(hidden && !open) || undefined}>
       <div className="ph-in pg">
-        {/* the visible words start the accessible name (WCAG 2.5.3 label in name) */}
+        {/* the logo is decorative SVG; the name of the link starts with the brand (WCAG 2.5.3) */}
         <CurtainLink href="/" className="ph-logo">
-          MEGA<i> </i>CARS<span className="sr-only"> – {tc('homeSuffix')}</span>
+          {brand}
+          <span className="sr-only">MEGA CARS – {tc('homeSuffix')}</span>
         </CurtainLink>
         <nav className="ph-nav" aria-label={t('label')}>
           {NAV.map((l) => (
@@ -115,9 +116,7 @@ export function Header({ stock }: { stock: number }) {
       <dialog ref={dialog} className="menu" aria-label={t('label')} onClose={() => setOpen(false)}>
         <div className="menu-in pg">
           <div className="menu-top">
-            <span className="ph-logo">
-              MEGA<i> </i>CARS
-            </span>
+            <span className="ph-logo">{brand}</span>
             <button type="button" className="sh sh--line ph-burger" style={{ display: 'inline-flex' }} onClick={() => setOpen(false)} aria-label={t('closeMenu')}>
               <Faces>{tc('close')}</Faces>
             </button>

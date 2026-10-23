@@ -3,6 +3,7 @@ import { SITE, mailHref, routeHref, whatsappHref } from '@/lib/site'
 import { Icon } from '@/components/ui/Icon'
 import { LinesUp } from './Reveals'
 import { ShutterA, ShutterLink } from './Shutter'
+import { Logo } from '@/components/brand/Logo'
 
 /** Footer: one sentence, the real contact data, legal links and the Galzura credit. */
 export async function Footer() {
@@ -14,6 +15,7 @@ export async function Footer() {
   return (
     <footer className="ft s-night" aria-labelledby="ft-title">
       <div className="pg wide">
+        <Logo layout="horizontal" tone="dark" className="ft-brand" />
         <LinesUp as="p" id="ft-title" className="ft-title d-l">
           {tf('title')}
         </LinesUp>

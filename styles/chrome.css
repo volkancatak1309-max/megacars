@@ -39,20 +39,39 @@
   height: var(--ph-h);
 }
 
+/* ---- logo (inline SVG from lib/brand/marks.ts; sized by the height of .logo) ---- */
+.logo {
+  display: inline-block;
+  line-height: 0;
+}
+
+.logo svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
 .ph-logo {
   margin-right: auto;
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: 1.0625rem;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
   color: inherit;
   text-decoration: none;
 }
 
-.ph-logo i {
-  font-style: normal;
-  color: var(--red);
+.ph-logo .logo {
+  height: 30px;
+}
+
+@media (min-width: 1024px) {
+  .ph-logo .logo {
+    height: 34px;
+  }
+}
+
+.ft-brand {
+  height: 44px;
+  margin-bottom: clamp(32px, 4vw, 56px);
 }
 
 .ph-nav {

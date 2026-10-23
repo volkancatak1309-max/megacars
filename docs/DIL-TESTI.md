@@ -68,3 +68,20 @@
 | Kök adres (/) | cookie=en | Mobil 390 (menü) | ✓ geçti | path=/en | — |
 | Kök adres (/) | accept-language=en | Mobil 390 (menü) | ✓ geçti | path=/en | — |
 | console | mobile | errors | ✓ geçti | none | — |
+
+## Panelden eklenen araç sayfası (23.10.2026, derleme 44e8303, önizleme)
+
+Yöntem: Playwright (Chromium) ile yönetim panelinden gerçek bir deneme aracı eklendi (3 fotoğraf, 3 donanım, "CC-Test"); aracın sayfası üç dilde açılıp görünen metin tarandı; Almanca/İngilizce/Türkçe olmayan kelime listesiyle (Kilometerstand, Erstzulassung, Zum Verkauf, Getriebe, Kraftstoff, Mileage, First registration, For sale, Sold, Satılık, İlk tescil …) kontrol edildi; donanım etiketlerinin üç dilde kendi dilinde göründüğü doğrulandı. Deneme aracı testin sonunda tamamen silindi. Betik: `_work/faz8/pw-preview.mjs` (repoya girmez); sonuçlar `_work/faz8/out-preview/results.json`.
+
+| Sayfa | Dil | Cihaz | Sonuç | Ölçüm | Ekran görüntüsü |
+|---|---|---|---|---|---|
+| Fahrzeug-Detail (yeni araç) | de | Masaüstü 1440 | ✓ geçti | ad + fiyat 1,3 sn'de göründü; 3 donanım DE; EN/TR kelime yok | `_work/faz8/out-preview/detail-de-new.jpg` |
+| Fahrzeug-Detail (yeni araç) | en | Masaüstü 1440 | ✓ geçti | "Dual-zone automatic climate control / Three-zone … / 360° camera"; €28,900; DE kelime yok | — |
+| Fahrzeug-Detail (yeni araç) | tr | Masaüstü 1440 | ✓ geçti | "2 bölgeli otomatik klima / 3 bölgeli … / 360° kamera"; 28.900 €; DE/EN kelime yok | — |
+| Fahrzeug-Detail (satıldı) | de / en / tr | Masaüstü 1440 | ✓ geçti | "Verkauft" + "Dieses Fahrzeug ist bereits verkauft." · "Sold" + "This vehicle has already been sold." · "Satıldı" + "Bu araç satılmıştır." (1,0–1,4 sn) | — |
+| Fahrzeug-Detail (telefondan eklenen araç) | tr | Mobil 390 | ✓ geçti | "CC-Test-Mobil" görünür; DE/EN kelime yok | — |
+| Yönetim paneli | de | Masaüstü 1440 | ✓ geçti | Giriş, liste, form: TR/EN kelime yok (Araçlar/Giriş/Vehicles/Sign taraması) | `docs/rehber/liste-de.jpg` |
+| Yönetim paneli | tr | Mobil 390 | ✓ geçti | Giriş, liste, form: DE/EN kelime yok (Fahrzeuge/Anmelden/Abmelden/Vehicles/Logout taraması) | `docs/rehber/liste-tr.jpg` |
+| Yönetim paneli | en | — | ✓ geçti | `/en/admin` → `/de/admin/login` (panel yalnız DE/TR) | — |
+
+Not: Panelde marka, model ve "Version / Ausstattungslinie" alanları özel ad sayılır ve her dilde aynı görünür (KARAR-DEFTERI, CC varsayımı 2). Donanım, renk, kasa tipi, yakıt, vites, durum ve KDV notu anahtarla saklanır ve her dilde o dilin sözcüğüyle çizilir.

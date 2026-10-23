@@ -487,3 +487,9 @@
 11. Pazar ve resmî tatil günlerinde randevuyla inceleme / test sürüşü.
 12. Porsche Panamera'nın kasa tipi (ilan hatası, gizli).
 13. Güncel stok kaynağı ve 360° deneme çekimi.
+
+**Performans ve erişilebilirlik düzeltmeleri (ölçümle bulunan, 23.10.2026)**
+- İlk Lighthouse turunda mobil LCP: ana sayfa 2,81 sn, liste 2,68, detay 3,59 (hedef < 3,0). Neden: bütün sayfalar her istekte sunucuda üretiliyordu (`(site)/layout.tsx` `setRequestLocale` çağırmadığı için next-intl istek başlıklarını okuyordu) → HTML akışla ~0,6 sn'de bitiyordu ve ilk boyama JS çalıştıktan sonraya kalıyordu. Düzeltme: `setRequestLocale` eklendi; ana sayfa, detay ve iç sayfalar derlemede üretiliyor (Vercel önbelleği HIT). Liste bilerek dinamik (filtreler adres satırından sunucuda okunuyor). Finanzierung'daki `?fahrzeug=` ön seçimi istemcide okunuyor.
+- Gövde yazı tipi Hanken Grotesk artık ön yüklenmiyor (34 KB LCP görseliyle yarışmasın; ölçü ayarlı yedek yazı tipiyle kayma yok); detay galerisindeki küçük resimler `fetchpriority=low`.
+- Kırmızı bölümlerde ikincil metin %86 beyazdan (4,13:1) tam beyaza (5,24:1) çekildi (WCAG AA; 1. aşamadan kalan hata). Logo ve dil bağlantılarında görünen yazı erişilebilir adın başında (WCAG 2.5.3).
+- Denenip etkisi görülmeyen: ilk ziyaret yükleyicisini kapatmak (detay LCP değişmedi) → yükleyici yerinde bırakıldı.

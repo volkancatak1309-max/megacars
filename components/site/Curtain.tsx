@@ -93,16 +93,29 @@ export function CurtainProvider({ mark, children }: { mark: string; children: Re
   )
 }
 
-/** A next-intl link that travels behind the red curtain when a provider is present. */
-export const CurtainLink = forwardRef<HTMLAnchorElement, ComponentProps<typeof Link>>(function CurtainLink({ href, onClick, onMouseEnter, ...rest }, ref) {
+/**
+ * A next-intl link that travels behind the red curtain when a provider is present.
+ * No prefetch for every link that scrolls into view (on a slow phone those requests
+ * kept the main thread busy before the first paint); the next page is prefetched on
+ * hover or touch instead, and the closing curtain covers the rest of the wait.
+ */
+export const CurtainLink = forwardRef<HTMLAnchorElement, ComponentProps<typeof Link>>(function CurtainLink(
+  { href, onClick, onMouseEnter, onTouchStart, prefetch = false, ...rest },
+  ref,
+) {
   const ctx = useContext(CurtainContext)
   const router = useRouter()
   return (
     <Link
       ref={ref}
       href={href}
+      prefetch={prefetch}
       onMouseEnter={(e) => {
         onMouseEnter?.(e)
+        router.prefetch(href as never)
+      }}
+      onTouchStart={(e) => {
+        onTouchStart?.(e)
         router.prefetch(href as never)
       }}
       onClick={(e: MouseEvent<HTMLAnchorElement>) => {

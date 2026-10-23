@@ -126,7 +126,7 @@ export function Header({ stock, brand }: { stock: number; brand: React.ReactNode
               <span key={l.href} className="menu-line" style={{ ['--i' as string]: i }}>
                 <ShutterLink href={l.href} kind="text" className="menu-link" aria-current={pathname === l.href ? 'page' : undefined}>
                   {t(l.key)}
-                  {l.href === '/fahrzeuge' ? <sup className="tabular">{stock}</sup> : null}
+                  {l.href === '/fahrzeuge' && stock > 0 ? <sup className="tabular">{stock}</sup> : null}
                 </ShutterLink>
               </span>
             ))}

@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import map from '@/data/map.json'
 import type { Locale } from '@/i18n/routing'
-import { stockStats, vehicles } from '@/lib/inventory'
+import { getCards, statsOf } from '@/lib/inventory'
+import { BUILDING_PHOTO, SHOWROOM_PHOTO } from '@/lib/dealer-photos'
 import { formatPrice } from '@/lib/format'
 import { autoDealerLd, breadcrumbLd, localizedUrl, pageMeta } from '@/lib/seo'
 import { SITE, mailHref, routeHref, whatsappHref } from '@/lib/site'
@@ -27,9 +28,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMeta({ locale: locale as Locale, href: '/kontakt', title: t('metaTitle'), description: t('metaDescription') })
 }
 
-// The dealer's own photos: showroom interior and the building with its sign.
-const photoOf = (id: string, photo: number) => vehicles.find((v) => v.id === id)!.photos[photo]
-
 export default async function ContactPage({ params }: Props) {
   const { locale: raw } = await params
   const locale = raw as Locale
@@ -41,7 +39,9 @@ export default async function ContactPage({ params }: Props) {
   const tt = await getTranslations('trust')
   const tf = await getTranslations('form')
 
-  const makes = new Set(vehicles.map((v) => v.makeSlug)).size
+  const cards = await getCards()
+  const stats = statsOf(cards)
+  const makes = new Set(cards.map((v) => v.makeSlug)).size
   const fields: FormField[] = [
     {
       name: 'topic',
@@ -139,7 +139,7 @@ export default async function ContactPage({ params }: Props) {
           </LinesUp>
           <div className="abt-grid">
             <ClipReveal className="abt-photo">
-              <CarImage photo={photoOf('mercedes-glc-220-d', 3)} alt={tt('photoAlt')} sizes="(min-width: 1024px) 46vw, 100vw" className="aspect-[4/3] h-full w-full" />
+              <CarImage photo={SHOWROOM_PHOTO} alt={tt('photoAlt')} sizes="(min-width: 1024px) 46vw, 100vw" className="aspect-[4/3] h-full w-full" />
             </ClipReveal>
             <div className="abt-text">
               <BlockReveal className="lead abt-lead">{t('aboutText1')}</BlockReveal>
@@ -166,8 +166,8 @@ export default async function ContactPage({ params }: Props) {
                 <DrawGroup>
                   <dt>{t('stockLabel')}</dt>
                   <dd>
-                    <Ticker value={stockStats.count} locale={locale} className="abt-count" />
-                    <span className="tabular">{t('stockValue', { makes, min: formatPrice(stockStats.min, locale), max: formatPrice(stockStats.max, locale) })}</span>
+                    <Ticker value={stats.count} locale={locale} className="abt-count" />
+                    {stats.count > 0 && <span className="tabular">{t('stockValue', { makes, min: formatPrice(stats.min, locale), max: formatPrice(stats.max, locale) })}</span>}
                   </dd>
                 </DrawGroup>
               </dl>
@@ -176,7 +176,7 @@ export default async function ContactPage({ params }: Props) {
         </div>
       </section>
 
-      <LocationSection map={map as MapData} building={photoOf('audi-q3-35-tdi', 0)} />
+      <LocationSection map={map as MapData} building={BUILDING_PHOTO} />
       <ActionBar />
     </>
   )

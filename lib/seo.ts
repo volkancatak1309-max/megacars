@@ -152,7 +152,8 @@ export function carLd(
       url,
       price: v.price,
       priceCurrency: 'EUR',
-      availability: 'https://schema.org/InStock',
+      availability:
+        v.status === 'sold' ? 'https://schema.org/SoldOut' : v.status === 'reserved' ? 'https://schema.org/LimitedAvailability' : 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/UsedCondition',
       seller: { '@type': 'AutoDealer', '@id': dealerId(), name: SITE.name },
     },

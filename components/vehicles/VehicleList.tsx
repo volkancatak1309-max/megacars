@@ -22,7 +22,11 @@ import { lockScroll } from '@/components/motion/SmoothScroll'
 import { Faces, ShutterButton } from '@/components/site/Shutter'
 import { VehicleCard } from '@/components/vehicle/VehicleCard'
 
+// cards per step; "Weitere anzeigen" adds the next ones (100+ vehicles stay fast)
+const PAGE = 24
+
 const SORT_LABEL: Record<SortKey, string> = {
+  newest: 'sortNewest',
   recommended: 'sortRecommended',
   'price-asc': 'sortPriceAsc',
   'price-desc': 'sortPriceDesc',
@@ -58,8 +62,10 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   const entrance = useRef<{ kill: () => void }[]>([])
 
   const sorted = useMemo(() => sortVehicles(cards, f.sort), [cards, f.sort])
-  const visible = useMemo(() => new Set(sorted.filter((v) => matches(v, f)).map((v) => v.id)), [sorted, f])
-  const count = visible.size
+  const matched = useMemo(() => sorted.filter((v) => matches(v, f)), [sorted, f])
+  const count = matched.length
+  const [limit, setLimit] = useState(PAGE)
+  const visible = useMemo(() => new Set(matched.slice(0, limit).map((v) => v.id)), [matched, limit])
   const active = activeCount(f)
   const [shown, setShown] = useState(count)
 
@@ -82,7 +88,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
     // `shown` is the tween's start value only
   }, [count])
 
-  const update = (next: Filters) => {
+  const captureFlip = () => {
     const el = grid.current
     const m = motion.current
     if (el && m && matchMedia(MOTION_OK).matches) {
@@ -92,7 +98,15 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
       m.gsap.set(el.querySelectorAll('[data-card], [data-reveal]'), { clearProps: 'opacity,visibility,transform,clipPath' })
       flipState.current = m.Flip.getState(el.querySelectorAll('[data-card]'))
     }
+  }
+  const update = (next: Filters) => {
+    captureFlip()
+    setLimit(PAGE)
     setF(next)
+  }
+  const showMore = () => {
+    captureFlip()
+    setLimit((l) => l + PAGE)
   }
   const set = <K extends keyof Filters>(key: K, value: Filters[K]) => update({ ...f, [key]: value })
 
@@ -137,7 +151,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
       onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, y: 32 }, { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.15, ease: 'power3.out' }),
       onLeave: (els) => gsap.to(els, { autoAlpha: 0, duration: 0.35 }),
     })
-  }, [f, view])
+  }, [f, view, limit])
 
   useEffect(() => {
     loadMotion().then((m) => {
@@ -148,7 +162,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   // first view: frames below the fold open from their lower edge when they arrive
   useMotion(({ gsap, ScrollTrigger }) => {
     gsap.matchMedia().add(MOTION_OK, () => {
-      const frames = [...grid.current!.querySelectorAll<HTMLElement>('[data-card]:not([hidden]) [data-reveal]')].filter(
+      const frames = [...(grid.current?.querySelectorAll<HTMLElement>('[data-card]:not([hidden]) [data-reveal]') ?? [])].filter(
         (el) => el.getBoundingClientRect().top > window.innerHeight * 0.95,
       )
       if (!frames.length) return
@@ -288,11 +302,13 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
 
   // the stock in real numbers: price span, makes, years of first registration
   const years = cards.map((v) => Math.floor(v.firstRegistrationKey / 100))
-  const stats = [
-    { label: t('statPrice'), value: `${formatPrice(Math.min(...cards.map((v) => v.price)), locale)} – ${formatPrice(Math.max(...cards.map((v) => v.price)), locale)}` },
-    { label: t('statMakes'), value: String(options.makes.length) },
-    { label: t('statYears'), value: `${Math.min(...years)} – ${Math.max(...years)}` },
-  ]
+  const stats = cards.length
+    ? [
+        { label: t('statPrice'), value: `${formatPrice(Math.min(...cards.map((v) => v.price)), locale)} – ${formatPrice(Math.max(...cards.map((v) => v.price)), locale)}` },
+        { label: t('statMakes'), value: String(options.makes.length) },
+        { label: t('statYears'), value: `${Math.min(...years)} – ${Math.max(...years)}` },
+      ]
+    : []
 
   const sortChip = (
     <span className="sh sh--line chip" data-sort>
@@ -310,6 +326,24 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
       </select>
     </span>
   )
+
+  // no vehicle online (empty database or no connection): a calm note instead of a list
+  if (!cards.length) {
+    return (
+      <div className="vl pg wide">
+        <header className="vl-head vl-none">
+          <div className="vl-intro">
+            <h1 className="vl-title d-m">
+              <span className="mline rise">
+                <span>{t('noneTitle')}</span>
+              </span>
+            </h1>
+            <p className="lead fade-up">{t('noneLead')}</p>
+          </div>
+        </header>
+      </div>
+    )
+  }
 
   return (
     <div className="vl pg wide">
@@ -391,6 +425,14 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
       <ul ref={grid} className="vl-grid" data-view={view}>
         {cardItems}
       </ul>
+
+      {count > visible.size && (
+        <div className="vl-more">
+          <ShutterButton kind="line" onClick={showMore}>
+            {t('showMore', { count: count - visible.size })}
+          </ShutterButton>
+        </div>
+      )}
 
       <dialog ref={dialog} onClose={() => setSheet(false)} aria-label={t('filterTitle')} className="sheet">
         <div style={{ display: 'flex', flexDirection: 'column', maxHeight: '90svh' }}>

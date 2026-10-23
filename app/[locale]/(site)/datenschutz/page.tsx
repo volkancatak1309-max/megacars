@@ -15,9 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // Written for what the site really uses (KARAR-DEFTERI 23.10.2026): Vercel hosting,
-// self-hosted fonts and media, OpenStreetMap only after a click, WhatsApp and e-mail
-// links, no cookies and no storage on the device.
-const SECTIONS = ['controller', 'hosting', 'fonts', 'map', 'contact', 'cookies', 'links', 'rights'] as const
+// the vehicle database and photo storage at Supabase (EU region), self-hosted fonts,
+// OpenStreetMap only after a click, WhatsApp and e-mail links, the language cookie and
+// the staff-only login cookies of the admin panel.
+const SECTIONS = ['controller', 'hosting', 'database', 'fonts', 'map', 'contact', 'cookies', 'links', 'rights'] as const
 
 export default async function PrivacyPage({ params }: Props) {
   const { locale: raw } = await params

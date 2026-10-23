@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/i18n/routing'
-import { stockStats } from '@/lib/inventory'
+import { getStockStats } from '@/lib/inventory'
 import { Loader } from '@/components/site/Loader'
 import { CurtainProvider } from '@/components/site/Curtain'
 import { Header } from '@/components/site/Header'
@@ -18,12 +18,13 @@ import { Logo } from '@/components/brand/Logo'
 export default async function SiteLayout({ children, params }: LayoutProps<'/[locale]'>) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+  const stock = await getStockStats()
   return (
     <>
       <Loader />
       <CurtainProvider mark="MEGA CARS">
         {/* the logo renders here on the server, so the client bundle carries no outlines */}
-        <Header stock={stockStats.count} brand={<Logo layout="horizontal" tone="dark" />} />
+        <Header stock={stock.count} brand={<Logo layout="horizontal" tone="dark" />} />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>

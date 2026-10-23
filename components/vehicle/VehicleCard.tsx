@@ -30,14 +30,21 @@ export function VehicleCard({
   index?: number
 }) {
   const tc = useTranslations('common')
+  const tv = useTranslations('vehicle')
   const locale = useLocale()
   const label = useVehicleLabels()
   const Heading = headingLevel
   const year = v.firstRegistration.split('/')[1]
   return (
-    <CurtainLink href={{ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } }} className="vc">
+    <CurtainLink href={{ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } }} className="vc" data-status={v.status}>
       <span className="vc-frame clip-reveal" data-reveal>
         <CarImage photo={v.cover} alt={label.photoAlt(v, 1, v.photoCount)} sizes={sizes} priority={priority} className="aspect-[4/3] h-full w-full" />
+        {/* sold and reserved cars keep their label until the dealer hides them (Volkan, 23.10.2026) */}
+        {v.status !== 'for_sale' && (
+          <span className="vc-status status-chip" data-status={v.status}>
+            {tv(`statusValues.${v.status}`)}
+          </span>
+        )}
         <span className="vc-photos tabular">{tc('photos', { count: v.photoCount })}</span>
       </span>
       <span className="vc-body">

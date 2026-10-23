@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Photo, Vehicle } from '@/lib/types'
 import { SITE, mailHref, routeHref, whatsappHref } from '@/lib/site'
-import { formatNumber, formatPrice, inSentence, vehicleFullName } from '@/lib/format'
+import { formatNumber, formatPrice, hpUnit, inSentence, vehicleFullName } from '@/lib/format'
 import { CarImage } from '@/components/ui/CarImage'
 import { Icon } from '@/components/ui/Icon'
 import { DrawGroup, Stagger, Ticker } from '@/components/motion/Reveal'
@@ -32,12 +32,17 @@ export async function FeaturedCars({ cars }: { cars: Vehicle[] }) {
             const alt = color
               ? tv('photoAlt', { name, color: inSentence(color, locale), index: 1, total: v.photos.length })
               : tv('photoAltNoColor', { name, index: 1, total: v.photos.length })
-            const chain = [v.firstRegistration, `${formatNumber(v.mileage, locale)} km`, v.powerPs ? `${formatNumber(v.powerPs, locale)} PS` : null].filter(Boolean).join(' · ')
+            const chain = [v.firstRegistration, `${formatNumber(v.mileage, locale)} km`, v.powerPs ? `${formatNumber(v.powerPs, locale)} ${hpUnit(locale)}` : null].filter(Boolean).join(' · ')
             return (
               <li key={v.id}>
                 <CurtainLink href={{ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } }} className="fc-card">
                   <ClipReveal className="fc-frame" from={k % 2 ? 'left' : 'bottom'}>
                     <CarImage photo={v.photos[v.cover]} alt={alt} sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[4/3] h-full w-full" />
+                    {v.status !== 'for_sale' && (
+                      <span className="fc-status status-chip" data-status={v.status}>
+                        {tv(`statusValues.${v.status}`)}
+                      </span>
+                    )}
                   </ClipReveal>
                   <span className="fc-text">
                     <span className="fc-make">{v.make}</span>
@@ -57,6 +62,32 @@ export async function FeaturedCars({ cars }: { cars: Vehicle[] }) {
             <Icon name="arrowRight" size={18} />
           </ShutterLink>
         </div>
+      </div>
+    </section>
+  )
+}
+
+/** Shown instead of search, featured cars and brands while no vehicle is online. */
+export async function StockEmpty() {
+  const t = await getTranslations('list')
+  const tc = await getTranslations('common')
+  return (
+    <section className="se s-bone" aria-labelledby="se-title">
+      <div className="pg wide">
+        <LinesUp id="se-title" className="se-title d-l">
+          {t('noneTitle')}
+        </LinesUp>
+        <p className="lead">{t('noneLead')}</p>
+        <p className="se-ctas">
+          <ShutterA href={SITE.phoneHref} kind="solid">
+            <Icon name="phone" size={17} />
+            {tc('call')}
+          </ShutterA>
+          <ShutterA href={whatsappHref(tc('whatsappGeneric'))} target="_blank" rel="noopener" kind="line">
+            <Icon name="whatsapp" size={17} />
+            {tc('whatsappWrite')}
+          </ShutterA>
+        </p>
       </div>
     </section>
   )
@@ -138,13 +169,16 @@ export async function TrustSection({ photo, stock }: { photo: Photo; stock: { co
                 <span>{tl('saturday')} 09:00–15:00</span>
               </dd>
             </DrawGroup>
-            <DrawGroup>
-              <dt>{t('stockLabel')}</dt>
-              <dd>
-                <Ticker value={stock.count} locale={locale} className="tr-count" />
-                <span className="tabular">{t('stockRange', { min: formatPrice(stock.min, locale), max: formatPrice(stock.max, locale) })}</span>
-              </dd>
-            </DrawGroup>
+            {/* no row while nothing is online: an unreachable database must not claim "0 cars" */}
+            {stock.count > 0 && (
+              <DrawGroup>
+                <dt>{t('stockLabel')}</dt>
+                <dd>
+                  <Ticker value={stock.count} locale={locale} className="tr-count" />
+                  <span className="tabular">{t('stockRange', { min: formatPrice(stock.min, locale), max: formatPrice(stock.max, locale) })}</span>
+                </dd>
+              </DrawGroup>
+            )}
           </dl>
         </div>
       </div>

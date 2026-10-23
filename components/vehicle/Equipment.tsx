@@ -1,43 +1,33 @@
 import { getLocale, getTranslations } from 'next-intl/server'
-import enDictionary from '@/data/equipment-en.json'
-import trDictionary from '@/data/equipment-tr.json'
-import type { EquipmentGroup, Vehicle } from '@/lib/types'
+import { equipmentLabel, groupEquipment } from '@/lib/equipment'
 import { DrawGroup } from '@/components/motion/Reveal'
 
-const ORDER: EquipmentGroup[] = ['comfort', 'safety', 'media', 'extras']
-const DICTIONARY: Record<string, Record<string, string>> = { en: enDictionary, tr: trDictionary }
-
 /**
- * Only the equipment named in the listing, set like a magazine page: each group under
- * a heavy rule with its count, items in columns. German terms come from the listing;
- * English and Turkish use controlled dictionaries, a missing term stays German with lang="de".
+ * Only the equipment the dealer ticked, set like a magazine page: each group under a
+ * heavy rule with its count, items in columns. The words come from the three-language
+ * checklist (data/equipment.json), so every page shows its own language only.
  */
-export async function Equipment({ equipment }: { equipment: Vehicle['equipment'] }) {
+export async function Equipment({ equipment }: { equipment: string[] }) {
   const t = await getTranslations('detail')
   const locale = await getLocale()
-  const groups = ORDER.filter((g) => equipment[g].length > 0)
+  const groups = groupEquipment(equipment)
   if (!groups.length) return null
 
   return (
     <div className="eq-groups">
       {groups.map((g) => (
-        <DrawGroup key={g}>
+        <DrawGroup key={g.group}>
           <div className="eq-group-head">
-            <h3>{t(`equipmentGroups.${g}`)}</h3>
+            <h3>{t(`equipmentGroups.${g.group}`)}</h3>
             <span className="tabular">
-              <span aria-hidden="true">{String(equipment[g].length).padStart(2, '0')}</span>
-              <span className="sr-only">{t('equipmentCount', { count: equipment[g].length })}</span>
+              <span aria-hidden="true">{String(g.keys.length).padStart(2, '0')}</span>
+              <span className="sr-only">{t('equipmentCount', { count: g.keys.length })}</span>
             </span>
           </div>
           <ul className="eq-list">
-            {equipment[g].map((item) => {
-              const translated = locale === 'de' ? item : DICTIONARY[locale]?.[item]
-              return (
-                <li key={item} lang={translated ? undefined : 'de'}>
-                  {translated ?? item}
-                </li>
-              )
-            })}
+            {g.keys.map((key) => (
+              <li key={key}>{equipmentLabel(key, locale)}</li>
+            ))}
           </ul>
         </DrawGroup>
       ))}

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { routing, type AppPathname } from '@/i18n/routing'
-import { vehicles } from '@/lib/inventory'
+import { getCards } from '@/lib/inventory'
 import { PAGES } from '@/lib/launch'
 import { languageAlternates, localizedUrl } from '@/lib/seo'
 
@@ -23,9 +23,10 @@ function entries(href: Href): MetadataRoute.Sitemap {
   return routing.locales.map((l) => ({ url: localizedUrl(href, l), alternates: { languages } }))
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const cards = await getCards()
   return [
     ...STATIC.flatMap((p) => entries(p as Href)),
-    ...vehicles.flatMap((v) => entries({ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } })),
+    ...cards.flatMap((v) => entries({ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } })),
   ]
 }

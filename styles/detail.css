@@ -806,3 +806,17 @@ dialog.lightbox::backdrop {
 .mcs-hint.is-gone {
   opacity: 0;
 }
+
+/* ---- status label (sold / reserved) ---------------------------------------------- */
+.vd-status-inline {
+  margin-left: 0.9em;
+  vertical-align: middle;
+}
+
+.vd-status-note {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  margin-top: 16px;
+  color: var(--sub);
+}

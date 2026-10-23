@@ -170,7 +170,7 @@ export function HeroLetters({ film, title, cta, count }: { film: HeroFilm; title
           <div className="hl-actions fade-up">
             <ShutterLink href="/fahrzeuge" kind="solid">
               {cta}
-              <span className="tabular">({count})</span>
+              {count > 0 && <span className="tabular">({count})</span>}
               <Icon name="arrowRight" size={18} />
             </ShutterLink>
             <ShutterButton kind="line" className="hl-play" onClick={toggle} aria-label={playing ? t('pause') : t('play')}>

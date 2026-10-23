@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { redirect } from '@/i18n/navigation'
 import { routing, type Locale } from '@/i18n/routing'
-import { getVehicle, similarVehicles, toCard, vehicles } from '@/lib/inventory'
+import { getCards, getVehicle, getVehicles, similarVehicles, toCard } from '@/lib/inventory'
 import { formatDecimal, formatKm, formatNumber, formatPower, formatPrice, hpUnit, inSentence, vehicleFullName, vehicleName, versionLabel } from '@/lib/format'
 import { colorName } from '@/lib/colors'
 import { breadcrumbLd, carLd, localizedUrl, pageMeta } from '@/lib/seo'
@@ -26,14 +26,17 @@ import { VehicleCard } from '@/components/vehicle/VehicleCard'
 
 type Props = PageProps<'/[locale]/fahrzeuge/[slug]'>
 
-export function generateStaticParams() {
-  return routing.locales.flatMap((locale) => vehicles.map((v) => ({ locale, slug: v.slug })))
+// Known vehicles are built ahead; a car added later renders on its first visit and is
+// then cached until the next save in the admin panel.
+export async function generateStaticParams() {
+  const cards = await getCards()
+  return routing.locales.flatMap((locale) => cards.map((v) => ({ locale, slug: v.slug })))
 }
-export const dynamicParams = false
+export const dynamicParams = true
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
-  const v = getVehicle(slug)
+  const v = await getVehicle(slug)
   if (!v) return {}
   const t = await getTranslations({ locale, namespace: 'meta' })
   const tv = await getTranslations({ locale, namespace: 'vehicle' })
@@ -49,8 +52,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     fuel: v.fuel ? tv(`fuelValues.${v.fuel}`) : '',
     gearbox: v.transmission ? tv(`gearboxValues.${v.transmission}`) : '',
   })
-  // share image: 1200×630 from the car's own cover photo (scripts/import-inventory.ts)
-  return pageMeta({ locale: locale as Locale, href, title, description, image: { url: v.og, width: 1200, height: 630 }, imageAlt: name })
+  // share image: the car's own cover photo
+  const cover = v.photos[v.cover]
+  return pageMeta({ locale: locale as Locale, href, title, description, image: cover ? { url: cover.src, width: cover.width, height: cover.height } : undefined, imageAlt: name })
 }
 
 /** "Hybrid (Benzin/Elektro)" → big "Hybrid" + small "Benzin/Elektro"; "SUV / Geländewagen" likewise. */
@@ -65,8 +69,12 @@ export default async function VehiclePage({ params }: Props) {
   const { locale: raw, slug } = await params
   const locale = raw as Locale
   setRequestLocale(locale)
-  const v = getVehicle(slug)
-  if (!v) notFound()
+  const v = await getVehicle(slug)
+  // hidden, archived or unknown: the visitor lands on the list, no broken link (Volkan, 23.10.2026)
+  if (!v || !v.photos.length) {
+    redirect({ href: '/fahrzeuge', locale })
+    return null
+  }
 
   const t = await getTranslations('detail')
   const tv = await getTranslations('vehicle')
@@ -90,7 +98,11 @@ export default async function VehiclePage({ params }: Props) {
       : tv('photoAltNoColor', { name: fullName, index: i + 1, total: v.photos.length }),
   )
   const yesNo = (b: boolean | null) => (b === null ? null : b ? tc('yes') : tc('no'))
+  const flag = (b: boolean) => (b ? tc('yes') : null)
   const n = (x: number | null, unit = '') => (x === null ? null : `${formatNumber(x, locale)}${unit}`)
+  // sold or reserved cars stay visible with their label until the dealer hides them
+  const statusLabel = v.status === 'for_sale' ? null : tv(`statusValues.${v.status}`)
+  const priceNote = v.vatNote === 'unknown' ? t('priceNote') : tv(`vatValues.${v.vatNote}`)
 
   const tech: TechFact[] = [
     { label: tv('registration'), value: v.firstRegistration },
@@ -121,15 +133,18 @@ export default async function VehiclePage({ params }: Props) {
     { label: tv('interiorMaterial'), value: material },
     { label: tv('interiorColor'), value: interiorColor },
     { label: tv('previousOwners'), value: n(v.previousOwners) },
+    { label: tv('firstOwner'), value: flag(v.firstOwner) },
+    { label: tv('accidentFree'), value: flag(v.accidentFree) },
     { label: tv('serviceBook'), value: yesNo(v.serviceBook) },
     { label: tv('nonSmoker'), value: yesNo(v.nonSmoker) },
+    { label: tv('warranty'), value: flag(v.warranty) },
+    { label: tv('inspectionNew'), value: flag(v.inspectionNew) },
     { label: tv('lastService'), value: v.lastService },
   ].filter((f): f is { label: string; value: string } => Boolean(f.value))
 
-  const similar = similarVehicles(v).map(toCard)
+  const similar = similarVehicles(v, await getVehicles()).map((s, i) => toCard(s, i))
   const waHref = whatsappHref(t('whatsappMessage', vehicleRef))
   const chain = [v.firstRegistration, formatKm(v.mileage, locale), formatPower(v.powerKw, v.powerPs, locale)].filter(Boolean).join(' · ')
-  const hasEquipment = Object.values(v.equipment).some((g) => g.length)
 
   return (
     <article aria-labelledby="vd-title">
@@ -156,7 +171,14 @@ export default async function VehiclePage({ params }: Props) {
             <li aria-current="page">{name}</li>
           </ol>
         </nav>
-        <p className="vd-make">{v.make}</p>
+        <p className="vd-make">
+          {v.make}
+          {statusLabel && (
+            <span className="status-chip vd-status-inline" data-status={v.status}>
+              {statusLabel}
+            </span>
+          )}
+        </p>
         <h1 id="vd-title" className={`vd-model${v.model.length > 10 ? ' is-long' : ''}`}>
           <span className="sr-only">{v.make} </span>
           <span className="mline rise">
@@ -188,8 +210,16 @@ export default async function VehiclePage({ params }: Props) {
           <p className="vd-price">
             <span className="label">{tc('price')}</span>
             <Odometer text={price} className="vd-price-value tabular" />
-            <span className="vd-price-note">{t('priceNote')}</span>
+            <span className="vd-price-note">{priceNote}</span>
           </p>
+          {statusLabel && (
+            <p className="vd-status-note" data-status={v.status}>
+              <span className="status-chip" data-status={v.status}>
+                {statusLabel}
+              </span>
+              <span>{v.status === 'sold' ? t('soldNote') : t('reservedNote')}</span>
+            </p>
+          )}
           <p className="vd-chain tabular">{chain}</p>
           <div className="vd-ctas">
             <TestDriveButton label={t('testDrive')} />
@@ -203,7 +233,7 @@ export default async function VehiclePage({ params }: Props) {
                 {tc('call')}
               </ShutterA>
             </div>
-            {PAGES.financing && (
+            {PAGES.financing && v.status === 'for_sale' && (
               <ShutterLink href={{ pathname: '/finanzierung', query: { fahrzeug: slug } }} kind="text" className="vd-fin">
                 {t('financingLink')}
                 <Icon name="arrowRight" size={16} />
@@ -214,7 +244,7 @@ export default async function VehiclePage({ params }: Props) {
         </aside>
       </div>
 
-      {hasEquipment && (
+      {v.equipment.length > 0 && (
         <section className="eq s-bone" aria-labelledby="eq-title">
           <div className="pg wide">
             <LinesUp id="eq-title" className="eq-title d-l">

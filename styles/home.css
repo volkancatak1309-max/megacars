@@ -754,3 +754,30 @@
   font-size: 0.75rem;
   color: var(--bone);
 }
+
+/* ---- featured card status, empty stock section ---------------------------------- */
+.fc-status {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+}
+
+.se {
+  padding-block: var(--section);
+}
+
+.se-title {
+  max-width: 18ch;
+}
+
+.se .lead {
+  margin-top: 1.25rem;
+}
+
+.se-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2rem;
+}

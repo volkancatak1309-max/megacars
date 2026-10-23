@@ -159,6 +159,10 @@
     "sortRecommended": "Recommended",
     "sortYearDesc": "First registration: newest first",
     "sortYearAsc": "First registration: oldest first",
+    "sortNewest": "Newly arrived",
+    "showMore": "{count, plural, one {Show # more vehicle} other {Show # more vehicles}}",
+    "noneTitle": "No vehicle is online at the moment.",
+    "noneLead": "Call us or write to us; we will gladly tell you what is in our showroom right now.",
     "foundLabel": "{count, plural, =0 {vehicles found} one {vehicle found} other {vehicles found}}",
     "statPrice": "Price range",
     "statMakes": "Makes",
@@ -217,22 +221,42 @@
       "front": "Front-wheel drive"
     },
     "colorValues": {
-      "Schwarz": "Black",
-      "Weiß": "White",
-      "Grau": "Grey",
-      "Silber": "Silver",
-      "Blau": "Blue",
-      "Rot": "Red",
-      "Beige": "Beige",
-      "Braun": "Brown",
-      "Grün": "Green"
+      "schwarz": "Black",
+      "weiss": "White",
+      "silber": "Silver",
+      "grau": "Grey",
+      "blau": "Blue",
+      "rot": "Red",
+      "gruen": "Green",
+      "gelb": "Yellow",
+      "orange": "Orange",
+      "braun": "Brown",
+      "beige": "Beige",
+      "gold": "Gold",
+      "bronze": "Bronze",
+      "violett": "Purple"
     },
     "materialValues": {
-      "Vollleder": "Full leather",
-      "Teilleder": "Part leather",
-      "Stoff": "Cloth",
-      "Alcantara": "Alcantara"
+      "vollleder": "Full leather",
+      "teilleder": "Part leather",
+      "stoff": "Cloth",
+      "alcantara": "Alcantara",
+      "velours": "Velour",
+      "kunstleder": "Synthetic leather"
     },
+    "statusValues": {
+      "for_sale": "For sale",
+      "reserved": "Reserved",
+      "sold": "Sold"
+    },
+    "vatValues": {
+      "incl": "Final price including VAT",
+      "margin": "Margin scheme; VAT is not shown separately"
+    },
+    "accidentFree": "Accident-free",
+    "firstOwner": "First owner",
+    "warranty": "Warranty",
+    "inspectionNew": "New inspection certificate (§ 57a)",
     "photoAlt": "{name} in {color}, photo {index} of {total}",
     "photoAltNoColor": "{name}, photo {index} of {total}"
   },
@@ -259,6 +283,8 @@
     "techTitle": "You can see the key facts here at a glance.",
     "actionsLabel": "Enquiry and contact",
     "priceNote": "The price is taken from the listing.",
+    "soldNote": "This vehicle has already been sold.",
+    "reservedNote": "This vehicle is reserved.",
     "visitNote": "You can see the vehicle in our showroom at Radetzkystraße 80 in Hohenems.",
     "equipmentCount": "{count, plural, one {# equipment feature} other {# equipment features}}",
     "financingLink": "Request financing for this car"
@@ -465,6 +491,9 @@
     "hostingP1": "The website is hosted by Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, USA. When you open a page, Vercel processes technically necessary data such as your IP address, the approximate location derived from it, the address requested, the date and time, and details of your browser and operating system.",
     "hostingP2": "We need this data to deliver the website securely and reliably. The legal basis is our legitimate interest under Art. 6(1)(f) GDPR. Depending on the Vercel plan, our project’s logs remain available for between one hour and 30 days.",
     "hostingP3": "Vercel participates in the EU-U.S. Data Privacy Framework and provides for the European Commission’s Standard Contractual Clauses in its data processing addendum. You can read more in Vercel’s privacy policy at vercel.com/legal/privacy-policy.",
+    "databaseTitle": "Where is the vehicle data kept?",
+    "databaseP1": "The vehicle data and vehicle photos on this website are kept in a database and a photo store of Supabase Pte. Ltd., 65 Chulia Street #38-02/03, OCBC Centre, Singapore 049513, run in the Frankfurt am Main region (European Union). When you open a page, your browser loads the photos from there; Supabase processes technically necessary data such as your IP address, the requested file and the date and time.",
+    "databaseP2": "We use this service as a processor so that we can maintain our stock ourselves and the website runs reliably. The legal basis is our legitimate interest under Art. 6(1)(f) GDPR. Supabase is bound by a data processing agreement that includes the European Commission’s Standard Contractual Clauses; details are available at supabase.com/legal/privacy and supabase.com/legal/dpa.",
     "fontsTitle": "Which fonts and content are loaded?",
     "fontsP1": "The website delivers its fonts, photos, videos and program code from its own server. The Unbounded and Hanken Grotesk fonts are built into the website; your browser does not connect to Google for them.",
     "mapTitle": "How does the map work?",
@@ -478,6 +507,7 @@
     "cookiesTitle": "Does the website use cookies?",
     "cookiesP1": "Only one, and it is strictly necessary: when you choose a language in the language switch, the cookie “NEXT_LOCALE” remembers that choice for one year, so that you read in your language straight away on your next visit. It contains nothing but the language code (de, en or tr) and is not passed on to anyone.",
     "cookiesP2": "Under § 165(3) of the Austrian Telecommunications Act 2021 (TKG 2021) this cookie needs no consent, which is why you do not see a cookie notice. Beyond that, the website stores nothing on your device and uses no analytics, tracking or advertising tools. You can delete the cookie in your browser at any time.",
+    "cookiesP3": "Our vehicle management area at the address /admin is intended for our staff only. Anyone who signs in there with an e-mail address and password receives technically necessary login cookies (their names begin with “sb-”) that keep the session until sign-out. Visitors to the website do not receive these cookies.",
     "linksTitle": "Where do external links lead?",
     "linksP1": "Links to WhatsApp, Google Maps, OpenStreetMap and Galzura open those providers’ pages. Data only goes to them once you click such a link; from then on their own privacy policies apply.",
     "rightsTitle": "What rights do you have?",

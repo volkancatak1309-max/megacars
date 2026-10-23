@@ -522,3 +522,26 @@
   display: grid;
   gap: 18px;
 }
+
+/* ---- status label on the card, "show more", empty stock ------------------------- */
+.vc-status {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+.vc[data-status='sold'] .vc-frame img {
+  filter: saturate(0.6);
+}
+
+.vl-more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.vl-head.vl-none {
+  grid-template-columns: 1fr;
+  padding-bottom: var(--section);
+}

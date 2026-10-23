@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/i18n/routing'
-import { toCard, vehicles } from '@/lib/inventory'
+import { getCards } from '@/lib/inventory'
 import { buildOptions, parseFilters } from '@/lib/filter'
 import { breadcrumbLd, localizedUrl, pageMeta } from '@/lib/seo'
 import { JsonLd } from '@/components/ui/JsonLd'
@@ -21,7 +21,7 @@ export default async function VehiclesPage({ params, searchParams }: Props) {
   setRequestLocale(locale as Locale)
   // filters live in the URL, so a shared or reloaded link renders the same result
   const initial = parseFilters(await searchParams)
-  const cards = vehicles.map(toCard)
+  const cards = await getCards()
   const tn = await getTranslations('nav')
 
   return (

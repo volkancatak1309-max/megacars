@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/i18n/routing'
-import { vehicles } from '@/lib/inventory'
+import { getCards } from '@/lib/inventory'
 import { formatPrice, vehicleName } from '@/lib/format'
 import { breadcrumbLd, localizedUrl, pageMeta } from '@/lib/seo'
 import { JsonLd } from '@/components/ui/JsonLd'
@@ -30,6 +30,8 @@ export default async function FinancingPage({ params }: Props) {
   const t = await getTranslations('financingPage')
   const tn = await getTranslations('nav')
   const tf = await getTranslations('form')
+  // only cars that are for sale can be financed
+  const vehicles = (await getCards()).filter((v) => v.status === 'for_sale')
 
   const fields: FormField[] = [
     {

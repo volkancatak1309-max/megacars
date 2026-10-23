@@ -85,9 +85,26 @@ export function Stage({ photos, alts, name, whatsapp }: { photos: Photo[]; alts:
   const wheelLock = useRef(0)
 
   // warm the neighbours so the wipe never reveals a blurred placeholder
+  // neighbours are decoded ahead; on arrival only well after load, so they never share
+  // the line with the LCP photo
+  const warm = useRef(false)
   useEffect(() => {
-    decodePhoto(photos[(stage.index + 1) % total], STAGE_SIZES)
-    decodePhoto(photos[(stage.index - 1 + total) % total], STAGE_SIZES)
+    const run = () => {
+      warm.current = true
+      decodePhoto(photos[(stage.index + 1) % total], STAGE_SIZES)
+      decodePhoto(photos[(stage.index - 1 + total) % total], STAGE_SIZES)
+    }
+    if (warm.current) return run()
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const later = () => {
+      timer = setTimeout(run, 2000)
+    }
+    if (document.readyState === 'complete') later()
+    else window.addEventListener('load', later, { once: true })
+    return () => {
+      window.removeEventListener('load', later)
+      clearTimeout(timer)
+    }
   }, [stage.index, photos, total])
 
   const show = (l: ReturnType<typeof useLayers>, sizes: string) => (to: number, dir?: Dir) => {

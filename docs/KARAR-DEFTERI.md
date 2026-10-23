@@ -480,7 +480,7 @@
 4. +43 660 6877002 numarasının WhatsApp'ta açık olduğu.
 5. UID numarası: firmenabc'de görünen ATU70884019 AB VIES'te geçersiz ("isValid": false, 22.10.2026 23:16Z) → yayınlanmadı; Impressum'da UID satırı yok (eksik).
 6. **Fiyatların KDV durumu:** § 5 Abs. 2 ECG fiyatın vergi dahil olup olmadığının belirtilmesini istiyor; galeri ilanlarında bu bilgi yok. Sitede şimdilik yalnız "Der Preis stammt aus dem Inserat." yazıyor — canlıya çıkmadan önce galeriden öğrenilmeli (ör. "Endpreise inkl. USt." ya da "differenzbesteuert").
-7. "Seit 2002": hiçbir resmî kaynakta yok; en eski kayıt 02.03.2016 (Demir OG). Kullanılmadı.
+7. "Seit 2002": hiçbir resmî kaynakta yok; en eski kayıt 02.03.2016 (Demir OG). Kullanılmadı. Kaynak (Volkan, 23.10.2026): ifade Mega Cars'ın eski AutoScout24 bayi profilinin tanıtım metninde geçiyordu („Mega Car's bietet Ihnen bereits seit dem Jahr 2002…"); profil kapandı, metin arama motoru kaydında görüldü. Sahibi teyit etmeden sitede kullanılmaz.
 8. Firma adının güncel yazımı: EVI'de Mart 2026 tarihli "Namensänderung … Rechtsformänderung … Auflösung" kaydı var (OG'den e.U.'ya geçiş olduğu düşünülüyor), WKO "Firmenname: Murat Demir" gösteriyor. Impressum'daki "Mega Cars Murat Demir e.U." yazımı güncel Firmenbuchauszug ile doğrulanmalı.
 9. İkinci telefon +43 660 6969496 (firmenabc'de "T:0660/6969496") — sitede kullanılmıyor.
 10. "Wartung und Pflege" müşteriye hizmet olarak sunuluyor mu (yalnız Firmenbuch iş kolunda geçiyor; sitede hizmet olarak yazılmadı).
@@ -498,3 +498,72 @@
 - Lighthouse her ölçümü "ilk ziyaret" olarak yaptığı için yükleyici her ölçümde açılıyor. Önizlemede yükleyici açıkken gözlenen ilk boyama 2,4 sn civarında kalıyor (film şeridinde 2,4 sn'ye kadar ekran boş); yükleyicinin açılmadığı ölçümlerde 0,9–1,2 sn. Simülasyondaki mobil LCP buna göre ana sayfada ≈ 3,3–3,7 sn (yükleyici açık) ↔ 2,3 sn (kapalı).
 - Denenip etkisiz kalanlar (yerel, tek değişken): grain katmanını kapatmak; yükleyici panellerini yarı saydam yapmak; iç metnin opaklık animasyonunu kaldırmak; panelleri hiç hareket ettirmemek. Yalnız yükleyiciyi tümden kaldırmak ilk boymayı sürekli öne çekti.
 - Sonuç: "sayaçlı sinematik yükleyici (yalnız ilk ziyarette)" ile "LCP'yi geciktirmeden" kuralı bugünkü yükleyiciyle aynı anda sağlanamıyor. Seçenekler Volkan'a soruldu: (a) yükleyici yalnız ana sayfada, (b) yükleyici sayfayı örtmeden yalnız köşede sayaç + çizgi olarak, (c) olduğu gibi kalsın, LCP hedefi ilk ziyaret için esnetilsin.
+
+## 23.10.2026 — Premium logo + logolu açılış ekranı + küçük düzeltmeler (talimat)
+
+### Volkan'ın kararları (23.10.2026)
+- **23.10.2026** — "Açılış yükleyicisi KALIYOR ve ekranı kaplamaya devam ediyor. İçindeki sayaç (0–100) KALDIRILIYOR. Yerine Mega Cars için tasarlanacak ultra premium bir logo/amblem gösterilecek. Örnek: HAK61 projesindeki açılış (ekranın ortasında amblem görünür, sonra yumuşakça kaybolur); Mega Cars'ta bundan daha gösterişli olacak." — İlgili: components/site/Loader.tsx, açılış yükleyicisi (yukarıdaki "yükleyici ↔ LCP" sorusunun cevabı: yükleyici kalır)
+- **23.10.2026** — "Mobilde "3 sn içinde görünme" hedefi bu proje için Volkan'ın kararıyla askıya alındı; bu oturumda hız çalışması yapılmayacak." — İlgili: performans bütçesi (mobil LCP < 3,0 sn), docs/LIGHTHOUSE.md, docs/TESLIM-KONTROL.md
+- **23.10.2026** — "Volkan'ın bütün projeler için koyduğu kural: özel imleç (fare okunun yerine çıkan nokta/halka ya da yazılı imleç) yasak. Sitedeki "Ansehen" imlecini kaldır; normal fare oku kalsın. Kartların hover efektleri (fotoğraf büyümesi, kırmızı çizgi) kalır." — İlgili: components/site/Cursor.tsx, araç kartı, galeri sahnesi; BRIEF.md ve DESIGN.md'deki "Ansehen imleci" maddeleri bu kararla kalkar
+
+### Sınır
+- **23.10.2026** — "main'e dokunma. Vercel CLI ile elle deploy yok. fal.ai yalnız logo fikir aşamasında kullanılabilir; toplam harcama en fazla 5 USD; harcamayı raporla. Uydurma veri yok. BRIEF.md ve KARAR-DEFTERI.md'deki diğer bütün kurallar geçerli." — İlgili: bu oturum
+
+### 1) Ultra premium Mega Cars logosu — 3 konsept
+- **23.10.2026** — "Her konsept iki parçadan oluşur: bir amblem (otomobil rozeti hissi veren; "MC" harflerinden ya da Mega Cars'a özgü bir biçimden türetilmiş işaret) + "MEGA CARS" yazısı (logotype)." — İlgili: logo
+- **23.10.2026** — "Her konseptin üç kullanım biçimi olur: yatay (üst bar), ortalanmış/dikey (açılış ekranı), yalnız amblem (sekme ikonu, uygulama ikonu)." — İlgili: logo
+- **23.10.2026** — "His: fiyakalı, gösterişli, premium otomotiv. C yönünün renkleri (yarış kırmızısı, kemik rengi, derin siyah) kullanılır; istenirse metalik krom etkisi eklenir. Ucuz parıltı, neon, çizgi film ve clipart yok." — İlgili: logo
+- **23.10.2026** — "Hiçbir otomobil üreticisinin ya da bilinen bir markanın logosuna benzemeyecek (Mercedes yıldızı, BMW yuvarlağı, Ferrari atı, Lamborghini boğası, Porsche arması, Alfa Romeo arması vb.). Her konsept için benzerlik kontrolü yap." — İlgili: logo
+- **23.10.2026** — "Fikir aşamasında fal.ai'deki logo ve yazı üretiminde en iyi model(ler)i kullanabilirsin (ör. Ideogram ya da Recraft; güncel en iyisini seç); bütçe sınırı yukarıda. Son logoları temiz vektör SVG olarak sen çiz: harfler kusursuz, her boyutta keskin, 16 px sekme ikonunda bile okunur." — İlgili: logo SVG
+- **23.10.2026** — "Galerinin bugünkü adı "MEGA CARS" aynen kalır; logo galeriye bir öneri olarak sunulacak." — İlgili: logo
+
+### 2) Logolu açılış ekranı (her konsept için)
+- **23.10.2026** — "Ekranı kaplayan, koyu, sinematik bir açılış: amblem ince çizgilerle çizilerek belirir; üzerinden bir ışık (krom parıltısı) geçer; "MEGA CARS" yazısı açılır; ardından kırmızı perde kalkar ve site görünür. Sayaç, yüzde ya da ilerleme çubuğu YOK." — İlgili: açılış yükleyicisi
+- **23.10.2026** — "Süre yaklaşık 2–2,5 sn. Tarayıcı oturumu başına yalnız bir kez gösterilir; aynı oturumda sayfa değişince tekrar çıkmaz. prefers-reduced-motion açıkken yalnız sade bir belirme olur." — İlgili: açılış yükleyicisi
+- **23.10.2026** — "Bounce ya da elastic yok; hareketler sakin ama etkileyici." — İlgili: açılış yükleyicisi
+
+### 3) Karşılaştırma sayfası ve uygulama
+- **23.10.2026** — "/de/prototyp/logo (noindex) sayfasında üç konsept yan yana dursun: her birinin açılış animasyonu (tekrar oynat düğmesiyle), koyu ve açık zemin üzerinde yatay / dikey / yalnız amblem biçimleri ve sekme ikonu önizlemesi." — İlgili: /de/prototyp/logo
+- **23.10.2026** — "Senin önerdiğin konsepti şimdiden bütün siteye uygula: açılış ekranı, üst bar, footer, favicon + apple-touch-icon, varsayılan OG paylaşım görseli. Volkan başka bir konsept seçerse logo tek değişiklikle değişebilsin." — İlgili: Header, Footer, app/icon.svg, app/apple-icon.png, public/og/default.jpg
+
+### 4) Büyük sayı kesiliyor (Volkan'ın ekran görüntüsü)
+- **23.10.2026** — ""Stokumuzda 18 araç bulunuyor." başlıklı bölümde (Almanca ve İngilizce karşılıklarında da aynı bölüm; büyük olasılıkla araç listesi sayfasının başı) soldaki büyük kırmızı "18" sayısının sağ kenarı kesiliyor: "8"in sağ kısmı kutunun dışında kalıyor. Bölümü metinden arayarak bul." — İlgili: components/vehicles/VehicleList.tsx, styles/list.css (.vl-num)
+- **23.10.2026** — "Sayı her ekran genişliğinde (390 / 1440 / 2560 px) kutusuna tam sığsın; hane sayısına göre (ör. 9, 66, 120) otomatik boyutlansın ve hiçbir zaman kesilmesin. Maske ya da reveal animasyonu kullanılıyorsa maske sayının tamamını kapsasın." — İlgili: liste başlığı
+- **23.10.2026** — "Sitedeki diğer büyük tipografili sayıları ve başlıkları (fiyat sayacı, teknik kart rakamları, açılıştaki MEGA CARS harfleri vb.) aynı kesilme sorunu için üç genişlikte ve üç dilde kontrol et; bulduklarını düzelt." — İlgili: bütün büyük tipografi
+
+### 5) Küçük not
+- **23.10.2026** — ""Seit 2002" ifadesi Mega Cars'ın eski AutoScout24 bayi profilinin tanıtım metninde geçiyordu ("Mega Car's bietet Ihnen bereits seit dem Jahr 2002…"). Profil kapandı; metin arama motoru kaydında görüldü. Bu kaynağı KARAR-DEFTERI'ne ekle. İfade yine de sahibi teyit etmeden sitede kullanılmaz." — İlgili: Über uns; "Teyit bekliyor" 7. madde (kaynak: eski AutoScout24 bayi profili tanıtım metni, arama motoru kaydı)
+
+### 6) Kontrol, yayın, rapor
+- **23.10.2026** — "Production derlemesi temiz olsun; konsol hatası 0 olsun; 390 / 1440 / 2560 px'te taşma ve kesilen yazı ya da sayı olmasın; prefers-reduced-motion ve klavye kontrollerini yap." — İlgili: kalite kapısı
+- **23.10.2026** — "Anlamlı commit'lerle v2'ye push et; main'e dokunma. Önizlemede doğrula. Ana sayfayı ve /de/prototyp/logo sayfasını Volkan'ın tarayıcısında aç." — İlgili: yayın
+- **23.10.2026** — "En fazla 12 satırlık kısa Türkçe rapor ver ... Her maddede [DOĞRULANDI]+kaynak / [VARSAYIM] / [BİLMİYORUM] etiketi olsun. Sonra DUR." — İlgili: rapor
+
+### Kayıtlar (CC, kaynaklı) — logo, açılış ekranı ve düzeltmeler
+> Bu alt bölüm Volkan'ın cümlesi değildir; talimatın istediği kaynak, harcama ve kontrol kayıtlarıdır. Tarih: 23.10.2026.
+
+**Logotype ve çizim**
+- "MEGA CARS" yazısı Unbounded 800 konturlarından vektör yol olarak çıkarıldı (kaynak: Google Fonts deposu `ofl/unbounded/Unbounded[wght].ttf`, SIL Open Font License 1.1; fontTools + HarfBuzz ile kerning'li şekillendirme, betik `_work/faz6/glyphs.py`, çıktı `lib/brand/glyphs.ts`). Font dosyası repoya girmedi.
+- Amblemler CC tarafından elle çizildi (`lib/brand/marks.ts`): A Monogramm (geometrik iki fasetli M + köşeleri yuvarlak kare C), B Plakette (yuvarlak köşeli plaket, çerçeve, kırmızı şerit, Unbounded 900 "MC"), C Wappen (altıgen, üst alan gece/M, alt alan kırmızı/C). Önerilen ve uygulanan: **A** (en sade silüet, 16 px'te M okunur, C kırmızı vurguyla ayrışır). Anahtar: `lib/launch.ts` → `LOGO_CONCEPT = 'a'`.
+- Krom etkisi (fırçalanmış metal gradyanı) yalnız koyu zeminde; açılış ekranı, dikey lockup ve paylaşım görselinde.
+
+**fal.ai harcaması (fikir aşaması, Volkan'ın 5 USD sınırı)**
+- 6 görsel: Ideogram V3 (BALANCED, DESIGN stili) 3 × 0,06 $ + Recraft V3 (vector_illustration) 3 × 0,08 $ = **0,42 $** (liste fiyatları fal.ai model sayfalarından, 23.10.2026; fal panelindeki kesin tutar görülmedi). Çıktılar `_work/faz6/ideas/` (repoya girmez). Ideogram'ın monogram çıktısı yalnız yön teyidi olarak işe yaradı; Recraft çıktıları clipart düzeyindeydi (araba çizimi, yıldız, metin olarak renk kodu) ve kullanılmadı. Son logolarda yapay zekâ üretimi yok.
+
+**Benzerlik kontrolü (CC, görsel; marka/tescil araştırması değil)**
+- A: yıldız, halka, kalkan, kanat, hayvan yok; katlanmış M Maybach'ın üçgen içindeki çift M'si değil, C McLaren işareti değil. B: Honda'nın dikdörtgen içindeki H'si, plaka ya da oval (Ford, Toyota, Land Rover) değil. C: düz kenarlı altıgen; kalkan (Porsche, Cadillac, Lamborghini), oval (Hyundai, Infiniti), sekizgen (MG) değil; üç dişli mızrak ve taç yok. Metinler `/de/prototyp/logo` sayfasında.
+
+**Açılış ekranı**
+- `components/site/Loader.tsx` + `styles/motion.css`: sayaç, yüzde ve çubuk kaldırıldı; sıra: amblem çizgi çizimi (0,1–1,0 sn) → krom dolgu → ışık geçişi → harfler yükselir → gece paneli kalkar (1,78 sn) → kırmızı perde kalkar (1,95 sn) → 2,7 sn'de gizlenir. Saf CSS; JS yok; cihazda depolama yok. "Oturumda bir kez": site içi bağlantı, yenileme ve geri/ileri gezinmede gösterilmez (yönlendiren adres + gezinme türü; önceki oturumdaki yöntem korundu). [VARSAYIM] Dış siteden aynı sekmeye yeniden gelişte tekrar gösterilir; sessionStorage kullanılmadı (Datenschutz "depolama yok").
+- HAK61 örneği: proje klasörü açılıp incelenmedi; Volkan'ın tarifi ("amblem ortada belirir, yumuşakça kaybolur") esas alındı ve üstüne çizim, krom ve perde eklendi. [VARSAYIM]
+- Reduced motion: amblem ve ad 0,6 sn'de belirir, 1,4–1,9 sn'de solar; çizim, parıltı ve perde yok.
+
+**Özel imleç**
+- Kaldırıldı: `components/site/Cursor.tsx` (ViewCursor), `.vcursor` stilleri, `[data-cursor] { cursor: none }`, `--z-cursor`, kartlardaki / galeri sahnesindeki `data-cursor`. Grain `components/site/Grain.tsx`'e taşındı. Kart hover'ı (fotoğraf 1.04, kırmızı çizgi, çerçeve daralması) değişmedi.
+
+**Büyük sayı ve maskeler**
+- Liste başlığındaki sayı (`.vl-num`): `.mline` maskesi `overflow: clip` + −0,07 em harf aralığı yüzünden son glifin ("8") sağ taşmasını kesiyordu. Düzeltme: bütün `.mline` maskelerine sağ 0,15 em / üst 0,08 em / alt 0,1 em pay (eksi kenar boşluğuyla düzen sabit); sayı `--digits` ile hane sayısına göre boyutlanır (mobilde içerik genişliği, ≥ 900 px'te içerik genişliğinin %55'i; Unbounded 900 rakamı ≈ 0,84 em). 390 / 1440 / 2560'ta "18" tam; 3 haneli sayı için formül aynı.
+- Tarama (10 sayfa × DE/EN/TR × 390/1440/2560, canvas `measureText` ile glif sınırı ↔ maske kutusu): SplitText satır maskeleri (LinesUp) ve `.chars` kelime maskelerinde 2–6 px sağ kesilme → maskelere pay eklendi (`Reveals.tsx` onSplit, `.chars`). TR sayfa adlarında İ/Ü noktası ve Ş çengeli kesiliyordu → `.chars` üst 0,22 em / alt 0,24 em pay, harfler %150'den yükselir. Açılış harfleri (SVG), fiyat odometresi, teknik kart ve footer dev yazısı: kesilme yok. Yatay taşma 0.
+
+**Varlıklar ve derleme**
+- `scripts/brand-assets.ts` (`npm run brand`, `prebuild`): `app/icon.svg` (64 px), `app/apple-icon.png` (180 px, gece zemin), `public/og/default.jpg` (1200 × 630, dikey krom lockup + kırmızı çizgi). Konsept değişince tek satır (`LOGO_CONCEPT`) + derleme yeter.

@@ -54,7 +54,7 @@ Odak halkası: koyu zeminde bone, kemik zeminde night, kırmızı zeminde beyaz;
 | Başlık / display | **Unbounded** (değişken, 200–900; kullanılan 600–900) | SIL Open Font License 1.1 | Google Fonts, `next/font/google` |
 | Metin / arayüz | **Hanken Grotesk** (değişken, 100–900; kullanılan 400–700) | SIL Open Font License 1.1 | Google Fonts, `next/font/google` |
 
-Unbounded geniş ve iddialıdır; doğal oranlarında kullanılır (harf sıkıştırma yok). Açılış harfleri SVG maskesinde `textLength` yalnız harf aralığını açar (`lengthAdjust="spacing"`), glifleri bozmaz.
+Unbounded geniş ve iddialıdır; doğal oranlarında kullanılır (harf sıkıştırma yok). Açılış harfleri SVG maskesinde `textLength` yalnız harf aralığını açar (`lengthAdjust="spacing"`), glifleri bozmaz. Logotype "MEGA CARS" sitede yazı olarak değil, Unbounded 800'den çıkarılmış vektör konturlarla çizilir (`lib/brand/glyphs.ts`, HarfBuzz ile kerning'li; OFL 1.1): üst bar, footer, açılış ekranı ve paylaşım görseli aynı çizgiyi kullanır (§15).
 
 ### Ölçek (önce mobil, `clamp()`)
 | Sınıf | Boyut | Ağırlık / satır / harf aralığı | Kullanım |
@@ -77,9 +77,9 @@ Sayılar `font-variant-numeric: tabular-nums` (`.tabular`). Her başlık yüklem
 - Sayfa kenarı `--page: clamp(20px, 4.5vw, 72px)`; en geniş içerik `--wide: 1680px`.
 - Bölüm boşluğu `--section: clamp(96px, 12vw, 200px)`; ritim için bölümler farklı üst/alt boşluk alır (hızlı arama ve öne çıkanlar daha sıkı).
 - Üst bar yüksekliği `--ph-h` 68 / 80 px; mobil eylem çubuğu `--bar-h` 64 px.
-- Köşe yarıçapı **0** (düğme, çip, çerçeve); tek istisna yuvarlak "yukarı" düğmesi ve "Ansehen" imleci.
+- Köşe yarıçapı **0** (düğme, çip, çerçeve); tek istisna yuvarlak "yukarı" düğmesi. Özel imleç yok (Volkan'ın bütün projeler için kuralı, 23.10.2026): fare oku her yerde normaldir.
 - Gölge yok; derinlik zemin tonu ve çizgiyle kurulur.
-- z-index ölçeği: raised 10 · header 100 · bar 200 · float 210 · sheet 400 · fullscreen 500 · menu 600 · curtain 900 · grain 940 · loader 950 · cursor 960 · skip 990.
+- z-index ölçeği: raised 10 · header 100 · bar 200 · float 210 · sheet 400 · fullscreen 500 · menu 600 · curtain 900 · grain 940 · loader 950 · skip 990.
 
 ---
 
@@ -98,12 +98,13 @@ Sayılar `font-variant-numeric: tabular-nums` (`.tabular`). Her başlık yüklem
 - **Süreler:** 300 · 450 · 700 · 1000 · 1400 ms; hiçbir animasyon 0,3 sn'den kısa değil.
 - **Kaydırma:** her zaman aşağı; yatay kaydırma yok; yalnız açılış sahnesi tam **bir ekran** boyu yapışkan (200 svh bölüm, 100 svh sahne). Masaüstünde Lenis (`lerp 0.1`), dokunmatikte doğal kaydırma.
 - **LCP:** açılış posteri ve detay sayfasının ilk fotoğrafı ilk boyamada görünür; opacity 0'dan başlamaz. İlk ekrandaki başlıklar CSS ile maskeden yükselir (JS beklemez). GSAP, ScrollTrigger, SplitText, Flip ve Lenis ilk boyamadan sonra yüklenir (`lib/gsap.ts`).
-- **Reduced motion:** bütün animasyon ve geçişler kapanır; yükleyici, grain, imleç gizlenir; video eklenmez (oynat düğmesiyle istenirse gelir); perde yerine düz geçiş; galeri anında değişir.
+- **Reduced motion:** bütün animasyon ve geçişler kapanır; açılış ekranı yalnız sade bir belirme yapar (çizim, parıltı ve perde yok), grain gizlenir; video eklenmez (oynat düğmesiyle istenirse gelir); perde yerine düz geçiş; galeri anında değişir.
+- **Maskeler:** maskeli yükselişlerde (`.mline`, `.chars`, SplitText satır maskeleri) kutu, glif taşması için pay bırakır (üst 0,08–0,22 em, sağ 0,08–0,15 em, alt 0,1–0,24 em; eksi kenar boşluğuyla düzen değişmez) — sıkı harf aralığında son glifin sağ kenarı ve İ/Ü/Ş aksanları kesilmez. Liste sayısı hane sayısına göre boyutlanır (`--digits`).
 
 ### Hareket envanteri
 | Hareket | Nerede | Kaynak |
 |---|---|---|
-| Sayaçlı açılış yükleyicisi (0 → 100, paneller açılır) | İlk ziyaretin ilk sayfası; saf CSS | Animmaster Hero Animations 9 / 18 |
+| Logolu açılış ekranı: amblem ince çizgiyle belirir, kroma dolar, üzerinden ışık geçer, "MEGA CARS" harf harf yükselir, gece paneli ve kırmızı perde kalkar (≈ 2,6 sn; sayaç yok) | İlk ziyaretin ilk sayfası; saf CSS (`components/site/Loader.tsx`, `lib/brand/marks.ts`) | Volkan 23.10.2026 (HAK61 açılışından esinle) |
 | Kırmızı perde (iki satır kapanır, MEGA CARS yükselir, açılır) | Bütün iç bağlantılar ve dil değişimi | Animmaster Page Transitions 5 |
 | Kepenk hover (kırmızı panel iner, yazı yuvarlanır, çıkışta yukarı toplanır) | Bütün düğmeler, menü linkleri, filtre çipleri | galzura-motion-demo `src/d6/Roll.tsx` + `d6.css` |
 | Manyetik CTA (en çok 8 px) | Dolu ve çizgili düğmeler | galzura `useMagnet` |
@@ -116,11 +117,10 @@ Sayılar `font-variant-numeric: tabular-nums` (`.tabular`). Her başlık yüklem
 | Odometre fiyat | Detay sayfası fiyatı (CSS, ilk boyamadan) | — |
 | Sayı sayacı | Stok adedi, hızlı arama ve liste sonuç sayısı (yalnız gerçek veri) | NumberTicker mantığı |
 | GSAP Flip | Liste filtre değişimi | — |
-| "Ansehen" imleci (görsel önizlemesiz) | Araç kartları, galeri sahnesi | Animmaster Mouse Effect 13 |
 | İnce grain | Bütün sayfa (%7) | — |
 | Kaydırma ilerleme halkası | "Yukarı" düğmesi | — |
 
-Yasak (Volkan): imleci izleyen görsel önizleme; kaydırmayla kare kare oynayan açılış.
+Yasak (Volkan): imleci izleyen görsel önizleme; kaydırmayla kare kare oynayan açılış; özel imleç (nokta, halka ya da yazılı; 23.10.2026).
 
 ---
 
@@ -132,13 +132,13 @@ Yasak (Volkan): imleci izleyen görsel önizleme; kaydırmayla kare kare oynayan
 - İç bağlantı `ShutterLink` (kırmızı perdeyle), dış bağlantı `ShutterA`, düğme `ShutterButton`.
 
 ### 7.2 Üst bar (`components/site/Header.tsx`)
-Logo (Unbounded 800), gezinme (Fahrzeuge · Finanzierung · Ankauf · Kontakt; geçerli sayfa kırmızı alt çizgi), DE/TR, telefon (≥ 1280 px). Açılışın üstünde şeffaf; 40 px sonra koyu ve bulanık zemin; aşağı okurken gizlenir, yukarı kaydırınca geri gelir. Mobilde "Menü" düğmesi.
+Logo (amblem + vektör yazı, `components/brand/Logo.tsx`, 30 / 34 px yüksek; bağlantının erişilebilir adı "MEGA CARS – Startseite"), gezinme (Fahrzeuge · Finanzierung · Ankauf · Kontakt; geçerli sayfa kırmızı alt çizgi), DE/EN/TR, telefon (≥ 1280 px). Açılışın üstünde şeffaf; 40 px sonra koyu ve bulanık zemin; aşağı okurken gizlenir, yukarı kaydırınca geri gelir. Mobilde "Menü" düğmesi.
 
 ### 7.3 Mobil menü
 Tam ekran `dialog`; clip-path ile yukarıdan iner, linkler satır satır yükselir (Animmaster Navigation Menus 19; Mobbin: Open). Büyük harfli Unbounded linkler, "Fahrzeuge" yanında stok adedi, altta telefon · WhatsApp · e-posta · adres · saatler ve dil seçimi.
 
 ### 7.4 Araç kartı (`components/vehicle/VehicleCard.tsx`)
-4:3 çerçeve (foto sayısı rozeti), film klaketi gibi sıra numarası (01, 02 … görünür sıraya göre), marka (etiket) ve ilk tescil yılı, model (Unbounded 800 büyük harf), sürüm, kırmızı çizgi (hover'da %12 → %100), özellik zinciri, fiyat ve "Ansehen →". Hover: çerçeve geniş ekran kesimine daralır (`clip-path: inset(7% 0)`), fotoğraf kendi çerçevesinde 1.04 büyür — fotoğrafın üstüne katman yok. Kartın tamamı tek bağlantı; "Ansehen" imleci; clip-path ile gelir.
+4:3 çerçeve (foto sayısı rozeti), film klaketi gibi sıra numarası (01, 02 … görünür sıraya göre), marka (etiket) ve ilk tescil yılı, model (Unbounded 800 büyük harf), sürüm, kırmızı çizgi (hover'da %12 → %100), özellik zinciri, fiyat ve "Ansehen →". Hover: çerçeve geniş ekran kesimine daralır (`clip-path: inset(7% 0)`), fotoğraf kendi çerçevesinde 1.04 büyür — fotoğrafın üstüne katman yok. Kartın tamamı tek bağlantı; fare oku normal; clip-path ile gelir.
 
 ### 7.5 Fahrzeuge (`components/vehicles/VehicleList.tsx`)
 - **Başlık:** stok adedi dev Unbounded 900 kırmızı rakam (maskeden yükselir) + tam cümle başlık + gerçek veriden üç değer (fiyat aralığı, marka sayısı, ilk tescil yılı aralığı).
@@ -164,7 +164,7 @@ Masaüstünde sağda yapışkan: fiyat (odometre), özellik zinciri, **Probefahr
 Çubuk: Anrufen · WhatsApp (çizgili) · Probefahrt (kırmızı); klavye açıkken iner (Mobbin: Realtor.com, Agoda). Yüzen: yuvarlak "yukarı" düğmesi (kırmızı ilerleme halkası; Mobbin: Goodreads) ve masaüstünde WhatsApp; ilk 1,5 ekranda ve footer'da gizli.
 
 ### 7.11 Footer
-Tek cümle başlık, adres/route · saatler · iletişim, hover'da kırmızıya dolan dev çizgisel "MEGA CARS", telif · Impressum · Datenschutz · "Website: Galzura".
+Üstte yatay logo (44 px), tek cümle başlık, adres/route · saatler · iletişim, hover'da kırmızıya dolan dev çizgisel "MEGA CARS", telif · Impressum · Datenschutz · "Website: Galzura".
 
 ---
 
@@ -247,11 +247,21 @@ Hareket kitaplıkları ilk boyamadan sonra; video `load`'dan sonra; harita tıkl
 - `sitemap.xml`: her sayfa × 3 dil, hreflang alternatifleriyle; gizli sayfalar (`PAGES`) dışarıda.
 - **Canlıya geçiş tek satır:** `lib/launch.ts` → `INDEXABLE = true` (robots.txt açılır ve sitemap'i duyurur, meta robots index/follow olur, `X-Robots-Tag` kalkar). Demo canlıya çıkana kadar **noindex**.
 - `siteOrigin()`: üretimde `VERCEL_PROJECT_PRODUCTION_URL`, önizlemede sabit dal adresi.
-- Favicon: kırmızı kare + beyaz geometrik "M" (`app/icon.svg`, `app/apple-icon.png`).
+- Favicon, apple-touch-icon ve yedek paylaşım görseli seçili logo konseptinden üretilir (`scripts/brand-assets.ts`, `npm run brand`; her derlemeden önce `prebuild` ile kendiliğinden): `app/icon.svg`, `app/apple-icon.png`, `public/og/default.jpg`.
 
 ## 13. i18n
 `next-intl`, mesajlar derleme anında derlenir; DE · EN · TR (dil seçicide bu sırayla). Almanca önce yazılır; İngilizce ve Türkçe uzman tercüman düzeyinde ve yüklemli tam cümlelerle. Biçimler: DE/TR "64.900 €", EN "€64,900"; "148.000 km" / "148,000 km"; "345 kW (469 PS)"; "02/2019". İlan donanımı Almanca gelir; İngilizce (`data/equipment-en.json`) ve Türkçe (`data/equipment-tr.json`) kontrollü sözlükten, sözlükte olmayan terim `lang="de"` ile Almanca kalır. Dil çerezi yok (`localeCookie: false`): ilk girişte tarayıcı dili, sonra adres dili belirler.
 
 ## 14. Yapılacaklar / yapılmayacaklar
 - Yap: her bölümde bir anlamlı hareket; kırmızıyı eylem için sakla; fotoğrafı çerçevede tut; her sayıyı gerçek veriden al; reduced motion'da her şeyi okunur bırak.
-- Yapma: neon, parıltı, bounce; yatay kaydırma; bir ekrandan uzun pin; koyu zeminde küçük kırmızı yazı; kart içinde kart; sahte yorum, sahte garanti, sahte sayı; faiz oranı, banka ortağı ya da koşul; uydurma hizmet (Inzahlungnahme, Leasing, Tausch teyit bekliyor); cihazda çerez ya da depolama.
+- Yapma: neon, parıltı, bounce; yatay kaydırma; bir ekrandan uzun pin; koyu zeminde küçük kırmızı yazı; kart içinde kart; özel imleç; sahte yorum, sahte garanti, sahte sayı; faiz oranı, banka ortağı ya da koşul; uydurma hizmet (Inzahlungnahme, Leasing, Tausch teyit bekliyor); cihazda çerez ya da depolama.
+
+## 15. Marka: logo (Volkan, 23.10.2026)
+
+- **Tek anahtar:** `lib/launch.ts` → `LOGO_CONCEPT` (`'a' | 'b' | 'c'`). Açılış ekranı, üst bar, footer ve prototip sayfası bu anahtarı okur; favicon, apple-touch-icon ve `og/default.jpg` her derlemeden önce `npm run brand` ile aynı anahtardan üretilir. Üç konsept yan yana: `/de/prototyp/logo` (noindex).
+- **Çizim:** `lib/brand/marks.ts` — React'siz SVG üreticisi: amblem (`emblem`), lockup'lar (`logoSvg`: yatay / dikey / yalnız amblem), favicon (`iconSvg`) ve açılış ekranı sanatı (`loaderSvg`). Logotype Unbounded 800 konturları (`lib/brand/glyphs.ts`, `_work/faz6/glyphs.py` ile üretildi; font dosyası repoda değil).
+- **Konseptler:** **A Monogramm** (önerilen): geometrik, iki fasetli M (20 birimlik kalın çizgi, V 44/74'e iner) sağ bacağında köşeleri yuvarlak kare bir C taşır; C kırmızı, M kemik/koyu kemik (açık zeminde gece/koyu gri). **B Plakette:** 150 × 100 yuvarlak köşeli plaket, 3 birim çerçeve, solda kırmızı şerit, içinde Unbounded 900 "MC". **C Wappen:** 100 × 116 altıgen, üst alan gece (M), alt alan kırmızı (C), 3 birim çerçeve.
+- **Renk ve krom:** koyu zeminde kemik + kırmızı, açık zeminde gece + kırmızı; krom (fırçalanmış metal gradyanı) yalnız koyu zeminde ve yalnız açılış ekranı, dikey lockup ve paylaşım görselinde. Neon, parıltı, gölge yok.
+- **Küçük boyut:** favicon 64 px kutu; A gece kare üstünde, B plaketin kendisi, C altıgenin kendisi; 16 px'te M okunur (C/plaket/altıgen silueti tanınır). Apple ikonu her konseptte gece zemin üstünde.
+- **Benzerlik kontrolü (CC, görsel; marka araştırması değil):** yıldız, halka, kalkan, kanat, hayvan, üç dişli mızrak, sekizgen, oval yok → Mercedes, BMW, Porsche, Ferrari, Lamborghini, Alfa Romeo, Bentley, Aston Martin, Maybach (üçgen içinde çift M), McLaren, Honda, MG, Hyundai, Infiniti, Ford, Toyota, Land Rover'dan ayrı.
+- **Açılış ekranı zamanlaması (CSS, `styles/motion.css`):** 0,1–1,0 sn amblem çizgisi çizilir → 0,8–1,3 krom dolgu → 1,1–1,8 ışık geçer → 0,95–1,9 harfler yükselir (0,04 sn adım) → 1,78–2,5 gece paneli kalkar → 1,95–2,7 kırmızı perde kalkar → 2,7 gizlenir. Tarayıcı oturumunda bir kez: site içi bağlantı, yenileme ve geri/ileri gezinmede gösterilmez (`data-loader-off`, depolama yok). Reduced motion: amblem ve ad 0,6 sn'de belirir, 1,4–1,9 sn'de solar.

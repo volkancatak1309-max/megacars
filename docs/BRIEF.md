@@ -29,7 +29,8 @@ GÖRSEL DİL (Volkan, 22.10.2026; ayrıntı: docs/KARAR-DEFTERI.md)
 - Tipografi: karakterli, büyük, iddialı bir başlık fontu (geniş ya da sıkışık grotesk, ya da grotesk + serif eşleşmesi). Yalnız ticari kullanıma açık lisanslı fontlar (OFL ya da Fontshare); lisans yazılır.
 - Kaydırma her zaman sayfayı aşağı götürür: yatay kaydırma YOK; sayfayı kilitleyen uzun sabitleme (pin) YOK — bir bölüm en fazla bir ekran boyu sabit kalabilir.
 - Kepenk hover: galzura.com'daki düğme hover efekti (kaynak: galzura-motion-demo deposu ve canlı galzura.com) aynı kalitede ve kırmızı renkle bütün düğmelere ve menü linklerine uygulanır: imleç üzerine gelince renk paneli kepenk gibi iner ve yazı yuvarlanarak değişir; imleç çıkınca kepenk yukarı toplanır.
-- Hareket dili: her bölümde en az bir etkileyici hareket; bounce/spring/elastic yok, 0,3 sn'den hızlı animasyon yok. Kullanılacaklar: sayaçlı sinematik açılış yükleyicisi (yalnız ilk ziyarette, LCP'yi geciktirmeden); sayfa geçişlerinde kırmızı perde (curtain) geçişi; başlıklarda maskeli / split-text açılış; görsellerde clip-path ile açılan reveal'lar; slaytlarda perde ya da maske ile premium geçişler (sıradan kaydırma değil); manyetik CTA; hover'da "Ansehen" yazan özel imleç (görsel önizlemesiz); gerçek veriden sayı sayaçları; ince grain dokusu.
+- Hareket dili: her bölümde en az bir etkileyici hareket; bounce/spring/elastic yok, 0,3 sn'den hızlı animasyon yok. Kullanılacaklar: logolu sinematik açılış ekranı (sayaç yok; yalnız ilk ziyarette; ekranı kaplar — Volkan 23.10.2026); sayfa geçişlerinde kırmızı perde (curtain) geçişi; başlıklarda maskeli / split-text açılış; görsellerde clip-path ile açılan reveal'lar; slaytlarda perde ya da maske ile premium geçişler (sıradan kaydırma değil); manyetik CTA; gerçek veriden sayı sayaçları; ince grain dokusu. Özel imleç (fare okunun yerine çıkan nokta/halka ya da yazılı imleç) YASAK — Volkan'ın bütün projeler için kuralı (23.10.2026).
+- Logo (Volkan, 23.10.2026): amblem + "MEGA CARS" logotype; üç konsept /de/prototyp/logo'da (A Monogramm uygulandı ve önerilir, B Plakette, C Wappen); seçili konsept `lib/launch.ts` → `LOGO_CONCEPT`. Galerinin adı "MEGA CARS" aynen kalır; logo galeriye bir öneridir. Hiçbir otomobil markasının logosuna benzemez.
 - Bileşen kaynakları: Animmaster kütüphanesinden (300 Awwwards components) seçilen bileşenler zip'ten gerçekten çıkarılıp kullanılır; Mobbin'den header, mobil menü, araç kartı, filtre, araç detay ve sabit iletişim çubuğu için en az 6 ekran örneği alınır ve neyin nereden alındığı yazılır; referans: Awwwards otomotiv kategorisindeki ödüllü siteler ve galzura.com'un hareket kalitesi (hasib.site çizgisi).
 - Fotoğraf: gerçek araç fotoğrafları 1440 px genişliğinde; 1440 px'ten büyük, bulanık tam ekran fotoğraf yok. Tam ekran alanlarda video ya da tipografi kullanılır; fotoğraflar çerçeveli ve keskin durur.
 - Mobil birinci sınıf: her efektin mobil karşılığı tasarlanır; mobilde de premium his korunur.
@@ -71,10 +72,10 @@ KESİN YASAKLAR
 HAREKET VE WOW ANLARI
 - Her bölümde en az bir anlamlı hareket olur; tek başına düz fade-in yetmez.
 - Wow 1 — Açılış: seçilecek tasarım yönüne göre (prototip A slayt gösterisi / B dergi kapağı / C dev harflerin içinden video). Tam ekran alanda yalnız video ya da tipografi; başlık maskeli/split-text, okunur hızda açılır. LCP öğesi gecikmez.
-- Wow 2 — Öne çıkan araçlar: DİKEY bölüm (yatay şerit kaldırıldı, Volkan 22.10.2026). Kart hover'ında "Ansehen" yazan özel imleç; fotoğraflar clip-path ile açılır.
+- Wow 2 — Öne çıkan araçlar: DİKEY bölüm (yatay şerit kaldırıldı, Volkan 22.10.2026). Kart hover'ında fotoğraf kendi çerçevesinde büyür ve kırmızı çizgi çizilir (özel imleç yok, 23.10.2026); fotoğraflar clip-path ile açılır.
 - Wow 3 — Kart → detay: karttan araç detayına kırmızı perde (curtain) geçişi (Volkan, 22.10.2026); aracın 360° verisi varsa detayda showroom sahnesi açılır ve dönmeye başlar.
 - Wow 4 — 360° showroom: yukarıdaki SHOWROOM bölümü.
-- Ek hareketler: bütün düğme ve menü linklerinde kırmızı kepenk hover; CTA'larda manyetik hover (tıklamada 0.98, WCAG AA odak halkası); masaüstünde Lenis yumuşak kaydırma (dokunmatikte doğal kaydırma); yalnız ilk ziyarette sayaçlı sinematik yükleyici (boş sayfa görünmez, LCP'yi geciktirmez); gerçek veriden sayı sayaçları; ince grain dokusu.
+- Ek hareketler: bütün düğme ve menü linklerinde kırmızı kepenk hover; CTA'larda manyetik hover (tıklamada 0.98, WCAG AA odak halkası); masaüstünde Lenis yumuşak kaydırma (dokunmatikte doğal kaydırma); yalnız ilk ziyarette logolu sinematik açılış ekranı (Volkan 23.10.2026: sayaç kaldırıldı, ekran kaplanır; mobil LCP < 3 sn hedefi bu proje için askıda); gerçek veriden sayı sayaçları; ince grain dokusu.
 
 SAYFA İSKELETİ (SADE)
 - Sayfalar: Startseite · Fahrzeuge (liste + filtre + sıralama) · Fahrzeug-Detail · Finanzierung · Ankauf/Inzahlungnahme · Kontakt & Über uns · Impressum · Datenschutz.
@@ -87,7 +88,7 @@ SAYFA İSKELETİ (SADE)
 - Footer'da küçük bir "Website: Galzura" bağlantısı (galzura.com) olur.
 
 KALİTE EŞİĞİ (teslimden önce kanıtlanır)
-- Lighthouse mobil Performans ≥ 80, masaüstü ≥ 85; LCP < 3,0 sn (mobil); CLS < 0,1; INP < 200 ms; ilk yükte JS < 300 KB (gzip).
+- Lighthouse mobil Performans ≥ 80, masaüstü ≥ 85; LCP < 3,0 sn (mobil); CLS < 0,1; INP < 200 ms; ilk yükte JS < 300 KB (gzip). Volkan (23.10.2026): mobilde "3 sn içinde görünme" hedefi bu proje için askıya alındı; açılış ekranı kalır.
 - Erişilebilirlik: bütün butonlarda ve yalnız ikonlu linklerde aria-label; kontrast ≥ 4.5:1; klavyeyle tam gezinme; prefers-reduced-motion açıkken animasyonlar kapanır.
 - SEO: robots.txt, sitemap.xml (hreflang'li), her sayfada generateMetadata (title, description, OG, Twitter), JSON-LD (AutoDealer; her araç için Car + Offer; BreadcrumbList), mutlak adresli OG görseli + yedeği. Demo sürümü canlıya çıkana kadar noindex kalır.
 - Production derlemesinde konsol hatası ve uyarısı 0.

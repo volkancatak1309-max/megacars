@@ -3,6 +3,7 @@
 > Ölçüm: 23.10.2026 (commit 38f09d0), sabit önizleme adresi https://megacars-git-v2-volkancatak1309-maxs-projects.vercel.app (girişsiz, noindex). Lighthouse 13.5.0 CLI, headless Chrome, varsayılan simüle kısıtlama (mobil: Moto G Power, yavaş 4G, 4× CPU; masaüstü: `--preset=desktop`). Her sayfa tipi ve cihaz için **3 ölçüm, sırayla (aynı anda değil)**; tablodaki değerler **ortanca**. Ham JSON: `_work/faz5/lh/` (repoya girmez), betik: `_work/faz5/lh.py`.
 > Hedefler (KARAR-DEFTERI): mobil Performans ≥ 80, masaüstü ≥ 85, mobil LCP < 3,0 sn, CLS < 0,1, INP < 200 ms, ilk yük JS < 300 KB (gzip).
 > \* SEO puanı bilerek düşük: site canlıya çıkana kadar `noindex` + `robots.txt Disallow: /` (Lighthouse "is-crawlable" denetimi). `lib/launch.ts` → `INDEXABLE = true` ile açılır.
+> 23.10.2026 (logo oturumu): Volkan mobil LCP < 3,0 sn hedefini bu proje için askıya aldı; açılış ekranı sayaçtan logoya çevrildi, özel imleç kaldırıldı. Bu oturumda hız ölçümü yenilenmedi; aşağıdaki değerler 38f09d0 ölçümleridir.
 
 ## Mobil
 

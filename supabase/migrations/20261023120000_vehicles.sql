@@ -136,6 +136,17 @@ create policy "admins update photos" on public.vehicle_photos
 create policy "admins delete photos" on public.vehicle_photos
   for delete to authenticated using (public.is_admin());
 
+-- ---------------------------------------------------------------- privileges
+-- The project was created with "automatically expose new tables" switched off, so the
+-- API roles receive their table privileges here, explicitly. Row Level Security above
+-- decides which rows each role may touch; these grants only open the tables.
+grant usage on schema public to anon, authenticated, service_role;
+grant select on public.admin_users to authenticated;
+grant all on public.admin_users to service_role;
+grant select on public.vehicles, public.vehicle_photos to anon, authenticated;
+grant insert, update, delete on public.vehicles, public.vehicle_photos to authenticated;
+grant all on public.vehicles, public.vehicle_photos to service_role;
+
 -- ---------------------------------------------------------------- storage
 -- Public read: the site embeds the photo addresses in static pages, so they must open
 -- without a token. Paths contain two random UUIDs and are linked nowhere once a vehicle

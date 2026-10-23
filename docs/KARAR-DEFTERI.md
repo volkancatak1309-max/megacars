@@ -711,3 +711,37 @@
 ### 5) Yayın ve rapor
 - **23.10.2026** — "Production derlemesi temiz olsun; konsol hatası 0 olsun. Anlamlı commit'lerle (fix:, i18n:, chore:, docs:) v2'ye push et; önizlemede doğrula; main'e dokunma. Ana sayfayı Türkçe olarak Volkan'ın tarayıcısında aç." — İlgili: yayın
 - **23.10.2026** — "En fazla 12 satırlık kısa Türkçe rapor ver ... Her maddede [DOĞRULANDI]+kaynak / [VARSAYIM] / [BİLMİYORUM] etiketi olsun. Sonra DUR." — İlgili: rapor
+
+## 23.10.2026 — Supabase projesi açıldı: şema, hesaplar, Vercel ortamı, aktarım, push, uçtan uca test (talimat, aynen)
+
+### Bağlam ve sınır
+- **23.10.2026** — "devam. Supabase erişim anahtarı hazır; aşağıdaki kurallarla işe başla." — İlgili: bu oturum
+- **23.10.2026** — "Repo: C:\Users\90553\Desktop\megacars, dal: v2. main dalına ve Production'a dokunma." — İlgili: git, Vercel
+- **23.10.2026** — "Panel kodu yerel commit 63c1ce3'te, henüz push edilmedi. Bekleyenler: docs/TESLIM-KONTROL.md" — İlgili: docs/TESLIM-KONTROL.md
+
+### Supabase projesi
+- **23.10.2026** — "Project ref: ixcpfnzzxzxliyfdyurz" / "API adresi: https://ixcpfnzzxzxliyfdyurz.supabase.co" / "Bölge: Frankfurt. Proje açılırken "Automatically expose new tables" KAPALI, "Enable automatic RLS" AÇIK seçildi. Bu yüzden yeni tablolarda anon/authenticated için GRANT'leri ve RLS politikalarını migration içinde açıkça yaz; varsayılan izne güvenme." — İlgili: supabase/migrations/, lib/supabase/env.ts
+
+### Anahtar
+- **23.10.2026** — ".env.local içinde SUPABASE_ACCESS_TOKEN adıyla duruyor (sbp_… ile başlayan, sınırlı yetkili, 30 gün geçerli)." [CC: belirteç öneki deftere yazılmadı] — İlgili: .env.local
+- **23.10.2026** — "Değerini hiçbir çıktıya, log'a, dosyaya, commit'e yazma; .env.local'ı ekrana basma. Yalnız ortam değişkeni olarak kullan." — İlgili: .env.local, _work/faz8/sb.mjs
+- **23.10.2026** — "İşe başlamadan git check-ignore .env.local ile dosyanın git dışı olduğunu doğrula; değilse DUR, bana bildir." — İlgili: .gitignore
+- **23.10.2026** — "Bu anahtarı Vercel'e ekleme." — İlgili: Vercel ortam değişkenleri
+
+### Anahtarın yetkileri (bilerek kısıtlı)
+- **23.10.2026** — "Okuma-yazma: Project Settings, Database, Migrations, Database Config, API Keys, Auth Config, Storage, Storage Config, Data API Config, Edge Functions, Edge Function Secrets, Realtime Config ve diğer veritabanı ayarları. Yalnız okuma: API Key Secrets, Advisors, Logs, Usage Analytics. Yok: proje ve organizasyon listeleme/ayarları, Compute, Backups, Database JIT, Auth Signing Keys, Data API JWT Secret, Analytics Config, branch/add-on/disk/domain." — İlgili: Supabase Management API
+- **23.10.2026** — "supabase projects list ve supabase whoami bu anahtarla hata verir; bu beklenen durum, anahtar bozuk değil. Doğrulamak için GET /v1/projects/ixcpfnzzxzxliyfdyurz kullan." — İlgili: _work/faz8/sb.mjs
+- **23.10.2026** — "Bir istek 403 dönerse cevaptaki missing_permissions listesini bana aynen raporla ve DUR. Başka yoldan aşmaya çalışma, tam yetkili anahtar isteme." — İlgili: rapor
+- **23.10.2026** — "Veritabanı işlerini Management API'nin SQL/migration uç noktalarıyla yap. Veritabanı şifresine ihtiyaç duyarsan sıfırlamadan önce bana sor." — İlgili: veritabanı
+
+### Yapılacaklar (sırayla)
+- **23.10.2026** — "1. Şema + RLS + GRANT'ler (migration olarak). Sonra Supabase güvenlik danışmanıyla (advisors) açık kalmadığını kontrol et." — İlgili: supabase/migrations/20261023120000_vehicles.sql
+- **23.10.2026** — "2. Auth: dışarıdan kayıt (signup) KAPALI. Site URL şimdilik https://megacars-git-v2-volkancatak1309-maxs-projects.vercel.app; yönlendirme listesine localhost da eklensin." — İlgili: Supabase Auth ayarı
+- **23.10.2026** — "3. 2 hesap: Galzura yönetici + demo. Giriş bilgilerini yalnız C:\Users\90553\Desktop\megacars-giris-bilgileri.txt dosyasına yaz (repo dışında). Şifreleri ekrana yazma." — İlgili: Supabase Auth, admin_users
+- **23.10.2026** — "4. Vercel ortam değişkenleri: yalnız megacars projesine, yalnız Preview ve Development ortamına; Production'a ekleme. Secret key yalnız sunucu tarafında kalsın (NEXT_PUBLIC_ öneki yok). Bunu push'tan ÖNCE yap; NEXT_PUBLIC_ değerleri derleme sırasında gömülüyor." — İlgili: Vercel ortam değişkenleri
+- **23.10.2026** — "5. 18 aracı ve fotoğraflarını veritabanına ve Storage'a aktar. data/inventory.json yedek olarak kalsın." — İlgili: scripts/migrate-inventory.ts, data/inventory.json
+- **23.10.2026** — "6. v2 dalına commit + push (63c1ce3 dahil). Vercel CLI ile deploy yok; Vercel GitHub'dan kendisi derlesin." — İlgili: git, v2 dalı
+- **23.10.2026** — "7. Uçtan uca test önizleme adresinde: /de/admin ve /tr/admin girişi, araç ekle, örnek bir fotoğrafla yükleme, düzenle, satıldı işaretle, gizle; her adımın herkese açık sayfada doğru göründüğünü kontrol et. Publishable key ile araç listesi okunabiliyor mu, yazma reddediliyor mu ölç. Test aracını en sonda sil, stok yine 18 olsun." — İlgili: uçtan uca test, önizleme
+
+### Rapor
+- **23.10.2026** — "Her madde için [ÖLÇÜLDÜ] veya [ÖLÇÜLMEDİ] etiketiyle kısa Türkçe rapor. Son commit hash'ini yaz. Anahtar, şifre ve secret key değerlerini rapora koyma." — İlgili: rapor

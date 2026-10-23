@@ -146,12 +146,8 @@
   }
 }
 
-/* one row of eight only where every label fits */
-@media (min-width: 1800px) {
-  .vl-bar {
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-  }
-}
+/* always 4 × 2: the content width is capped, and in eight columns the longer labels
+   (EN "First registered from") would be cut */
 
 .vl-bar .chip {
   display: block;

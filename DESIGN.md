@@ -142,7 +142,7 @@ Tam ekran `dialog`; clip-path ile yukarıdan iner, linkler satır satır yüksel
 
 ### 7.5 Fahrzeuge (`components/vehicles/VehicleList.tsx`)
 - **Başlık:** stok adedi dev Unbounded 900 kırmızı rakam (maskeden yükselir) + tam cümle başlık + gerçek veriden üç değer (fiyat aralığı, marka sayısı, ilk tescil yılı aralığı).
-- **Filtre paneli (masaüstü):** sekiz hücreli gösterge paneli (1800 px altında 4 × 2, üstünde 8 × 1); her hücrede küçük etiket + büyük değer + ok; üstünde görünmez yerel `select` (klavye, ekran okuyucu, sistem seçicisi); kepenk hover; seçili hücre kemik zemin + üstte 3 px kırmızı çizgi.
+- **Filtre paneli (masaüstü):** sekiz hücreli gösterge paneli (her genişlikte 4 × 2); her hücrede küçük etiket + büyük değer + ok; üstünde görünmez yerel `select` (klavye, ekran okuyucu, sistem seçicisi); kepenk hover; seçili hücre kemik zemin + üstte 3 px kırmızı çizgi.
 - **Sonuç satırı:** sonuç sayısı sayaçla değişir; sıralama çipi; **Raster / Liste** görünüm düğmeleri (Liste: katalog satırı — küçük fotoğraf, dev model adı, sağda fiyat; geçiş GSAP Flip ile).
 - Mobil: "Filter (n)" → alttan açılan sheet, altta "n Fahrzeuge anzeigen". Aktif filtreler kırmızı çerçeveli kaldırılabilir çipler. Sıralama: **Empfohlen** (varsayılan), Preis auf-/absteigend, Kilometerstand aufsteigend, Erstzulassung neueste/älteste zuerst. Durum adres çubuğunda.
 

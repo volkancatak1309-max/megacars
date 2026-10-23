@@ -35,7 +35,7 @@ export async function FeaturedCars({ cars }: { cars: Vehicle[] }) {
             const chain = [v.firstRegistration, `${formatNumber(v.mileage, locale)} km`, v.powerPs ? `${formatNumber(v.powerPs, locale)} PS` : null].filter(Boolean).join(' · ')
             return (
               <li key={v.id}>
-                <CurtainLink href={{ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } }} className="fc-card" data-cursor>
+                <CurtainLink href={{ pathname: '/fahrzeuge/[slug]', params: { slug: v.slug } }} className="fc-card">
                   <ClipReveal className="fc-frame" from={k % 2 ? 'left' : 'bottom'}>
                     <CarImage photo={v.photos[v.cover]} alt={alt} sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[4/3] h-full w-full" />
                   </ClipReveal>

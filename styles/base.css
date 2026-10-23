@@ -66,7 +66,6 @@
   --z-curtain: 900;
   --z-grain: 940;
   --z-loader: 950;
-  --z-cursor: 960;
   --z-skip: 990;
 
   interpolate-size: allow-keywords;

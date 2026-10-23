@@ -1,6 +1,6 @@
 /* ===========================================================================
-   Motion system: shutter hover, red curtain, first-visit loader, "Ansehen"
-   cursor, grain, masked lines, odometer numbers. Nothing here hides content
+   Motion system: shutter hover, red curtain, opening screen, grain, masked
+   lines, odometer numbers. No custom cursor (Volkan's rule, 23.10.2026). Nothing here hides content
    that the server rendered; every animation has a reduced-motion end state.
    =========================================================================== */
 
@@ -216,159 +216,119 @@
   transform: translateY(110%);
 }
 
-/* ---- first-visit loader with an odometer 0 → 100 ------------------------------
-   Animmaster Hero Animations 9 / 18. Pure CSS: digits are static columns that roll,
-   so it needs no JavaScript and the page paints underneath at once. */
+/* ---- opening screen (Volkan, 23.10.2026: the logo instead of a counter) ---------
+   The emblem is drawn in thin lines, fills in chrome, a sheen passes over it, the
+   name rises letter by letter, then the night panel and the red curtain lift
+   (≈ 2.6 s). Pure CSS from the first paint: no JavaScript, nothing stored on the
+   device; app/[locale]/layout.tsx hides it for the rest of the visit. Artwork:
+   lib/brand/marks.ts loaderSvg(). */
 .loader {
   position: fixed;
   inset: 0;
   z-index: var(--z-loader);
   pointer-events: none;
-  animation: loader-gone 0s linear 2.6s forwards;
+  animation: loader-gone 0s linear 2.7s forwards;
 }
 
-html[data-loader-off] .loader {
+/* prototype page: the same screen inside a frame, replayed by remounting */
+.loader[data-demo] {
+  position: absolute;
+}
+
+html[data-loader-off] .loader:not([data-demo]) {
   display: none;
 }
 
-.loader-panel {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 50.5%;
-  background: var(--night);
-  animation: loader-out 0.9s var(--ease-hop) 1.6s forwards;
-}
-
-.loader-panel[data-pos='top'] {
-  top: 0;
-  --out: translateY(-101%);
-}
-
-.loader-panel[data-pos='bottom'] {
-  bottom: 0;
-  --out: translateY(101%);
-}
-
-.loader-inner {
+.loader-red,
+.loader-night {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: var(--page);
-  color: var(--bone);
-  animation: fade-out 0.4s var(--ease-out) 1.5s forwards;
+  transform-origin: top;
 }
 
-.loader-mark {
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  letter-spacing: 0.04em;
-}
-
-.loader-count {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.loader-place {
-  font-size: 0.8125rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.loader-odo {
-  display: inline-flex;
-  height: 1em;
-  overflow: hidden;
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-size: clamp(5rem, 22vw, 19rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: var(--red);
-}
-
-.loader-col {
-  display: flex;
-  flex-direction: column;
-  animation: loader-odo 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-}
-
-.loader-col > span {
-  display: block;
-  height: 1em;
-  text-align: center;
-}
-
-.loader-col[data-col='h'] {
-  animation-name: loader-odo-h;
-}
-
-.loader-col[data-col='t'] {
-  --to: calc(-100% * 10 / 11);
-}
-
-.loader-col[data-col='o'] {
-  --to: calc(-100% * 100 / 101);
-}
-
-.loader-bar {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 100%;
+.loader-red {
   background: var(--red);
-  transform-origin: left;
-  animation: grow-x 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  animation: loader-lift 0.75s var(--ease-hop) 1.95s forwards;
 }
 
-@keyframes loader-out {
+.loader-night {
+  display: grid;
+  place-items: center;
+  background: var(--night);
+  animation: loader-lift 0.7s var(--ease-hop) 1.78s forwards;
+}
+
+.loader-night .ld {
+  width: min(64vw, 440px);
+  height: auto;
+  overflow: visible;
+}
+
+.ld-lines path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation:
+    ld-draw 0.9s var(--ease-io) 0.1s forwards,
+    ld-out 0.4s var(--ease-out) 1.05s forwards;
+}
+
+.ld-fill {
+  opacity: 0;
+  animation: ld-in 0.5s var(--ease-out) 0.8s forwards;
+}
+
+.ld-sheen {
+  animation: ld-sheen 0.7s var(--ease-io) 1.1s both;
+}
+
+.ld-wm path {
+  transform-box: fill-box;
+  transform: translateY(125%);
+  animation: ld-rise 0.6s var(--ease-out) calc(0.95s + var(--i, 0) * 0.04s) forwards;
+}
+
+@keyframes ld-draw {
   to {
-    transform: var(--out);
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ld-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ld-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ld-rise {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes ld-sheen {
+  from {
+    transform: skewX(-18deg) translateX(0);
+  }
+  to {
+    transform: skewX(-18deg) translateX(320px);
+  }
+}
+
+@keyframes loader-lift {
+  to {
+    transform: translateY(-101%);
   }
 }
 
 @keyframes loader-gone {
   to {
     visibility: hidden;
-  }
-}
-
-@keyframes loader-odo {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(var(--to));
-  }
-}
-
-@keyframes loader-odo-h {
-  0%,
-  62% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes grow-x {
-  from {
-    transform: scaleX(0);
-  }
-}
-
-@keyframes fade-out {
-  to {
-    opacity: 0;
   }
 }
 
@@ -416,44 +376,6 @@ html[data-loader-off] .loader {
   transform: translateY(calc(var(--n) * -10%));
 }
 
-/* ---- "Ansehen" cursor (no image preview: Volkan's rule) -------------------- */
-.vcursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: var(--z-cursor);
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-
-.vcursor-dot {
-  position: absolute;
-  width: 112px;
-  height: 112px;
-  margin: -56px 0 0 -56px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--red);
-  color: #fff;
-  font: 700 0.8125rem/1 var(--f-text);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transform: scale(0);
-  transition: transform 0.45s var(--ease-out);
-}
-
-.vcursor[data-on] .vcursor-dot {
-  transform: scale(1);
-}
-
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  [data-cursor] {
-    cursor: none;
-  }
-}
-
 /* ---- fine grain over everything -------------------------------------------- */
 .grain {
   position: fixed;
@@ -487,10 +409,14 @@ html[data-loader-off] .loader {
 }
 
 /* ---- masked lines that rise from the first paint (no JS) -------------------- */
+/* Masks keep room for glyph overhang: with tight letter-spacing the last glyph's ink
+   reaches past its advance, and round tops overshoot the cap height. The padding is
+   paid back by negative margins, so the layout does not move. */
 .mline {
   display: block;
   overflow: clip;
-  padding-bottom: 0.04em;
+  padding: 0.08em 0.15em 0.1em 0;
+  margin: -0.08em -0.15em -0.1em 0;
 }
 
 .rise > * {
@@ -510,6 +436,12 @@ html[data-loader-off] .loader {
   }
 }
 
+@keyframes rise-up-far {
+  from {
+    transform: translateY(150%);
+  }
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -518,17 +450,20 @@ html[data-loader-off] .loader {
 }
 
 /* letters rise in a scattered order (Animmaster Hero Animations 26) */
+/* room above for İ and Ü, below for Ş and Ç (the page names are set in capitals with a
+   0.86 line height); the letters start further down so nothing shows before they rise */
 .chars {
   display: inline-block;
   overflow: clip;
   vertical-align: top;
-  padding-bottom: 0.06em;
+  padding: 0.22em 0.08em 0.24em 0;
+  margin: -0.22em -0.08em -0.24em 0;
 }
 
 .chars > span {
   display: inline-block;
   white-space: pre;
-  animation: rise-up 1s var(--ease-out) both;
+  animation: rise-up-far 1s var(--ease-out) both;
   animation-delay: calc(0.3s + var(--d, 0) * 1s);
 }
 
@@ -572,9 +507,32 @@ html[data-loader-off] .loader {
     visibility: hidden;
   }
 
-  .loader,
-  .grain,
-  .vcursor {
+  .grain {
     display: none;
+  }
+
+  /* opening screen: a plain appearance only, no drawing, sheen or curtain */
+  .loader {
+    animation-delay: 1.9s;
+  }
+
+  .loader-red,
+  .ld-lines,
+  .ld-sheen {
+    display: none;
+  }
+
+  .loader-night {
+    animation: ld-out 0.5s var(--ease-out) 1.4s forwards;
+  }
+
+  .ld-fill {
+    animation: ld-in 0.6s var(--ease-out) 0.1s forwards;
+  }
+
+  .ld-wm path {
+    transform: none;
+    opacity: 0;
+    animation: ld-in 0.6s var(--ease-out) 0.3s forwards;
   }
 }

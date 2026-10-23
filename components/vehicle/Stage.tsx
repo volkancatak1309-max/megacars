@@ -205,7 +205,6 @@ export function Stage({ photos, alts, name, whatsapp }: { photos: Photo[]; alts:
         aria-roledescription="slide"
         aria-label={t('counter', { index: stage.index + 1, total })}
         onKeyDown={keys(showStage, stage.index)}
-        data-cursor
         {...stageSwipe}
       >
         {renderLayers(stage, 'stage')}

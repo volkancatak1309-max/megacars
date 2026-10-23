@@ -1,44 +1,28 @@
-// First-visit loader (Animmaster Hero Animations 9 / 18: counter 0 → 100 + bar, then
-// the panels open). Pure CSS: it runs from the first paint, needs no JavaScript and
-// never holds the page back; the page renders underneath at once. The head script in
-// app/[locale]/layout.tsx hides it for the rest of the visit.
+import { LOGO_CONCEPT } from '@/lib/launch'
+import { loaderSvg, type Concept } from '@/lib/brand/marks'
 
-const digits = (from: number, to: number, times = 1) => {
-  const out: number[] = []
-  for (let t = 0; t < times; t++) for (let d = from; d <= to; d++) out.push(d)
-  return out
-}
-
-export function Loader({ place }: { place: string }) {
+/**
+ * Opening screen (Volkan, 23.10.2026): no counter, no bar. The emblem is drawn in thin
+ * lines, fills in chrome, a sheen passes over it, "MEGA CARS" rises letter by letter,
+ * then the night panel and the red curtain lift and the page is there (≈ 2.5 s). Pure
+ * CSS from the first paint (styles/motion.css): no JavaScript, nothing stored on the
+ * device. The head script in app/[locale]/layout.tsx hides it for the rest of the visit
+ * (links within the site, reload, back/forward). Reduced motion: a plain fade only.
+ */
+export function Loader({ concept = LOGO_CONCEPT, demo = false }: { concept?: Concept; demo?: boolean }) {
+  const { svg } = loaderSvg(concept)
   return (
-    <div className="loader" aria-hidden="true">
-      <div className="loader-panel" data-pos="top" />
-      <div className="loader-panel" data-pos="bottom" />
-      <div className="loader-inner">
-        <span className="loader-mark">MEGA CARS</span>
-        <div className="loader-count">
-          <span className="loader-odo">
-            <span className="loader-col" data-col="h">
-              <span>0</span>
-              <span>1</span>
-            </span>
-            <span className="loader-col" data-col="t">
-              {[...digits(0, 9), 0].map((d, i) => (
-                <span key={i}>{d}</span>
-              ))}
-            </span>
-            <span className="loader-col" data-col="o">
-              {[...digits(0, 9, 10), 0].map((d, i) => (
-                <span key={i}>{d}</span>
-              ))}
-            </span>
-          </span>
-          <span className="loader-place">{place}</span>
-        </div>
-      </div>
-      <div className="loader-bar" />
+    <div className="loader" aria-hidden="true" data-demo={demo || undefined}>
+      <div className="loader-red" />
+      <div className="loader-night" dangerouslySetInnerHTML={{ __html: svg }} />
     </div>
   )
+}
+
+const digits = (from: number, to: number) => {
+  const out: number[] = []
+  for (let d = from; d <= to; d++) out.push(d)
+  return out
 }
 
 /** Letters rise in a scattered order from the first paint (Animmaster Hero Animations 26). */
@@ -80,7 +64,7 @@ export function Odometer({ text, className = '' }: { text: string; className?: s
           if (!/\d/.test(ch)) {
             return (
               <span key={i} className="odo-static">
-                {ch === ' ' ? ' ' : ch}
+                {ch === ' ' ? ' ' : ch}
               </span>
             )
           }

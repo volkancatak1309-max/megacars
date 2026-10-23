@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing, type Locale } from '@/i18n/routing'
 import { getVehicle, similarVehicles, toCard, vehicles } from '@/lib/inventory'
-import { formatDecimal, formatKm, formatNumber, formatPower, formatPrice, inSentence, vehicleFullName, vehicleName } from '@/lib/format'
+import { formatDecimal, formatKm, formatNumber, formatPower, formatPrice, hpUnit, inSentence, vehicleFullName, vehicleName, versionLabel } from '@/lib/format'
+import { colorName } from '@/lib/colors'
 import { breadcrumbLd, carLd, localizedUrl, pageMeta } from '@/lib/seo'
 import { PAGES } from '@/lib/launch'
 import { SITE, whatsappHref } from '@/lib/site'
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!v) return {}
   const t = await getTranslations({ locale, namespace: 'meta' })
   const tv = await getTranslations({ locale, namespace: 'vehicle' })
-  const name = vehicleFullName(v)
+  const name = vehicleFullName(v, locale)
   const price = formatPrice(v.price, locale)
   const href = { pathname: '/fahrzeuge/[slug]', params: { slug } } as const
   const title = t('detailTitle', { name: vehicleName(v), price })
@@ -73,7 +74,7 @@ export default async function VehiclePage({ params }: Props) {
   const tc = await getTranslations('common')
 
   const name = vehicleName(v)
-  const fullName = vehicleFullName(v)
+  const fullName = vehicleFullName(v, locale)
   const price = formatPrice(v.price, locale)
   const url = localizedUrl({ pathname: '/fahrzeuge/[slug]', params: { slug } }, locale)
   const vehicleRef = { name: fullName, price, url }
@@ -95,7 +96,7 @@ export default async function VehiclePage({ params }: Props) {
     { label: tv('registration'), value: v.firstRegistration },
     { label: tv('mileage'), value: formatNumber(v.mileage, locale), unit: 'km' },
     v.powerPs
-      ? { label: tv('power'), value: formatNumber(v.powerPs, locale), unit: 'PS', note: v.powerKw ? `${formatNumber(v.powerKw, locale)} kW` : undefined }
+      ? { label: tv('power'), value: formatNumber(v.powerPs, locale), unit: hpUnit(locale), note: v.powerKw ? `${formatNumber(v.powerKw, locale)} kW` : undefined }
       : v.powerKw
         ? { label: tv('power'), value: formatNumber(v.powerKw, locale), unit: 'kW' }
         : null,
@@ -116,7 +117,7 @@ export default async function VehiclePage({ params }: Props) {
     { label: tv('consumption'), value: v.consumptionL === null ? null : `${formatDecimal(v.consumptionL, locale)} l/100 km` },
     { label: tv('co2'), value: n(v.co2, ' g/km') },
     { label: tv('colorBase'), value: color },
-    { label: tv('colorManufacturer'), value: v.colorManufacturer },
+    { label: tv('colorManufacturer'), value: colorName(v.colorManufacturer, locale) },
     { label: tv('interiorMaterial'), value: material },
     { label: tv('interiorColor'), value: interiorColor },
     { label: tv('previousOwners'), value: n(v.previousOwners) },
@@ -164,7 +165,7 @@ export default async function VehiclePage({ params }: Props) {
         </h1>
         {v.version && (
           <p className="vd-version fade-up" style={{ ['--i' as string]: 1 }}>
-            {v.version}
+            {versionLabel(v.version, locale)}
           </p>
         )}
       </header>

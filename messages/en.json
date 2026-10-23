@@ -27,7 +27,8 @@
     "reachUs": "How to reach us",
     "quickContact": "Quick contact",
     "view": "View",
-    "homeSuffix": "back to the home page"
+    "homeSuffix": "back to the home page",
+    "court": "Feldkirch Regional Court (Landesgericht Feldkirch)"
   },
   "nav": {
     "label": "Main navigation",
@@ -80,6 +81,9 @@
     "lead": "Mega Cars is Murat Demir's car dealership in Hohenems. Everything you read here is something we can back up.",
     "registerLabel": "Registered in the Austrian Commercial Register",
     "showroomLabel": "Showroom",
+    "quote1": "Conscientious.",
+    "quote2": "Reliable.",
+    "quote3": "Professional.",
     "hoursLabel": "Opening hours",
     "stockLabel": "Vehicles in stock",
     "stockRange": "from {min} to {max}",
@@ -261,6 +265,8 @@
   },
   "gallery": {
     "label": "Photos of {name}",
+    "roleCarousel": "carousel",
+    "roleSlide": "slide",
     "counter": "Photo {index} of {total}",
     "prev": "Previous photo",
     "next": "Next photo",
@@ -323,7 +329,7 @@
     "aboutTitle": "Mega Cars is Murat Demir's car dealership in Hohenems.",
     "aboutText1": "The business is entered in the Austrian Commercial Register as Mega Cars Murat Demir e.U.",
     "aboutText2": "In our showroom at Radetzkystraße 80 you can see every vehicle in person before you decide. You arrange a test drive directly with us.",
-    "mottoIntro": "How we introduce ourselves on Facebook",
+    "mottoIntro": "How we introduce ourselves on Facebook (translated from the German)",
     "mottoTranslation": "“… cars at top prices – for smaller budgets, too.”",
     "ownerLabel": "Owner",
     "registerLabel": "Commercial Register",
@@ -430,7 +436,7 @@
     "trade": "Trade licence",
     "tradeValue": "Trade business excluding regulated trades (unregulated trade), branch: retail of automobiles, granted in Austria; GISA number 38931796",
     "authority": "Trade authority",
-    "authorityValue": "Bezirkshauptmannschaft Dornbirn (Dornbirn District Authority)",
+    "authorityValue": "Dornbirn District Authority (Bezirkshauptmannschaft Dornbirn)",
     "chamber": "Chamber membership",
     "chamberValue": "Austrian Economic Chamber of Vorarlberg (Wirtschaftskammer Vorarlberg), regional vehicle trade committee (Landesgremium Fahrzeughandel)",
     "law": "Trade regulations",

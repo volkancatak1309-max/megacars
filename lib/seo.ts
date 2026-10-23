@@ -4,7 +4,7 @@ import { routing, type Locale } from '@/i18n/routing'
 import { INDEXABLE } from './launch'
 import { SITE, siteOrigin } from './site'
 import type { Vehicle } from './types'
-import { vehicleFullName } from './format'
+import { vehicleFullName, versionLabel } from './format'
 
 type Href = Parameters<typeof getPathname>[0]['href']
 
@@ -126,12 +126,12 @@ export function carLd(
   return {
     '@context': 'https://schema.org',
     '@type': 'Car',
-    name: vehicleFullName(v),
+    name: vehicleFullName(v, locale),
     url,
     image: v.photos.map((p) => siteOrigin() + p.src),
     brand: { '@type': 'Brand', name: v.make },
     model: v.model,
-    ...(v.version && { vehicleConfiguration: v.version }),
+    ...(v.version && { vehicleConfiguration: versionLabel(v.version, locale) }),
     dateVehicleFirstRegistered: `${yyyy}-${mm}`,
     mileageFromOdometer: { '@type': 'QuantitativeValue', value: v.mileage, unitCode: 'KMT' },
     ...(labels.fuel && { fuelType: labels.fuel }),

@@ -27,6 +27,7 @@ export default async function ImprintPage({ params }: Props) {
   setRequestLocale(locale)
   const t = await getTranslations('imprintPage')
   const tn = await getTranslations('nav')
+  const tc = await getTranslations('common')
 
   const rows: { label: string; value: React.ReactNode }[] = [
     { label: t('company'), value: SITE.legalName },
@@ -50,7 +51,7 @@ export default async function ImprintPage({ params }: Props) {
       ),
     },
     { label: t('register'), value: SITE.register },
-    { label: t('court'), value: SITE.court },
+    { label: t('court'), value: tc('court') },
     { label: t('purpose'), value: t('purposeValue') },
     { label: t('trade'), value: t('tradeValue') },
     { label: t('authority'), value: t('authorityValue') },

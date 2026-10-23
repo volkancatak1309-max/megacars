@@ -1,5 +1,6 @@
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import type { CardVehicle } from '@/lib/filter'
+import { versionLabel } from '@/lib/format'
 import { CarImage } from '@/components/ui/CarImage'
 import { Icon } from '@/components/ui/Icon'
 import { CurtainLink } from '@/components/site/Curtain'
@@ -29,6 +30,7 @@ export function VehicleCard({
   index?: number
 }) {
   const tc = useTranslations('common')
+  const locale = useLocale()
   const label = useVehicleLabels()
   const Heading = headingLevel
   const year = v.firstRegistration.split('/')[1]
@@ -49,7 +51,7 @@ export function VehicleCard({
           {year && <span className="vc-year tabular">{year}</span>}
         </span>
         <Heading className="vc-model">{v.model}</Heading>
-        {v.version && <span className="vc-version">{v.version}</span>}
+        {v.version && <span className="vc-version">{versionLabel(v.version, locale)}</span>}
         <span className="vc-rule" aria-hidden="true" />
         <span className="vc-chain tabular">{label.chain(v)}</span>
         <span className="vc-foot">

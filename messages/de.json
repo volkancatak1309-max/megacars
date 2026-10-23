@@ -27,7 +27,8 @@
     "reachUs": "So erreichen Sie uns",
     "quickContact": "Schnellkontakt",
     "view": "Ansehen",
-    "homeSuffix": "zur Startseite"
+    "homeSuffix": "zur Startseite",
+    "court": "Landesgericht Feldkirch"
   },
   "nav": {
     "label": "Hauptnavigation",
@@ -79,16 +80,19 @@
     "title": "Gewissenhaft, verlässlich, professionell: So steht es auf unseren Kennzeichenhaltern.",
     "lead": "Mega Cars ist der Autohandel von Murat Demir in Hohenems. Sie sehen bei uns nur Angaben, die wir belegen können.",
     "registerLabel": "Eingetragen im Firmenbuch",
-    "showroomLabel": "Showroom",
+    "showroomLabel": "Schauraum",
+    "quote1": "Gewissenhaft.",
+    "quote2": "Verlässlich.",
+    "quote3": "Professionell.",
     "hoursLabel": "Öffnungszeiten",
     "stockLabel": "Fahrzeuge im Bestand",
     "stockRange": "von {min} bis {max}",
-    "photoAlt": "Der Showroom von Mega Cars in Hohenems mit einem Fahrzeug unter dem Deckenlicht"
+    "photoAlt": "Der Schauraum von Mega Cars in Hohenems mit einem Fahrzeug unter dem Deckenlicht"
   },
   "services": {
     "title": "So einfach kommen Sie zu Ihrem nächsten Wagen.",
     "visitTitle": "Besichtigung",
-    "visitText": "Sie sehen sich jedes Fahrzeug persönlich in unserem Showroom in Hohenems an.",
+    "visitText": "Sie sehen sich jedes Fahrzeug persönlich in unserem Schauraum in Hohenems an.",
     "visitLink": "Anfahrt planen",
     "driveTitle": "Probefahrt",
     "driveText": "Eine Probefahrt vereinbaren Sie direkt mit uns per WhatsApp oder Telefon.",
@@ -240,12 +244,14 @@
     "techTitle": "Die wichtigsten Daten sehen Sie hier auf einen Blick.",
     "actionsLabel": "Anfrage und Kontakt",
     "priceNote": "Der Preis stammt aus dem Inserat.",
-    "visitNote": "Sie sehen das Fahrzeug in unserem Showroom in der Radetzkystraße 80 in Hohenems.",
+    "visitNote": "Sie sehen das Fahrzeug in unserem Schauraum in der Radetzkystraße 80 in Hohenems.",
     "equipmentCount": "{count, plural, one {# Ausstattungsmerkmal} other {# Ausstattungsmerkmale}}",
     "financingLink": "Finanzierung für dieses Fahrzeug anfragen"
   },
   "gallery": {
     "label": "Fotos von {name}",
+    "roleCarousel": "Bildergalerie",
+    "roleSlide": "Foto",
     "counter": "Foto {index} von {total}",
     "prev": "Vorheriges Foto",
     "next": "Nächstes Foto",
@@ -296,7 +302,7 @@
     "metaDescription": "So erreichen Sie Mega Cars in Hohenems: per Telefon, WhatsApp oder E-Mail. Hier finden Sie auch Öffnungszeiten, Anfahrt, ein Kontaktformular und erfahren, wer Mega Cars führt.",
     "word": "Kontakt",
     "title": "Sie erreichen uns per Telefon, WhatsApp oder E-Mail.",
-    "lead": "Rufen Sie uns an, schreiben Sie uns oder besuchen Sie uns direkt in unserem Showroom in Hohenems.",
+    "lead": "Rufen Sie uns an, schreiben Sie uns oder besuchen Sie uns direkt in unserem Schauraum in Hohenems.",
     "phoneLabel": "Telefon",
     "whatsappLabel": "WhatsApp",
     "emailLabel": "E-Mail",
@@ -307,7 +313,7 @@
     "aboutWord": "Über uns",
     "aboutTitle": "Mega Cars ist der Autohandel von Murat Demir in Hohenems.",
     "aboutText1": "Im Firmenbuch ist das Unternehmen als Mega Cars Murat Demir e.U. eingetragen.",
-    "aboutText2": "In unserem Showroom in der Radetzkystraße 80 sehen Sie jedes Fahrzeug persönlich an, bevor Sie sich entscheiden. Eine Probefahrt vereinbaren Sie direkt mit uns.",
+    "aboutText2": "In unserem Schauraum in der Radetzkystraße 80 sehen Sie jedes Fahrzeug persönlich an, bevor Sie sich entscheiden. Eine Probefahrt vereinbaren Sie direkt mit uns.",
     "mottoIntro": "So stellen wir uns auf Facebook vor",
     "mottoTranslation": "",
     "ownerLabel": "Inhaber",
@@ -423,7 +429,7 @@
     "mediaOwner": "Medieninhaber (§ 25 MedienG)",
     "mediaOwnerValue": "Mega Cars Murat Demir e.U., Sitz in Hohenems; Unternehmensgegenstand: Handel sowie Wartung und Pflege von Kraftfahrzeugen",
     "credits": "Bildnachweis",
-    "creditsValue": "Fahrzeug- und Showroomfotos: Mega Cars. Eröffnungsfilm: Igor Vieira über Pexels (Pexels License). Kartendaten: © OpenStreetMap-Mitwirkende.",
+    "creditsValue": "Fahrzeug- und Schauraumfotos: Mega Cars. Eröffnungsfilm: Igor Vieira über Pexels (Pexels License). Kartendaten: © OpenStreetMap-Mitwirkende.",
     "website": "Website",
     "websiteValue": "Gestaltung und Umsetzung: Galzura",
     "country": "Österreich"

@@ -146,8 +146,8 @@ export default async function ContactPage({ params }: Props) {
               <p>{t('aboutText2')}</p>
               <figure className="abt-motto">
                 <figcaption className="label">{t('mottoIntro')}</figcaption>
-                <blockquote lang="de">„… Autos zu Top Preisen. Auch für die kleine Geldtasche.“</blockquote>
-                {locale !== 'de' && <p className="abt-motto-tr">{t('mottoTranslation')}</p>}
+                {/* only the page language on the page (Volkan, 23.10.2026): EN/TR show the translation */}
+                {locale === 'de' ? <blockquote>„… Autos zu Top Preisen. Auch für die kleine Geldtasche.“</blockquote> : <blockquote>{t('mottoTranslation')}</blockquote>}
               </figure>
               <dl className="abt-facts">
                 <DrawGroup>
@@ -159,7 +159,7 @@ export default async function ContactPage({ params }: Props) {
                   <dd>
                     {SITE.legalName}
                     <span>
-                      {SITE.register} · {SITE.court}
+                      {SITE.register} · {tc('court')}
                     </span>
                   </dd>
                 </DrawGroup>

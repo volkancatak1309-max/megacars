@@ -1,0 +1,15 @@
+{
+  "_comment": "Manufacturer paint names as they appear in the listings → the page language (Volkan, 23.10.2026: only the chosen language on a page). DE keeps the maker's German name; English maker names get their German equivalent on the DE page.",
+  "BLACK SAPPHIRE METALLIC": { "de": "Saphirschwarz Metallic", "en": "Black sapphire metallic", "tr": "Safir siyahı metalik" },
+  "Brilliant-Silber Metallic": { "de": "Brilliant-Silber Metallic", "en": "Brilliant silver metallic", "tr": "Parlak gümüş metalik" },
+  "Deep Black Perleffekt": { "de": "Deep Black Perleffekt", "en": "Deep black pearl effect", "tr": "Derin siyah sedef efektli" },
+  "Gletscherweiß Metallic": { "de": "Gletscherweiß Metallic", "en": "Glacier white metallic", "tr": "Buzul beyazı metalik" },
+  "MINERALGRAU METALLIC": { "de": "Mineralgrau Metallic", "en": "Mineral grey metallic", "tr": "Mineral grisi metalik" },
+  "NACHTSCHWARZ - UNILACK": { "de": "Nachtschwarz, Unilack", "en": "Night black, solid paint", "tr": "Gece siyahı, düz boya" },
+  "OBSIDIANSCHWARZ - METALLICLACK": { "de": "Obsidianschwarz, Metalliclack", "en": "Obsidian black metallic", "tr": "Obsidyen siyahı metalik" },
+  "POLARWEISS - UNILACK": { "de": "Polarweiß, Unilack", "en": "Polar white, solid paint", "tr": "Kutup beyazı, düz boya" },
+  "Pure White": { "de": "Pure White", "en": "Pure white", "tr": "Saf beyaz" },
+  "SCHWARZ - UNILACK": { "de": "Schwarz, Unilack", "en": "Black, solid paint", "tr": "Siyah, düz boya" },
+  "SELENITGRAU - METALLICLACK": { "de": "Selenitgrau, Metalliclack", "en": "Selenite grey metallic", "tr": "Selenit grisi metalik" },
+  "UNG. SCHWARZ - UNILACK": { "de": "Ung. Schwarz, Unilack", "en": "Black, solid paint", "tr": "Siyah, düz boya" }
+}

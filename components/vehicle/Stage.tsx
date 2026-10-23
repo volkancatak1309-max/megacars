@@ -197,12 +197,12 @@ export function Stage({ photos, alts, name, whatsapp }: { photos: Photo[]; alts:
   )
 
   return (
-    <section className="st" aria-label={t('label', { name })} aria-roledescription="carousel">
+    <section className="st" aria-label={t('label', { name })} aria-roledescription={t('roleCarousel')}>
       <div
         className="st-frame"
         tabIndex={0}
         role="group"
-        aria-roledescription="slide"
+        aria-roledescription={t('roleSlide')}
         aria-label={t('counter', { index: stage.index + 1, total })}
         onKeyDown={keys(showStage, stage.index)}
         {...stageSwipe}

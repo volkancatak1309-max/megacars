@@ -28,7 +28,7 @@ export async function FeaturedCars({ cars }: { cars: Vehicle[] }) {
         <ol className="fc-list">
           {cars.map((v, k) => {
             const color = v.colorBase && tv.has(`colorValues.${v.colorBase}`) ? tv(`colorValues.${v.colorBase}`) : v.colorBase
-            const name = vehicleFullName(v)
+            const name = vehicleFullName(v, locale)
             const alt = color
               ? tv('photoAlt', { name, color: inSentence(color, locale), index: 1, total: v.photos.length })
               : tv('photoAltNoColor', { name, index: 1, total: v.photos.length })
@@ -94,12 +94,14 @@ export async function BrandBand({ makes }: { makes: { slug: string; label: strin
 export async function TrustSection({ photo, stock }: { photo: Photo; stock: { count: number; min: number; max: number } }) {
   const t = await getTranslations('trust')
   const tl = await getTranslations('location')
+  const tc = await getTranslations('common')
   const locale = await getLocale()
   return (
     <section className="tr s-bone" aria-labelledby="tr-title">
       <div className="pg wide">
-        <LinesUp as="h2" id="tr-title" className="tr-quote" lang="de">
-          Gewissenhaft. <em>Verlässlich.</em> Professionell.
+        {/* the dealer's plate-holder slogan, in the page language (Volkan, 23.10.2026) */}
+        <LinesUp as="h2" id="tr-title" className="tr-quote">
+          {t('quote1')} <em>{t('quote2')}</em> {t('quote3')}
         </LinesUp>
       </div>
       <div className="tr-grid pg wide">
@@ -116,7 +118,7 @@ export async function TrustSection({ photo, stock }: { photo: Photo; stock: { co
               <dd>
                 {SITE.legalName}
                 <span>
-                  {SITE.register} · {SITE.court}
+                  {SITE.register} · {tc('court')}
                 </span>
               </dd>
             </DrawGroup>

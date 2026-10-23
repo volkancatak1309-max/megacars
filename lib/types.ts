@@ -1,18 +1,23 @@
-// Shape of data/inventory.json. Every optional field is null when the source
-// listing does not state it; the UI hides rows whose value is null.
+// Shape of a vehicle as the site reads it from the database (lib/inventory.ts) and as
+// the migration script writes it. Every optional field is null when the dealer or the
+// source listing did not state it; the UI hides rows whose value is null.
 
 export type BodyType = 'limousine' | 'kombi' | 'cabrio' | 'coupe' | 'suv' | 'van' | 'kleinwagen'
 export type Fuel = 'benzin' | 'diesel' | 'hybrid' | 'elektro'
 export type Transmission = 'automatik' | 'schaltgetriebe'
 export type Drive = 'allrad' | 'heck' | 'front'
 export type EquipmentGroup = 'comfort' | 'media' | 'safety' | 'extras'
+export type VehicleStatus = 'for_sale' | 'reserved' | 'sold'
+/** VAT statement next to the price (§ 5 Abs. 2 ECG): unknown until the dealer confirms. */
+export type VatNote = 'unknown' | 'incl' | 'margin'
 
 export interface Photo {
-  /** Original listing photo, e.g. /cars/<id>/1.webp */
+  id: string
+  /** Large photo (up to 1600 px wide) */
   src: string
-  /** 800 px wide derivative, or null when the original is not wider than 800 px */
+  /** 800 px wide copy, or null when the large file is not wider than 800 px */
   src800: string | null
-  /** 240 px wide derivative for thumbnails */
+  /** 240 px wide copy for thumbnails */
   src240: string
   width: number
   height: number
@@ -40,7 +45,7 @@ export interface Vehicle {
   version: string | null
   price: number
   mileage: number
-  /** "MM/YYYY" as in the listing */
+  /** "MM/YYYY" */
   firstRegistration: string
   /** YYYYMM, for sorting and filtering */
   firstRegistrationKey: number
@@ -60,6 +65,7 @@ export interface Vehicle {
   /** combined consumption in l/100 km */
   consumptionL: number | null
   co2: number | null
+  /** key of lib/options.ts COLORS, or the listing's own word for migrated cars */
   colorBase: string | null
   colorManufacturer: string | null
   interiorColor: string | null
@@ -68,12 +74,26 @@ export interface Vehicle {
   nonSmoker: boolean | null
   previousOwners: number | null
   lastService: string | null
-  equipment: Record<EquipmentGroup, string[]>
+  accidentFree: boolean
+  firstOwner: boolean
+  warranty: boolean
+  inspectionNew: boolean
+  vatNote: VatNote
+  /** keys of data/equipment.json */
+  equipment: string[]
   photos: Photo[]
-  /** index into photos used as cover (listing's own first photo unless set) */
+  /** index into photos used as cover */
   cover: number
-  /** 1200×630 JPEG crop of the cover for Open Graph */
+  /** share image: the cover photo's large file */
   og: string
-  sourceUrl: string
+  sourceUrl: string | null
   spin: Spin | null
+  status: VehicleStatus
+  visible: boolean
+  featured: boolean
+  featuredOrder: number
+  /** ISO timestamps */
+  createdAt: string
+  updatedAt: string
+  archivedAt: string | null
 }

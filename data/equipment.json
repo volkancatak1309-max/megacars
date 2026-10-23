@@ -1,0 +1,821 @@
+[
+  {
+    "key": "2-zonen-klimaautomatik",
+    "group": "comfort",
+    "de": "2-Zonen-Klimaautomatik",
+    "en": "Dual-zone automatic climate control",
+    "tr": "2 bölgeli otomatik klima"
+  },
+  {
+    "key": "3-zonen-klimaautomatik",
+    "group": "comfort",
+    "de": "3-Zonen-Klimaautomatik",
+    "en": "Three-zone automatic climate control",
+    "tr": "3 bölgeli otomatik klima"
+  },
+  {
+    "key": "360grad-kamera",
+    "group": "comfort",
+    "de": "360° Kamera",
+    "en": "360° camera",
+    "tr": "360° kamera"
+  },
+  {
+    "key": "4-zonen-klimaautomatik",
+    "group": "comfort",
+    "de": "4-Zonen-Klimaautomatik",
+    "en": "Four-zone automatic climate control",
+    "tr": "Dört bölgeli otomatik klima"
+  },
+  {
+    "key": "armlehne",
+    "group": "comfort",
+    "de": "Armlehne",
+    "en": "Armrest",
+    "tr": "Kol dayama"
+  },
+  {
+    "key": "beheizbare-frontscheibe",
+    "group": "comfort",
+    "de": "Beheizbare Frontscheibe",
+    "en": "Heated windscreen",
+    "tr": "Isıtmalı ön cam"
+  },
+  {
+    "key": "beheizbares-lenkrad",
+    "group": "comfort",
+    "de": "Beheizbares Lenkrad",
+    "en": "Heated steering wheel",
+    "tr": "Isıtmalı direksiyon"
+  },
+  {
+    "key": "berganfahrassistent",
+    "group": "comfort",
+    "de": "Berganfahrassistent",
+    "en": "Hill start assist",
+    "tr": "Yokuş kalkış desteği"
+  },
+  {
+    "key": "einparkhilfe",
+    "group": "comfort",
+    "de": "Einparkhilfe",
+    "en": "Parking assist",
+    "tr": "Park yardımı"
+  },
+  {
+    "key": "einparkhilfe-rueckfahrkamera",
+    "group": "comfort",
+    "de": "Einparkhilfe Rückfahrkamera",
+    "en": "Reversing camera",
+    "tr": "Geri görüş kamerası"
+  },
+  {
+    "key": "einparkhilfe-selbstlenkendes-system",
+    "group": "comfort",
+    "de": "Einparkhilfe selbstlenkendes System",
+    "en": "Self-steering parking system",
+    "tr": "Otomatik park sistemi"
+  },
+  {
+    "key": "einparkhilfe-sensoren-hinten",
+    "group": "comfort",
+    "de": "Einparkhilfe Sensoren hinten",
+    "en": "Rear parking sensors",
+    "tr": "Arka park sensörleri"
+  },
+  {
+    "key": "einparkhilfe-sensoren-vorne",
+    "group": "comfort",
+    "de": "Einparkhilfe Sensoren vorne",
+    "en": "Front parking sensors",
+    "tr": "Ön park sensörleri"
+  },
+  {
+    "key": "elektrische-fensterheber",
+    "group": "comfort",
+    "de": "Elektrische Fensterheber",
+    "en": "Electric windows",
+    "tr": "Elektrikli camlar"
+  },
+  {
+    "key": "elektrische-heckklappe",
+    "group": "comfort",
+    "de": "Elektrische Heckklappe",
+    "en": "Electric tailgate",
+    "tr": "Elektrikli bagaj kapağı"
+  },
+  {
+    "key": "elektrische-seitenspiegel",
+    "group": "comfort",
+    "de": "Elektrische Seitenspiegel",
+    "en": "Electric door mirrors",
+    "tr": "Elektrikli yan aynalar"
+  },
+  {
+    "key": "elektrische-sitze",
+    "group": "comfort",
+    "de": "Elektrische Sitze",
+    "en": "Electric seats",
+    "tr": "Elektrikli koltuklar"
+  },
+  {
+    "key": "elektrische-sitzeinstellung-hinten",
+    "group": "comfort",
+    "de": "Elektrische Sitzeinstellung, hinten",
+    "en": "Electric seat adjustment, rear",
+    "tr": "Arka koltuklarda elektrikli ayar"
+  },
+  {
+    "key": "getoente-scheiben",
+    "group": "comfort",
+    "de": "Getönte Scheiben",
+    "en": "Tinted windows",
+    "tr": "Füme camlar"
+  },
+  {
+    "key": "head-up-display",
+    "group": "comfort",
+    "de": "Head-up display",
+    "en": "Head-up display",
+    "tr": "Ön cama yansıtmalı gösterge"
+  },
+  {
+    "key": "klimaanlage",
+    "group": "comfort",
+    "de": "Klimaanlage",
+    "en": "Air conditioning",
+    "tr": "Klima"
+  },
+  {
+    "key": "klimaautomatik",
+    "group": "comfort",
+    "de": "Klimaautomatik",
+    "en": "Automatic climate control",
+    "tr": "Otomatik klima"
+  },
+  {
+    "key": "lederausstattung",
+    "group": "comfort",
+    "de": "Lederausstattung",
+    "en": "Leather upholstery",
+    "tr": "Deri döşeme"
+  },
+  {
+    "key": "lederlenkrad",
+    "group": "comfort",
+    "de": "Lederlenkrad",
+    "en": "Leather steering wheel",
+    "tr": "Deri direksiyon"
+  },
+  {
+    "key": "lichtsensor",
+    "group": "comfort",
+    "de": "Lichtsensor",
+    "en": "Light sensor",
+    "tr": "Far sensörü"
+  },
+  {
+    "key": "lordosenstuetze",
+    "group": "comfort",
+    "de": "Lordosenstütze",
+    "en": "Lumbar support",
+    "tr": "Bel desteği"
+  },
+  {
+    "key": "luftfederung",
+    "group": "comfort",
+    "de": "Luftfederung",
+    "en": "Air suspension",
+    "tr": "Havalı süspansiyon"
+  },
+  {
+    "key": "massagesitze",
+    "group": "comfort",
+    "de": "Massagesitze",
+    "en": "Massage seats",
+    "tr": "Masajlı koltuklar"
+  },
+  {
+    "key": "memory-sitze",
+    "group": "comfort",
+    "de": "Memory-Sitze",
+    "en": "Memory seats",
+    "tr": "Hafızalı koltuklar"
+  },
+  {
+    "key": "multifunktionslenkrad",
+    "group": "comfort",
+    "de": "Multifunktionslenkrad",
+    "en": "Multifunction steering wheel",
+    "tr": "Çok fonksiyonlu direksiyon"
+  },
+  {
+    "key": "navigationssystem",
+    "group": "comfort",
+    "de": "Navigationssystem",
+    "en": "Navigation system",
+    "tr": "Navigasyon sistemi"
+  },
+  {
+    "key": "panoramadach",
+    "group": "comfort",
+    "de": "Panoramadach",
+    "en": "Panoramic roof",
+    "tr": "Panoramik cam tavan"
+  },
+  {
+    "key": "regensensor",
+    "group": "comfort",
+    "de": "Regensensor",
+    "en": "Rain sensor",
+    "tr": "Yağmur sensörü"
+  },
+  {
+    "key": "schiebedach",
+    "group": "comfort",
+    "de": "Schiebedach",
+    "en": "Sunroof",
+    "tr": "Sürgülü cam tavan"
+  },
+  {
+    "key": "schluessellose-zentralverriegelung",
+    "group": "comfort",
+    "de": "Schlüssellose Zentralverriegelung",
+    "en": "Keyless entry",
+    "tr": "Anahtarsız giriş ve çalıştırma"
+  },
+  {
+    "key": "sitzbelueftung",
+    "group": "comfort",
+    "de": "Sitzbelüftung",
+    "en": "Ventilated seats",
+    "tr": "Havalandırmalı koltuklar"
+  },
+  {
+    "key": "sitzheizung",
+    "group": "comfort",
+    "de": "Sitzheizung",
+    "en": "Heated seats",
+    "tr": "Isıtmalı koltuklar"
+  },
+  {
+    "key": "sitzheizung-hinten",
+    "group": "comfort",
+    "de": "Sitzheizung hinten",
+    "en": "Heated rear seats",
+    "tr": "Arka koltuklarda ısıtma"
+  },
+  {
+    "key": "standheizung",
+    "group": "comfort",
+    "de": "Standheizung",
+    "en": "Auxiliary heating",
+    "tr": "Park ısıtıcısı"
+  },
+  {
+    "key": "start-stop-automatik",
+    "group": "comfort",
+    "de": "Start/Stop-Automatik",
+    "en": "Automatic start/stop",
+    "tr": "Otomatik motor durdurma ve çalıştırma"
+  },
+  {
+    "key": "teilb-ruecksitzbank",
+    "group": "comfort",
+    "de": "teilb. Rücksitzbank",
+    "en": "Split-folding rear seat",
+    "tr": "Katlanabilir bölünmüş arka koltuk"
+  },
+  {
+    "key": "tempomat",
+    "group": "comfort",
+    "de": "Tempomat",
+    "en": "Cruise control",
+    "tr": "Hız sabitleyici"
+  },
+  {
+    "key": "windschott-fuer-cabrio",
+    "group": "comfort",
+    "de": "Windschott (für Cabrio)",
+    "en": "Wind deflector (convertible)",
+    "tr": "Rüzgâr kesici (cabrio için)"
+  },
+  {
+    "key": "abs",
+    "group": "safety",
+    "de": "ABS",
+    "en": "ABS",
+    "tr": "ABS"
+  },
+  {
+    "key": "abstandstempomat",
+    "group": "safety",
+    "de": "Abstandstempomat",
+    "en": "Adaptive cruise control",
+    "tr": "Adaptif hız sabitleyici"
+  },
+  {
+    "key": "abstandswarner",
+    "group": "safety",
+    "de": "Abstandswarner",
+    "en": "Distance warning",
+    "tr": "Takip mesafesi uyarısı"
+  },
+  {
+    "key": "airbag-hinten",
+    "group": "safety",
+    "de": "Airbag hinten",
+    "en": "Rear airbags",
+    "tr": "Arka hava yastıkları"
+  },
+  {
+    "key": "alarmanlage",
+    "group": "safety",
+    "de": "Alarmanlage",
+    "en": "Alarm system",
+    "tr": "Alarm sistemi"
+  },
+  {
+    "key": "beifahrerairbag",
+    "group": "safety",
+    "de": "Beifahrerairbag",
+    "en": "Passenger airbag",
+    "tr": "Yolcu hava yastığı"
+  },
+  {
+    "key": "esp",
+    "group": "safety",
+    "de": "ESP",
+    "en": "ESP",
+    "tr": "ESP"
+  },
+  {
+    "key": "fahrerairbag",
+    "group": "safety",
+    "de": "Fahrerairbag",
+    "en": "Driver airbag",
+    "tr": "Sürücü hava yastığı"
+  },
+  {
+    "key": "fernlichtassistent",
+    "group": "safety",
+    "de": "Fernlichtassistent",
+    "en": "High-beam assist",
+    "tr": "Uzun far asistanı"
+  },
+  {
+    "key": "geschwindigkeits-begrenzungsanlage",
+    "group": "safety",
+    "de": "Geschwindigkeits-begrenzungsanlage",
+    "en": "Speed limiter",
+    "tr": "Hız sınırlayıcı"
+  },
+  {
+    "key": "isofix",
+    "group": "safety",
+    "de": "Isofix",
+    "en": "Isofix child seat mounts",
+    "tr": "Isofix çocuk koltuğu bağlantısı"
+  },
+  {
+    "key": "kopfairbag",
+    "group": "safety",
+    "de": "Kopfairbag",
+    "en": "Curtain airbags",
+    "tr": "Perde hava yastıkları"
+  },
+  {
+    "key": "kurvenlicht",
+    "group": "safety",
+    "de": "Kurvenlicht",
+    "en": "Cornering lights",
+    "tr": "Viraj aydınlatması"
+  },
+  {
+    "key": "led-scheinwerfer",
+    "group": "safety",
+    "de": "LED-Scheinwerfer",
+    "en": "LED headlights",
+    "tr": "LED farlar"
+  },
+  {
+    "key": "led-tagfahrlicht",
+    "group": "safety",
+    "de": "LED-Tagfahrlicht",
+    "en": "LED daytime running lights",
+    "tr": "LED gündüz farları"
+  },
+  {
+    "key": "matrix-led-scheinwerfer",
+    "group": "safety",
+    "de": "Matrix-LED Scheinwerfer",
+    "en": "Matrix LED headlights",
+    "tr": "Matris LED farlar"
+  },
+  {
+    "key": "muedigkeitswarnsystem",
+    "group": "safety",
+    "de": "Müdigkeitswarnsystem",
+    "en": "Driver fatigue warning",
+    "tr": "Yorgunluk uyarı sistemi"
+  },
+  {
+    "key": "nachtsichtassistent",
+    "group": "safety",
+    "de": "Nachtsichtassistent",
+    "en": "Night vision assist",
+    "tr": "Gece görüş yardımcısı"
+  },
+  {
+    "key": "nebelscheinwerfer",
+    "group": "safety",
+    "de": "Nebelscheinwerfer",
+    "en": "Fog lights",
+    "tr": "Sis farları"
+  },
+  {
+    "key": "notbremsassistent",
+    "group": "safety",
+    "de": "Notbremsassistent",
+    "en": "Emergency brake assist",
+    "tr": "Acil fren asistanı"
+  },
+  {
+    "key": "notrufsystem",
+    "group": "safety",
+    "de": "Notrufsystem",
+    "en": "Emergency call system",
+    "tr": "Acil çağrı sistemi"
+  },
+  {
+    "key": "reifendruckkontrollsystem",
+    "group": "safety",
+    "de": "Reifendruckkontrollsystem",
+    "en": "Tyre pressure monitoring",
+    "tr": "Lastik basıncı izleme sistemi"
+  },
+  {
+    "key": "seitenairbag",
+    "group": "safety",
+    "de": "Seitenairbag",
+    "en": "Side airbags",
+    "tr": "Yan hava yastıkları"
+  },
+  {
+    "key": "servolenkung",
+    "group": "safety",
+    "de": "Servolenkung",
+    "en": "Power steering",
+    "tr": "Servo direksiyon"
+  },
+  {
+    "key": "spurhalteassistent",
+    "group": "safety",
+    "de": "Spurhalteassistent",
+    "en": "Lane keeping assist",
+    "tr": "Şerit takip asistanı"
+  },
+  {
+    "key": "spurwechselassistent",
+    "group": "safety",
+    "de": "Spurwechselassistent",
+    "en": "Lane change assist",
+    "tr": "Şerit değiştirme yardımcısı"
+  },
+  {
+    "key": "tagfahrlicht",
+    "group": "safety",
+    "de": "Tagfahrlicht",
+    "en": "Daytime running lights",
+    "tr": "Gündüz farları"
+  },
+  {
+    "key": "totwinkel-assistent",
+    "group": "safety",
+    "de": "Totwinkel-Assistent",
+    "en": "Blind spot assist",
+    "tr": "Kör nokta asistanı"
+  },
+  {
+    "key": "traktionskontrolle",
+    "group": "safety",
+    "de": "Traktionskontrolle",
+    "en": "Traction control",
+    "tr": "Çekiş kontrolü"
+  },
+  {
+    "key": "verkehrszeichenerkennung",
+    "group": "safety",
+    "de": "Verkehrszeichenerkennung",
+    "en": "Traffic sign recognition",
+    "tr": "Trafik işareti tanıma"
+  },
+  {
+    "key": "voll-led-scheinwerfer",
+    "group": "safety",
+    "de": "Voll-LED Scheinwerfer",
+    "en": "Full LED headlights",
+    "tr": "Tam LED farlar"
+  },
+  {
+    "key": "wegfahrsperre",
+    "group": "safety",
+    "de": "Wegfahrsperre",
+    "en": "Immobiliser",
+    "tr": "İmmobilizer"
+  },
+  {
+    "key": "xenonscheinwerfer",
+    "group": "safety",
+    "de": "Xenonscheinwerfer",
+    "en": "Xenon headlights",
+    "tr": "Xenon farlar"
+  },
+  {
+    "key": "zentralverriegelung",
+    "group": "safety",
+    "de": "Zentralverriegelung",
+    "en": "Central locking",
+    "tr": "Merkezi kilit"
+  },
+  {
+    "key": "zentralverriegelung-mit-funkfernbedienung",
+    "group": "safety",
+    "de": "Zentralverriegelung mit Funkfernbedienung",
+    "en": "Remote central locking",
+    "tr": "Uzaktan kumandalı merkezi kilit"
+  },
+  {
+    "key": "android-auto",
+    "group": "media",
+    "de": "Android Auto",
+    "en": "Android Auto",
+    "tr": "Android Auto"
+  },
+  {
+    "key": "apple-carplay",
+    "group": "media",
+    "de": "Apple CarPlay",
+    "en": "Apple CarPlay",
+    "tr": "Apple CarPlay"
+  },
+  {
+    "key": "bluetooth",
+    "group": "media",
+    "de": "Bluetooth",
+    "en": "Bluetooth",
+    "tr": "Bluetooth"
+  },
+  {
+    "key": "bordcomputer",
+    "group": "media",
+    "de": "Bordcomputer",
+    "en": "On-board computer",
+    "tr": "Yol bilgisayarı"
+  },
+  {
+    "key": "cd",
+    "group": "media",
+    "de": "CD",
+    "en": "CD player",
+    "tr": "CD çalar"
+  },
+  {
+    "key": "dab-radio",
+    "group": "media",
+    "de": "DAB-Radio",
+    "en": "DAB digital radio",
+    "tr": "DAB dijital radyo"
+  },
+  {
+    "key": "freisprecheinrichtung",
+    "group": "media",
+    "de": "Freisprecheinrichtung",
+    "en": "Hands-free kit",
+    "tr": "Eller serbest telefon sistemi"
+  },
+  {
+    "key": "induktionsladen-fuer-smartphones",
+    "group": "media",
+    "de": "Induktionsladen für Smartphones",
+    "en": "Wireless smartphone charging",
+    "tr": "Kablosuz telefon şarjı"
+  },
+  {
+    "key": "mp3",
+    "group": "media",
+    "de": "MP3",
+    "en": "MP3",
+    "tr": "MP3"
+  },
+  {
+    "key": "musikstreaming-integriert",
+    "group": "media",
+    "de": "Musikstreaming integriert",
+    "en": "Integrated music streaming",
+    "tr": "Entegre müzik akışı"
+  },
+  {
+    "key": "radio",
+    "group": "media",
+    "de": "Radio",
+    "en": "Radio",
+    "tr": "Radyo"
+  },
+  {
+    "key": "soundsystem",
+    "group": "media",
+    "de": "Soundsystem",
+    "en": "Sound system",
+    "tr": "Ses sistemi"
+  },
+  {
+    "key": "tv",
+    "group": "media",
+    "de": "TV",
+    "en": "TV",
+    "tr": "TV"
+  },
+  {
+    "key": "usb",
+    "group": "media",
+    "de": "USB",
+    "en": "USB",
+    "tr": "USB"
+  },
+  {
+    "key": "volldigitales-kombiinstrument",
+    "group": "media",
+    "de": "Volldigitales Kombiinstrument",
+    "en": "Fully digital instrument cluster",
+    "tr": "Tam dijital gösterge paneli"
+  },
+  {
+    "key": "w-lan-wifi-hotspot",
+    "group": "media",
+    "de": "W-Lan / Wifi Hotspot",
+    "en": "Wi-Fi hotspot",
+    "tr": "Wi-Fi erişim noktası"
+  },
+  {
+    "key": "adaptives-fahrwerk",
+    "group": "extras",
+    "de": "Adaptives Fahrwerk",
+    "en": "Adaptive suspension",
+    "tr": "Uyarlanabilir süspansiyon"
+  },
+  {
+    "key": "allwetterreifen",
+    "group": "extras",
+    "de": "Allwetterreifen",
+    "en": "All-season tyres",
+    "tr": "Dört mevsim lastikleri"
+  },
+  {
+    "key": "alufelgen",
+    "group": "extras",
+    "de": "Alufelgen",
+    "en": "Alloy wheels",
+    "tr": "Alüminyum jantlar"
+  },
+  {
+    "key": "ambientebeleuchtung",
+    "group": "extras",
+    "de": "Ambientebeleuchtung",
+    "en": "Ambient lighting",
+    "tr": "Ambiyans aydınlatması"
+  },
+  {
+    "key": "anhaengerkupplung",
+    "group": "extras",
+    "de": "Anhängerkupplung",
+    "en": "Tow bar",
+    "tr": "Römork bağlantısı (çeki demiri)"
+  },
+  {
+    "key": "anhaengerkupplung-abnehmbar",
+    "group": "extras",
+    "de": "Anhängerkupplung abnehmbar",
+    "en": "Detachable tow bar",
+    "tr": "Sökülebilir çeki demiri"
+  },
+  {
+    "key": "dachreling",
+    "group": "extras",
+    "de": "Dachreling",
+    "en": "Roof rails",
+    "tr": "Tavan rayları"
+  },
+  {
+    "key": "elektronische-parkbremse",
+    "group": "extras",
+    "de": "Elektronische Parkbremse",
+    "en": "Electronic parking brake",
+    "tr": "Elektronik park freni"
+  },
+  {
+    "key": "gepaeckraumabtrennung",
+    "group": "extras",
+    "de": "Gepäckraumabtrennung",
+    "en": "Luggage compartment divider",
+    "tr": "Bagaj bölmesi ayırıcısı"
+  },
+  {
+    "key": "innenspiegel-automatisch-abblendend",
+    "group": "extras",
+    "de": "Innenspiegel automatisch abblendend",
+    "en": "Auto-dimming rear-view mirror",
+    "tr": "Otomatik kararan iç dikiz aynası"
+  },
+  {
+    "key": "schaltwippen",
+    "group": "extras",
+    "de": "Schaltwippen",
+    "en": "Paddle shifters",
+    "tr": "Direksiyondan vites kulakçıkları"
+  },
+  {
+    "key": "scheinwerferreinigung",
+    "group": "extras",
+    "de": "Scheinwerferreinigung",
+    "en": "Headlight washers",
+    "tr": "Far yıkama sistemi"
+  },
+  {
+    "key": "skisack",
+    "group": "extras",
+    "de": "Skisack",
+    "en": "Ski bag",
+    "tr": "Kayak çantası"
+  },
+  {
+    "key": "sommerreifen",
+    "group": "extras",
+    "de": "Sommerreifen",
+    "en": "Summer tyres",
+    "tr": "Yaz lastikleri"
+  },
+  {
+    "key": "spoiler",
+    "group": "extras",
+    "de": "Spoiler",
+    "en": "Spoiler",
+    "tr": "Spoyler"
+  },
+  {
+    "key": "sportfahrwerk",
+    "group": "extras",
+    "de": "Sportfahrwerk",
+    "en": "Sports suspension",
+    "tr": "Spor süspansiyon"
+  },
+  {
+    "key": "sportpaket",
+    "group": "extras",
+    "de": "Sportpaket",
+    "en": "Sports package",
+    "tr": "Spor paket"
+  },
+  {
+    "key": "sportsitze",
+    "group": "extras",
+    "de": "Sportsitze",
+    "en": "Sports seats",
+    "tr": "Spor koltuklar"
+  },
+  {
+    "key": "sprachsteuerung",
+    "group": "extras",
+    "de": "Sprachsteuerung",
+    "en": "Voice control",
+    "tr": "Sesli komut"
+  },
+  {
+    "key": "touchscreen",
+    "group": "extras",
+    "de": "Touchscreen",
+    "en": "Touchscreen",
+    "tr": "Dokunmatik ekran"
+  },
+  {
+    "key": "tuning",
+    "group": "extras",
+    "de": "Tuning",
+    "en": "Tuning",
+    "tr": "Modifiye"
+  },
+  {
+    "key": "winterpaket",
+    "group": "extras",
+    "de": "Winterpaket",
+    "en": "Winter package",
+    "tr": "Kış paketi"
+  },
+  {
+    "key": "winterreifen",
+    "group": "extras",
+    "de": "Winterreifen",
+    "en": "Winter tyres",
+    "tr": "Kış lastikleri"
+  }
+]

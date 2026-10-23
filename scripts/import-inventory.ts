@@ -12,7 +12,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import sharp from 'sharp'
-import type { BodyType, Drive, EquipmentGroup, Fuel, Photo, Transmission, Vehicle } from '../lib/types'
+import type { BodyType, Drive, EquipmentGroup, Fuel, Transmission } from '../lib/types'
+import type { LegacyPhoto as Photo, LegacyVehicle as Vehicle } from './legacy-types'
 
 const ROOT = process.cwd()
 const PUBLIC = path.join(ROOT, 'public')

@@ -493,3 +493,8 @@
 - Gövde yazı tipi Hanken Grotesk artık ön yüklenmiyor (34 KB LCP görseliyle yarışmasın; ölçü ayarlı yedek yazı tipiyle kayma yok); detay galerisindeki küçük resimler `fetchpriority=low`.
 - Kırmızı bölümlerde ikincil metin %86 beyazdan (4,13:1) tam beyaza (5,24:1) çekildi (WCAG AA; 1. aşamadan kalan hata). Logo ve dil bağlantılarında görünen yazı erişilebilir adın başında (WCAG 2.5.3).
 - Denenip etkisi görülmeyen: ilk ziyaret yükleyicisini kapatmak (detay LCP değişmedi) → yükleyici yerinde bırakıldı.
+
+**İlk ziyaret yükleyicisi ↔ LCP çelişkisi (ölçüm, 23.10.2026) — Volkan'ın kararı gerekiyor**
+- Lighthouse her ölçümü "ilk ziyaret" olarak yaptığı için yükleyici her ölçümde açılıyor. Önizlemede yükleyici açıkken gözlenen ilk boyama 2,4 sn civarında kalıyor (film şeridinde 2,4 sn'ye kadar ekran boş); yükleyicinin açılmadığı ölçümlerde 0,9–1,2 sn. Simülasyondaki mobil LCP buna göre ana sayfada ≈ 3,3–3,7 sn (yükleyici açık) ↔ 2,3 sn (kapalı).
+- Denenip etkisiz kalanlar (yerel, tek değişken): grain katmanını kapatmak; yükleyici panellerini yarı saydam yapmak; iç metnin opaklık animasyonunu kaldırmak; panelleri hiç hareket ettirmemek. Yalnız yükleyiciyi tümden kaldırmak ilk boymayı sürekli öne çekti.
+- Sonuç: "sayaçlı sinematik yükleyici (yalnız ilk ziyarette)" ile "LCP'yi geciktirmeden" kuralı bugünkü yükleyiciyle aynı anda sağlanamıyor. Seçenekler Volkan'a soruldu: (a) yükleyici yalnız ana sayfada, (b) yükleyici sayfayı örtmeden yalnız köşede sayaç + çizgi olarak, (c) olduğu gibi kalsın, LCP hedefi ilk ziyaret için esnetilsin.

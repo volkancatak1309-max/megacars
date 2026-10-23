@@ -389,7 +389,8 @@
 .abt-word {
   font-family: var(--f-display);
   font-weight: 900;
-  font-size: clamp(3rem, 13.5vw, 15rem);
+  /* the longest word (HAKKIMIZDA) is about 8.6 em wide and must stay on one line */
+  font-size: clamp(2.25rem, 9.6vw, 13rem);
   line-height: 0.8;
   letter-spacing: -0.06em;
   text-transform: uppercase;

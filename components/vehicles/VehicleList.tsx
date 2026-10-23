@@ -177,7 +177,20 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   }, [sheet])
 
   // counts for an option while the other filters stay as they are
-  const countWith = (key: FilterKey, value: Filters[FilterKey]) => cards.filter((v) => matches(v, { ...f, [key]: value })).length
+  // option counts once per filter state (opening the sheet must not recount 8 × 10 options)
+  const counts = useMemo(() => {
+    const cache = new Map<string, number>()
+    return (key: FilterKey, value: Filters[FilterKey]) => {
+      const id = `${key}:${String(value)}`
+      let n = cache.get(id)
+      if (n === undefined) {
+        n = cards.filter((v) => matches(v, { ...f, [key]: value })).length
+        cache.set(id, n)
+      }
+      return n
+    }
+  }, [cards, f])
+  const countWith = counts
 
   const priceFrom = options.priceFrom.map((p) => ({ value: String(p), label: t('fromPrice', { value: formatPrice(p, locale) }) }))
   const priceTo = options.priceTo.map((p) => ({ value: String(p), label: t('upToPrice', { value: formatPrice(p, locale) }) }))
@@ -223,7 +236,18 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
   const reset = () => update({ ...EMPTY_FILTERS, sort: f.sort })
 
   // running numbers follow the visible order
-  const order = new Map(sorted.filter((v) => visible.has(v.id)).map((v, i) => [v.id, i + 1]))
+  const order = useMemo(() => new Map(sorted.filter((v) => visible.has(v.id)).map((v, i) => [v.id, i + 1])), [sorted, visible])
+
+  // the card grid only changes with the result, never when the sheet or a menu opens
+  const cardItems = useMemo(
+    () =>
+      sorted.map((v, i) => (
+        <li key={v.id} data-card data-flip-id={v.id} hidden={!visible.has(v.id)}>
+          <VehicleCard v={v} priority={i === 0 && visible.has(v.id)} headingLevel="h2" index={order.get(v.id)} />
+        </li>
+      )),
+    [sorted, visible, order],
+  )
 
   // the stock in real numbers: price span, makes, years of first registration
   const years = cards.map((v) => Math.floor(v.firstRegistrationKey / 100))
@@ -341,11 +365,7 @@ export function VehicleList({ cards, options, initial }: { cards: CardVehicle[];
       )}
 
       <ul ref={grid} className="vl-grid" data-view={view}>
-        {sorted.map((v, i) => (
-          <li key={v.id} data-card data-flip-id={v.id} hidden={!visible.has(v.id)}>
-            <VehicleCard v={v} priority={i === 0 && visible.has(v.id)} headingLevel="h2" index={order.get(v.id)} />
-          </li>
-        ))}
+        {cardItems}
       </ul>
 
       <dialog ref={dialog} onClose={() => setSheet(false)} aria-label={t('filterTitle')} className="sheet">

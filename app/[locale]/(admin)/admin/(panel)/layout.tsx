@@ -20,7 +20,7 @@ export default async function PanelLayout({ children, params }: LayoutProps<'/[l
       <header className="adm-bar">
         <div className="adm-bar-in">
           <span className="adm-brand" aria-label={t('title')}>
-            <Logo layout="mark" tone="dark" />
+            <Logo sizes="54px" />
             <span className="adm-brand-word">{t('title')}</span>
           </span>
           <AdminNav locale={locale} email={admin.user.email ?? ''} />

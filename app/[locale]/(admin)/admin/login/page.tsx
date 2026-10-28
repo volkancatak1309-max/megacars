@@ -18,7 +18,7 @@ export default async function LoginPage({ params }: PageProps<'/[locale]/admin/l
     <main className="adm-login">
       <div className="adm-login-card">
         <div className="adm-login-brand">
-          <Logo layout="stacked" tone="dark" />
+          <Logo sizes="158px" />
         </div>
         <h1 className="d-s">{t('title')}</h1>
         <p className="adm-login-lead">{t('lead')}</p>

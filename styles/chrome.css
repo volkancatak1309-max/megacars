@@ -39,16 +39,14 @@
   height: var(--ph-h);
 }
 
-/* ---- logo (inline SVG from lib/brand/marks.ts; sized by the height of .logo) ---- */
+/* ---- logo (components/brand/Logo.tsx; the files come from assets/brand/logo.png and
+   have a transparent ground; sized by the height of .logo). In the top bar the name inside
+   the logo stays readable: about 17 % of the logo height is lettering. ---- */
 .logo {
-  display: inline-block;
-  line-height: 0;
-}
-
-.logo svg {
   display: block;
-  height: 100%;
   width: auto;
+  max-width: none;
+  user-select: none;
 }
 
 .ph-logo {
@@ -60,18 +58,24 @@
 }
 
 .ph-logo .logo {
-  height: 30px;
+  height: 56px;
 }
 
 @media (min-width: 1024px) {
   .ph-logo .logo {
-    height: 34px;
+    height: 68px;
   }
 }
 
 .ft-brand {
-  height: 44px;
+  height: 100px;
   margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+@media (min-width: 1024px) {
+  .ft-brand {
+    height: 130px;
+  }
 }
 
 .ph-nav {
@@ -224,7 +228,8 @@ dialog.menu[open] .menu-line > * {
   border-bottom: 1px solid var(--line);
   font-family: var(--f-display);
   font-weight: 700;
-  font-size: clamp(2.125rem, 9vw, 5.5rem);
+  /* a third smaller than before (Volkan, 28.10.2026: 35 → 23 px at 390, 88 → 58 px at 1440) */
+  font-size: clamp(1.4rem, 6vw, 3.65rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
   text-transform: uppercase;

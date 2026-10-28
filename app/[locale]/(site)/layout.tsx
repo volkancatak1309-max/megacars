@@ -23,8 +23,8 @@ export default async function SiteLayout({ children, params }: LayoutProps<'/[lo
     <>
       <Loader />
       <CurtainProvider mark="MEGA CARS">
-        {/* the logo renders here on the server, so the client bundle carries no outlines */}
-        <Header stock={stock.count} brand={<Logo layout="horizontal" tone="dark" />} />
+        {/* the logo renders here on the server and travels to the client header as markup */}
+        <Header stock={stock.count} brand={<Logo sizes="(min-width: 1024px) 83px, 68px" />} />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>

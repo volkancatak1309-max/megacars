@@ -1,19 +1,35 @@
-import { loaderSvg } from '@/lib/brand/marks'
+import { LOGO_LARGE, LOGO_SRCSET, LOGO_RATIO } from '@/components/brand/Logo'
+import logo from '@/lib/brand/logo.json'
 
 /**
- * Opening screen (Volkan, 23.10.2026): no counter, no bar. The emblem is drawn in thin
- * lines, fills in chrome, a sheen passes over it, "MEGA CARS" rises letter by letter,
- * then the night panel and the red curtain lift and the page is there (≈ 2.5 s). Pure
- * CSS from the first paint (styles/motion.css): no JavaScript, nothing stored on the
- * device. The head script in app/[locale]/layout.tsx hides it for the rest of the visit
- * (links within the site, reload, back/forward). Reduced motion: a plain fade only.
+ * Opening screen (Volkan, 28.10.2026): no counter, no bounce. The dealer's own logo fades
+ * in slowly, a light passes once over the chrome, then the night panel and the red curtain
+ * lift and the page is there (≈ 2.6 s). The light is a separate layer masked by the logo
+ * itself, so when it has passed the logo is exactly the original. Pure CSS from the first
+ * paint (styles/motion.css): no JavaScript, nothing stored on the device. The head script
+ * in app/[locale]/layout.tsx hides it for the rest of the visit (links within the site,
+ * reload, back/forward). Reduced motion: a plain fade only.
  */
 export function Loader() {
-  const { svg } = loaderSvg()
   return (
     <div className="loader" aria-hidden="true">
       <div className="loader-red" />
-      <div className="loader-night" dangerouslySetInnerHTML={{ __html: svg }} />
+      <div className="loader-night">
+        <div className="ld" style={{ aspectRatio: LOGO_RATIO, ['--ld-mask' as string]: `url(${LOGO_LARGE})` }}>
+          <img
+            className="ld-logo"
+            src={LOGO_LARGE}
+            srcSet={LOGO_SRCSET}
+            sizes="min(64vw, 400px)"
+            width={logo.width}
+            height={logo.height}
+            alt=""
+            decoding="async"
+            draggable={false}
+          />
+          <span className="ld-sheen" />
+        </div>
+      </div>
     </div>
   )
 }

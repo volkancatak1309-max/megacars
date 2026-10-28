@@ -52,7 +52,7 @@
   --page: clamp(20px, 4.5vw, 72px);
   --section: clamp(96px, 12vw, 200px);
   --wide: 1680px;
-  --ph-h: 68px;
+  --ph-h: 72px;
   --bar-h: 64px;
 
   /* z-index scale */
@@ -73,7 +73,7 @@
 
 @media (min-width: 1024px) {
   :root {
-    --ph-h: 80px;
+    --ph-h: 88px;
   }
 }
 

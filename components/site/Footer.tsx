@@ -15,7 +15,7 @@ export async function Footer() {
   return (
     <footer className="ft s-night" aria-labelledby="ft-title">
       <div className="pg wide">
-        <Logo layout="horizontal" tone="dark" className="ft-brand" />
+        <Logo sizes="(min-width: 1024px) 158px, 122px" className="ft-brand" />
         <LinesUp as="p" id="ft-title" className="ft-title d-l">
           {tf('title')}
         </LinesUp>

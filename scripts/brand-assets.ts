@@ -33,7 +33,9 @@ const MARGIN = 0.03
 
 const source = fs.readFileSync(SRC)
 // the file names change with the source and with this script (/brand/* is cached for a year)
-const hash = crypto.createHash('sha1').update(source).update(fs.readFileSync(import.meta.filename)).digest('hex').slice(0, 8)
+// (line endings normalised: the checkout on Windows has CRLF, the build server LF)
+const script = fs.readFileSync(import.meta.filename, 'utf8').replace(/\r\n/g, '\n')
+const hash = crypto.createHash('sha1').update(source).update(script).digest('hex').slice(0, 8)
 const { data, info } = await sharp(source).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
 const { width: W, height: H } = info
 

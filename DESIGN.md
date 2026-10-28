@@ -54,7 +54,7 @@ Odak halkası: koyu zeminde bone, kemik zeminde night, kırmızı zeminde beyaz;
 | Başlık / display | **Unbounded** (değişken, 200–900; kullanılan 600–900) | SIL Open Font License 1.1 | Google Fonts, `next/font/google` |
 | Metin / arayüz | **Hanken Grotesk** (değişken, 100–900; kullanılan 400–700) | SIL Open Font License 1.1 | Google Fonts, `next/font/google` |
 
-Unbounded geniş ve iddialıdır; doğal oranlarında kullanılır (harf sıkıştırma yok). Açılış harfleri SVG maskesinde `textLength` yalnız harf aralığını açar (`lengthAdjust="spacing"`), glifleri bozmaz. Logotype "MEGA CARS" sitede yazı olarak değil, Unbounded 800'den çıkarılmış vektör konturlarla çizilir (`lib/brand/glyphs.ts`, HarfBuzz ile kerning'li; OFL 1.1): üst bar, footer, açılış ekranı ve paylaşım görseli aynı çizgiyi kullanır (§15).
+Unbounded geniş ve iddialıdır; doğal oranlarında kullanılır (harf sıkıştırma yok). Açılış harfleri SVG maskesinde `textLength` yalnız harf aralığını açar (`lengthAdjust="spacing"`), glifleri bozmaz. Logo galerinin kendi logosudur (kalkan, araba silueti, MEGACARS yazısı; §15); sitede yazı olarak yeniden dizilmez.
 
 ### Ölçek (önce mobil, `clamp()`)
 | Sınıf | Boyut | Ağırlık / satır / harf aralığı | Kullanım |
@@ -104,7 +104,7 @@ Sayılar `font-variant-numeric: tabular-nums` (`.tabular`). Her başlık yüklem
 ### Hareket envanteri
 | Hareket | Nerede | Kaynak |
 |---|---|---|
-| Logolu açılış ekranı: amblem ince çizgiyle belirir, kroma dolar, üzerinden ışık geçer, "MEGA CARS" harf harf yükselir, gece paneli ve kırmızı perde kalkar (≈ 2,6 sn; sayaç yok) | İlk ziyaretin ilk sayfası; saf CSS (`components/site/Loader.tsx`, `lib/brand/marks.ts`) | Volkan 23.10.2026 (HAK61 açılışından esinle) |
+| Logolu açılış ekranı: galerinin logosu yavaşça belirir, kromun üzerinden bir kez ışık geçer, gece paneli ve kırmızı perde kalkar (≈ 2,6 sn; sayaç yok, zıplama yok) | İlk ziyaretin ilk sayfası; saf CSS (`components/site/Loader.tsx`) | Volkan 23.10.2026, logo 28.10.2026 |
 | Kırmızı perde (iki satır kapanır, MEGA CARS yükselir, açılır) | Bütün iç bağlantılar ve dil değişimi | Animmaster Page Transitions 5 |
 | Kepenk hover (kırmızı panel iner, yazı yuvarlanır, çıkışta yukarı toplanır) | Bütün düğmeler, menü linkleri, filtre çipleri | galzura-motion-demo `src/d6/Roll.tsx` + `d6.css` |
 | Manyetik CTA (en çok 8 px) | Dolu ve çizgili düğmeler | galzura `useMagnet` |
@@ -132,7 +132,7 @@ Yasak (Volkan): imleci izleyen görsel önizleme; kaydırmayla kare kare oynayan
 - İç bağlantı `ShutterLink` (kırmızı perdeyle), dış bağlantı `ShutterA`, düğme `ShutterButton`.
 
 ### 7.2 Üst bar (`components/site/Header.tsx`)
-Logo (amblem + vektör yazı, `components/brand/Logo.tsx`, 30 / 34 px yüksek; bağlantının erişilebilir adı "MEGA CARS – Startseite"), gezinme (Fahrzeuge · Finanzierung · Ankauf · Kontakt; geçerli sayfa kırmızı alt çizgi), DE/EN/TR, telefon (≥ 1280 px). Açılışın üstünde şeffaf; 40 px sonra koyu ve bulanık zemin; aşağı okurken gizlenir, yukarı kaydırınca geri gelir. Mobilde "Menü" düğmesi.
+Logo (galerinin logosu, `components/brand/Logo.tsx`, 56 / 68 px yüksek — içindeki MEGACARS yazısı okunur; üst bar 72 / 88 px; bağlantının erişilebilir adı "MEGA CARS – Startseite"), gezinme (Fahrzeuge · Finanzierung · Ankauf · Kontakt; geçerli sayfa kırmızı alt çizgi), DE/EN/TR, telefon (≥ 1280 px). Açılışın üstünde şeffaf; 40 px sonra koyu ve bulanık zemin; aşağı okurken gizlenir, yukarı kaydırınca geri gelir. Mobilde "Menü" düğmesi.
 
 ### 7.3 Mobil menü
 Tam ekran `dialog`; clip-path ile yukarıdan iner, linkler satır satır yükselir (Animmaster Navigation Menus 19; Mobbin: Open). Büyük harfli Unbounded linkler, "Fahrzeuge" yanında stok adedi, altta telefon · WhatsApp · e-posta · adres · saatler ve dil seçimi.
@@ -164,7 +164,7 @@ Masaüstünde sağda yapışkan: fiyat (odometre), özellik zinciri, **Probefahr
 Çubuk: Anrufen · WhatsApp (çizgili) · Probefahrt (kırmızı); klavye açıkken iner (Mobbin: Realtor.com, Agoda). Yüzen: yuvarlak "yukarı" düğmesi (kırmızı ilerleme halkası; Mobbin: Goodreads) ve masaüstünde WhatsApp; ilk 1,5 ekranda ve footer'da gizli.
 
 ### 7.11 Footer
-Üstte yatay logo (44 px), tek cümle başlık, adres/route · saatler · iletişim, hover'da kırmızıya dolan dev çizgisel "MEGA CARS", telif · Impressum · Datenschutz · "Website: Galzura".
+Üstte logo (100 / 130 px; yanında ayrı yazı yok), tek cümle başlık, adres/route · saatler · iletişim, hover'da kırmızıya dolan dev çizgisel "MEGA CARS", telif · Impressum · Datenschutz · "Website: Galzura".
 
 ---
 
@@ -194,7 +194,7 @@ Her iç sayfa aynı açılışla başlar: sayfanın adı dev, dağınık harf y�
 Kırmızı dev "404", tam cümle başlık, "Zum Bestand".
 
 ### 8.6 Açılış filmi
-Pexels 33374869, kırmızı Chevrolet Corvette C8 (Volkan'ın seçimi, 23.10.2026); `lib/hero.ts`, dosyalar `public/hero/c8/`. Doğal, koyu renk düzeni (gölgeler derin, en parlak değer %88, kırmızı doygun, hafif vinyet; gece taklidi yok). Yeni kodlama her zaman yeni klasöre gider (/hero/* bir yıl immutable).
+Eski sitenin açılış filmi (main dalı, `public/hero/hero-main.mp4`; müşteri isteği, 28.10.2026): dağ yolunda siyah, büyük arka kanatlı spor otomobil. Renk düzeni ve hız değişikliği yok; `lib/hero.ts`, dosyalar `public/hero/gt/`. Harflerin kenarında ince kemik rengi kontur var: film koyu olduğunda da "MEGA CARS" okunur. Yeni kodlama her zaman yeni klasöre gider (/hero/* bir yıl immutable). FAZ 1 denetimi: `docs/ARASTIRMA.md` §a3.
 
 ---
 
@@ -247,7 +247,7 @@ Hareket kitaplıkları ilk boyamadan sonra; video `load`'dan sonra; harita tıkl
 - `sitemap.xml`: her sayfa × 3 dil, hreflang alternatifleriyle; gizli sayfalar (`PAGES`) dışarıda.
 - **Canlıya geçiş tek satır:** `lib/launch.ts` → `INDEXABLE = true` (robots.txt açılır ve sitemap'i duyurur, meta robots index/follow olur, `X-Robots-Tag` kalkar). Demo canlıya çıkana kadar **noindex**.
 - `siteOrigin()`: üretimde `VERCEL_PROJECT_PRODUCTION_URL`, önizlemede sabit dal adresi.
-- Favicon, apple-touch-icon ve yedek paylaşım görseli logodan üretilir (`scripts/brand-assets.ts`, `npm run brand`; her derlemeden önce `prebuild` ile kendiliğinden): `app/icon.svg`, `app/apple-icon.png`, `public/og/default.jpg`.
+- Favicon, apple-touch-icon ve yedek paylaşım görseli logodan üretilir (`scripts/brand-assets.ts`, `npm run brand`; her derlemeden önce `prebuild` ile kendiliğinden): `app/icon.png`, `app/apple-icon.png`, `public/og/default.jpg` — hepsi `assets/brand/logo.png`'den.
 
 ## 13. i18n
 `next-intl`, mesajlar derleme anında derlenir; DE · EN · TR (dil seçicide bu sırayla). Almanca önce yazılır; İngilizce ve Türkçe uzman tercüman düzeyinde ve yüklemli tam cümlelerle. Biçimler: DE/TR "64.900 €", EN "€64,900"; "148.000 km" / "148,000 km"; "345 kW (469 PS)"; "02/2019". İlan donanımı Almanca gelir; İngilizce (`data/equipment-en.json`) ve Türkçe (`data/equipment-tr.json`) kontrollü sözlükten, sözlükte olmayan terim `lang="de"` ile Almanca kalır. Dil seçimi yalnız dil belirtilmemiş adreste (/) yapılır: önce `NEXT_LOCALE` çerezi (ziyaretçi dil seçiciden seçince yazılır, 1 yıl, teknik olarak gerekli — TKG 2021 § 165 Abs. 3, onay gerekmez, Datenschutz'ta adıyla anılır), sonra tarayıcı dili. Önekli adresler olduğu gibi sunulur; dil seçici aynı sayfanın karşılığına gider (`CurtainLink` hedef dili `router.push`'a aktarır — Volkan'ın 23.10.2026'da bulduğu hata). **Kural (Volkan, 23.10.2026):** hangi dil seçiliyse sayfada yalnız o dil görünür; istisna yalnız özel isimlerdir (firma, marka/model, cadde, resmî kurum adları — ilk geçtiği yerde o dildeki açıklamasıyla). "Showroom" → DE "Schauraum", TR "teşhir salonu"; slogan DE "Gewissenhaft. Verlässlich. Professionell.", EN "Conscientious. Reliable. Professional.", TR "Titiz. Güvenilir. Profesyonel.".
@@ -256,15 +256,14 @@ Hareket kitaplıkları ilk boyamadan sonra; video `load`'dan sonra; harita tıkl
 - Yap: her bölümde bir anlamlı hareket; kırmızıyı eylem için sakla; fotoğrafı çerçevede tut; her sayıyı gerçek veriden al; reduced motion'da her şeyi okunur bırak.
 - Yapma: neon, parıltı, bounce; yatay kaydırma; bir ekrandan uzun pin; koyu zeminde küçük kırmızı yazı; kart içinde kart; özel imleç; sahte yorum, sahte garanti, sahte sayı; faiz oranı, banka ortağı ya da koşul; uydurma hizmet (Inzahlungnahme, Leasing, Tausch teyit bekliyor); dil çerezi (NEXT_LOCALE) dışında çerez ya da depolama; seçili dilden başka dilde kelime.
 
-## 15. Marka: logo (Volkan, 23.10.2026)
+## 15. Marka: logo (müşteri isteği, 28.10.2026)
 
-- **Seçim:** Volkan 23.10.2026'da **A "Monogramm"** konseptini seçti; B (Plakette) ve C (Wappen) ile karşılaştırma sayfası `/prototyp/logo` kaldırıldı (git geçmişinde: 9c668db). Logo galeriye bir öneridir; galerinin adı "MEGA CARS" aynen kalır.
-- **Çizim:** `lib/brand/marks.ts` — React'siz SVG üreticisi: amblem (`EMBLEM`), lockup'lar (`logoSvg`: yatay / dikey / yalnız amblem), favicon (`iconSvg`) ve açılış ekranı sanatı (`loaderSvg`). Logotype Unbounded 800 konturları (`lib/brand/glyphs.ts`, `_work/faz6/glyphs.py` ile üretildi; font dosyası repoda değil). Favicon, apple-touch-icon ve `og/default.jpg` her derlemeden önce `npm run brand` ile üretilir.
-- **Amblem:** geometrik, iki fasetli M (20 birimlik kalın çizgi, V 44/74'e iner) sağ bacağında köşeleri yuvarlak kare bir C taşır; C kırmızı, M kemik/koyu kemik (açık zeminde gece/koyu gri). Kutu 128 × 100.
-- **Renk ve krom:** koyu zeminde kemik + kırmızı, açık zeminde gece + kırmızı; krom (fırçalanmış metal gradyanı) yalnız koyu zeminde ve yalnız açılış ekranı, dikey lockup ve paylaşım görselinde. Neon, parıltı, gölge yok.
-- **Küçük boyut:** favicon 64 px kutu, amblem gece kare üstünde; 16 px'te M okunur, kırmızı C ayrışır. Apple ikonu gece zemin üstünde.
-- **Benzerlik kontrolü (CC, görsel; marka araştırması değil):** yıldız, halka, kalkan, kanat, hayvan yok → Mercedes, BMW, Porsche, Ferrari, Lamborghini, Alfa Romeo, Bentley, Aston Martin'den ayrı; katlanmış M Maybach'ın üçgen içindeki çift M'si, C McLaren işareti değil.
-- **Açılış ekranı zamanlaması (CSS, `styles/motion.css`):** 0,1–1,0 sn amblem çizgisi çizilir → 0,8–1,3 krom dolgu → 1,1–1,8 ışık geçer → 0,95–1,9 harfler yükselir (0,04 sn adım) → 1,78–2,5 gece paneli kalkar → 1,95–2,7 kırmızı perde kalkar → 2,7 gizlenir. Tarayıcı oturumunda bir kez: site içi bağlantı, yenileme ve geri/ileri gezinmede gösterilmez (`data-loader-off`, depolama yok). Reduced motion: amblem ve ad 0,6 sn'de belirir, 1,4–1,9 sn'de solar.
+- **Logo:** Mega Cars'ın kendi logosu (krom kalkan, araba silueti, MEGACARS yazısı). MC monogramı (Konsept A, 23.10.2026) her yerden kaldırıldı: "MC" adında başka bir galeri var.
+- **Tek kaynak:** `assets/brand/logo.png` (orijinal logonun yaratıcı olmayan 4 kat büyütmesi, 3976 × 4008; Volkan onayladı). Galerinin orijinal dosyası gelince yalnız bu dosya değiştirilir; `npm run brand` (her derlemeden önce kendiliğinden) bütün türevleri yeniden üretir: `public/brand/logo-<hash>-<genişlik>.webp` (96–1280 px), `lib/brand/logo.json`, `app/icon.png`, `app/apple-icon.png`, `public/og/default.jpg`.
+- **Dokunulmazlık:** yeniden çizim, renklendirme, kırpma, parça çıkarma, keskinleştirme, filtre yok; yalnız küçültme ve WebP/PNG/JPEG'e dönüştürme. Çizimin çevresindeki boş siyah kenar boşluğu bırakılır (zeminden parlak her piksel içeride kalır, %3 pay).
+- **Siyah zemin:** web dosyalarında şeffaf. Siyah üstüne çizilmiş logo için alfa = en parlak kanal, renk = renk / alfa: siyah üstünde orijinal pikselin aynısı, sitenin gece renginde kutu görünmez, kenarlar olduğu gibi kalır. Favicon, apple-touch-icon ve paylaşım görseli logonun kendi siyah zemininde.
+- **Boyutlar:** üst bar 56 / 68 px (logo yüksekliğinin ≈ %17'si yazı → yazı ≈ 9,5 / 11,5 px), footer 100 / 130 px, açılış ekranı min(64vw, 400px) genişlik, panel 44 px, panel girişi 130 px. Üst bar ve footer'da logonun yanında ayrı "MEGA CARS" yazısı yok.
+- **Açılış ekranı zamanlaması (CSS, `styles/motion.css`):** 0,1–0,95 sn logo belirir (yalnız opaklık; ölçek ve zıplama yok) → 0,95–1,7 kromun üzerinden ışık geçer (logonun kendi dosyasıyla maskelenmiş ayrı katman; geçince logo birebir orijinal) → 1,78–2,5 gece paneli kalkar → 1,95–2,7 kırmızı perde kalkar → 2,7 gizlenir. Tarayıcı oturumunda bir kez (`data-loader-off`, depolama yok). Reduced motion: logo 0,6 sn'de belirir, 1,4–1,9 sn'de solar; ışık ve perde yok.
 
 ## 16. Araç yönetim paneli (`/de/admin`, `/tr/admin`; Volkan kararı, 23.10.2026)
 

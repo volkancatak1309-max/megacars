@@ -1,0 +1,24 @@
+390-acilis-ekrani-1-logo-beliriyor
+390-acilis-ekrani-2-isik-gecisi
+390-acilis-ekrani-3-logo-son-hali
+390-acilis-bolumu
+390-ust-bar
+390-ust-bar-kaydirinca
+390-footer
+overflow 390: 0
+1440-acilis-ekrani-1-logo-beliriyor
+1440-acilis-ekrani-2-isik-gecisi
+1440-acilis-ekrani-3-logo-son-hali
+1440-acilis-bolumu
+1440-ust-bar
+1440-ust-bar-kaydirinca
+1440-footer
+overflow 1440: 0
+390-menu-de
+menu de: [{"text":"Startseite","fontPx":23.4,"lines":1,"fits":true},{"text":"Fahrzeuge18","fontPx":23.4,"lines":1,"fits":true},{"text":"Finanzierung","fontPx":23.4,"lines":1,"fits":true},{"text":"Kontakt","fontPx":23.4,"lines":1,"fits":true}]
+390-menu-en
+menu en: [{"text":"Home","fontPx":23.4,"lines":1,"fits":true},{"text":"Vehicles18","fontPx":23.4,"lines":1,"fits":true},{"text":"Financing","fontPx":23.4,"lines":1,"fits":true},{"text":"Contact","fontPx":23.4,"lines":1,"fits":true}]
+390-menu-tr
+menu tr: [{"text":"Ana sayfa","fontPx":23.4,"lines":1,"fits":true},{"text":"Araçlar18","fontPx":23.4,"lines":1,"fits":true},{"text":"Finansman","fontPx":23.4,"lines":1,"fits":true},{"text":"İletişim","fontPx":23.4,"lines":1,"fits":true}]
+
+console errors:

@@ -766,3 +766,89 @@
 **Belgeler** — `docs/rehber/*.jpg` (14 ekran görüntüsü, 14–68 KB, önizlemeden), `docs/ARAC-PANELI-REHBERI.md` görsellerle, `.pdf` (`_work/faz8/guide-pdf.mjs`, Chromium), `docs/DIL-TESTI.md` yeni bölüm, `docs/TESLIM-KONTROL.md` 11–13. satırlar ve eksikler 8–9, `docs/BRIEF.md` envanter maddesi (proje, ortam, hesap kuralı).
 
 **Doğrulanamayanlar / açık kalanlar** — "Fotoğraf çek" (kamera) düğmesi başsız tarayıcıda denenemedi (dosya seçme yolu telefonda ölçüldü). Production ortam değişkenleri talimat gereği yazılmadı. Hesap e-posta adresleri CC varsayımı. Supabase'in "Automatically expose new tables" ayarının tam etkisi (varsayılan GRANT'lerin gelmemesi) kendi sorgumuzla değil, GRANT'leri açıkça yazarak karşılandı.
+
+## 28.10.2026 — Logo yüksek çözünürlük (yalnız logo işi)
+- **28.10.2026** — "YALNIZ LOGO İŞİ. Sitede hiçbir şeyi değiştirme; commit ve push yapma." — İlgili: bu oturum
+- **28.10.2026** — "AMAÇ: Mega Cars'ın logosunu BİREBİR AYNI kalacak şekilde yüksek çözünürlüğe çıkarmak. Logoda hiçbir şey değişmeyecek: şekil, oran, araba silueti, yazı, harf aralığı, renk ve ışık aynı kalacak." — İlgili: C:\Users\90553\Downloads\megacars.logo.png, _work/logo/
+- **28.10.2026** — "Önce kontrol et: dosyanın üretim bilgisinde (C2PA, XMP, IPTC) Google, Gemini ya da yapay zekâ ile üretildi izi var mı? Downloads'ta adı "Gemini" ile başlayan dosyalar varsa, bu dosya onlardan biriyle görsel olarak aynı mı? İz bulursan ya da dosya o çıktılardan biriyle aynıysa DUR, bana sor; o çıktılar logoyu yeniden çizdiği için reddedildi." — İlgili: kaynak kontrolü
+- **28.10.2026** — "Orijinali değiştirmeden C:\Users\90553\Desktop\megacars\_work\logo\ klasörüne logo-orijinal.png adıyla kopyala. Piksel boyutunu raporla." — İlgili: _work/logo/logo-orijinal.png
+- **28.10.2026** — "BÜYÜTME: fal.ai'da yalnız detay uydurmayan, yaratıcı olmayan bir büyütme modeli kullan (Real-ESRGAN, AuraSR, Topaz türü). "Creative", "clarity" ya da prompt'la detay ekleyen modeller YASAK. 4 kat büyüt. fal.ai anahtarı .env.local'da; değerini ekrana yazma. Bu işe en fazla 0,50 USD harca, gerçek tutarı raporla." — İlgili: fal.ai, _work/logo/logo-4x.png
+- **28.10.2026** — "KANIT: Büyütülmüş görseli orijinal boyuta geri küçült ve orijinalle piksel piksel karşılaştır; SSIM değerini ve fark haritasını üret. Solda orijinal (aynı boyuta basit büyütmeyle), sağda yeni büyütme olacak şekilde yan yana bir karşılaştırma görseli hazırla. Şekilde, yazıda ya da araba siluetinde fark görürsen o sonucu kullanma; başka bir yaratıcı olmayan model dene." — İlgili: _work/logo/karsilastirma.png, _work/logo/fark-haritasi.png
+- **28.10.2026** — "Başka hiçbir işlem yapma: arka plan silme, renk ayarı, keskinleştirme filtresi, yeniden çizim yok." — İlgili: logo
+- **28.10.2026** — "Sonuçları _work\logo\ altına kaydet (logo-4x.png, karsilastirma.png, fark-haritasi.png). karsilastirma.png'yi tarayıcımda aç." — İlgili: _work/logo/
+- **28.10.2026** — "RAPOR: Kısa Türkçe. Kullanılan model, maliyet, orijinal ve yeni piksel boyutu, SSIM değeri; her madde [ÖLÇÜLDÜ] veya [ÖLÇÜLMEDİ] etiketli. Sonra DUR." — İlgili: rapor
+
+### Kayıtlar (CC) — logo büyütme, 28.10.2026
+> Bu alt bölüm Volkan'ın cümlesi değildir.
+- Kaynak: 994 × 1002 RGBA PNG (alfa tamamen 255), yalnız sRGB/gAMA/pHYs parçaları; C2PA/XMP/IPTC yok. Downloads'taki 15 "Gemini*" görselinin hiçbiri bu logo değil (görsel karşılaştırma).
+- Real-ESRGAN x4plus (fal-ai/esrgan): SSIM-Y 0,862; siluette çift çizgi ve kalkanda düzleşme → reddedildi. Topaz High Fidelity V2: SSIM-Y 0,983; krom yüzeye çizik dokusu ekledi → reddedildi. Topaz CGI (denoise 0, sharpen 0): SSIM-Y 0,984, PSNR 33,3 dB → kullanıldı (`_work/logo/logo-4x.png`, 3976 × 4008).
+- Harcama: Topaz 2 × 8 birim × 0,01 $ = 0,16 $ + ESRGAN ≤ 0,003 $ (fiyat API'si × `x-fal-billable-units` başlığı; fal kullanım API'si bu anahtarla 403).
+
+## 28.10.2026 — Müşteri geri bildirimi: logo, menü, açılış videosu (talimat)
+- **28.10.2026** — "Müşteri (Mega Cars) önizleme sitesine geri bildirim verdi. Aşağıdaki değişiklikleri v2 dalında yap. main dalını değiştirme; yalnız okuyabilirsin." — İlgili: v2 dalı, main dalı
+- **28.10.2026** — "Tanımlar: "açılış ekranı" = sayfa yüklenirken çıkan perdeli logo ekranı (yükleyici). "Açılış bölümü" = sayfanın en üstündeki videolu bölüm (hero)." — İlgili: terimler
+
+### 1) Logo değişiyor
+- **28.10.2026** — "MC monogram logosu (Konsept A) her yerden kaldırılacak. Sebep: "MC" adında başka bir galeri varmış." — İlgili: lib/brand, bütün site
+- **28.10.2026** — "Yerine Mega Cars'ın kendi logosu gelecek. Kaynak: C:\Users\90553\Desktop\megacars\_work\logo\logo-4x.png (orijinal logonun yaratıcı olmayan 4 kat büyütmesi; Volkan onayladı). Bu dosyayı assets/brand/ altına koy; sitede yalnız ondan üretilen küçültülmüş türevleri kullan." — İlgili: assets/brand/
+- **28.10.2026** — "Logo BİREBİR AYNI kalacak: yeniden çizme, renklendirme, kırpma, parça çıkarma, keskinleştirme ya da filtre yok. Yalnız küçültme ve web formatına dönüştürme serbest." — İlgili: logo türevleri
+- **28.10.2026** — "Logo tek bir kaynak dosyadan beslensin; galerinin orijinal dosyası gelirse yalnız o dosyayı değiştirmek yetsin." — İlgili: assets/brand/, marka betiği
+- **28.10.2026** — "Siyah zemin koyu sitede kutu gibi görünmesin (şeffaflaştırma ya da koyu zeminde karışım); kalkan, araba silueti ve yazının kenarları bozulmasın." — İlgili: logo gösterimi
+- **28.10.2026** — "Kullanılacak yerler: açılış ekranı, üst bar, footer, favicon, apple-touch-icon, OG görseli, admin paneli (monogram oradaysa). Favicon ve apple-touch-icon için de logonun tamamı küçültülerek kullanılsın." — İlgili: Loader, Header, Footer, app/icon, app/apple-icon, public/og, admin
+- **28.10.2026** — "Üst barda ve footer'da logonun yanındaki ayrı "MEGA CARS" yazısı kalksın; logo zaten MEGACARS yazısını içeriyor. Üst barda logo, içindeki MEGACARS yazısı okunacak büyüklükte olsun; gerekirse üst bar yüksekliğini buna göre ayarla." — İlgili: Header, Footer
+- **28.10.2026** — "Açılış ekranı: monogram çizim animasyonu ve ayrı "MEGA CARS" yazı açılışı kalkar. Yerine logo yavaşça belirsin, kromun üzerinden geçici bir ışık geçsin, sonra mevcut kırmızı perde kalksın. Işık geçişi yalnız animasyondur; animasyon bitince logo birebir orijinal görünür. Sayaç yok, zıplama yok." — İlgili: açılış ekranı (Loader)
+
+### 2) Menü yazıları küçülecek
+- **28.10.2026** — ""Menü" düğmesiyle açılan ekrandaki büyük başlıklar (TR: ANA SAYFA / ARAÇLAR / FİNANSMAN / İLETİŞİM) müşteriye çok büyük gelmiş." — İlgili: menü ekranı
+- **28.10.2026** — "Şu anki boyutu 390 px ve 1440 px genişlikte ölç. Yaklaşık üçte bir küçültmeyle başla. 3 dilde en uzun başlık tek satıra sığsın. Alttaki iletişim bilgileri olduğu gibi kalsın." — İlgili: menü ekranı
+
+### 3) Açılış bölümünün arka planı
+- **28.10.2026** — "Müşteri eski sitedeki açılış videosunu istiyor. Eski site = main dalı (megacars-one.vercel.app). Müşterinin gönderdiği ekranda siyah, büyük arka kanatlı bir spor araba, arkada dağlar ve "JEDER KILOMETER, GEPRÜFT." başlığı var." — İlgili: açılış bölümü (hero)
+- **28.10.2026** — "Önce bu başlığın main dalında olduğunu doğrula; o bölümün gerçekte oynattığı video dosyasını bul. Bulamazsan ya da başlık v2'de çıkarsa DUR, bana sor." — İlgili: main dalı
+- **28.10.2026** — "Bu video FAZ 1'de docs/ARASTIRMA.md içinde denetlendiyse o bulguyu raporda hatırlat." — İlgili: docs/ARASTIRMA.md
+- **28.10.2026** — "Bu video, v2 açılış bölümündeki kırmızı Corvette videosunun yerine geçecek. Görüntü kalitesini düşürmeden web için uygun boyuta getir." — İlgili: public/hero
+
+### 4) Açılış bölümündeki büyük "MEGA CARS" yazısı
+- **28.10.2026** — "Müşteri "yazı tam görünmüyor" dedi: içi video dolgulu maskeli yazı koyu zeminde seçilmiyor." — İlgili: hero yazısı
+- **28.10.2026** — "Yeni videoyla birlikte mobilde ve masaüstünde tamamen okunur hale getir." — İlgili: hero yazısı
+
+### 5) Hakkımızda
+- **28.10.2026** — "Müşteri kendi hikayesini ve fotoğraflarını gönderecek. Şimdilik değişiklik yok; docs/TESLIM-KONTROL.md'ye bekleyen olarak ekle." — İlgili: Über uns, docs/TESLIM-KONTROL.md
+
+### Sonra
+- **28.10.2026** — "docs/ARAC-PANELI-REHBERI (.md ve .pdf) içindeki ekran görüntülerini yeni logoyla yenile." — İlgili: docs/ARAC-PANELI-REHBERI.md/.pdf, docs/rehber/
+- **28.10.2026** — "KARAR-DEFTERI'ne yaz: logo ve açılış videosu 28.10.2026'da müşteri isteğiyle değişti. Logo büyütme kaydı zaten eklendi; onu koru." — İlgili: KARAR-DEFTERI
+- **28.10.2026** — "_work klasörünü commit'e katma." — İlgili: git
+- **28.10.2026** — "v2'ye commit + push. Vercel GitHub'dan derlesin; CLI ile deploy yok." — İlgili: yayın
+- **28.10.2026** — "Önizleme adresinde ekran görüntüleri al: 390 px ve 1440 px genişlikte açılış ekranı, açılış bölümü, üst bar, footer; menü ekranı 3 dilde. Hepsini docs/geri-bildirim-2026-10-28/ klasörüne kaydet." — İlgili: docs/geri-bildirim-2026-10-28/
+- **28.10.2026** — "RAPOR: Her madde için [ÖLÇÜLDÜ] veya [ÖLÇÜLMEDİ] etiketiyle kısa Türkçe rapor. Son commit hash'ini yaz." — İlgili: rapor
+
+### Kayıt (CC) — değişiklik
+- **Logo ve açılış videosu 28.10.2026'da müşteri isteğiyle değişti.** Logo: MC monogramı (Konsept A, 23.10.2026) yerine Mega Cars'ın kendi logosu. Açılış videosu: Corvette C8 (Pexels 33374869, 23.10.2026) yerine eski sitenin filmi (main dalı `public/hero/hero-main.mp4`). Yukarıdaki "Logo yüksek çözünürlük" kaydı korunur.
+
+### Kayıtlar (CC, ölçümlü) — müşteri geri bildirimi uygulaması, 28.10.2026
+> Bu alt bölüm Volkan'ın cümlesi değildir.
+
+**Logo**
+- Kaynak `assets/brand/logo.png` = `_work/logo/logo-4x.png` (aynı SHA-256), 3976 × 4008. `scripts/brand-assets.ts` (`npm run brand`; `vercel.json` artık `npm run build` çalıştırdığı için Vercel'de de derlemeden önce) üretir: şeffaf WebP 96/160/240/320/480/640/960/1280 px (`public/brand/logo-<özet>-<w>.webp`, özet = kaynak + betik; satır sonundan bağımsız), `lib/brand/logo.json`, `app/icon.png` (64), `app/apple-icon.png` (180), `public/og/default.jpg`. `app/icon.svg`, `lib/brand/marks.ts`, `lib/brand/glyphs.ts` kaldırıldı.
+- Kırpma yok: yalnız çizimin çevresindeki boş zemin bırakıldı (zemin 0–2/255; 2'den parlak piksellerin hepsi içeride — ölçüm: dışarıda 0 piksel; %3 pay). Çizim kutusu 3179 × 2629.
+- Şeffaflaştırma: zemin gürültüsü tavanı T = 2 (çizim dışı alanın %99,9'u); alfa = (en parlak kanal − T) / (255 − T), renk = T + (v − T) / alfa. İlk denemede (alfa = en parlak kanal) zemin 1/255 alfa aldı ve açılış ekranında logonun çevresinde 1 seviyelik kutu ölçüldü (11 → 12); düzeltildi, şimdi logo çevresi = sayfa zemini 11/11/13.
+- Web dosyası ↔ düz küçültme (sharp lanczos3, T zemininde): logoda ortalama fark 0,8–1,1 seviye, %99'u ≤ 9 (yalnız WebP q85 sıkıştırması).
+- Açılış ekranı (animasyonlar Web Animations API ile 1,30 / 1,75 sn'de durdurularak, önizlemede): ışık geçerken pikseller değişir (en fazla 77, alanın %10,7'si); ışık geçtikten sonra ışık katmanı kaldırılmış kareyle fark 0; ölçeklemesiz (500 px pencere, 320 px dosya 1:1) düz logo dosyasıyla fark 0. 1440 px'te 480 px'lik dosya 400 px'e iner; animasyonlu katmanda tarayıcının küçültme filtresi farklı olduğu için düz `<img>` ile kenarlarda fark var (en fazla 56) — logo dosyası değil, tarayıcı ölçeklemesi.
+- Üst bar 68 → 72 px (mobil), 80 → 88 px (≥ 1024); logo 56 / 68 px (yazı ≈ %17 → ≈ 9,5 / 11,5 px). Footer logosu 100 / 130 px. Panel üst barı 44 px, giriş sayfası 130 px.
+- Footer'ın en altındaki dev, çizgisel "MEGA CARS" yazısı (`.ft-word`) logonun yanında değil, ayrı bir süs öğesi; talimat "logonun yanındaki" dediği için dokunulmadı → Volkan'a soruldu.
+
+**Menü**
+- Önce (önizleme, Playwright): başlık yazısı 390 px'te 35,1 px, 768 px'te 69,1 px, 1440 px'te 88 px. 1024 px ve üstünde "Menü" düğmesi yok (linkler üst barda); 1440 ölçümü pencere doğrudan açılarak alındı.
+- Sonra: `clamp(1.4rem, 6vw, 3.65rem)` → 23,4 / 46,1 / 58,4 px (−%33). En uzun başlık "FINANZIERUNG" 390 px'te 217/350 px; DE/EN/TR bütün başlıklar tek satır. Alttaki iletişim bilgileri değişmedi.
+
+**Açılış filmi**
+- Başlık "Jeder Kilometer, geprüft." main dalında `src/i18n/locales/de.json` (hero.title); main'deki `src/components/Hero.tsx` `/hero/hero-main.mp4` oynatıyor; canlı megacars-one.vercel.app'teki dosya ile aynı (SHA-256 c28d2855…, 10.269.693 bayt, 1920×1080, 30 fps, 19,7 sn). v2'de başlık yok.
+- FAZ 1 bulgusu (docs/ARASTIRMA.md §a3): bu filmde yapay zekâ izi var (okunmaz rozet harfleri, eriyen AMG rozeti, bozuk ızgara çubukları, 5 ayrı mekân) ve "kullanılamaz" kararı verilmişti; stokta olmayan araç. Ayrıca 1440 px'te "S" harfinin içinde Mercedes yıldızı seçiliyor (23.10.2026 kuralı: logo ve rozet okunmayacak). Müşteri isteğiyle yine de kullanıldı; Volkan'a hatırlatıldı.
+- Kodlama (renk ve hız değişikliği yok, 30 fps, 19,7 sn döngü): x264 iki geçiş. Masaüstü 1920×1080: 5,8 MB → VMAF 93,1; 6,7 MB → 94,8; **7,5 MB → 95,9 (seçilen)**; CRF 24 8,6 MB → 97,0. Mobil 540×960 (kaynakta x 656–1264 merkez kırpım) **2,4 MB → VMAF 96,2**. Posterler ilk kareden WebP: 76 KB / 17 KB. Masaüstü dosyası 23.10.2026'daki 6 MB sınırını 1,5 MB aşıyor (talimat "kaliteyi düşürmeden"); 5,8 MB'lık sürüm `_work/hero-main/desktop-5.8mb.mp4` içinde. Film sayfa yüklendikten sonra bağlanır (ilk boyamayı etkilemez). Corvette dosyaları (`public/hero/c8/`) kaldırıldı; künyedeki film satırı üç dilde "eski Mega Cars web sitesinden".
+- "MEGA CARS" harfleri: dış kenarda 1,75 px kemik rengi kontur (%90). Unbounded'ın üst üste binen iç konturları ilk denemede harf içinde çizgi olarak göründü; kontur 3,5 px çizilip plakanın maskesiyle kesildi, iç çizgiler gizlendi.
+
+**Kontrol**
+- `tsc` temiz; `npm run build` temiz (91 sayfa). Önizlemede: konsol hatası 0, yatay taşma 0 (390 / 1440), `/brand/*` ve `/hero/*` `immutable`, `/hero/c8/*` 404.
+- Panel rehberi: `_work/faz8/pw-preview.mjs` önizlemede yeniden çalıştırıldı — 73/73 geçti, deneme aracı en sonda tamamen silindi (stok 18); `docs/rehber/*.jpg` (14) yeni logoyla, PDF yeniden üretildi (12 sayfa, 14/14 görsel).
+- Ekran görüntüleri: `docs/geri-bildirim-2026-10-28/` (açılış ekranı 3 an, açılış bölümü, üst bar şeffaf + kaydırınca, footer — 390 ve 1440; menü DE/EN/TR — 390).

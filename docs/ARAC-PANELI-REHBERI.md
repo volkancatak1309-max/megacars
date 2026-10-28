@@ -3,7 +3,7 @@
 > Mega Cars — Website-Verwaltung. Adresse: **https://megacars-git-v2-volkancatak1309-maxs-projects.vercel.app/de/admin** (Deutsch) · **…/tr/admin** (Türkçe). Zugangsdaten erhalten Sie von Galzura.
 > Mega Cars — web sitesi yönetimi. Adres: **…/tr/admin** (Türkçe) · **…/de/admin** (Almanca). Giriş bilgilerini Galzura verir.
 
-> PDF-Version / PDF sürümü: `docs/ARAC-PANELI-REHBERI.pdf` · Screenshots / ekran görüntüleri: `docs/rehber/` (Vorschau-Adresse, 23.10.2026).
+> PDF-Version / PDF sürümü: `docs/ARAC-PANELI-REHBERI.pdf` · Screenshots / ekran görüntüleri: `docs/rehber/` (Vorschau-Adresse, 23.10.2026; mit dem neuen Logo erneuert am 28.10.2026 / yeni logoyla 28.10.2026).
 
 ---
 

@@ -852,3 +852,51 @@
 - `tsc` temiz; `npm run build` temiz (91 sayfa). Önizlemede: konsol hatası 0, yatay taşma 0 (390 / 1440), `/brand/*` ve `/hero/*` `immutable`, `/hero/c8/*` 404.
 - Panel rehberi: `_work/faz8/pw-preview.mjs` önizlemede yeniden çalıştırıldı — 73/73 geçti, deneme aracı en sonda tamamen silindi (stok 18); `docs/rehber/*.jpg` (14) yeni logoyla, PDF yeniden üretildi (12 sayfa, 14/14 görsel).
 - Ekran görüntüleri: `docs/geri-bildirim-2026-10-28/` (açılış ekranı 3 an, açılış bölümü, üst bar şeffaf + kaydırınca, footer — 390 ve 1440; menü DE/EN/TR — 390).
+
+## 28.10.2026 — Volkan'ın kararları: açılış videosu, video kalitesi, footer yazısı (talimat)
+- **28.10.2026** — "Volkan'ın kararları geldi. v2 dalında devam et; main dalını değiştirme, yalnız okuyabilirsin." — İlgili: v2 dalı, main dalı
+
+### KARAR 1 — Açılış videosu kalıyor, yapay zekâ izleri gizlenecek
+- **28.10.2026** — "FAZ 1'de (docs/ARASTIRMA.md §a3) bulunan izlerin (okunmayan rozet harfleri, eriyen AMG rozeti) göründüğü saniyeleri kare kare tespit et ve bu saniyeleri çıkar." — İlgili: açılış videosu, public/hero
+- **28.10.2026** — "Kalan video en az 6 saniyelik, takılmadan dönen akıcı bir döngü olsun; döngü noktasında sert kesim görünmesin." — İlgili: açılış videosu döngüsü
+- **28.10.2026** — "Videonun ekrandaki konumunu, Mercedes yıldızı ve rozetler büyük "MEGA CARS" harflerinin içine denk gelmeyecek ve okunmayacak şekilde ayarla. 390 px ve 1440 px'te kontrol et." — İlgili: açılış bölümü (hero) harf maskesi
+- **28.10.2026** — "Bunlar videoyu bozmadan yapılamıyorsa hiçbir şeyi değiştirme, nedenini raporla." — İlgili: açılış videosu
+
+### KARAR 2 — Video kalitesi: gerçek, keskin 1080p
+- **28.10.2026** — "Volkan önizlemede videoyu 720p gibi görüyor. Önce sebebini ölç: kaynak dosyanın çözünürlüğü, bit hızı, kare hızı ve gerçek detay seviyesi (daha düşük çözünürlükten büyütülmüş mü?)." — İlgili: açılış videosu kaynağı
+- **28.10.2026** — "Daha kaliteli kaynak ara: aynı videonun daha yüksek çözünürlüklü ya da daha az sıkıştırılmış bir kopyası C:\Users\90553\Desktop (alt klasörler dahil, ör. business\pikens-unboxing), Downloads, Videos ve CapCut'ın dışa aktarma klasörlerinde var mı? Süreye ve ilk kareye göre eşleştir. Varsa onu kullan." — İlgili: kaynak araması
+- **28.10.2026** — "Daha iyi kaynak yoksa fal.ai'da yalnız detay uydurmayan bir video büyütme modeliyle (Topaz türü) 1080p'ye çıkar. Rozet, yazı ya da şekil uyduran modeller YASAK; önce ve sonra kareleri karşılaştırıp yeni iz oluşmadığını kontrol et. Bu işe en fazla 2 USD harca; fiyatı önceden hesapla, aşacaksa DUR, sor." — İlgili: fal.ai, video büyütme
+- **28.10.2026** — "Sıra: önce saniyeleri çıkar, sonra büyüt (büyütme yalnız kalan kısma uygulansın), en son sıkıştır." — İlgili: video iş sırası
+- **28.10.2026** — "Hedef: masaüstü 1920×1080, kalite ölçüsü (VMAF) en az 96. Dosya boyutu ikinci planda, ama 15 MB'ı geçecekse DUR, sor. Mobil dosyayı da aynı kaynaktan yeniden üret. iPhone Safari'de oynadığını doğrula." — İlgili: public/hero (masaüstü + mobil)
+
+### KARAR 3 — Footer yazısı
+- **28.10.2026** — "Footer'ın altındaki büyük "MEGA CARS" yazısı kalıyor; dokunma." — İlgili: Footer `.ft-word`
+
+### Ek kontrol
+- **28.10.2026** — "Sekme ikonunu (favicon) açık temalı tarayıcı sekmesinde kontrol et. Logo seçilmiyorsa ikonda logonun siyah zeminini koru; logonun kendisi yine değişmeyecek." — İlgili: app/icon.png
+
+### Sonra
+- **28.10.2026** — "KARAR-DEFTERI'ne üç kararı 28.10.2026 tarihiyle yaz." — İlgili: KARAR-DEFTERI
+- **28.10.2026** — "_work klasörünü commit'e katma." — İlgili: git
+- **28.10.2026** — "v2'ye commit + push. Vercel GitHub'dan derlesin; CLI ile deploy yok." — İlgili: yayın
+- **28.10.2026** — "Önizlemeden 390 px ve 1440 px ekran görüntüleri al: açılış bölümü (videonun 3 farklı anı) ve footer. docs/geri-bildirim-2026-10-28/ altına ekle." — İlgili: docs/geri-bildirim-2026-10-28/
+- **28.10.2026** — "RAPOR: Kısa Türkçe, her madde [ÖLÇÜLDÜ] veya [ÖLÇÜLMEDİ] etiketli: çıkarılan saniyeler, yeni video süresi, kaynak ve yeni çözünürlük, kalite ölçüsü, dosya boyutları, maliyet, son commit hash'i. Ayrıca açılış bölümünde videonun şu an nasıl göründüğünü yaz: tam ekran arka plan olarak mı, yalnız büyük yazının harflerinin içinde mi? Bu konuda bir şey değiştirme." — İlgili: rapor, açılış bölümü
+
+### Kayıtlar (CC, ölçümlü) — Volkan'ın 28.10.2026 kararları uygulaması
+> Bu alt bölüm Volkan'ın cümlesi değildir.
+
+**KARAR 1 — uygulanmadı (talimat gereği hiçbir şey değiştirilmedi)**
+- Kare kare tarama (`_work/hero-main/ai/`, 30 fps, sahne kesimleri 5,30 / 8,10 / 13,80 / 17,63 sn): okunmaz bagaj yazısı (sahte "AMG") 1,40 sn'den (kare 42) 5,30 sn'ye kadar; ızgaradaki eriyen AMG rozeti ("H" biçimli çubuk ya da leke) 5,30–11,57 sn (kare 347'ye kadar; 8,1–9,3 çapraz geçiş dahil) ve 13,80–19,70 sn; çamurlukta "ASRMZ" 17,63–19,70 sn. Çıkarılması gereken: 1,40–11,57 ve 13,80–19,70 sn (16,1 sn).
+- Kalan temiz kısım: 0,00–1,37 sn (yan görünüş; jant göbeklerinde Mercedes yıldızı okunuyor) + 11,60–13,77 sn (kaput/kapı yakın planı, rozet yok) = **≈ 3,6 sn**. "En az 6 sn, takılmadan dönen döngü" bu iki parçayla sağlanamıyor (ileri-geri oynatma 1,4 sn'de bir yön değiştirir; yavaşlatma kare uydurur). → Video, konum ve kodlama değiştirilmedi; büyütme yapılmadı; harcama 0 $.
+- Önizlemede bugünkü durum (1440 px, filmin 15,8. sn'si): kaput yıldızı "R"nin, eriyen AMG rozeti "S"nin içinde görünüyor (`docs/geri-bildirim-2026-10-28/1440-acilis-bolumu-film-3-15.8sn.jpg`).
+
+**KARAR 2 — ölçüm ve kaynak araması**
+- Sitedeki dosyanın kaynağı (main `hero-main.mp4`): 1920×1080, 30 fps, H.264 High, 4,17 Mbit/s, 19,7 sn. Ayrıntı: 720p'ye indirip geri büyütme kare farkı ortanca 44,9 dB (gerçek 4K→1080 Pexels referansı 47,3 dB; 720p'den büyütülmüş referans 53,2 dB); %200 kırpımlarda 1080 dosya ile 720p'ye inip dönen kare gözle ayırt edilmiyor, dağ dokusunda blok sıkıştırma izi var → dosya adıyla 1080p, ayrıntısıyla ≈ 720p + düşük bit hızı. Mobil dosya kaynağın 608 px genişliğinden kırpılıyor; 390 px telefonda (2× ekran) ≈ 1,3× büyütülerek gösteriliyor.
+- Arama (Desktop alt klasörler, Downloads, OneDrive dahil Videos, CapCut; 269 video; 32×18 kare korelasyonu, ilk kare + bütün kareler): eşleşenler — `Downloads/hero-source.mp4` = `Desktop/business/pikens-unboxing/hero-source-backup.mp4` (aynı dosya, 1920×1080, 15,6 Mbit/s, 19,7 sn; ayrıntı ölçüsü daha yüksek ama %200'de aynı blok izleri — düşük bit hızlı kopyadan yeniden kodlanmış), `pikens-unboxing/public|dist/hero/hero-main.mp4` (1600×900), ve **`Downloads/Blacked-Out AMG GT Black Series 🖤 ｜ Aggressive 4K Cinematic Edit.mp4`** (101,6 sn, 1920×1080, 3,7 Mbit/s; dosya etiketi: sanatçı "VibeOnDriveOfficial", https://www.youtube.com/watch?v=yhcDe-59P18, 10.05.2026; açılış filmi bu YouTube videosunun 14–33,7 sn'lik bölümü). Daha yüksek çözünürlüklü kopya yok.
+- Sıra kuralı ("önce saniyeleri çıkar, sonra büyüt") ve KARAR 1 uygulanamadığı için fal.ai'da büyütme yapılmadı.
+
+**KARAR 3** — footer `.ft-word` olduğu gibi kaldı.
+
+**Ek kontrol — sekme ikonu** — `app/icon.png` 64 px, logonun kendi siyah zemini korunuyor (köşe pikseli 0/1/0, opak). Beyaz, Chrome açık sekme (#f1f3f4) ve açık şerit (#dee1e6) zemininde 16 ve 32 px'te siyah kare içinde krom logo seçiliyor; önizlemenin sunduğu dosya repodakiyle aynı (SHA-1 5e80754f). Değişiklik gerekmedi.
+
+**Ekran görüntüleri** — `docs/geri-bildirim-2026-10-28/{390,1440}-acilis-bolumu-film-{1,2,3}-*.jpg` (filmin 0,2 / 8,9 / 15,8. saniyesi) ve `{390,1440}-footer.jpg` (yenilendi); konsol hatası 0, yatay taşma 0.

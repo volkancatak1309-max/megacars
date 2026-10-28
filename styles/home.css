@@ -91,6 +91,15 @@
   font-weight: 900;
 }
 
+/* the outline of the cut letters: the name reads even where the film is dark. The mask
+   keeps the outer half of the stroke, so 3.5 px draws a 1.75 px line. */
+.hl-edge text {
+  stroke: var(--bone);
+  stroke-opacity: 0.9;
+  stroke-width: 3.5px;
+  vector-effect: non-scaling-stroke;
+}
+
 .hl-scrim {
   position: absolute;
   inset: 0;

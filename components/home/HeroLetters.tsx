@@ -16,10 +16,24 @@ const LAYOUT = {
   portrait: { w: 900, h: 1600, size: 174, top: 700, lead: 155 },
 }
 
-/** The dark plate with the letters cut out; whatever sits behind it shows through them. */
+/**
+ * The dark plate with the letters cut out; whatever sits behind it shows through them. A thin
+ * bone outline follows the cut (Volkan, 28.10.2026: the letters must read on mobile and desktop
+ * even where the film is as dark as the plate).
+ */
 export function LetterMask({ id, portrait, className = '' }: { id: string; portrait: boolean; className?: string }) {
   const { w, h, size, top, lead } = LAYOUT[portrait ? 'portrait' : 'landscape']
   const width = Math.round(size * 4.03)
+  const letters = (props: React.SVGProps<SVGTextElement>) => (
+    <>
+      <text x={w / 2} y={top} textAnchor="middle" className="hl-letters" style={{ fontSize: size }} {...props}>
+        MEGA
+      </text>
+      <text x={w / 2} y={top + lead} textAnchor="middle" textLength={width} lengthAdjust="spacing" className="hl-letters" style={{ fontSize: size }} {...props}>
+        CARS
+      </text>
+    </>
+  )
   return (
     <svg
       className={`hl-mask ${portrait ? 'is-portrait' : 'is-landscape'} ${className}`}
@@ -31,15 +45,15 @@ export function LetterMask({ id, portrait, className = '' }: { id: string; portr
       <defs>
         <mask id={id} maskUnits="userSpaceOnUse" x="0" y="0" width={w} height={h}>
           <rect width={w} height={h} fill="#fff" />
-          <text x={w / 2} y={top} textAnchor="middle" fill="#000" className="hl-letters" style={{ fontSize: size }}>
-            MEGA
-          </text>
-          <text x={w / 2} y={top + lead} textAnchor="middle" textLength={width} lengthAdjust="spacing" fill="#000" className="hl-letters" style={{ fontSize: size }}>
-            CARS
-          </text>
+          {letters({ fill: '#000' })}
         </mask>
       </defs>
       <rect width={w} height={h} fill="currentColor" mask={`url(#${id})`} />
+      {/* the font's contours overlap inside the letters: the stroke is drawn twice as wide and
+          cut by the same mask, so only its outer half shows and no inner line appears */}
+      <g className="hl-edge" mask={`url(#${id})`}>
+        {letters({ fill: 'none' })}
+      </g>
     </svg>
   )
 }

@@ -1,56 +1,46 @@
 # LIGHTHOUSE — Mega Cars v2 (önizleme)
 
-> Ölçüm: 23.10.2026 (commit 38f09d0), sabit önizleme adresi https://megacars-git-v2-volkancatak1309-maxs-projects.vercel.app (girişsiz, noindex). Lighthouse 13.5.0 CLI, headless Chrome, varsayılan simüle kısıtlama (mobil: Moto G Power, yavaş 4G, 4× CPU; masaüstü: `--preset=desktop`). Her sayfa tipi ve cihaz için **3 ölçüm, sırayla (aynı anda değil)**; tablodaki değerler **ortanca**. Ham JSON: `_work/faz5/lh/` (repoya girmez), betik: `_work/faz5/lh.py`.
-> Hedefler (KARAR-DEFTERI): mobil Performans ≥ 80, masaüstü ≥ 85, mobil LCP < 3,0 sn, CLS < 0,1, INP < 200 ms, ilk yük JS < 300 KB (gzip).
-> \* SEO puanı bilerek düşük: site canlıya çıkana kadar `noindex` + `robots.txt Disallow: /` (Lighthouse "is-crawlable" denetimi). `lib/launch.ts` → `INDEXABLE = true` ile açılır.
-> 23.10.2026 (logo oturumu): Volkan mobil LCP < 3,0 sn hedefini bu proje için askıya aldı; açılış ekranı sayaçtan logoya çevrildi, özel imleç kaldırıldı. Bu oturumda hız ölçümü yenilenmedi; aşağıdaki değerler 38f09d0 ölçümleridir.
+> **Ölçüm: 29.10.2026, commit f823edc** (Panamera kasa tipi + hareket azaltma / tarih alanı düzeltmeleri dahil). Sabit önizleme adresi https://megacars-git-v2-volkancatak1309-maxs-projects.vercel.app (girişsiz, noindex). Lighthouse 13.5.0 CLI, headless Chrome, varsayılan simüle kısıtlama (mobil: Moto G Power, yavaş 4G, 4× CPU; masaüstü: `--preset=desktop`). Her sayfa ve cihaz için **3 ölçüm, sırayla (aynı anda değil)**; tablodaki değerler **ortanca**. Ham JSON ve HTML raporları: `_work/finish/lh/` (repoya girmez), betik `_work/finish/lh.py`.
+> Volkan'ın 29.10.2026 talimatı: **yalnız ölç, hız iyileştirmesi yapma.** Volkan'ın 23.10.2026 kararıyla bu sitede hız işleriyle uğraşılmıyor; mobil LCP < 3,0 sn hedefi askıda.
+> Hedefler (KARAR-DEFTERI 22.10.2026, bilgi için): mobil Performans ≥ 80, masaüstü ≥ 85, mobil LCP < 3,0 sn, CLS < 0,1, ilk yük JS < 300 KB (gzip).
+> \* SEO bilerek düşük: site canlıya çıkana kadar `noindex` + `robots.txt Disallow: /` (Lighthouse "is-crawlable"). Canlıya geçişte `lib/launch.ts` → `INDEXABLE = true`.
 
-## Mobil
+## Mobil (29.10.2026)
 
-| Sayfa tipi | Performans | LCP (sn) | CLS | TBT (ms) | FCP (sn) | Erişilebilirlik | En iyi uyg. | SEO* | İlk yük JS gzip (KB) | 3 ölçüm (Perf / LCP) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Startseite /de | 84 ✓ | **3.4 ✗** | 0 ✓ | 151 | 1.32 | 100 | 100 | 69 | 230.1 ✓ | 84 / 2.68 · 85 / 3.4 · 83 / 3.42 |
-| Fahrzeuge /de/fahrzeuge | 91 ✓ | 2.73 ✓ | 0.0 ✓ | 126 | 1.27 | 100 | 100 | 69 | 230.3 ✓ | 91 / 2.73 · 93 / 2.71 · 83 / 3.67 |
-| Fahrzeug-Detail (S 560) | **78 ✗** | **3.69 ✗** | 0.0 ✓ | 334 | 1.69 | 100 | 100 | 69 | 231.3 ✓ | 79 / 3.69 · 78 / 3.71 · 77 / 3.59 |
-| Kontakt & Über uns | 89 ✓ | 2.58 ✓ | 0.003 ✓ | 234 | 1.58 | 100 | 100 | 69 | 228.0 ✓ | 89 / 2.58 · 87 / 2.64 · 90 / 2.53 |
-| Finanzierung | 87 ✓ | **3.23 ✗** | 0.013 ✓ | 276 | 1.49 | 100 | 100 | 66 | 227.3 ✓ | 83 / 3.23 · 87 / 3.3 · 89 / 2.51 |
-| Ankauf (gizli) | 82 ✓ | **3.38 ✗** | 0.012 ✓ | 305 | 1.45 | 100 | 100 | 66 | 227.3 ✓ | 79 / 3.46 · 82 / 3.38 · 88 / 2.52 |
-| Impressum | 92 ✓ | 2.46 ✓ | 0.0 ✓ | 207 | 1.19 | 100 | 100 | 66 | 224.7 ✓ | 92 / 2.36 · 89 / 2.5 · 92 / 2.46 |
-| Datenschutz | 87 ✓ | **3.11 ✗** | 0 ✓ | 98 | 1.26 | 100 | 100 | 66 | 224.7 ✓ | 95 / 2.31 · 87 / 3.11 · 87 / 3.11 |
+| Sayfa | Performans | LCP (sn) | CLS | TBT (ms) | FCP (sn) | Speed Index (sn) | Erişilebilirlik | En iyi uyg. | SEO* | İlk yük JS gzip (KB) | 3 ölçüm (Perf / LCP) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Ana sayfa /de | 73 ✗ | 4,99 ✗ | 0 ✓ | 110 | 1,29 | 7,55 | 100 | 96 | 69 | 230,7 ✓ | 73 / 4,99 · 74 / 4,92 · 73 / 5,00 |
+| Araç listesi /de/fahrzeuge | 75 ✗ | 5,62 ✗ | 0 ✓ | 22 | 1,26 | 5,12 | 100 | 96 | 69 | 231,2 ✓ | 75 / 5,79 · 75 / 5,62 · 76 / 5,53 |
+| Araç detayı (S 560) | 74 ✗ | 5,02 ✗ | 0,014 ✓ | 55 | 1,27 | 7,80 | 100 | 100 | 69 | 231,7 ✓ | 81 / 4,27 · 73 / 5,15 · 74 / 5,02 |
+| İletişim /de/kontakt | 77 ✗ | 4,39 ✗ | 0 ✓ | 58 | 1,27 | 7,10 | 100 | 100 | 69 | 228,4 ✓ | 78 / 4,35 · 77 / 4,50 · 77 / 4,39 |
 
-## Masaüstü
+## Masaüstü (29.10.2026)
 
-| Sayfa tipi | Performans | LCP (sn) | CLS | TBT (ms) | FCP (sn) | Erişilebilirlik | En iyi uyg. | SEO* | İlk yük JS gzip (KB) | 3 ölçüm (Perf / LCP) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Startseite /de | 96 ✓ | 0.98 | 0.022 ✓ | 4 | 0.41 | 100 | 100 | 69 | 235.4 ✓ | 96 / 0.98 · 96 / 0.97 · 96 / 0.99 |
-| Fahrzeuge /de/fahrzeuge | 92 ✓ | 1.24 | 0.0 ✓ | 0 | 0.4 | 100 | 100 | 69 | 235.6 ✓ | 92 / 1.22 · 92 / 1.37 · 93 / 1.24 |
-| Fahrzeug-Detail (S 560) | 96 ✓ | 1.02 | 0.013 ✓ | 0 | 0.41 | 100 | 100 | 69 | 236.6 ✓ | 95 / 1.14 · 97 / 0.76 · 96 / 1.02 |
-| Kontakt & Über uns | 97 ✓ | 0.89 | 0.013 ✓ | 0 | 0.41 | 100 | 100 | 69 | 233.3 ✓ | 97 / 0.9 · 97 / 0.89 · 97 / 0.89 |
-| Finanzierung | 96 ✓ | 0.91 | 0.014 ✓ | 4 | 0.4 | 100 | 100 | 66 | 232.6 ✓ | 96 / 0.91 · 97 / 0.61 · 94 / 1.17 |
-| Ankauf (gizli) | 96 ✓ | 0.99 | 0.0 ✓ | 36 | 0.45 | 100 | 100 | 66 | 232.6 ✓ | 95 / 1.04 · 96 / 0.99 · 97 / 0.61 |
-| Impressum | 96 ✓ | 0.94 | 0.0 ✓ | 4 | 0.36 | 100 | 100 | 66 | 230.0 ✓ | 96 / 0.94 · 96 / 0.98 · 96 / 0.93 |
-| Datenschutz | 96 ✓ | 0.95 | 0.0 ✓ | 9 | 0.4 | 100 | 100 | 66 | 230.0 ✓ | 96 / 1.01 · 96 / 0.95 · 97 / 0.59 |
+| Sayfa | Performans | LCP (sn) | CLS | TBT (ms) | FCP (sn) | Speed Index (sn) | Erişilebilirlik | En iyi uyg. | SEO* | İlk yük JS gzip (KB) | 3 ölçüm (Perf / LCP) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Ana sayfa /de | 95 ✓ | 0,96 | 0 ✓ | 0 | 0,35 | 2,08 | 100 | 96 | 69 | 236,0 ✓ | 95 / 0,84 · 93 / 1,22 · 95 / 0,96 |
+| Araç listesi /de/fahrzeuge | 90 ✓ | 1,54 | 0 ✓ | 0 | 0,33 | 2,24 | 100 | 96 | 69 | 236,5 ✓ | 90 / 1,54 · 94 / 0,93 · 88 / 1,71 |
+| Araç detayı (S 560) | 92 ✓ | 1,32 | 0 ✓ | 0 | 0,34 | 2,02 | 100 | 100 | 69 | 237,0 ✓ | 92 / 1,38 · 95 / 1,01 · 92 / 1,32 |
+| İletişim /de/kontakt | 96 ✓ | 0,75 | 0 ✓ | 0 | 0,34 | 1,92 | 100 | 96 | 69 | 233,7 ✓ | 96 / 0,75 · 95 / 1,05 · 96 / 0,72 |
 
-## INP
+## Ekran görüntüleri (ortanca ölçümün raporu)
 
-Lighthouse'un sayfa yükleme ölçümü INP'yi ölçemez (etkileşim gerekir); laboratuvar karşılığı TBT yukarıda. Ayrıca gerçek tıklamalarla ölçüldü (Chrome, mobil öykünme, 4× CPU, Event Timing API; en kötü etkileşim):
+Mobil: [ana sayfa](lighthouse/2026-10-29/startseite-mobile.jpg) · [araç listesi](lighthouse/2026-10-29/fahrzeuge-mobile.jpg) · [araç detayı](lighthouse/2026-10-29/detail-s560-mobile.jpg) · [iletişim](lighthouse/2026-10-29/kontakt-mobile.jpg)
+Masaüstü: [ana sayfa](lighthouse/2026-10-29/startseite-desktop.jpg) · [araç listesi](lighthouse/2026-10-29/fahrzeuge-desktop.jpg) · [araç detayı](lighthouse/2026-10-29/detail-s560-desktop.jpg) · [iletişim](lighthouse/2026-10-29/kontakt-desktop.jpg)
 
-| EtkileÅŸim (Ã¶nizleme, 23.10.2026) | 4Ã— CPU, mobil Ã¶ykÃ¼nme | 1Ã— CPU |
-|---|---|---|
-| Detay: galeride "NÃ¤chstes Foto" | 72 ms âœ“ | â€” |
-| Detay: kÃ¼Ã§Ã¼k resme dokunma | 48 ms âœ“ | â€” |
-| Liste: "Filter" panelini aÃ§ma (mobil) | **224â€“272 ms âœ—** | â€” |
-| MenÃ¼yÃ¼ aÃ§ma | **272â€“288 ms âœ—** | 40 ms âœ“ |
-| Detay: "Probefahrt anfragen" penceresini aÃ§ma | **296 ms âœ—** | 40 ms âœ“ |
+![Ana sayfa, mobil](lighthouse/2026-10-29/startseite-mobile.jpg)
+![Ana sayfa, masaüstü](lighthouse/2026-10-29/startseite-desktop.jpg)
 
-Modal pencere aÃ§an dÃ¼ÄŸmelerde (menÃ¼, filtre paneli, Probefahrt) sÃ¼re 4Ã— yavaÅŸlatmada 200 ms'yi aÅŸÄ±yor: `dialog.showModal()` sayfanÄ±n geri kalanÄ±nÄ± "inert" yapÄ±yor ve tarayÄ±cÄ± bÃ¼tÃ¼n belgenin stilini yeniden hesaplÄ±yor (izde â‰ˆ 120 ms). Liste sayÄ±mlarÄ±nÄ±n Ã¶nbelleÄŸe alÄ±nmasÄ± ve kaydÄ±rma kilidinin Ã§izimden sonraya ertelenmesi sÃ¼reyi 304 â†’ 224 ms'ye indirdi; kalan kÄ±sÄ±m iÃ§in modal yapÄ±sÄ±nÄ±n deÄŸiÅŸtirilmesi (Ã¶r. modal olmayan `show()` + kendi odak tuzaÄŸÄ±) gerekiyor â€” aÃ§Ä±k madde.
+## Okuma notları (ölçüm; düzeltme yapılmadı)
 
-## İlk yük JS
+- **Mobil LCP 4,4–5,6 sn:** ölçülen gecikmenin büyük kısmı "element render delay" (ana sayfa 2,2 sn, detay 2,0 sn, iletişim 2,4 sn). Lighthouse her ölçümü ilk ziyaret sayar; logolu açılış ekranı ilk ≈ 2 sn sayfayı örter (film şeridinde logo görünür, sonra sayfa). LCP öğesi: ana sayfa = açılış bölümündeki "MEGA CARS" harfleri, liste = açılış ekranındaki logo, detay = aracın kapak fotoğrafı, iletişim = adres satırı. 23.10.2026'daki ölçüme (sayaçlı yükleyici, eski film) göre mobil LCP 1,3–2,9 sn arttı, mobil Performans 84–91'den 73–77'ye indi; masaüstü 90–96 aralığında kaldı.
+- **En iyi uygulamalar 96 (ana sayfa, liste, iletişim):** tek eksik "image-aspect-ratio" — üst bardaki logonun 96 ve 160 px'lik WebP dosyaları piksel yuvarlaması yüzünden 1,22 / 1,21 oranında (asıl logo 1,21). Logo dosyalarına dokunulmadı (Volkan: logo değişmez).
+- **Erişilebilirlik 100 (8/8):** puana sayılmayan "label-content-name-mismatch" denetimi masaüstünde üst bardaki telefon bağlantısında başarısızdı (görünen numara erişilebilir adın başında değildi). 6a26281 ile düzeltildi; önizlemede yeniden ölçüldü: /de ve /de/kontakt'ta denetim artık uygulanamaz (etiket yok, ad görünen numarayla başlıyor), erişilebilirlik 100.
+- Konsol hatası her 24 ölçümde 0. İlk yük JS 228–237 KB (gzip -9 ile yeniden sıkıştırılmış).
+- Vercel önizlemesi `vercel.live` araç çubuğu betiğini ekler; üretim adresinde bu betik yoktur.
 
-"İlk yük JS" = sayfa açılırken indirilen bütün betikler (hareket paketi GSAP/Lenis ilk boyamadan sonra ayrı yüklenir ve dahildir); gzip -9 ile yeniden sıkıştırılmış boyut. Vercel brotli ile daha az gönderir (tabloda "aktarım" değil gzip verildi).
+## Önceki ölçüm — 23.10.2026 (commit 38f09d0; sayaçlı yükleyici ve Corvette filmiyle)
 
-## Notlar
+Mobil Performans / LCP: ana sayfa 84 / 3,40 · liste 91 / 2,73 · detay 78 / 3,69 · Kontakt 89 / 2,58 · Finanzierung 87 / 3,23 · Ankauf 82 / 3,38 · Impressum 92 / 2,46 · Datenschutz 87 / 3,11. Masaüstü 92–97, LCP ≤ 1,24 sn. Erişilebilirlik ve en iyi uygulamalar her sayfada 100; SEO 66–69 (noindex). Ham veriler `_work/faz5/lh/`.
 
-- Vercel önizlemesi, ziyaretçiye `vercel.live/_next-live/feedback/feedback.js` (Vercel araç çubuğu) ekler; üretim adresinde bu betik yoktur.
-- Ölçüm sırasında bulunan ve düzeltilen sorunlar `docs/KARAR-DEFTERI.md` → "Performans ve erişilebilirlik düzeltmeleri".
-- **İlk ziyaret yükleyicisi:** Lighthouse her ölçümü ilk ziyaret olarak yaptığından yükleyici her seferinde açılır; açık olduğu ölçümlerde ilk boyama ≈ 2,4 sn'ye kayar ve mobil LCP'yi yükseltir (ayrıntı ve seçenekler KARAR-DEFTERI'nde; Volkan'ın kararı bekleniyor).
+INP (23.10.2026, Chrome mobil öykünme, 4× CPU, Event Timing API, en kötü etkileşim): galeride "Nächstes Foto" 72 ms · küçük resme dokunma 48 ms · liste "Filter" panelini açma 224–272 ms · menüyü açma 272–288 ms (1× CPU'da 40 ms) · "Probefahrt anfragen" penceresi 296 ms (1× CPU'da 40 ms). Modal açan düğmelerde `dialog.showModal()` bütün belgenin stilini yeniden hesaplatıyor. Volkan'ın 29.10.2026 kararıyla bu madde yapılmayacak (hız işi).

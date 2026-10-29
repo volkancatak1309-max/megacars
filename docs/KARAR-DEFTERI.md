@@ -995,3 +995,41 @@
 - Kare kare karşılaştırma (`_work/video/proof.py`), yeni ↔ şu anki telefon dosyası (`gt2/mobile.mp4`, 540×960): 591/591 kare; 270×480'de korelasyon en düşük 0,9988, işaretlenen kare 0; 540×960'ta en düşük 0,9975, işaretlenen kare 0; sahne kesimleri ikisinde de [159, 243, 529]; hareket eğrisi korelasyonu 0,9999. Faz korelasyonuyla kadraj kayması 5 karede (5/150/300/450/580) 0/0 px. Eski sitenin telefon dosyasına karşı da 0 işaretli kare (en düşük 0,9948).
 - Site: `public/hero/gt3/mobile.mp4` (yeni klasör; /hero/* bir yıl immutable), `lib/hero.ts` yalnız `mobile` yolu ve açıklama satırı; `public/hero/gt2/mobile.mp4` kaldırıldı. Masaüstü dosyası, posterler, açılış bölümünün düzeni ve künye satırı değişmedi. `tsc` temiz; `npm run build` temiz (91 sayfa).
 - Önizleme (e4aa4af, Vercel "success"): `/hero/gt3/mobile.mp4` bayt aralığına 206, `Content-Range … /8262199`, `video/mp4`, `public, max-age=31536000, immutable`; eski `/hero/gt2/mobile.mp4` 404; `/hero/gt2/desktop.mp4` 200 (değişmedi). Chrome 390 px (3× ekran) → `gt3/mobile.mp4` 1080×1920, 19,7 sn, oynuyor; 1440 px → `gt2/desktop.mp4` 1920×1080; yatay taşma 0, konsol hatası 0. iPhone: gerçek cihazla denenmedi; Playwright WebKit (iPhone 13 profili) `gt3/mobile.mp4`'ü seçti ve oynattı (2 sn'de 2,02 sn ilerledi, `readyState` 4, hata yok, `canPlayType('avc1.640028')` = "probably"), konsol hatası 0.
+
+## 29.10.2026 — Siteyi bitiriyoruz: Lighthouse, erişilebilirlik, Panamera kasa tipi, teslim kontrolü (talimat, aynen)
+- **29.10.2026** — "Volkan'ın kararları (29.10.2026): Siteyi bitiriyoruz. v2 dalında aşağıdaki işleri yap; main dalını değiştirme. Raporu Türkçe yaz." — İlgili: v2 dalı, main dalı
+
+### Yapılacaklar
+- **29.10.2026** — "1. Lighthouse'u yeniden ölç: ana sayfa, araç listesi, araç detayı ve iletişim sayfası; mobil ve masaüstü. Sonuçları ekran görüntüleriyle docs/LIGHTHOUSE.md'ye yaz. Yalnız ölç, hız iyileştirmesi yapma." — İlgili: docs/LIGHTHOUSE.md
+- **29.10.2026** — "2. Erişilebilirlik kontrolü (28–29.10 değişikliklerinden sonra): hareket azaltma ayarı açıkken yeni logolu açılış ekranı ve açılış filmi, 2560 px genişlik, klavyeyle tam gezinme, kontrast en az 4.5:1, ikonlu düğmelerde aria-label. Sorun bulursan düzelt; düzeltmeler tasarımı ve logoyu değiştirmesin." — İlgili: açılış ekranı (Loader), açılış bölümü, bütün site
+- **29.10.2026** — "3. Porsche Panamera kasa tipi: Stoktaki Panamera'nın model adına bak. Standart Panamera ise kasa tipi "Limousine" (arkası bagaj kapaklı sedan), "Sport Turismo" ise "Kombi" olacak. Kaynak: Porsche Newsroom ve Alman otomotiv basını; bu, galeriye sorulacak bir soru değil. Veritabanında ve sitede 3 dilde düzelt." — İlgili: Supabase vehicles, data/overrides.json, Fahrzeug-Detail (teyit bekliyor 12)
+- **29.10.2026** — "4. docs/TESLIM-KONTROL.md'yi güncelle: güncel film boyutları ve klasörleri, düzgün numaralar. Bizim yapacaklarımızı, galeriden beklenenleri, Volkan kararıyla yapılmayacakları ve canlıya geçiş adımlarını ayrı başlıklarla yaz. Ayrıca: Galeriden beklenenler listesinden çıkar: güncel stok ve fotoğraflar (galeri sahibi araçlarını panelden kendisi yükleyecek, biz yüklemeyeceğiz), Panamera kasa tipi (biz düzelttik), 360° deneme (Volkan kararı: şimdilik bekliyor). Canlıya geçiş adımlarına ekle: Sitedeki 18 örnek aracın durumu canlıya geçmeden önce galeri sahibiyle netleşecek." — İlgili: docs/TESLIM-KONTROL.md
+
+### Yapılmayacaklar
+- **29.10.2026** — "Hız iyileştirmeleri: önceki listendeki 2, 3, 4. maddeler ve araç fotoğraflarının önbellek ayarı. Volkan'ın 23.10 kararı: bu sitede hız işleriyle uğraşılmıyor." — İlgili: performans
+- **29.10.2026** — "Canlıya geçiş (Supabase anahtarlarını Production'a ekleme, siteyi Google'a açma, main'e birleştirme): galeri yeni siteyi onaylayınca ayrıca yapılacak." — İlgili: Vercel Production, lib/launch.ts INDEXABLE, main dalı
+
+### Sonra
+- **29.10.2026** — "KARAR-DEFTERI'ne 29.10.2026 tarihiyle yaz: araçları galeri sahibi panelden kendisi yükleyecek; 360° deneme şimdilik bekliyor; Panamera kasa tipi kaynaktan düzeltildi; hız iyileştirmeleri yapılmıyor; canlıya geçiş galeri onayından sonra." — İlgili: KARAR-DEFTERI
+- **29.10.2026** — "_work klasörünü commit'e katma. v2'ye commit + push; Vercel GitHub'dan derlesin, CLI ile deploy yok." — İlgili: git, yayın
+
+### Rapor
+- **29.10.2026** — "RAPOR: Kısa Türkçe, her madde [ÖLÇÜLDÜ] veya [ÖLÇÜLMEDİ] etiketli: sayfa sayfa Lighthouse sonuçları (mobil ve masaüstü), bulunan ve düzeltilen erişilebilirlik sorunları, Panamera'nın model adı ve yazılan kasa tipi, son commit hash'i. Sonra DUR." — İlgili: rapor
+
+### Kayıt (CC) — Volkan'ın istediği satırlar
+- **29.10.2026 — araçları galeri sahibi panelden kendisi yükleyecek (biz yüklemeyeceğiz).**
+- **29.10.2026 — 360° deneme şimdilik bekliyor.**
+- **29.10.2026 — hız iyileştirmeleri yapılmıyor (23.10 kararı).**
+- **29.10.2026 — canlıya geçiş (Production anahtarları, Google'a açma, main'e birleştirme) galeri onayından sonra.**
+- **29.10.2026 — Porsche Panamera kasa tipi kaynaktan düzeltildi: model adı "Panamera E-Hybrid S Facelift" (11/2013) = 2013 makyajlı Panamera S E-Hybrid, standart Panamera → "Limousine" (EN "Saloon", TR "Sedan"). Galeriye sorulmayacak; "Teyit bekliyor" 12. madde kapandı.**
+
+### Kayıtlar (CC, ölçümlü) — 29.10.2026 uygulaması
+> Bu alt bölüm Volkan'ın cümlesi değildir.
+
+**Panamera** — Veritabanı `vehicles` (legacy_id `porsche-panamera-e-hybrid-s`): `body` null → `limousine` (Management API SQL, 29.10.2026 16:37 UTC). Yedek `data/inventory.json` aynı; `data/overrides.json` artık değeri `_source` ile yazıyor (`scripts/import-inventory.ts`: kaynaksız değer hâlâ reddedilir). Kaynaklar: Porsche Newsroom, 07.03.2017, "World premiere in Geneva: Sport Turismo expands the Panamera model line" — "The Sport Turismo is a new body version of the Porsche Panamera", "Based on the successful sports saloon" (Sport Turismo 2017'de geldi; 11/2013 aracı Sport Turismo olamaz); ecomento.de, 19.09.2013, auto motor und sport testi — "die hybride Reiselimousine". Önizlemede (39d316d) teknik kartta DE "Karosserie Limousine", EN "Body type Saloon", TR "Kasa tipi Sedan"; JSON-LD `bodyType` aynı.
+
+**Erişilebilirlik** (`_work/finish/a11y.mjs`, `contrast.mjs`, önizleme) — axe-core 4.13 WCAG 2.0/2.1/2.2 A+AA, 72 görünüm (8 sayfa × DE/EN/TR × 390/1440/2560): ihlal 0, adsız ikonlu düğme 0, taşma 0, konsol hatası 0; açık menü/filtre/test sürüşü (DE+TR) ihlal 0. axe'nin "belirlenemedi" dediği kontrast (kepenk sahte öğesi, fotoğraf, film) ekran pikselinden ölçüldü: 4.689 yazı kutusu, gerçek eksik yok. Bulunup düzeltilen 3 sorun: (1) hareket azaltmada açılış ekranı hiç görünmüyordu — `styles/base.css`'teki genel `* { animation-duration: 0.01ms !important }` kuralı `styles/motion.css`'teki sade solmayı eziyordu; açılış ekranı zamanlamaları `!important` ile korundu, ölçüm: logo 0,3 sn'de %17–35, 0,9 sn'de tam, 2,1 sn'de ekran kalktı (f823edc). (2) Tarih alanının takvim düğmesi ayrı bir Tab durağı ve odak halkası yoktu (alan `:focus` olmuyor) → `:focus-within:not(:focus)` ile aynı halka (f823edc). (3) Üst bar telefon bağlantısı `aria-label` "Mega Cars anrufen: …" görünen numarayla başlamıyordu (Lighthouse label-content-name-mismatch, WCAG 2.5.3) → etiket kalktı, numara + gizli " – Mega Cars anrufen / Call Mega Cars / Mega Cars'ı arayın"; Kontakt'taki büyük numara da aynı (6a26281; önizlemede denetim geçiyor). Tasarım ve logo değişmedi.
+
+**Lighthouse** — `docs/LIGHTHOUSE.md` (f823edc, 4 sayfa × 2 cihaz × 3 ölçüm, ekran görüntüleri `docs/lighthouse/2026-10-29/`). Mobil Performans 73–77, LCP 4,39–5,62 sn; masaüstü 90–96, LCP 0,75–1,54 sn; erişilebilirlik 100; en iyi uygulamalar 96–100 (logonun 96/160 px dosyalarında en-boy yuvarlaması; dokunulmadı); SEO 69 (noindex). Talimat gereği hız iyileştirmesi yapılmadı.
+
+**Önbellek** — önizlemede `/hero/gt2/*`, `/hero/gt3/*`, `/cars/*`, `/brand/*` ve Supabase araç fotoğrafları `public, max-age=31536000, immutable` (29.10.2026).

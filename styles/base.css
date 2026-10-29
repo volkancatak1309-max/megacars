@@ -319,7 +319,10 @@ select.field-control option {
   }
 }
 
-.field-control:focus-visible {
+.field-control:focus-visible,
+/* the calendar button inside a date field takes its own Tab stop; the field itself is then
+   not :focus, so the same ring is drawn from :focus-within */
+input[type='date'].field-control:focus-within:not(:focus) {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
   border-color: var(--fg);

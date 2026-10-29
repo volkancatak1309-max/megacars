@@ -492,9 +492,11 @@ html[data-loader-off] .loader:not([data-demo]) {
     display: none;
   }
 
-  /* opening screen: a plain appearance only, no light and no curtain */
+  /* opening screen: a plain appearance only, no light and no curtain. The timings are
+     !important because the global reduced-motion rule in base.css (also !important) would
+     otherwise cut these fades to 0.01 ms and the screen would not be seen at all. */
   .loader {
-    animation-delay: 1.9s;
+    animation-delay: 1.9s !important;
   }
 
   .loader-red,
@@ -504,9 +506,13 @@ html[data-loader-off] .loader:not([data-demo]) {
 
   .loader-night {
     animation: ld-out 0.5s var(--ease-out) 1.4s forwards;
+    animation-duration: 0.5s !important;
+    animation-delay: 1.4s !important;
   }
 
   .ld-logo {
     animation: ld-in 0.6s var(--ease-out) 0.1s forwards;
+    animation-duration: 0.6s !important;
+    animation-delay: 0.1s !important;
   }
 }

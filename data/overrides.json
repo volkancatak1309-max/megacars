@@ -1,6 +1,7 @@
 {
   "porsche-panamera-e-hybrid-s": {
-    "body": null,
-    "_reason": "AutoScout24 listing states 'Kleinwagen', which is wrong for a Panamera. Hidden (not replaced) until Mega Cars confirms the body type."
+    "body": "limousine",
+    "_reason": "AutoScout24 listing states 'Kleinwagen', which is wrong. The car (11/2013, 'E-Hybrid S Facelift') is the Panamera S E-Hybrid of the 2013 facelift; the only Panamera body then was the saloon (Limousine). The estate-like Sport Turismo arrived in 2017 as a new body version. Corrected 29.10.2026 (KARAR-DEFTERI).",
+    "_source": "Porsche Newsroom 07.03.2017 'World premiere in Geneva: Sport Turismo expands the Panamera model line' (\"The Sport Turismo is a new body version of the Porsche Panamera\"; \"Based on the successful sports saloon\"); ecomento.de 19.09.2013 on the auto motor und sport test (\"die hybride Reiselimousine\")"
   }
 }

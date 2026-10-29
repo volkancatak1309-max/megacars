@@ -39,7 +39,8 @@ interface SourceCar {
 const source: SourceCar[] = JSON.parse(fs.readFileSync(path.join(ROOT, 'cars-data.json'), 'utf8'))
 const previous: Vehicle[] = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : []
 const previousById = new Map(previous.map((v) => [v.id, v]))
-// Documented corrections: a value may only be hidden (null), never replaced by a guess.
+// Documented corrections: a value may be hidden (null), or replaced only when the override
+// names its source in `_source` (never a guess).
 const OVERRIDES_FILE = path.join(ROOT, 'data', 'overrides.json')
 const overrides: Record<string, Record<string, unknown>> = fs.existsSync(OVERRIDES_FILE)
   ? JSON.parse(fs.readFileSync(OVERRIDES_FILE, 'utf8'))
@@ -282,10 +283,11 @@ async function main() {
       sourceUrl: car.url,
       spin: prev?.spin ?? null,
     })
-    for (const [key, value] of Object.entries(overrides[car.id] ?? {})) {
+    const fix = overrides[car.id] ?? {}
+    for (const [key, value] of Object.entries(fix)) {
       if (key.startsWith('_')) continue
-      if (value !== null) throw new Error(`${car.id}: overrides may only hide a field (null), "${key}" was set to a value`)
-      ;(vehicles[vehicles.length - 1] as unknown as Record<string, unknown>)[key] = null
+      if (value !== null && !fix._source) throw new Error(`${car.id}: override "${key}" sets a value without a _source`)
+      ;(vehicles[vehicles.length - 1] as unknown as Record<string, unknown>)[key] = value
     }
     console.log(`  ${car.id} → ${slug}`)
   }

@@ -748,7 +748,7 @@
     "powerPs": 333,
     "fuel": "hybrid",
     "transmission": "automatik",
-    "body": null,
+    "body": "limousine",
     "drive": "heck",
     "seats": 4,
     "doors": 5,

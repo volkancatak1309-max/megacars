@@ -103,9 +103,11 @@ export function Header({ stock, brand }: { stock: number; brand: React.ReactNode
               </CurtainLink>
             ))}
           </span>
-          <ShutterA href={SITE.phoneHref} kind="text" className="ph-tel" aria-label={t('callAria')}>
+          {/* name starts with the visible number (WCAG 2.5.3), as on the logo and language links */}
+          <ShutterA href={SITE.phoneHref} kind="text" className="ph-tel">
             <Icon name="phone" size={16} />
             <span className="tabular">{SITE.phone}</span>
+            <span className="sr-only"> – {t('callSuffix')}</span>
           </ShutterA>
           <button type="button" className="ph-burger sh sh--line" aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)}>
             <Faces>{t('menu')}</Faces>

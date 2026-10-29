@@ -72,8 +72,9 @@ export default async function ContactPage({ params }: Props) {
         <ul className="ct-lines">
           <li>
             <span className="label">{t('phoneLabel')}</span>
-            <a href={SITE.phoneHref} className="ct-big tabular" aria-label={tn('callAria')}>
+            <a href={SITE.phoneHref} className="ct-big tabular">
               {SITE.phone}
+              <span className="sr-only"> – {tn('callSuffix')}</span>
             </a>
           </li>
           <li>

@@ -958,3 +958,9 @@
 - Posterler ilk kareden WebP q80: 98 KB / 21 KB. Eski `public/hero/gt/` kaldırıldı (önbellek bir yıl immutable olduğu için yeni klasör `gt2`). `lib/hero.ts` yalnız dosya yolları ve kaynak notu değişti; açılış bölümünün düzeni, videonun konumu ve künye satırı değişmedi.
 - Künyedeki film satırı (değiştirilmedi): DE "Eröffnungsfilm: aus der bisherigen Website von Mega Cars." · EN "Opening film: from the previous Mega Cars website." · TR "Açılış filmi: Mega Cars'ın önceki web sitesinden."
 - `tsc` temiz; `npm run build` temiz (91 sayfa).
+
+**Önizleme (6e2e7f8, Vercel "Deployment has completed")**
+- `/hero/gt2/desktop.mp4` ve `mobile.mp4`: `video/mp4`, bayt aralığı isteğine 206 (Safari'nin istediği), `Content-Length` 14.368.220 / 2.414.083, `public, max-age=31536000, immutable`; eski `/hero/gt/desktop.mp4` 404.
+- iPhone Safari: gerçek iPhone ile denenmedi. Playwright WebKit 27.2 (iPhone 13 profili, iOS Safari tarayıcı kimliği, 390 px, dokunmatik) önizlemede `gt2/mobile.mp4`'ü seçti, oynattı (2 sn'de 2,01 sn ilerledi, `paused` false, `readyState` 4, hata yok), `canPlayType('avc1.640028')` = "probably"; konsol hatası 0. Dosya iOS'un oynattığı biçimde: H.264 High 4.0, yuv420p, faststart, ses yok; video etiketi `muted loop playsInline autoPlay`.
+- Chrome 390 px → `gt2/mobile.mp4` 540×960; 1440 px → `gt2/desktop.mp4` 1920×1080; ikisi de 19,7 sn; yatay taşma 0; konsol hatası 0. Düzen değişmedi (harflerin içinde başlıyor).
+- Ekran görüntüleri: `docs/geri-bildirim-2026-10-28/{390,1440}-acilis-bolumu-4k-film-{1-0.2sn,2-8.9sn,3-15.8sn}.jpg`.

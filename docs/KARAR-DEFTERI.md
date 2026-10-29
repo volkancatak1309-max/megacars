@@ -964,3 +964,33 @@
 - iPhone Safari: gerçek iPhone ile denenmedi. Playwright WebKit 27.2 (iPhone 13 profili, iOS Safari tarayıcı kimliği, 390 px, dokunmatik) önizlemede `gt2/mobile.mp4`'ü seçti, oynattı (2 sn'de 2,01 sn ilerledi, `paused` false, `readyState` 4, hata yok), `canPlayType('avc1.640028')` = "probably"; konsol hatası 0. Dosya iOS'un oynattığı biçimde: H.264 High 4.0, yuv420p, faststart, ses yok; video etiketi `muted loop playsInline autoPlay`.
 - Chrome 390 px → `gt2/mobile.mp4` 540×960; 1440 px → `gt2/desktop.mp4` 1920×1080; ikisi de 19,7 sn; yatay taşma 0; konsol hatası 0. Düzen değişmedi (harflerin içinde başlıyor).
 - Ekran görüntüleri: `docs/geri-bildirim-2026-10-28/{390,1440}-acilis-bolumu-4k-film-{1-0.2sn,2-8.9sn,3-15.8sn}.jpg`.
+
+## 29.10.2026 — Telefon videosu tam çözünürlük + bitirmek için kalanlar (talimat, aynen)
+- **29.10.2026** — "Volkan'ın kararı (29.10.2026): Telefon videosu, telefon ekranına tam uyan çözünürlükte olacak. Künyedeki video satırına dokunma. main dalını değiştirme. Raporu Türkçe yaz." — İlgili: açılış bölümü telefon film dosyası, künye (Impressum) film satırı, main dalı
+
+### 1) Telefon videosu
+- **29.10.2026** — "Kaynak: 4K kaynaktaki aynı parça (kare 493–1083). Kırpım alanı, şu anki telefon dosyasıyla aynı konum ve oranda olsun. Sahne, geçiş, süre ve hız birebir aynı kalacak." — İlgili: telefon film dosyası
+- **29.10.2026** — "Çıktı: 1080×1920, kalite ölçüsü (VMAF, bu çözünürlükte ölçülmüş) en az 96. Kodlayıcı şu anki telefon dosyasınınkiyle aynı olsun (iPhone Safari uyumu için)." — İlgili: telefon film dosyası
+- **29.10.2026** — "22.10'daki "telefon dosyası en fazla 2,5 MB" kuralı bu video için kalktı. Yeni üst sınır 15 MB. Dosya 15 MB'ı geçerse 720×1280'e in (yine VMAF en az 96) ve onu kullan." — İlgili: telefon film dosyası boyut sınırı (22.10.2026 "mobil 960 px (en fazla 2,5 MB)" kuralı bu video için geçersiz)
+- **29.10.2026** — "Yeni telefon dosyasının 591 karesini şu anki telefon dosyasıyla karşılaştır: aynı sahne ve aynı kadraj olduğunu ölç. Fark çıkarsa DUR, raporla." — İlgili: kare kare karşılaştırma
+- **29.10.2026** — "v2'deki telefon dosyasını yenisiyle değiştir. Önbellek sorunu olmasın diye gerekirse yeni bir klasör kullan. Başka hiçbir şeye dokunma." — İlgili: public/hero, lib/hero.ts
+- **29.10.2026** — "KARAR-DEFTERI'ne yaz: 29.10.2026 — telefon videosu 1080×1920 (ya da kullanılan çözünürlük); 2,5 MB kuralı bu video için kalktı; künye satırı değişmeyecek." — İlgili: KARAR-DEFTERI
+- **29.10.2026** — "_work klasörünü commit'e katma. v2'ye commit + push; Vercel GitHub'dan derlesin, CLI ile deploy yok." — İlgili: git, yayın
+
+### 2) Bitirmek için kalanlar (yalnız listele, hiçbirini yapma)
+- **29.10.2026** — "docs/TESLIM-KONTROL.md ve docs/BRIEF.md'deki açık maddeleri iki grupta listele: (a) Bizim şimdi yapabileceklerimiz (müşteriden bir şey beklemeyenler). (b) Galeriden bilgi ya da dosya bekleyenler. Her biri için galeriden tam olarak ne istenmesi gerektiğini tek cümleyle yaz." — İlgili: docs/TESLIM-KONTROL.md, docs/BRIEF.md
+- **29.10.2026** — "Galzura web kalite standardının teslim kontrol listesinde (Lighthouse ölçümleri, erişilebilirlik, SEO, robots.txt, sitemap, önbellek başlıkları vb.) henüz ölçülmemiş ya da geçmemiş maddeleri de (a) grubuna ekle." — İlgili: docs/TESLIM-KONTROL.md
+
+### Rapor
+- **29.10.2026** — "RAPOR: Kısa Türkçe, her madde [ÖLÇÜLDÜ] veya [ÖLÇÜLMEDİ] etiketli: telefon dosyasının çözünürlüğü, boyutu, kalite ölçüsü, kare karşılaştırma sonucu, son commit hash'i; ardından (a) ve (b) listeleri. Sonra DUR." — İlgili: rapor
+
+### Kayıt (CC) — Volkan'ın istediği satır
+- **29.10.2026 — telefon videosu 1080×1920; 2,5 MB kuralı bu video için kalktı; künye satırı değişmeyecek.**
+
+### Kayıtlar (CC, ölçümlü) — telefon videosu 1080×1920, 29.10.2026
+> Bu alt bölüm Volkan'ın cümlesi değildir.
+- Kaynak: 4K `yt-625-yhcDe-59P18.mp4`, kaynak kare 495–1083 + ilk kare 2 kez daha (eski klibin kare 493–1083 eşleşmesi, 29.10 kaydı) → 591 kare, 30 fps, 19,700 sn. Kırpım öncekiyle aynı: 4K'da `crop=1216:2160:1312:0` (1920 genişliğinde x 656–1264), lanczos ile 1080×1920; kayıpsız FFV1 ana kopya `_work/video/master/mobile1080.mkv`.
+- Kodlayıcı şu anki telefon dosyasıyla aynı: x264 veryslow iki geçiş, H.264 High, seviye 4.0, yuv420p, bt709, tune ssim, GOP 150, faststart, ses yok (betik `_work/video/enc/phone.sh`).
+- VMAF (1080×1920'de, kare kare eşlenerek, referans kayıpsız ana kopya): 3000 kbit/s 7,28 MB → 95,92; 3200 → 7,77 MB / 96,21; **3400 kbit/s → 8.262.199 bayt (8,3 MB), VMAF 96,44 (en düşük kare 88,7) — kullanılan**; 4500 → 10,96 MB / 97,30. 15 MB sınırının altında; 720×1280'e inmek gerekmedi.
+- Kare kare karşılaştırma (`_work/video/proof.py`), yeni ↔ şu anki telefon dosyası (`gt2/mobile.mp4`, 540×960): 591/591 kare; 270×480'de korelasyon en düşük 0,9988, işaretlenen kare 0; 540×960'ta en düşük 0,9975, işaretlenen kare 0; sahne kesimleri ikisinde de [159, 243, 529]; hareket eğrisi korelasyonu 0,9999. Faz korelasyonuyla kadraj kayması 5 karede (5/150/300/450/580) 0/0 px. Eski sitenin telefon dosyasına karşı da 0 işaretli kare (en düşük 0,9948).
+- Site: `public/hero/gt3/mobile.mp4` (yeni klasör; /hero/* bir yıl immutable), `lib/hero.ts` yalnız `mobile` yolu ve açıklama satırı; `public/hero/gt2/mobile.mp4` kaldırıldı. Masaüstü dosyası, posterler, açılış bölümünün düzeni ve künye satırı değişmedi. `tsc` temiz; `npm run build` temiz (91 sayfa).

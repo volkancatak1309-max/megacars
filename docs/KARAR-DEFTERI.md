@@ -900,3 +900,61 @@
 **Ek kontrol — sekme ikonu** — `app/icon.png` 64 px, logonun kendi siyah zemini korunuyor (köşe pikseli 0/1/0, opak). Beyaz, Chrome açık sekme (#f1f3f4) ve açık şerit (#dee1e6) zemininde 16 ve 32 px'te siyah kare içinde krom logo seçiliyor; önizlemenin sunduğu dosya repodakiyle aynı (SHA-1 5e80754f). Değişiklik gerekmedi.
 
 **Ekran görüntüleri** — `docs/geri-bildirim-2026-10-28/{390,1440}-acilis-bolumu-film-{1,2,3}-*.jpg` (filmin 0,2 / 8,9 / 15,8. saniyesi) ve `{390,1440}-footer.jpg` (yenilendi); konsol hatası 0, yatay taşma 0.
+
+## 29.10.2026 — Açılış videosu: aynı sahneler, yüksek kaliteli kaynak (talimat, aynen)
+- **29.10.2026** — "YENİ KARAR (29.10.2026, Volkan): Açılış videosu, eski sitedekiyle AYNI sahneler ve AYNI geçişlerle kalacak; yalnız görüntü kalitesi yükselecek. 28.10'daki "yapay zekâ izlerini gizle" planı İPTAL; videodan hiçbir sahne çıkarılmayacak. Bu talimatın dışına çıkma. main dalını değiştirme. Raporu Türkçe yaz." — İlgili: açılış videosu, public/hero, main dalı
+- **29.10.2026** — "Kaynak izni: YouTube kanalı "VibeOnDriveOfficial" Volkan'ın yakın arkadaşı; video onun izniyle kullanılıyor." — İlgili: açılış videosu kaynağı, lisans
+
+### 1) Kaliteli kaynak
+- **29.10.2026** — "Videonun YouTube'daki aslı: https://www.youtube.com/watch?v=yhcDe-59P18" — İlgili: kaynak
+- **29.10.2026** — "yt-dlp ile mevcut biçimleri listele (gerekirse yt-dlp'yi kur). En yüksek çözünürlüklü ve en yüksek bit hızlı görüntü akışını indir; ses gerekmez. Biçim listesini rapora koy. İndirme başarısız olursa DUR, raporla." — İlgili: yt-dlp, _work/video
+- **29.10.2026** — "İndirilen dosyanın, Downloads'taki "Blacked-Out AMG GT Black Series … Cinematic Edit.mp4" ile aynı video olduğunu süre ve karelerle doğrula." — İlgili: kaynak doğrulama
+
+### 2) Aynı sahneler, aynı geçişler
+- **29.10.2026** — "Referans: eski sitenin (main dalı) açılış videosu hero-main.mp4. Senin tespitine göre YouTube videosunun 14,0–33,7 sn arası." — İlgili: main `public/hero/hero-main.mp4`
+- **29.10.2026** — "Başlangıç ve bitiş noktalarını yuvarlak saniyeyle değil, eski klibin ilk ve son karesini yeni kaynakta kare kare eşleştirerek bul." — İlgili: kesim noktaları
+- **29.10.2026** — "Eski klipte renk, kırpma, yakınlaştırma ya da hız değişikliği varsa aynısını uygula; yoksa hiçbir şey ekleme. Sahne sırası, geçişler, süre, hız ve kare hızı eskisiyle birebir aynı olacak." — İlgili: yeni klip
+- **29.10.2026** — "KANIT: Eski klipteki her kare için yeni klipte aynı andaki karenin aynı sahne ve aynı kadraj olduğunu ölç (iki kareyi aynı boyuta küçültüp karşılaştırarak). Tek bir karede bile sahne, geçiş ya da zamanlama farkı çıkarsa DUR, siteye koyma, raporla." — İlgili: kare kare karşılaştırma
+- **29.10.2026** — "Yan yana karşılaştırma videosu hazırla: solda eski, sağda yeni, aynı anda oynasın. _work\video\ altına kaydet ve tarayıcımda aç." — İlgili: _work/video/
+
+### 3) Kodlama
+- **29.10.2026** — "Masaüstü: 1920×1080, kalite ölçüsü (VMAF) en az 96. Dosya 15 MB'ı geçecekse DUR, sor." — İlgili: masaüstü film dosyası
+- **29.10.2026** — "Mobil: şu anki mobil dosyanın kırpım alanının aynısı (aynı konum ve oran), yeni kaynaktan." — İlgili: mobil film dosyası
+- **29.10.2026** — "iPhone Safari'de oynadığını doğrula." — İlgili: mobil oynatma
+
+### 4) Site
+- **29.10.2026** — "Ölçümler geçerse v2'deki açılış videosu dosyalarını yenileriyle değiştir. Açılış bölümünün düzenine (harflerin içinde başlama, kaydırınca tam ekran), videonun ekrandaki konumuna ve başka hiçbir şeye dokunma." — İlgili: public/hero, lib/hero.ts, açılış bölümü
+- **29.10.2026** — "KARAR-DEFTERI'ne yaz: 29.10.2026 — açılış videosu eski sitedekiyle aynı sahnelerle, yüksek kaliteli kaynaktan yeniden kesildi; kaynak VibeOnDriveOfficial (Volkan'ın arkadaşı, izinli); 28.10 "izleri gizle" planı iptal." — İlgili: KARAR-DEFTERI
+- **29.10.2026** — "_work klasörünü commit'e katma. v2'ye commit + push; Vercel GitHub'dan derlesin, CLI ile deploy yok." — İlgili: git, yayın
+- **29.10.2026** — "Önizlemeden 390 px ve 1440 px ekran görüntüleri al (açılış bölümü, videonun 3 farklı anı) ve docs/geri-bildirim-2026-10-28/ altına ekle." — İlgili: docs/geri-bildirim-2026-10-28/
+
+### Rapor
+- **29.10.2026** — "RAPOR: Kısa Türkçe, her madde [ÖLÇÜLDÜ] veya [ÖLÇÜLMEDİ] etiketli: indirilen biçim (çözünürlük, bit hızı, kare hızı), eşleşen başlangıç ve bitiş kareleri, kare kare karşılaştırma sonucu, yeni dosya boyutları ve kalite ölçüsü, son commit hash'i. Künyedeki video satırının şu anki metnini de yaz; o satırı değiştirme." — İlgili: rapor, künye (Impressum) film satırı
+
+### Kayıt (CC) — Volkan'ın istediği satır
+- **29.10.2026 — açılış videosu eski sitedekiyle aynı sahnelerle, yüksek kaliteli kaynaktan yeniden kesildi; kaynak VibeOnDriveOfficial (Volkan'ın arkadaşı, izinli); 28.10 "izleri gizle" planı iptal.**
+
+### Kayıtlar (CC, ölçümlü) — 29.10.2026 uygulaması
+> Bu alt bölüm Volkan'ın cümlesi değildir.
+
+**Kaynak**
+- `yt-dlp -F` (2026.08.19; JS çalışma ortamı yok uyarısıyla): en yüksek görüntü akışları 625 (mp4/HLS, 3840×2160, 30 fps, VP9, listede ≈ 15,5 Mbit/s tahmini), 313 (webm, 3840×2160, 30 fps, VP9, 8,8 Mbit/s), 620/271 (2560×1440), 270/137/614/248 (1920×1080; H.264 en çok 4,8 Mbit/s). İndirilen: **625** → 3840×2160, 30 fps, VP9, yuv420p bt709, **gerçek ortalama 8,83 Mbit/s**, 101,5 sn, 106,9 MiB (`_work/video/src/`).
+- Downloads'taki "Blacked-Out AMG GT Black Series … Cinematic Edit.mp4" ile aynı video: ikisi de 3045 kare / 101,5 sn; 96×54 gri karelerde kayma 0'da ortalama korelasyon 0,9943 (±1 karede 0,968); 0,97'nin altında kalan 38 kare tamamen siyah kareler.
+
+**Eşleşen kareler (kare kare)**
+- Eski klip (main `hero-main.mp4`, 591 kare, 30 fps, 19,7 sn) 4K kaynakta **kare 493'ten (16,433 sn) kare 1083'e (36,100 sn) kadar** kesintisiz duruyor (ortalama korelasyon 0,9996; en yakın başka konum 0,9791). Eski klibin ilk 3 karesi aynı resim (kare 0–2 = kaynak kare 495; eski dosyanın kendi donması); son karesi = kaynak kare 1083.
+- Yeni klip bunu birebir kuruyor: kaynak kare 495–1083 (589 kare), ilk kare 2 kez daha tekrarlanıyor → 591 kare, 30 fps, 19,700 sn.
+- Kırpma / yakınlaştırma / renk / hız: faz korelasyonu kayma 0/0 px, en iyi ölçek 1,000 (5 örnek kare); eski klip ile 1080p kaynağı arasında renk ortalaması farkı ≤ 0,8/255 → eski klipte renk ayarı yok; hiçbir şey eklenmedi. (4K ile 1080p YouTube kopyası arasında R/B ortalamasında 1–2,6/255 fark var; bu YouTube'un iki ayrı dönüştürmesinden, eklenmiş bir ayar değil.)
+
+**Kare kare kanıt** (`_work/video/proof.py`, sonuçlar `_work/video/proof/*.csv`)
+- Masaüstü, eski `hero-main.mp4` ↔ yeni `public/hero/gt2/desktop.mp4`, 192×108: 591/591 kare; korelasyon en düşük 0,9985 (ortalama 0,9995); sahne kesimleri eski [159, 243, 529] = yeni [159, 243, 529]; ffmpeg scdet ikisinde de 5,30 / 8,10 / 13,80 / 17,633 sn; kareden kareye hareket eğrisi korelasyonu 0,9996. 480×270'te korelasyon en düşük 0,9963.
+- Zamanlama: 467–472 karede en iyi eşleşme aynı numaralı kare; kalanlarda komşu kare kaynağın kendi tekrar karesi (24→30 kare çoğaltması) ya da durağan görüntü. Tek işaretlenen kare **257** (8,1–9,3 sn çapraz geçişi): eski kare 257, yeni 256 ile 257 arasında başa baş (192×108'de fark 0,08/255; 480×270'te 0,015); 960×540'ta yeni 257 açıkça önde (3,39 / 3,50); eski 257 kendi kaynağı olan 1080p kopyanın 257. karesine en yakın (2,24), o da 4K'nın 257. karesine (1,30; 256 ile 2,19). Sonuç: zamanlama farkı yok; başa baş durum eski dosyanın geçişteki sıkıştırmasından.
+- Mobil, eski `gt/mobile.mp4` ↔ yeni `gt2/mobile.mp4`, 270×480: 591/591 kare, korelasyon en düşük 0,9948, sahne kesimleri aynı, işaretlenen kare 0.
+- Yan yana video: `_work/video/yan-yana-tam.mp4` (3840×1080) ve `yan-yana-detay.mp4` (ortadaki 960 px, 1:1 piksel), `_work/video/karsilastirma.html` tarayıcıda açıldı.
+
+**Kodlama** (referans = 4K'dan lanczos ile küçültülmüş kayıpsız FFV1 ana kopya; VMAF kare kare eşlenerek ölçüldü)
+- Masaüstü `public/hero/gt2/desktop.mp4`: 1920×1080, 30 fps, H.264 High 4.1, x264 veryslow iki geçiş 6 Mbit/s, tune ssim, GOP 150, faststart, ses yok → **14.368.220 bayt (14,4 MB), VMAF 96,44** (en düşük kare 88,4). Denenenler: CRF 22 16,4 MB / 96,67; 6 Mbit/s tune'suz 95,60 / 14,5 MB; 6,2 Mbit/s 96,56 / 14,9 MB. (İlk ölçümde mkv zaman damgası yuvarlaması kareleri kaydırıp VMAF'ı 74'e düşürüyordu; `settb=1/30,setpts=N` ile düzeltildi.)
+- Mobil `public/hero/gt2/mobile.mp4`: aynı kırpım (1920 genişliğinde x 656–1264 = 4K'da 1312–2528, tam yükseklik, 608:1080 oranı) → 540×960, H.264 High 4.0, 1 Mbit/s iki geçiş → **2.414.083 bayt (2,4 MB), VMAF 95,11**. VMAF ≥ 96 için 1,3 Mbit/s → 3,14 MB / 96,36 gerekiyor; 22.10.2026'daki "mobil en fazla 2,5 MB" sınırı nedeniyle 2,4 MB'lık sürüm konuldu (3,14 MB'lık `_work/video/enc/m1300.mp4`). Karşılaştırma: eski mobil dosya aynı referansa göre VMAF 71,5.
+- Posterler ilk kareden WebP q80: 98 KB / 21 KB. Eski `public/hero/gt/` kaldırıldı (önbellek bir yıl immutable olduğu için yeni klasör `gt2`). `lib/hero.ts` yalnız dosya yolları ve kaynak notu değişti; açılış bölümünün düzeni, videonun konumu ve künye satırı değişmedi.
+- Künyedeki film satırı (değiştirilmedi): DE "Eröffnungsfilm: aus der bisherigen Website von Mega Cars." · EN "Opening film: from the previous Mega Cars website." · TR "Açılış filmi: Mega Cars'ın önceki web sitesinden."
+- `tsc` temiz; `npm run build` temiz (91 sayfa).
